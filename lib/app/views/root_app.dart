@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stuverse/features/common/views/splash_screen.dart';
 import '../utils/app_theme.dart';
 
 class RootApp extends StatelessWidget {
@@ -9,7 +10,7 @@ class RootApp extends StatelessWidget {
     return MaterialApp(
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      home: const Placeholder(),
+      home: const SplashScreen(),
       themeMode: ThemeMode.light,
     );
   }
