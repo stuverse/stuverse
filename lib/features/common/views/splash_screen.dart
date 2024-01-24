@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stuverse/app/app.dart';
 
-import '../widgets/bg_greadient.dart';
+import '../widgets/bg_gradient.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
