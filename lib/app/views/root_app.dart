@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stuverse/features/common/views/splash_screen.dart';
+import 'package:stuverse/app/routes/app_router.dart';
+
 import '../utils/app_theme.dart';
 
 class RootApp extends StatelessWidget {
@@ -7,11 +8,11 @@ class RootApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      home: const SplashScreen(),
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
+      routerConfig: AppRouter.router,
     );
   }
 }
