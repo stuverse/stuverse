@@ -1,1 +1,2 @@
-export 'widgets/bg_gradient.dart';
+export 'auth/auth.dart';
+export 'core/core.dart';
