@@ -92,6 +92,7 @@ class AppTheme {
     error: Color(0xffb00020),
   );
 
+
   static const _flexSchemeDark = FlexSchemeColor(
     primary: Color(0xff4e8ecd),
     primaryContainer: Color(0xff001d34),
