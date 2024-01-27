@@ -15,7 +15,12 @@ class BgGradient extends StatelessWidget {
       width: MediaQuery.of(context).size.width, // 100%
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
-        gradient: AppTheme.backgroundGradient,
+        gradient: Theme.of(context).brightness == Brightness.dark
+            ? AppTheme.darkBackgroundGradient
+            : null,
+        color: Theme.of(context).brightness == Brightness.light
+            ? Theme.of(context).colorScheme.background
+            : null,
       ),
       child: child,
     );

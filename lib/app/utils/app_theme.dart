@@ -1,88 +1,114 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static final lightTheme = ThemeData(
-    colorScheme: _flexSchemeLight,
+  // Theme config for FlexColorScheme version 7.3.x. Make sure you use
+// same or higher package version, but still same major version. If you
+// use a lower package version, some properties may not be supported.
+// In that case remove them after copying this theme to your app.
+
+  static final lightTheme = FlexThemeData.light(
+    colors: _flexSchemeLight,
+    surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
+    blendLevel: 7,
+    transparentStatusBar: false,
+    appBarElevation: 2.5,
+    subThemesData: const FlexSubThemesData(
+      blendOnLevel: 10,
+      blendOnColors: false,
+      useTextTheme: true,
+      useM2StyleDividerInM3: true,
+      thinBorderWidth: 0.5,
+      defaultRadius: 9.0,
+      textButtonRadius: 9.0,
+      filledButtonRadius: 9.0,
+      elevatedButtonRadius: 9.0,
+      outlinedButtonRadius: 9.0,
+      outlinedButtonBorderWidth: 0.5,
+      outlinedButtonPressedBorderWidth: 1.5,
+      toggleButtonsRadius: 9.0,
+      toggleButtonsBorderWidth: 0.5,
+      segmentedButtonRadius: 9.0,
+      segmentedButtonBorderWidth: 0.5,
+      alignedDropdown: true,
+      useInputDecoratorThemeInDialogs: true,
+    ),
+    visualDensity: FlexColorScheme.comfortablePlatformDensity,
     useMaterial3: true,
+    swapLegacyOnMaterial3: true,
+    // To use the Playground font, add GoogleFonts package and uncomment
+    // fontFamily: GoogleFonts.notoSans().fontFamily,
   );
 
-  static final darkTheme = ThemeData(
-    colorScheme: _flexSchemeDark,
+  static final darkTheme = FlexThemeData.dark(
+    colors: _flexSchemeDark,
+    surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
+    blendLevel: 5,
+    transparentStatusBar: false,
+    appBarElevation: 3.0,
+    subThemesData: const FlexSubThemesData(
+      blendOnLevel: 20,
+      blendTextTheme: true,
+      useTextTheme: true,
+      useM2StyleDividerInM3: true,
+      defaultRadius: 9.0,
+      thinBorderWidth: 0.5,
+      textButtonRadius: 9.0,
+      filledButtonRadius: 9.0,
+      elevatedButtonRadius: 9.0,
+      outlinedButtonRadius: 9.0,
+      outlinedButtonBorderWidth: 0.5,
+      outlinedButtonPressedBorderWidth: 1.5,
+      toggleButtonsRadius: 9.0,
+      toggleButtonsBorderWidth: 0.5,
+      segmentedButtonRadius: 9.0,
+      segmentedButtonBorderWidth: 0.5,
+      inputDecoratorSchemeColor: SchemeColor.tertiary,
+
+      inputDecoratorBorderSchemeColor: SchemeColor.primary,
+      inputCursorSchemeColor: SchemeColor.onTertiary,
+      // inputDecoratorIsFilled: false,
+      alignedDropdown: true,
+      useInputDecoratorThemeInDialogs: true,
+      appBarBackgroundSchemeColor: SchemeColor.shadow,
+    ),
+    visualDensity: FlexColorScheme.comfortablePlatformDensity,
     useMaterial3: true,
+    swapLegacyOnMaterial3: true,
+    // To use the Playground font, add GoogleFonts package and uncomment
+    // fontFamily: GoogleFonts.notoSans().fontFamily,
   );
 
 // Light and dark ColorSchemes made by FlexColorScheme v7.3.1.
 // These ColorScheme objects require Flutter 3.7 or later.
-  static const ColorScheme _flexSchemeLight = ColorScheme(
-    brightness: Brightness.light,
+  static const _flexSchemeLight = FlexSchemeColor(
     primary: Color(0xff0052a2),
-    onPrimary: Color(0xffffffff),
     primaryContainer: Color(0xff00172d),
-    onPrimaryContainer: Color(0xffeff1f2),
     secondary: Color(0xfffac595),
-    onSecondary: Color(0xff000000),
     secondaryContainer: Color(0xfffcdbbd),
-    onSecondaryContainer: Color(0xff141210),
     tertiary: Color(0xff00264d),
-    onTertiary: Color(0xffffffff),
     tertiaryContainer: Color(0xffebd9da),
-    onTertiaryContainer: Color(0xff141212),
+    appBarColor: Color(0xfffcdbbd),
     error: Color(0xffb00020),
-    onError: Color(0xffffffff),
-    errorContainer: Color(0xfffcd8df),
-    onErrorContainer: Color(0xff141213),
-    background: Color(0xfff8fafc),
-    onBackground: Color(0xff090909),
-    surface: Color(0xfff8fafc),
-    onSurface: Color(0xff090909),
-    surfaceVariant: Color(0xffe0e5e9),
-    onSurfaceVariant: Color(0xff111112),
-    outline: Color(0xff7c7c7c),
-    outlineVariant: Color(0xffc8c8c8),
-    shadow: Color(0xff000000),
-    scrim: Color(0xff000000),
-    inverseSurface: Color(0xff101214),
-    onInverseSurface: Color(0xfff5f5f5),
-    inversePrimary: Color(0xff99d0ff),
-    surfaceTint: Color(0xff0052a2),
   );
 
-  static const ColorScheme _flexSchemeDark = ColorScheme(
-    brightness: Brightness.dark,
-    primary: Color(0xff0052a2),
-    onPrimary: Color(0xffeff5fb),
-    primaryContainer: Color(0xFF001529),
-    onPrimaryContainer: Color(0xFFDFE3E6),
+
+  static const _flexSchemeDark = FlexSchemeColor(
+    primary: Color(0xff4e8ecd),
+    primaryContainer: Color(0xff001d34),
     secondary: Color(0xfffabf93),
-    onSecondary: Color(0xff14120f),
-    secondaryContainer: Color(0xff465f77),
-    onSecondaryContainer: Color(0xffeaeef2),
+    secondaryContainer: Color(0xff002d4d),
     tertiary: Color(0xff000b18),
-    onTertiary: Color(0xffefeff0),
     tertiaryContainer: Color(0xffaf676b),
-    onTertiaryContainer: Color(0xfffbeff0),
+    appBarColor: Color(0xff002d4d),
     error: Color(0xffcf6679),
-    onError: Color(0xff140c0d),
-    errorContainer: Color(0xffb1384e),
-    onErrorContainer: Color(0xfffbe8ec),
-    background: Color(0xff101213),
-    onBackground: Color(0xffececec),
-    surface: Color(0xff101213),
-    onSurface: Color(0xffececec),
-    surfaceVariant: Color(0xff303336),
-    onSurfaceVariant: Color(0xffdedfdf),
-    outline: Color(0xff797979),
-    outlineVariant: Color(0xff2d2d2d),
-    shadow: Color(0xff000000),
-    scrim: Color(0xff000000),
-    inverseSurface: Color(0xfffafbfd),
-    onInverseSurface: Color(0xff131313),
-    inversePrimary: Color(0xff0e3051),
-    surfaceTint: Color(0xff0052a2),
   );
 
-  static final backgroundGradient = LinearGradient(
-    colors: [_flexSchemeDark.tertiary, _flexSchemeDark.primaryContainer],
+  static final darkBackgroundGradient = LinearGradient(
+    colors: [
+      _flexSchemeDark.tertiary,
+      _flexSchemeDark.tertiary.withOpacity(0.5),
+    ],
     stops: const [0.25, 0.75],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
