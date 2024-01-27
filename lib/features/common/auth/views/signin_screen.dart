@@ -37,6 +37,11 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   Text(
                     'Welcome to StuVerse!',
+                    style: Theme.of(context)
+                              .textTheme.headlineLarge!
+                              .copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                   ),
                   SizedBox(height: 15),
                   Text(
@@ -99,6 +104,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         onPressed: () {},
                         child: Text(
                           'Forgot password?',
+                            style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
                         )),
                   ),
                   SizedBox(
@@ -113,6 +125,12 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Center(
                       child: Text(
                         'Login',
+                        style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                              fontWeight: FontWeight.bold
+                              ),
                       ),
                     ),
                   ),
@@ -124,6 +142,12 @@ class _SignInScreenState extends State<SignInScreen> {
                     children: [
                       Text(
                         "Don't have an account?",
+                        style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                       ),
                       TextButton(
                         onPressed: () {
@@ -135,6 +159,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               .textTheme
                               .bodyMedium!
                               .copyWith(
+                                fontWeight: FontWeight.bold,
                                 color: Theme.of(context).colorScheme.primary,
                               ),
                         ),
