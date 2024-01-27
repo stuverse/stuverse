@@ -2,134 +2,207 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/common/common.dart';
 
-class SignInScreen extends StatelessWidget {
-  const SignInScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  SignInScreen({super.key});
   static const String routeName = '/signin';
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+  final _emailController=TextEditingController();
+  final _passwordController=TextEditingController();
+  final _formKey=GlobalKey<FormState>();
+  bool _obscureText=true;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BgGradient(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset(
-                  'assets/app/logo/stuverse.png',
-                  height: 100,
-                ),
-                const SizedBox(
-                  height: 60,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 13,
-                    vertical: 8,
-                  ),
-                  child: TextFormField(
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(
-                        Icons.email_outlined,
-                        size: 20,
-                        color: Color.fromARGB(255, 150, 150, 150),
-                      ),
-                      labelText: 'Username',
-                      alignLabelWithHint: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 78, 77, 77),
-                          width: 0,
-                        ),
-                      ),
-                      hintText: 'Email or Phone number',
+    return Form(
+      key: _formKey,
+      child: Scaffold(
+        body: Container(
+          width:double.infinity,
+          decoration: BoxDecoration(
+          gradient: LinearGradient(colors: 
+          [
+            Theme.of(context).colorScheme.tertiary,
+            Theme.of(context).colorScheme.primaryContainer
+          ]
+          ),
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Image.asset('assets/app/logo/stuverse.png',
+                    height: 250,
+                    width: 250,
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 13,
-                    vertical: 8,
-                  ),
-                  child: TextFormField(
-                    obscureText: true,
-                    obscuringCharacter: '*',
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(
-                        Icons.lock_outline,
-                        size: 20,
-                        color: Color.fromARGB(255, 150, 150, 150),
-                      ),
-                      labelText: 'Password',
-                      alignLabelWithHint: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 78, 77, 77),
-                          width: 0,
-                        ),
-                      ),
-                      hintText: 'Password...',
+                   Text(
+                    'Welcome to StuVerse!',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                  SizedBox(height: 15),
+                  Text('Email',
+                  style:TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize:15
+                  )
+                  ),
+      
+                  TextFormField(
+                   validator: (value) {
+                   if (value == null || value.isEmpty) {
+                   return 'Please enter email';
+                   } else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$').hasMatch(value)) {
+                  return 'Please enter a valid email address';
+                   }
+                     return null;
+                    },
+                    controller: _emailController,
+                    cursorColor: Color.fromARGB(133, 255, 255, 255),
+                    decoration: const InputDecoration(
+                      hintText: 'Enter your email',
+                      labelStyle: TextStyle(color: Colors.white),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(112, 255, 255, 255)
+                      )
+                      ),
+                         focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(112, 255, 255, 255),
+                        ),
+                      ),
+                        fillColor: Color.fromARGB(73, 70, 95, 119),
+                        filled: true,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text('Password',
+                  style:TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize:15
+                  )
+                  ),
+                    TextFormField(
+                      validator: (value) {
+                      if (value == null || value.isEmpty) {
+                      return 'Please enter a password';
+                    } else if (value.length < 8) {
+                      return 'Password must be at least 8 characters long';
+                 } else if (!RegExp(r'^(?=.*[A-Za-z])(?=.*[0-9!@#$%^&*()_+{}|:;<>,.?~\\-]).+$').hasMatch(value)) {
+                 return 'Password must contain a number or a special character';
+                  }
+                 return null;
+                  },
+                     obscureText: _obscureText, 
+                    controller: _passwordController,
+                    cursorColor: Color.fromARGB(133, 255, 255, 255),
+                    decoration: InputDecoration(
+                      hintText: 'Enter your password',
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                        setState(() {
+                          _obscureText =!_obscureText;
+                        });
+                        },
+                        child: Icon(
+                          _obscureText ? Icons.visibility : Icons.visibility_off,
+                        )
+                      ),
+                      labelStyle: TextStyle(color: Colors.white),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(133, 255, 255, 255)
+                      )
+                      ),
+                         focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(112, 255, 255, 255),
+                        ),
+                      ),
+                      fillColor: Color.fromARGB(73, 70, 95, 119),
+                      filled: true,
+                  
+                      ),
+                      ),
+                    
+                    SizedBox(height: 5),
+                  TextButton(onPressed: (){}, child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text('Forgot password?',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize:15
+                    ),
+                    ),
+                  )),
+                  SizedBox(height: 10,),
+                  InkWell(
+                    onTap: () {
+                    _formKey.currentState!.validate();
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 55,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(colors: [
+                        Theme.of(context).colorScheme.primary,
+                        Theme.of(context).colorScheme.secondaryContainer
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(child: Text('Login',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold
+                      ),
+                      ))
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Text("Don't have an account?",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white
+                      ),
+                      
+                      ),
                       TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Forgot Password?',
+                        onPressed: () {
+                          context.replace(SignUpScreen.routeName);
+                        },
+                        child: Text('Sign Up',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.primary
+                        ),
                         ),
                       ),
                     ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 40,
-                    padding: const EdgeInsets.all(10),
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Theme.of(context).colorScheme.secondaryContainer,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Sign In',
-                      ),
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't have an account?",
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        context.push(SignUpScreen.routeName);
-                      },
-                      child: Text(
-                        'Sign up',
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
