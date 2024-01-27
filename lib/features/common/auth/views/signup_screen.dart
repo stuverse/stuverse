@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:go_router/go_router.dart';
-import 'package:stuverse/features/common/auth/views/signin_screen.dart';
+import 'package:stuverse/features/common/common.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -9,6 +11,7 @@ class SignUpScreen extends StatefulWidget {
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
+
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _emailController=TextEditingController();

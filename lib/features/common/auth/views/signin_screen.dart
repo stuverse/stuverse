@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import 'signup_screen.dart';
+import 'package:stuverse/features/common/common.dart';
 
 class SignInScreen extends StatefulWidget {
   SignInScreen({super.key});
