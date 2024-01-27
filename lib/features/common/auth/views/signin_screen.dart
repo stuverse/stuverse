@@ -79,12 +79,6 @@ class SignInScreen extends StatelessWidget {
                       size: 20,
                       color: Color.fromARGB(255, 150, 150, 150),
                     ),
-                    suffixIcon: Icon(
-                      Icons.remove_red_eye,
-                      size: 20,
-                      color: Color.fromARGB(255, 150, 150, 150),
-                    ),
-                    fillColor: Color.fromARGB(255, 78, 77, 77),
                     labelText: 'Password',
                     labelStyle: GoogleFonts.robotoSerif(
                       color: Color.fromARGB(255, 150, 150, 150),
