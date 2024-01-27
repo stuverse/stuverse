@@ -17,12 +17,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final List<_BranchChoice> branches = [
-    _BranchChoice(label: 'Computer Science', value: 'CS'),
-    _BranchChoice(label: 'Electronics and Communication', value: 'EC'),
-    _BranchChoice(label: 'Electrical', value: 'EE'),
-    _BranchChoice(label: 'Mechanical', value: 'ME'),
-    _BranchChoice(label: 'Civil', value: 'CE'),
-    _BranchChoice(label: 'Information Technology', value: 'IT'),
+    _BranchChoice(label: 'Computer Science and Engineering', value: 'cse'),
+    _BranchChoice(label: 'Electronics and Communication Engineering', value: 'ece'),
+    _BranchChoice(label: 'Electrical and Electronics Engineering', value: 'eee'),
+    _BranchChoice(label: 'Mechanical Engineering', value: 'me'),
+    _BranchChoice(label: 'Civil Engineering', value: 'ce'),
+    _BranchChoice(label: 'Information Technology', value: 'it'),
   ];
 
   String? selectedBranch;
@@ -54,8 +54,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 20),
-                      child: const Text(
+                      child:  Text(
                         'Create Your Account',
+                         style: Theme.of(context)
+                              .textTheme.headlineLarge!
+                              .copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                       ),
                     ),
                     SizedBox(height: 20),
@@ -121,6 +126,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     SizedBox(height: 10),
                     Text(
                       'Branch',
+                        overflow: TextOverflow.ellipsis, 
                     ),
                     DropdownButtonFormField<String>(
                       value: selectedBranch,
@@ -141,11 +147,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         }
                         return null;
                       },
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: 'Select your branch',
                       ),
+                      isExpanded: true,
                     ),
-                    const SizedBox(height: 40),
+
+                    SizedBox(height: 40),
                     FilledButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {}
@@ -153,6 +161,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Center(
                         child: Text(
                           'Sign Up',
+                           style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                              fontWeight: FontWeight.bold
+                              ),
                         ),
                       ),
                     ),
