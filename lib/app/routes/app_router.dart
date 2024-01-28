@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/common/auth/views/email_otp_screen.dart';
+import 'package:stuverse/features/common/auth/views/forgot_password_screen.dart';
 import 'package:stuverse/features/common/common.dart';
 import 'package:stuverse/features/common/core/views/onboarding_screen.dart';
 
@@ -30,9 +31,14 @@ class AppRouter {
         path: EmailOtpScreen.routeName,
         builder: (context, state) => EmailOtpScreen(),
       ),
+
        GoRoute(
         path: OnBoardingScreen.routeName,
         builder: (context, state) => OnBoardingScreen(),
+      ),
+      GoRoute(
+        path: ForgotPasswordScreen.routeName,
+        builder: (context, state) => ForgotPasswordScreen(),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {

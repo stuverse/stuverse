@@ -8,6 +8,8 @@ class AppImages {
   static const String mentorship = "assets/common/mentor.png";
   static const String jobPosting = "assets/common/jobposting.png";
   static const String fundraising = "assets/common/fundraising.png";
+  static const String otp3 = "assets/common/otp3.png";
+
   //! SVGs
   static const String logoSVG = "assets/app/logo/stuverse.svg";
 }
