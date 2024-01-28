@@ -30,7 +30,6 @@ flutter:
   uses-material-design: true
   generate: true
   assets:
-
     - assets/app/
     - assets/app/logo/
     - assets/common/

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/common/common.dart';
 
+import 'forgot_password_screen.dart';
+
 class SignInScreen extends StatefulWidget {
   SignInScreen({super.key});
   static const String routeName = '/signin';
@@ -37,11 +39,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   Text(
                     'Welcome to StuVerse!',
-                    style: Theme.of(context)
-                              .textTheme.headlineLarge!
-                              .copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                   SizedBox(height: 15),
                   Text(
@@ -101,10 +101,12 @@ class _SignInScreenState extends State<SignInScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.go(ForgotPasswordScreen.routeName);
+                        },
                         child: Text(
                           'Forgot password?',
-                            style: Theme.of(context)
+                          style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
                               .copyWith(
@@ -126,11 +128,9 @@ class _SignInScreenState extends State<SignInScreen> {
                       child: Text(
                         'Login',
                         style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(
-                              fontWeight: FontWeight.bold
-                              ),
+                            .textTheme
+                            .bodyMedium!
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -142,12 +142,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     children: [
                       Text(
                         "Don't have an account?",
-                        style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
                       TextButton(
                         onPressed: () {
