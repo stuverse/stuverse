@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/common/common.dart';
+import 'package:stuverse/features/common/core/views/onboarding_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   SignInScreen({super.key});
@@ -119,7 +120,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   FilledButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        // context.go(HomeScreen.routeName);
+                       context.push(OnBoardingScreen.routeName);
+                      
                       }
                     },
                     child: Center(
