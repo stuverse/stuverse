@@ -18,93 +18,78 @@ class ForgotPasswordScreen extends StatelessWidget {
         ),
         body: BgGradient(
             child: SafeArea(
-                child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(children: [
+                child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            children: [
               Image.asset(
                 'assets/common/otp3.png',
-                height: 250,
+                height: 200,
               ),
               SizedBox(
-                height: 30,
+                height: 25,
               ),
               Text(
-                'Otp Verification',
+                'Forgot your password?',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w800,
                     fontSize: 20,
                     color: Theme.of(context).colorScheme.onTertiaryContainer),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              RichText(
-                  text: TextSpan(
-                      style: TextStyle(color: Colors.blue), //apply style to all
-                      children: [
-                    TextSpan(
-                      text: 'We will send you an',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontWeight: FontWeight.normal,
-                            fontFamily: 'Poppins',
-                            color: Theme.of(context).colorScheme.outline,
-                          ),
-                    ),
-                    TextSpan(
-                      text: ' One Time Password',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'roboto',
-                          fontSize: 18),
-                    ),
-                    TextSpan(
-                      text: ' On this Email',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.normal,
-                          fontFamily: 'Poppins',
-                          color: Theme.of(context).colorScheme.onSecondary),
-                    )
-                  ])),
-              SizedBox(
-                height: 50,
-              ),
-              Text('Enter Email',
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  'Please, Enter yor email address below to recieve your user and new password',
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .copyWith(fontWeight: FontWeight.bold, fontSize: 15)),
-              TextField(
-                controller: _emailController,
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Enter your email',
+                      .copyWith(color: Colors.white),
                 ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    )),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Text(
-                      'Get OTP',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium!
-                          .copyWith(fontWeight: FontWeight.w500),
+                SizedBox(
+                  height: 30,
+                ),
+                Text('Email address*',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(color: Colors.blue, fontSize: 15)),
+                SizedBox(
+                  height: 5,
+                ),
+                TextField(
+                  controller: _emailController,
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Enter your email',
+                  ),
+                ),
+                SizedBox(
+                  height: 100,
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      )),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Text(
+                        'Get OTP',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium!
+                            .copyWith(fontWeight: FontWeight.w500),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ]),
+              ]),
+            ],
           ),
         ))));
   }
