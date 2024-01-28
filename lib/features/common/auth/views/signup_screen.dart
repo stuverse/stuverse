@@ -1,7 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:flutter/material.dart';
-
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/common/common.dart';
 
@@ -150,7 +149,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(height: 40),
                   FilledButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
+                      if (_formKey.currentState!.validate()) {
+                      
+                      }
                     },
                     child: Center(
                       child: Text(

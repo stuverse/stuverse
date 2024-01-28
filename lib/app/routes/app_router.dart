@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/common/auth/views/email_otp_screen.dart';
 import 'package:stuverse/features/common/auth/views/forgot_password_screen.dart';
 import 'package:stuverse/features/common/common.dart';
+import 'package:stuverse/features/common/core/views/onboarding_screen.dart';
 
 import 'package:stuverse/features/forum/forum.dart';
 import 'package:stuverse/features/fund/fund.dart';
@@ -29,6 +30,11 @@ class AppRouter {
       GoRoute(
         path: EmailOtpScreen.routeName,
         builder: (context, state) => EmailOtpScreen(),
+      ),
+
+       GoRoute(
+        path: OnBoardingScreen.routeName,
+        builder: (context, state) => OnBoardingScreen(),
       ),
       GoRoute(
         path: ForgotPasswordScreen.routeName,
