@@ -10,6 +10,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,
         backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -24,7 +25,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/common/otp3.png',
-                height: 200,
+                height: 300,
               ),
               SizedBox(
                 height: 25,
@@ -68,27 +69,28 @@ class ForgotPasswordScreen extends StatelessWidget {
                 SizedBox(
                   height: 100,
                 ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      )),
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
-                        'Get OTP',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .copyWith(fontWeight: FontWeight.w500),
-                      ),
+              ]),
+              Spacer(),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    )),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Text(
+                      'Get OTP',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
-              ]),
+              ),
             ],
           ),
         ))));
