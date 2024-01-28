@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:stuverse/app/widgets/labeled_form_input.dart';
 import 'package:stuverse/features/common/common.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -35,7 +36,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       key: _formKey,
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        backgroundColor: Colors.transparent,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -58,100 +58,101 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  Text(
-                    'Name',
-                  ),
-                  TextFormField(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter name';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      hintText: 'Enter your name',
+                  LabeledFormInput(
+                    label: 'Name',
+                    isRequired: true,
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter name';
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                        hintText: 'Enter your name',
+                      ),
                     ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    'Email',
-                  ),
-                  TextFormField(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter email';
-                      } else if (!RegExp(
-                              r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
-                          .hasMatch(value)) {
-                        return 'Please enter a valid email address';
-                      }
-                      return null;
-                    },
-                    controller: _emailController,
-                    decoration: const InputDecoration(
-                      hintText: 'Enter your email',
+                  LabeledFormInput(
+                    label: 'Email',
+                    isRequired: true,
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter email';
+                        } else if (!RegExp(
+                                r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+                            .hasMatch(value)) {
+                          return 'Please enter a valid email address';
+                        }
+                        return null;
+                      },
+                      controller: _emailController,
+                      decoration: const InputDecoration(
+                        hintText: 'Enter your email',
+                      ),
                     ),
                   ),
                   SizedBox(height: 10),
-                  Text(
-                    'Password',
-                  ),
-                  TextFormField(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter a password';
-                      } else if (value.length < 8) {
-                        return 'Password must be at least 8 characters long';
-                      } else if (!RegExp(
-                              r'^(?=.*[A-Za-z])(?=.*[0-9!@#$%^&*()_+{}|:;<>,.?~\\-]).+$')
-                          .hasMatch(value)) {
-                        return 'Password must contain a number or a special character';
-                      }
-                      return null;
-                    },
-                    obscureText: true,
-                    controller: _passwordController,
-                    decoration: const InputDecoration(
-                      hintText: 'Enter your password',
+                  LabeledFormInput(
+                    label: 'Password',
+                    isRequired: true,
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a password';
+                        } else if (value.length < 8) {
+                          return 'Password must be at least 8 characters long';
+                        } else if (!RegExp(
+                                r'^(?=.*[A-Za-z])(?=.*[0-9!@#$%^&*()_+{}|:;<>,.?~\\-]).+$')
+                            .hasMatch(value)) {
+                          return 'Password must contain a number or a special character';
+                        }
+                        return null;
+                      },
+                      obscureText: true,
+                      controller: _passwordController,
+                      decoration: const InputDecoration(
+                        hintText: 'Enter your password',
+                      ),
                     ),
                   ),
                   SizedBox(height: 10),
-                  Text(
-                    'Branch',
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  DropdownButtonFormField<String>(
-                    value: selectedBranch,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedBranch = value!;
-                      });
-                    },
-                    items: branches.map((branch) {
-                      return DropdownMenuItem<String>(
-                        value: branch.value,
-                        child: Text(branch.label),
-                      );
-                    }).toList(),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please select your branch';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'Select your branch',
+                  LabeledFormInput(
+                    label: 'Branch',
+                    isRequired: true,
+                    child: DropdownButtonFormField<String>(
+                      value: selectedBranch,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedBranch = value!;
+                        });
+                      },
+                      items: branches.map((branch) {
+                        return DropdownMenuItem<String>(
+                          value: branch.value,
+                          child: Text(branch.label),
+                        );
+                      }).toList(),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please select your branch';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Select your branch',
+                      ),
+                      isExpanded: true,
                     ),
-                    isExpanded: true,
                   ),
                   SizedBox(height: 40),
                   FilledButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                      
-                      }
+                      if (_formKey.currentState!.validate()) {}
                     },
                     child: Center(
                       child: Text(
