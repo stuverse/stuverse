@@ -162,10 +162,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: Center(
                       child: Text(
                         'Sign Up',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
