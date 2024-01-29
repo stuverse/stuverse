@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
-import 'package:stuverse/features/common/auth/views/email_otp_screen.dart';
-
-import '../../core/widgets/bg_gradient.dart';
 
 class OtpSigningScreen extends StatelessWidget {
   OtpSigningScreen({super.key});
-  static const String routeName = '/otp-signin';
+
   final _emailController = TextEditingController();
 
   @override
@@ -73,7 +70,7 @@ class OtpSigningScreen extends StatelessWidget {
                 Spacer(),
                 FilledButton(
                   onPressed: () {
-                    context.push(EmailOtpScreen.routeName);
+                    context.push(CommonRoutes.emailOtp);
                   },
                   style: FilledButton.styleFrom(),
                   child: Center(

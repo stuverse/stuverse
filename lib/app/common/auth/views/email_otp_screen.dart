@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:stuverse/features/common/common.dart';
+import 'package:stuverse/app/app.dart';
 
 class EmailOtpScreen extends StatelessWidget {
   const EmailOtpScreen({super.key});
-  static const String routeName = '/email-otp';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

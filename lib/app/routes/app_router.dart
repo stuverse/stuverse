@@ -1,42 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:stuverse/features/common/auth/views/email_otp_screen.dart';
-import 'package:stuverse/features/common/auth/views/otp_signin_screen.dart';
-import 'package:stuverse/features/common/common.dart';
-import 'package:stuverse/features/common/core/views/onboarding_screen.dart';
-
-import 'package:stuverse/features/forum/forum.dart';
-import 'package:stuverse/features/fund/fund.dart';
-import 'package:stuverse/features/job/job.dart';
-import 'package:stuverse/features/mentor/mentor.dart';
+import 'package:stuverse/app/app.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter _router = GoRouter(
-    initialLocation: SplashScreen.routeName,
+    initialLocation: CommonRoutes.splash,
     debugLogDiagnostics: true,
     navigatorKey: _rootNavigatorKey,
     routes: [
       GoRoute(
-        path: SignInScreen.routeName,
-        builder: (context, state) => SignInScreen(),
+        path: CommonRoutes.signin,
+        builder: (context, state) => const SignInScreen(),
       ),
       GoRoute(
-        path: SignUpScreen.routeName,
-        builder: (context, state) => SignUpScreen(),
+        path: CommonRoutes.signup,
+        builder: (context, state) => const SignUpScreen(),
       ),
       GoRoute(
-        path: EmailOtpScreen.routeName,
-        builder: (context, state) => EmailOtpScreen(),
+        path: CommonRoutes.emailOtp,
+        builder: (context, state) => const EmailOtpScreen(),
       ),
       GoRoute(
-        path: OnBoardingScreen.routeName,
-        builder: (context, state) => OnBoardingScreen(),
+        path: CommonRoutes.onBoarding,
+        builder: (context, state) => const OnBoardingScreen(),
       ),
       GoRoute(
-        path: OtpSigningScreen.routeName,
+        path: CommonRoutes.otpSignin,
         builder: (context, state) => OtpSigningScreen(),
       ),
       StatefulShellRoute.indexedStack(
@@ -46,19 +37,23 @@ class AppRouter {
           );
         },
         branches: [
-          StatefulShellBranch(routes: forumRoutes),
           StatefulShellBranch(
-            routes: fundRoutes,
+            routes: ForumRoutes.forumRoutes,
           ),
-          StatefulShellBranch(routes: jobRoutes),
           StatefulShellBranch(
-            routes: mentorRoutes,
+            routes: ForumRoutes.forumRoutes,
+          ),
+          StatefulShellBranch(
+            routes: JobRoutes.jobRoutes,
+          ),
+          StatefulShellBranch(
+            routes: MentorRoutes.mentorRoutes,
           ),
         ],
       ),
       GoRoute(
-        path: SplashScreen.routeName,
-        builder: (context, state) => SplashScreen(),
+        path: CommonRoutes.splash,
+        builder: (context, state) => const SplashScreen(),
       ),
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),

@@ -1,13 +1,9 @@
 // ignore_for_file: lines_longer_than_80_chars
-
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:stuverse/app/widgets/labeled_form_input.dart';
-import 'package:stuverse/features/common/common.dart';
+import 'package:stuverse/app/app.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
-  static const String routeName = '/signup';
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -45,9 +41,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         body: BgGradient(
           child: SafeArea(
             child: Padding(
-              padding:  EdgeInsets.symmetric(
-              horizontal: width * 0.05,
-              vertical: height * 0.05, 
+              padding: EdgeInsets.symmetric(
+                horizontal: width * 0.05,
+                vertical: height * 0.05,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
