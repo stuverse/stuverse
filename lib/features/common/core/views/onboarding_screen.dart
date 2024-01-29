@@ -34,17 +34,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             BoardingPage(
               img: AppImages.mentorship,
               title: 'Mentorship Beyond Boundaries',
-              description: 'Connect with experienced mentors, seek valuable insights, and sculpt your academic path with guidance that transcends boundaries.'
+              description: 'Forge connections with experienced mentors. Gain valuable insights and shape your academic path beyond boundaries. Connect, learn, and thrive.'
             ),
             BoardingPage(
               img: AppImages.jobPosting,
               title: 'Unlock Your Career Potential',
-              description: 'Explore job and internship postings, connecting academia with industry. Your path to success starts here.',
+              description: 'Unlock job and internship postings that bridge academia and industry. Your pathway to success starts here. Explore, apply, and advance your career.',
             ),
             BoardingPage(
               img: AppImages.fundraising,
               title: 'Innovate, Captivate, Fundraise', 
-            description:'Request funds for your needs, events, or charity.Transparent fundraising, top contributors recognized.')
+            description:'Request funds for your needs, events, or charity. Transparent fundraising processes, top contributors recognized. Innovate, captivate, and make a difference.')
           ],
         ),
         onLastPage ?
