@@ -5,9 +5,9 @@ import 'package:stuverse/features/common/auth/views/email_otp_screen.dart';
 
 import '../../core/widgets/bg_gradient.dart';
 
-class ForgotPasswordScreen extends StatelessWidget {
-  ForgotPasswordScreen({super.key});
-  static const String routeName = '/forgot-password';
+class OtpSigningScreen extends StatelessWidget {
+  OtpSigningScreen({super.key});
+  static const String routeName = '/otp-signin';
   final _emailController = TextEditingController();
 
   @override
@@ -33,7 +33,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   height: 25,
                 ),
                 Text(
-                  'Forgot your password?',
+                  'Passwordless Sign In',
                   style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                       fontWeight: FontWeight.w800,
                       color: Theme.of(context).colorScheme.onBackground),
@@ -43,7 +43,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    'Please, enter yor email address below to recieve your user and new password',
+                    'Enter your email address to receive a One-Time Password (OTP) for authentication',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Theme.of(context)
@@ -75,15 +75,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                   onPressed: () {
                     context.push(EmailOtpScreen.routeName);
                   },
+                  style: FilledButton.styleFrom(),
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Text(
                         'Get OTP',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .copyWith(fontWeight: FontWeight.w500),
                       ),
                     ),
                   ),

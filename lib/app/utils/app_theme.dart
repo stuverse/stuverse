@@ -21,6 +21,7 @@ class AppTheme {
       thinBorderWidth: 0.5,
       defaultRadius: 9,
       textButtonRadius: 9,
+      textButtonSchemeColor: SchemeColor.secondaryContainer,
       filledButtonRadius: 9,
       elevatedButtonRadius: 9,
       outlinedButtonRadius: 9,
@@ -83,13 +84,13 @@ class AppTheme {
 // Light and dark ColorSchemes made by FlexColorScheme v7.3.1.
 // These ColorScheme objects require Flutter 3.7 or later.
   static const _flexSchemeLight = FlexSchemeColor(
-    primary: Color(0xff0052a2),
+    primary: Color(0xff1d72c6),
     primaryContainer: Color(0xff00172d),
     secondary: Color(0xfffac595),
-    secondaryContainer: Color(0xfffcdbbd),
+    secondaryContainer: Color(0xff0052a2),
     tertiary: Color(0xff00264d),
     tertiaryContainer: Color(0xffebd9da),
-    appBarColor: Color(0xfffcdbbd),
+    appBarColor: Color(0xff0052a2),
     error: Color(0xffb00020),
   );
 

@@ -4,7 +4,7 @@ import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/common/common.dart';
 import 'package:stuverse/features/common/core/views/onboarding_screen.dart';
 
-import 'forgot_password_screen.dart';
+import 'otp_signin_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -107,7 +107,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                         onPressed: () {
-                          context.push(ForgotPasswordScreen.routeName);
+                          context.push(OtpSigningScreen.routeName);
                         },
                         child: Text(
                           'Forgot password?',
@@ -132,10 +132,6 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Center(
                       child: Text(
                         'Login',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
