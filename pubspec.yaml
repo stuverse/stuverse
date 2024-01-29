@@ -22,10 +22,30 @@ dependencies:
 
 dev_dependencies:
   bloc_test: ^9.1.4
+  flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.0
   very_good_analysis: ^5.1.0
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/app/logo/stuverse.jpg"
+  remove_alpha_ios: true
+  adaptive_icon_background: "#ffffff"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/app/logo/stuverse.jpg"
+    background_color: "#ffffff"
+  windows:
+    generate: true
+    image_path: "assets/app/logo/stuverse.jpg"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/app/logo/stuverse.jpg"
 
 flutter:
   uses-material-design: true

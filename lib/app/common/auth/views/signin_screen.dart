@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
-import 'package:stuverse/features/common/common.dart';
-import 'package:stuverse/features/common/core/views/onboarding_screen.dart';
-
-import 'otp_signin_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
-  static const String routeName = '/signin';
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -32,8 +27,8 @@ class _SignInScreenState extends State<SignInScreen> {
           child: SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(
-              horizontal: width * 0.05,
-              vertical: height * 0.05, 
+                horizontal: width * 0.05,
+                vertical: height * 0.05,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +107,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                         onPressed: () {
-                          context.push(OtpSigningScreen.routeName);
+                          context.push(CommonRoutes.otpSignin);
                         },
                         child: Text(
                           'Forgot password?',
@@ -130,9 +125,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   FilledButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        context.push(OnBoardingScreen.routeName);
-                      }
+                      if (_formKey.currentState!.validate()) {}
                     },
                     child: Center(
                       child: Text(
@@ -154,7 +147,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-                          context.push(SignUpScreen.routeName);
+                          context.push(CommonRoutes.signup);
                         },
                         child: Text(
                           'Sign Up',
