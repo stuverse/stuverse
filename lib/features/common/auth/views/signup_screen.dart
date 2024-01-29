@@ -32,6 +32,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String? selectedBranch;
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Form(
       key: _formKey,
       child: Scaffold(
@@ -43,7 +45,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         body: BgGradient(
           child: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(20),
+              padding:  EdgeInsets.symmetric(
+              horizontal: width * 0.05,
+              vertical: height * 0.05, 
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
