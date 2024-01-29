@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:stuverse/features/common/auth/widgets/custom_textfield.dart';
 import 'package:stuverse/features/common/common.dart';
 
 class EmailOtpScreen extends StatelessWidget {
@@ -11,8 +11,8 @@ class EmailOtpScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        leading: BackButton(),
         backgroundColor: Colors.transparent,
-        title: const Text('Email OTP'),
         elevation: 0,
       ),
       body: BgGradient(
@@ -74,133 +74,23 @@ class EmailOtpScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 68,
-                      width: 68,
-                      child: TextFormField(
-                        onSaved: (pin1) {},
-                        onChanged: (value) {
-                          if (value.length == 1) {
-                            FocusScope.of(context).nextFocus();
-                          }
-                        },
-                        decoration: InputDecoration(
-                          hintText: "0",
-                          hintStyle: TextStyle(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimary
-                                  .withOpacity(0.1),
-                              letterSpacing: 25),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        style: Theme.of(context).textTheme.headlineLarge,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(1),
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                      ),
-                    ),
-                    SizedBox(
                       width: 28,
                     ),
-                    SizedBox(
-                      height: 68,
-                      width: 68,
-                      child: TextFormField(
-                        onSaved: (pin2) {},
-                        onChanged: (value) {
-                          if (value.length == 1) {
-                            FocusScope.of(context).nextFocus();
-                          }
-                        },
-                        decoration: InputDecoration(
-                          hintText: "0",
-                          hintStyle: TextStyle(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimary
-                                  .withOpacity(0.1),
-                              letterSpacing: 25),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        style: Theme.of(context).textTheme.headlineLarge,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(1),
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                      ),
+                    CustomTextField(),
+                    const SizedBox(
+                      width: 20,
                     ),
+                    CustomTextField(),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    CustomTextField(),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    CustomTextField(),
                     SizedBox(
                       width: 28,
-                    ),
-                    SizedBox(
-                      height: 68,
-                      width: 68,
-                      child: TextFormField(
-                        onSaved: (pin3) {},
-                        onChanged: (value) {
-                          if (value.length == 1) {
-                            FocusScope.of(context).nextFocus();
-                          }
-                        },
-                        decoration: InputDecoration(
-                          hintText: "0",
-                          hintStyle: TextStyle(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimary
-                                  .withOpacity(0.1),
-                              letterSpacing: 25),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        style: Theme.of(context).textTheme.headlineLarge,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(1),
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 28,
-                    ),
-                    SizedBox(
-                      height: 68,
-                      width: 68,
-                      child: TextFormField(
-                        onSaved: (pin4) {},
-                        onChanged: (value) {
-                          if (value.length == 1) {
-                            FocusScope.of(context).nextFocus();
-                          }
-                        },
-                        decoration: InputDecoration(
-                          hintText: "0",
-                          hintStyle: TextStyle(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimary
-                                  .withOpacity(0.1),
-                              letterSpacing: 25),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        style: Theme.of(context).textTheme.headlineLarge,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(1),
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                      ),
                     ),
                   ],
                 ),
@@ -216,7 +106,8 @@ class EmailOtpScreen extends StatelessWidget {
                             horizontal: 30, vertical: 10),
                         child: Text(
                           "Resend",
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 15).copyWith(
+                              color: Theme.of(context).colorScheme.primary),
                         ),
                       )),
                   Spacer(),

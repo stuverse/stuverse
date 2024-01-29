@@ -15,7 +15,7 @@ class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter _router = GoRouter(
-    initialLocation: SplashScreen.routeName,
+    initialLocation: EmailOtpScreen.routeName,
     debugLogDiagnostics: true,
     navigatorKey: _rootNavigatorKey,
     routes: [
@@ -31,8 +31,7 @@ class AppRouter {
         path: EmailOtpScreen.routeName,
         builder: (context, state) => EmailOtpScreen(),
       ),
-
-       GoRoute(
+      GoRoute(
         path: OnBoardingScreen.routeName,
         builder: (context, state) => OnBoardingScreen(),
       ),
