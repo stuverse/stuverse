@@ -56,23 +56,18 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 bottom: 100,
                 left: 0,
                 right: 0,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 70),
-                  child: FilledButton(
-                    style: FilledButton.styleFrom(
-                      textStyle: context.bodyMedium!
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    onPressed: () {
-                      context.go(CommonRoutes.signin);
-                    },
-                    child: const Center(
-                      child: Text(
-                        'GET STARTED',
-                      ),
-                    ),
+                child: FilledButton(
+                  style: FilledButton.styleFrom(
+                    textStyle: context.bodyMedium!
+                        .copyWith(fontWeight: FontWeight.bold),
                   ),
-                ),
+                  onPressed: () {
+                    context.go(CommonRoutes.signin);
+                  },
+                  child: Text(
+                    'GET STARTED',
+                  ).toCenter(),
+                ).paddingSymmetric(horizontal: 70),
               )
             else
               Container(
@@ -86,11 +81,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       },
                       child: Text(
                         'SKIP',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(fontWeight: FontWeight.bold),
-                      ),
+                        style: context.bodyLarge
+                      ).bold(),
                     ),
                     SmoothPageIndicator(controller: _pageController, count: 4),
                     GestureDetector(
@@ -101,11 +93,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       },
                       child: Text(
                         'NEXT',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(fontWeight: FontWeight.bold),
-                      ),
+                        style: context.bodyLarge
+                      ).bold(),
                     ),
                   ],
                 ),

@@ -28,8 +28,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String? selectedBranch;
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Form(
       key: _formKey,
       child: Scaffold(
@@ -40,126 +38,119 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
         body: BgGradient(
           child: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: width * 0.05,
-                vertical: height * 0.05,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: Text(
-                      'Create Your Account',
-                      style: context.headlineLarge!.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  20.heightBox,
-                  LabeledFormInput(
-                    label: 'Name',
-                    isRequired: true,
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter name';
-                        }
-                        return null;
-                      },
-                      decoration: const InputDecoration(
-                        hintText: 'Enter your name',
-                      ),
-                    ),
-                  ),
-                  10.heightBox,
-                  LabeledFormInput(
-                    label: 'Email',
-                    isRequired: true,
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter email';
-                        } else if (!RegExp(
-                                r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
-                            .hasMatch(value)) {
-                          return 'Please enter a valid email address';
-                        }
-                        return null;
-                      },
-                      controller: _emailController,
-                      decoration: const InputDecoration(
-                        hintText: 'Enter your email',
-                      ),
-                    ),
-                  ),
-                  10.heightBox,
-                  LabeledFormInput(
-                    label: 'Password',
-                    isRequired: true,
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a password';
-                        } else if (value.length < 8) {
-                          return 'Password must be at least 8 characters long';
-                        } else if (!RegExp(
-                                r'^(?=.*[A-Za-z])(?=.*[0-9!@#$%^&*()_+{}|:;<>,.?~\\-]).+$')
-                            .hasMatch(value)) {
-                          return 'Password must contain a number or a special character';
-                        }
-                        return null;
-                      },
-                      obscureText: true,
-                      controller: _passwordController,
-                      decoration: const InputDecoration(
-                        hintText: 'Enter your password',
-                      ),
-                    ),
-                  ),
-                  10.heightBox,
-                  LabeledFormInput(
-                    label: 'Branch',
-                    isRequired: true,
-                    child: DropdownButtonFormField<String>(
-                      value: selectedBranch,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedBranch = value!;
-                        });
-                      },
-                      items: branches.map((branch) {
-                        return DropdownMenuItem<String>(
-                          value: branch.value,
-                          child: Text(branch.label),
-                        );
-                      }).toList(),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please select your branch';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Select your branch',
-                      ),
-                      isExpanded: true,
-                    ),
-                  ),
-                  40.heightBox,
-                  FilledButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Text(
+                    'Create Your Account',
+                    style: context.headlineLarge,
+                  ).bold(),
+                ),
+                20.heightBox,
+                LabeledFormInput(
+                  label: 'Name',
+                  isRequired: true,
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter name';
+                      }
+                      return null;
                     },
-                    child: Center(
-                      child: Text(
-                        'Sign Up',
-                      ),
+                    decoration: const InputDecoration(
+                      hintText: 'Enter your name',
                     ),
                   ),
-                ],
-              ),
+                ),
+                10.heightBox,
+                LabeledFormInput(
+                  label: 'Email',
+                  isRequired: true,
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter email';
+                      } else if (!RegExp(
+                              r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+                          .hasMatch(value)) {
+                        return 'Please enter a valid email address';
+                      }
+                      return null;
+                    },
+                    controller: _emailController,
+                    decoration: const InputDecoration(
+                      hintText: 'Enter your email',
+                    ),
+                  ),
+                ),
+                10.heightBox,
+                LabeledFormInput(
+                  label: 'Password',
+                  isRequired: true,
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a password';
+                      } else if (value.length < 8) {
+                        return 'Password must be at least 8 characters long';
+                      } else if (!RegExp(
+                              r'^(?=.*[A-Za-z])(?=.*[0-9!@#$%^&*()_+{}|:;<>,.?~\\-]).+$')
+                          .hasMatch(value)) {
+                        return 'Password must contain a number or a special character';
+                      }
+                      return null;
+                    },
+                    obscureText: true,
+                    controller: _passwordController,
+                    decoration: const InputDecoration(
+                      hintText: 'Enter your password',
+                    ),
+                  ),
+                ),
+                10.heightBox,
+                LabeledFormInput(
+                  label: 'Branch',
+                  isRequired: true,
+                  child: DropdownButtonFormField<String>(
+                    value: selectedBranch,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedBranch = value!;
+                      });
+                    },
+                    items: branches.map((branch) {
+                      return DropdownMenuItem<String>(
+                        value: branch.value,
+                        child: Text(branch.label),
+                      );
+                    }).toList(),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please select your branch';
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Select your branch',
+                    ),
+                    isExpanded: true,
+                  ),
+                ),
+                40.heightBox,
+                FilledButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {}
+                  },
+                  child: Text(
+                    'Sign Up',
+                  ).toCenter(),
+                ),
+              ],
+            ).paddingSymmetric(
+               horizontal: context.width *0.05,
+              vertical: context.height *0.05
             ),
           ),
         ),
