@@ -18,40 +18,32 @@ class OtpSigningScreen extends StatelessWidget {
       ),
       body: BgGradient(
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Column(
-              children: [
-                Image.asset(
-                  AppImages.otp3,
-                  height: 300,
+          child: Column(
+            children: [
+              Image.asset(
+                AppImages.otp3,
+                height: 300,
+              ),
+              25.heightBox,
+              Text(
+                'Passwordless Sign In',
+                style: context.headlineMedium!.copyWith(
+                  fontWeight: FontWeight.w800,
+                  color: context.colorScheme.onBackground,
                 ),
-                SizedBox(
-                  height: 25,
-                ),
-                Text(
-                  'Passwordless Sign In',
-                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                      fontWeight: FontWeight.w800,
-                      color: Theme.of(context).colorScheme.onBackground),
-                ),
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  SizedBox(
-                    height: 10,
-                  ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  10.heightBox,
                   Text(
                     'Enter your email address to receive a One-Time Password (OTP) for authentication',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onBackground
-                              .withOpacity(0.7),
-                        ),
+                    style: context.bodyMedium!.copyWith(
+                      color: context.colorScheme.onBackground.withOpacity(0.7),
+                    ),
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
+                  30.heightBox,
                   LabeledFormInput(
                     label: 'Email',
                     isRequired: true,
@@ -63,28 +55,21 @@ class OtpSigningScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 100,
-                  ),
-                ]),
-                Spacer(),
-                FilledButton(
-                  onPressed: () {
-                    context.push(CommonRoutes.emailOtp);
-                  },
-                  style: FilledButton.styleFrom(),
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
-                        'Get OTP',
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+                  100.heightBox,
+                ],
+              ),
+              const Spacer(),
+              FilledButton(
+                onPressed: () {
+                  context.push(CommonRoutes.emailOtp);
+                },
+                style: FilledButton.styleFrom(),
+                child: const Text(
+                  'Get OTP',
+                ).toCenter().paddingSymmetric(vertical: 10),
+              ),
+            ],
+          ).paddingAll(15),
         ),
       ),
     );
