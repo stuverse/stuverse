@@ -18,22 +18,25 @@ class OtpSigningScreen extends StatelessWidget {
       ),
       body: BgGradient(
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Column(
-              children: [
-                Image.asset(
-                  AppImages.otp3,
-                  height: 300,
+          child: Column(
+            children: [
+              Image.asset(
+                AppImages.otp3,
+                height: 300,
+              ),
+              25.heightBox,
+              Text(
+                'Passwordless Sign In',
+                style: context.headlineMedium!.copyWith(
+                  fontWeight: FontWeight.w800,
+                  color: context.colorScheme.onBackground,
                 ),
-                25.heightBox,
-                Text(
-                  'Passwordless Sign In',
-                  style: context.headlineMedium!.copyWith(
-                      fontWeight: FontWeight.w800,
-                      color: context.colorScheme.onBackground),
-                ),
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+
                   10.heightBox,
                   Text(
                     'Enter your email address to receive a One-Time Password (OTP) for authentication',
@@ -54,26 +57,23 @@ class OtpSigningScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  100.heightBox
-                ]),
-                Spacer(),
-                FilledButton(
-                  onPressed: () {
-                    context.push(CommonRoutes.emailOtp);
-                  },
-                  style: FilledButton.styleFrom(),
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
-                        'Get OTP',
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+
+                  100.heightBox,
+                ],
+              ),
+              const Spacer(),
+              FilledButton(
+                onPressed: () {
+                  context.push(CommonRoutes.emailOtp);
+                },
+                style: FilledButton.styleFrom(),
+                child: const Text(
+                  'Get OTP',
+                ).toCenter().paddingSymmetric(vertical: 10),
+              ),
+            ],
+          ).paddingAll(15),
+
         ),
       ),
     );
