@@ -26,32 +26,23 @@ class OtpSigningScreen extends StatelessWidget {
                   AppImages.otp3,
                   height: 300,
                 ),
-                SizedBox(
-                  height: 25,
-                ),
+                25.heightBox,
                 Text(
                   'Passwordless Sign In',
-                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                  style: context.headlineMedium!.copyWith(
                       fontWeight: FontWeight.w800,
-                      color: Theme.of(context).colorScheme.onBackground),
+                      color: context.colorScheme.onBackground),
                 ),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  SizedBox(
-                    height: 10,
-                  ),
+                  10.heightBox,
                   Text(
                     'Enter your email address to receive a One-Time Password (OTP) for authentication',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onBackground
-                              .withOpacity(0.7),
-                        ),
+                    style: context.bodyMedium!.copyWith(
+                      color: context.colorScheme.onBackground.withOpacity(0.7),
+                    ),
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
+                  30.heightBox,
                   LabeledFormInput(
                     label: 'Email',
                     isRequired: true,
@@ -63,9 +54,7 @@ class OtpSigningScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 100,
-                  ),
+                  100.heightBox
                 ]),
                 Spacer(),
                 FilledButton(
