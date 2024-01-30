@@ -1,6 +1,9 @@
 //! Sub-Modules
 export 'common/common.dart';
 
+//! Models
+export 'models/user/user.dart';
+
 //! Route
 export 'routes/common_routes.dart';
 export 'routes/forum_routes.dart';
