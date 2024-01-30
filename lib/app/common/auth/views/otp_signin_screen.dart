@@ -2,10 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 
-class OtpSigningScreen extends StatelessWidget {
-  OtpSigningScreen({super.key});
+class OtpSigningScreen extends StatefulWidget {
+  OtpSigningScreen({super.key, this.email});
+  final String? email;
 
+  @override
+  State<OtpSigningScreen> createState() => _OtpSigningScreenState();
+}
+
+class _OtpSigningScreenState extends State<OtpSigningScreen> {
   final _emailController = TextEditingController();
+
+  @override
+  void initState() {
+    if (widget.email != null) {
+      _emailController.text = widget.email!;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +84,7 @@ class OtpSigningScreen extends StatelessWidget {
                 Spacer(),
                 FilledButton(
                   onPressed: () {
-                    context.push(CommonRoutes.emailOtp);
+                    context.push(CommonRoutes.otpVerify);
                   },
                   style: FilledButton.styleFrom(),
                   child: Center(

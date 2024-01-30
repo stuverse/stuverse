@@ -1,24 +1,25 @@
 part of 'auth_cubit.dart';
 
-@immutable
-sealed class AuthState {}
+@freezed
+class AuthState with _$AuthState {
+  const factory AuthState.initial() = _Initial;
+  const factory AuthState.signInLoading() = _SignInLoading;
+  const factory AuthState.signInFailure(String message) = _SignInFailure;
 
-final class AuthInitial extends AuthState {}
+  const factory AuthState.signUpLoading() = _SignUpLoading;
+  const factory AuthState.signUpFailure(String message) = _SignUpFailure;
 
-final class AuthSigninLoading extends AuthState {}
+  const factory AuthState.emailOtpSendLoading() = _EmailOtpLoading;
+  const factory AuthState.emailOtpSendFailure(String message) =
+      _EmailOtpSendFailure;
+  const factory AuthState.emailOtpSendSuccess() = _EmailOtpSendSuccess;
 
-final class AuthSigninSuccess extends AuthState {}
+  const factory AuthState.otpSignInLoading() = _OtpSignInLoading;
+  const factory AuthState.otpSignInFailure(String message) = _OtpSignInFailure;
 
-final class AuthSigninFailure extends AuthState {
-  AuthSigninFailure(this.message);
-  final String message;
-}
+  const factory AuthState.success(
+    User user,
+  ) = _Success;
 
-final class AuthSignupLoading extends AuthState {}
-
-final class AuthSignupSuccess extends AuthState {}
-
-final class AuthSignupFailure extends AuthState {
-  AuthSignupFailure(this.message);
-  final String message;
+  const factory AuthState.accountNotVerified() = _AccountNotVerified;
 }

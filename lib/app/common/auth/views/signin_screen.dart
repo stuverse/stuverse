@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 
@@ -10,8 +11,8 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _emailController = TextEditingController(text: '20ncs10@meaec.edu.in');
+  final _passwordController = TextEditingController(text: "1234");
   final _formKey = GlobalKey<FormState>();
   bool _obscureText = true;
   @override
@@ -75,12 +76,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter a password';
-                        } else if (value.length < 8) {
-                          return 'Password must be at least 8 characters long';
-                        } else if (!RegExp(
-                                r'^(?=.*[A-Za-z])(?=.*[0-9!@#$%^&*()_+{}|:;<>,.?~\\-]).+$')
-                            .hasMatch(value)) {
-                          return 'Password must contain a number or a special character';
                         }
                         return null;
                       },
@@ -123,16 +118,52 @@ class _SignInScreenState extends State<SignInScreen> {
                   SizedBox(
                     height: 10,
                   ),
-                  FilledButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
-                    },
-                    child: Center(
-                      child: Text(
-                        'Login',
-                      ),
-                    ),
-                  ),
+                  BlocConsumer<AuthCubit, AuthState>(
+                      listener: (context, state) {
+                        state.mapOrNull(
+                          signInFailure: (failure) => context.showErrorMessage(
+                            message: failure.message,
+                          ),
+                          accountNotVerified: (_) {
+                            context.showAlertDialog(
+                                title: 'Account not verified',
+                                message:
+                                    'Your account is not verified. Please verify your account.',
+                                onDone: (p0) => context.push(
+                                    CommonRoutes.otpSignin,
+                                    extra: _emailController.text),
+                                positiveButtonsTitle: [
+                                  'Verify Now',
+                                ],
+                                cancelButtonTitle: "Cancel");
+                          },
+                          success: (user) {
+                            context.go(ForumRoutes.forumHome);
+                          },
+                        );
+                      },
+                      builder: (context, state) => state.maybeMap(
+                            signInLoading: (_) => Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            orElse: () => FilledButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  context
+                                      .read<AuthCubit>()
+                                      .signInWithEmailAndPassword(
+                                        email: _emailController.text,
+                                        password: _passwordController.text,
+                                      );
+                                }
+                              },
+                              child: Center(
+                                child: Text(
+                                  'Login',
+                                ),
+                              ),
+                            ),
+                          )),
                   SizedBox(
                     height: 10,
                   ),

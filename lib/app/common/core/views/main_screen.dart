@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({required this.navigationShell, Key? key}) : super(key: key);
+  const MainScreen({required this.navigationShell, Key? key})
+      : super(
+            key: key ?? const ValueKey<String>('ScaffoldWithNestedNavigation'));
   final StatefulNavigationShell navigationShell;
 
   @override

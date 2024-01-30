@@ -4,6 +4,13 @@ import 'package:stuverse/app/app.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
+  static final _forumNavigatorKey =
+      GlobalKey<NavigatorState>(debugLabel: 'forum');
+  static final _fundNavigatorKey =
+      GlobalKey<NavigatorState>(debugLabel: 'fund');
+  static final _jobNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'job');
+  static final _mentorNavigatorKey =
+      GlobalKey<NavigatorState>(debugLabel: 'mentor');
 
   static final GoRouter _router = GoRouter(
     initialLocation: CommonRoutes.splash,
@@ -19,8 +26,8 @@ class AppRouter {
         builder: (context, state) => const SignUpScreen(),
       ),
       GoRoute(
-        path: CommonRoutes.emailOtp,
-        builder: (context, state) => const EmailOtpScreen(),
+        path: CommonRoutes.otpVerify,
+        builder: (context, state) => const OtpVerifyScreen(),
       ),
       GoRoute(
         path: CommonRoutes.onBoarding,
@@ -28,7 +35,9 @@ class AppRouter {
       ),
       GoRoute(
         path: CommonRoutes.otpSignin,
-        builder: (context, state) => OtpSigningScreen(),
+        builder: (context, state) => OtpSigningScreen(
+          email: state.extra as String?,
+        ),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
@@ -38,15 +47,23 @@ class AppRouter {
         },
         branches: [
           StatefulShellBranch(
+            navigatorKey: _forumNavigatorKey,
+            initialLocation: ForumRoutes.forumHome,
             routes: ForumRoutes.forumRoutes,
           ),
           StatefulShellBranch(
-            routes: ForumRoutes.forumRoutes,
+            navigatorKey: _fundNavigatorKey,
+            initialLocation: FundRoutes.fundHome,
+            routes: FundRoutes.fundRoutes,
           ),
           StatefulShellBranch(
+            navigatorKey: _jobNavigatorKey,
+            initialLocation: JobRoutes.jobHome,
             routes: JobRoutes.jobRoutes,
           ),
           StatefulShellBranch(
+            navigatorKey: _mentorNavigatorKey,
+            initialLocation: MentorRoutes.mentorHome,
             routes: MentorRoutes.mentorRoutes,
           ),
         ],
