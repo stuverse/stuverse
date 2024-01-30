@@ -60,15 +60,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 70),
                   child: FilledButton(
                     style: FilledButton.styleFrom(
-                      textStyle: Theme.of(context)
-                          .textTheme
-                          .bodyMedium!
+                      textStyle: context.bodyMedium!
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
                       context.go(CommonRoutes.signin);
                     },
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         'GET STARTED',
                       ),

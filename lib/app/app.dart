@@ -12,6 +12,7 @@ export 'routes/mentor_routes.dart';
 export 'utils/app_images.dart';
 export 'utils/app_theme.dart';
 export 'utils/dio_client.dart';
+export 'utils/extentions/app_extensions.dart';
 
 //! Views
 export 'views/root_app.dart';

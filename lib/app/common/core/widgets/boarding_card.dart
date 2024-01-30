@@ -13,42 +13,35 @@ class BoardingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-
     return BgGradient(
-      child: Container(
-        child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: width * 0.05,
-              vertical: height * 0.05,
-            ),
-            child: Column(
-              children: [
-                Image.asset(
-                  img,
-                  height: 350,
-                  width: 350,
+      child: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: context.width * 0.05,
+            vertical: context.height * 0.05,
+          ),
+          child: Column(
+            children: [
+              Image.asset(
+                img,
+                height: context.minSize * 0.8,
+                width: context.minSize * 0.8,
+              ),
+              10.widthBox,
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: context.headlineMedium!.copyWith(
+                  fontWeight: FontWeight.bold,
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  description,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(),
-                )
-              ],
-            ),
+              ),
+              10.heightBox,
+              Text(
+                description,
+                textAlign: TextAlign.center,
+                style: context.bodyLarge,
+              ),
+            ],
           ),
         ),
       ),
