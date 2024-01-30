@@ -52,13 +52,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     padding: const EdgeInsets.only(top: 20),
                     child: Text(
                       'Create Your Account',
-                      style:
-                          Theme.of(context).textTheme.headlineLarge!.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                      style: context.headlineLarge!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  20.heightBox,
                   LabeledFormInput(
                     label: 'Name',
                     isRequired: true,
@@ -74,9 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  10.heightBox,
                   LabeledFormInput(
                     label: 'Email',
                     isRequired: true,
@@ -97,7 +94,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  10.heightBox,
                   LabeledFormInput(
                     label: 'Password',
                     isRequired: true,
@@ -121,7 +118,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  10.heightBox,
                   LabeledFormInput(
                     label: 'Branch',
                     isRequired: true,
@@ -150,7 +147,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       isExpanded: true,
                     ),
                   ),
-                  SizedBox(height: 40),
+                  40.heightBox,
                   FilledButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {}
