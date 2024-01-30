@@ -26,24 +26,24 @@ class _SignInScreenState extends State<SignInScreen> {
           child: SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: width * 0.05,
-                vertical: height * 0.05,
+                horizontal: context.width * 0.05,
+                vertical: context.height * 0.05,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
                     child: Image.asset(
-                      'assets/app/logo/stuverse.png',
-                      height: 250,
-                      width: 250,
+                      AppImages.logo,
+                      height: context.minSize * 0.6,
+                      width: context.minSize * 0.6,
                     ),
                   ),
                   Text(
                     'Welcome to StuVerse!',
-                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                    style: context.headlineLarge!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   SizedBox(height: 15),
                   LabeledFormInput(
