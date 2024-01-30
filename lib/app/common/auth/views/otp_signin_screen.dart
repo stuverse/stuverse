@@ -31,10 +31,12 @@ class OtpSigningScreen extends StatelessWidget {
                   fontWeight: FontWeight.w800,
                   color: context.colorScheme.onBackground,
                 ),
+
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
                   10.heightBox,
                   Text(
                     'Enter your email address to receive a One-Time Password (OTP) for authentication',
@@ -55,6 +57,7 @@ class OtpSigningScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+
                   100.heightBox,
                 ],
               ),
@@ -70,6 +73,7 @@ class OtpSigningScreen extends StatelessWidget {
               ),
             ],
           ).paddingAll(15),
+
         ),
       ),
     );
