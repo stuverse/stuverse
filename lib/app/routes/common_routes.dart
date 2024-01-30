@@ -1,5 +1,5 @@
 class CommonRoutes {
-  static const String emailOtp = '/email-otp';
+  static const String otpVerify = '/otp-verify';
   static const String otpSignin = '/otp-signin';
   static const String signin = '/signin';
   static const String signup = '/signup';
