@@ -45,53 +45,48 @@ class _OtpSigningScreenState extends State<OtpSigningScreen> {
                   fontWeight: FontWeight.w800,
                   color: context.colorScheme.onBackground,
                 ),
-
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-
-                  10.heightBox,
-                  Text(
-                    'Enter your email address to receive a One-Time Password (OTP) for authentication',
-                    textAlign: TextAlign.center,
-                    style: context.bodyMedium!.copyWith(
-                      color: context.colorScheme.onBackground.withOpacity(0.7),
-                    ),
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                10.heightBox,
+                Text(
+                  'Enter your email address to receive a One-Time Password (OTP) for authentication',
+                  textAlign: TextAlign.center,
+                  style: context.bodyMedium!.copyWith(
+                    color: context.colorScheme.onBackground.withOpacity(0.7),
                   ),
-                  30.heightBox,
-                  LabeledFormInput(
-                    label: 'Email',
-                    isRequired: true,
-                    child: TextFormField(
-                      controller: _emailController,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Enter your email',
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 100,
-                  ),
-                ]),
-                Spacer(),
-                FilledButton(
-                  onPressed: () {
-                    context.push(CommonRoutes.otpVerify);
-                  },
-                  style: FilledButton.styleFrom(),
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
-                        'Get OTP',
-                      ),
+                ),
+                30.heightBox,
+                LabeledFormInput(
+                  label: 'Email',
+                  isRequired: true,
+                  child: TextFormField(
+                    controller: _emailController,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Enter your email',
                     ),
                   ),
                 ),
-              ],
-            ),
+                SizedBox(
+                  height: 100,
+                ),
+              ]),
+              Spacer(),
+              FilledButton(
+                onPressed: () {
+                  context.push(CommonRoutes.otpVerify);
+                },
+                style: FilledButton.styleFrom(),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Text(
+                      'Get OTP',
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
