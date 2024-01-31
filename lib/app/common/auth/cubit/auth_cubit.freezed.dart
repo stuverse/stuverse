@@ -23,11 +23,12 @@ mixin _$AuthState {
     required TResult Function(String message) signInFailure,
     required TResult Function() signUpLoading,
     required TResult Function(String message) signUpFailure,
-    required TResult Function() emailOtpSendLoading,
-    required TResult Function(String message) emailOtpSendFailure,
-    required TResult Function() emailOtpSendSuccess,
-    required TResult Function() otpSignInLoading,
-    required TResult Function(String message) otpSignInFailure,
+    required TResult Function() otpSendLoading,
+    required TResult Function(String message) otpSendFailure,
+    required TResult Function() otpSendSuccess,
+    required TResult Function() otpResendSuccess,
+    required TResult Function() otpVerifyLoading,
+    required TResult Function(String message) otpVerifyFailure,
     required TResult Function(User user) success,
     required TResult Function() accountNotVerified,
   }) =>
@@ -39,11 +40,12 @@ mixin _$AuthState {
     TResult? Function(String message)? signInFailure,
     TResult? Function()? signUpLoading,
     TResult? Function(String message)? signUpFailure,
-    TResult? Function()? emailOtpSendLoading,
-    TResult? Function(String message)? emailOtpSendFailure,
-    TResult? Function()? emailOtpSendSuccess,
-    TResult? Function()? otpSignInLoading,
-    TResult? Function(String message)? otpSignInFailure,
+    TResult? Function()? otpSendLoading,
+    TResult? Function(String message)? otpSendFailure,
+    TResult? Function()? otpSendSuccess,
+    TResult? Function()? otpResendSuccess,
+    TResult? Function()? otpVerifyLoading,
+    TResult? Function(String message)? otpVerifyFailure,
     TResult? Function(User user)? success,
     TResult? Function()? accountNotVerified,
   }) =>
@@ -55,11 +57,12 @@ mixin _$AuthState {
     TResult Function(String message)? signInFailure,
     TResult Function()? signUpLoading,
     TResult Function(String message)? signUpFailure,
-    TResult Function()? emailOtpSendLoading,
-    TResult Function(String message)? emailOtpSendFailure,
-    TResult Function()? emailOtpSendSuccess,
-    TResult Function()? otpSignInLoading,
-    TResult Function(String message)? otpSignInFailure,
+    TResult Function()? otpSendLoading,
+    TResult Function(String message)? otpSendFailure,
+    TResult Function()? otpSendSuccess,
+    TResult Function()? otpResendSuccess,
+    TResult Function()? otpVerifyLoading,
+    TResult Function(String message)? otpVerifyFailure,
     TResult Function(User user)? success,
     TResult Function()? accountNotVerified,
     required TResult orElse(),
@@ -72,11 +75,12 @@ mixin _$AuthState {
     required TResult Function(_SignInFailure value) signInFailure,
     required TResult Function(_SignUpLoading value) signUpLoading,
     required TResult Function(_SignUpFailure value) signUpFailure,
-    required TResult Function(_EmailOtpLoading value) emailOtpSendLoading,
-    required TResult Function(_EmailOtpSendFailure value) emailOtpSendFailure,
-    required TResult Function(_EmailOtpSendSuccess value) emailOtpSendSuccess,
-    required TResult Function(_OtpSignInLoading value) otpSignInLoading,
-    required TResult Function(_OtpSignInFailure value) otpSignInFailure,
+    required TResult Function(_OtpSendLoading value) otpSendLoading,
+    required TResult Function(_OtpSendFailure value) otpSendFailure,
+    required TResult Function(_OtpSendSuccess value) otpSendSuccess,
+    required TResult Function(_OtpResendSuccess value) otpResendSuccess,
+    required TResult Function(_OtpVerifyLoading value) otpVerifyLoading,
+    required TResult Function(_OtpVerifyFailure value) otpVerifyFailure,
     required TResult Function(_Success value) success,
     required TResult Function(_AccountNotVerified value) accountNotVerified,
   }) =>
@@ -88,11 +92,12 @@ mixin _$AuthState {
     TResult? Function(_SignInFailure value)? signInFailure,
     TResult? Function(_SignUpLoading value)? signUpLoading,
     TResult? Function(_SignUpFailure value)? signUpFailure,
-    TResult? Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult? Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult? Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult? Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult? Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult? Function(_OtpSendLoading value)? otpSendLoading,
+    TResult? Function(_OtpSendFailure value)? otpSendFailure,
+    TResult? Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult? Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult? Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult? Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult? Function(_Success value)? success,
     TResult? Function(_AccountNotVerified value)? accountNotVerified,
   }) =>
@@ -104,11 +109,12 @@ mixin _$AuthState {
     TResult Function(_SignInFailure value)? signInFailure,
     TResult Function(_SignUpLoading value)? signUpLoading,
     TResult Function(_SignUpFailure value)? signUpFailure,
-    TResult Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult Function(_OtpSendLoading value)? otpSendLoading,
+    TResult Function(_OtpSendFailure value)? otpSendFailure,
+    TResult Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult Function(_Success value)? success,
     TResult Function(_AccountNotVerified value)? accountNotVerified,
     required TResult orElse(),
@@ -176,11 +182,12 @@ class _$InitialImpl implements _Initial {
     required TResult Function(String message) signInFailure,
     required TResult Function() signUpLoading,
     required TResult Function(String message) signUpFailure,
-    required TResult Function() emailOtpSendLoading,
-    required TResult Function(String message) emailOtpSendFailure,
-    required TResult Function() emailOtpSendSuccess,
-    required TResult Function() otpSignInLoading,
-    required TResult Function(String message) otpSignInFailure,
+    required TResult Function() otpSendLoading,
+    required TResult Function(String message) otpSendFailure,
+    required TResult Function() otpSendSuccess,
+    required TResult Function() otpResendSuccess,
+    required TResult Function() otpVerifyLoading,
+    required TResult Function(String message) otpVerifyFailure,
     required TResult Function(User user) success,
     required TResult Function() accountNotVerified,
   }) {
@@ -195,11 +202,12 @@ class _$InitialImpl implements _Initial {
     TResult? Function(String message)? signInFailure,
     TResult? Function()? signUpLoading,
     TResult? Function(String message)? signUpFailure,
-    TResult? Function()? emailOtpSendLoading,
-    TResult? Function(String message)? emailOtpSendFailure,
-    TResult? Function()? emailOtpSendSuccess,
-    TResult? Function()? otpSignInLoading,
-    TResult? Function(String message)? otpSignInFailure,
+    TResult? Function()? otpSendLoading,
+    TResult? Function(String message)? otpSendFailure,
+    TResult? Function()? otpSendSuccess,
+    TResult? Function()? otpResendSuccess,
+    TResult? Function()? otpVerifyLoading,
+    TResult? Function(String message)? otpVerifyFailure,
     TResult? Function(User user)? success,
     TResult? Function()? accountNotVerified,
   }) {
@@ -214,11 +222,12 @@ class _$InitialImpl implements _Initial {
     TResult Function(String message)? signInFailure,
     TResult Function()? signUpLoading,
     TResult Function(String message)? signUpFailure,
-    TResult Function()? emailOtpSendLoading,
-    TResult Function(String message)? emailOtpSendFailure,
-    TResult Function()? emailOtpSendSuccess,
-    TResult Function()? otpSignInLoading,
-    TResult Function(String message)? otpSignInFailure,
+    TResult Function()? otpSendLoading,
+    TResult Function(String message)? otpSendFailure,
+    TResult Function()? otpSendSuccess,
+    TResult Function()? otpResendSuccess,
+    TResult Function()? otpVerifyLoading,
+    TResult Function(String message)? otpVerifyFailure,
     TResult Function(User user)? success,
     TResult Function()? accountNotVerified,
     required TResult orElse(),
@@ -237,11 +246,12 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_SignInFailure value) signInFailure,
     required TResult Function(_SignUpLoading value) signUpLoading,
     required TResult Function(_SignUpFailure value) signUpFailure,
-    required TResult Function(_EmailOtpLoading value) emailOtpSendLoading,
-    required TResult Function(_EmailOtpSendFailure value) emailOtpSendFailure,
-    required TResult Function(_EmailOtpSendSuccess value) emailOtpSendSuccess,
-    required TResult Function(_OtpSignInLoading value) otpSignInLoading,
-    required TResult Function(_OtpSignInFailure value) otpSignInFailure,
+    required TResult Function(_OtpSendLoading value) otpSendLoading,
+    required TResult Function(_OtpSendFailure value) otpSendFailure,
+    required TResult Function(_OtpSendSuccess value) otpSendSuccess,
+    required TResult Function(_OtpResendSuccess value) otpResendSuccess,
+    required TResult Function(_OtpVerifyLoading value) otpVerifyLoading,
+    required TResult Function(_OtpVerifyFailure value) otpVerifyFailure,
     required TResult Function(_Success value) success,
     required TResult Function(_AccountNotVerified value) accountNotVerified,
   }) {
@@ -256,11 +266,12 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_SignInFailure value)? signInFailure,
     TResult? Function(_SignUpLoading value)? signUpLoading,
     TResult? Function(_SignUpFailure value)? signUpFailure,
-    TResult? Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult? Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult? Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult? Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult? Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult? Function(_OtpSendLoading value)? otpSendLoading,
+    TResult? Function(_OtpSendFailure value)? otpSendFailure,
+    TResult? Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult? Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult? Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult? Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult? Function(_Success value)? success,
     TResult? Function(_AccountNotVerified value)? accountNotVerified,
   }) {
@@ -275,11 +286,12 @@ class _$InitialImpl implements _Initial {
     TResult Function(_SignInFailure value)? signInFailure,
     TResult Function(_SignUpLoading value)? signUpLoading,
     TResult Function(_SignUpFailure value)? signUpFailure,
-    TResult Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult Function(_OtpSendLoading value)? otpSendLoading,
+    TResult Function(_OtpSendFailure value)? otpSendFailure,
+    TResult Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult Function(_Success value)? success,
     TResult Function(_AccountNotVerified value)? accountNotVerified,
     required TResult orElse(),
@@ -338,11 +350,12 @@ class _$SignInLoadingImpl implements _SignInLoading {
     required TResult Function(String message) signInFailure,
     required TResult Function() signUpLoading,
     required TResult Function(String message) signUpFailure,
-    required TResult Function() emailOtpSendLoading,
-    required TResult Function(String message) emailOtpSendFailure,
-    required TResult Function() emailOtpSendSuccess,
-    required TResult Function() otpSignInLoading,
-    required TResult Function(String message) otpSignInFailure,
+    required TResult Function() otpSendLoading,
+    required TResult Function(String message) otpSendFailure,
+    required TResult Function() otpSendSuccess,
+    required TResult Function() otpResendSuccess,
+    required TResult Function() otpVerifyLoading,
+    required TResult Function(String message) otpVerifyFailure,
     required TResult Function(User user) success,
     required TResult Function() accountNotVerified,
   }) {
@@ -357,11 +370,12 @@ class _$SignInLoadingImpl implements _SignInLoading {
     TResult? Function(String message)? signInFailure,
     TResult? Function()? signUpLoading,
     TResult? Function(String message)? signUpFailure,
-    TResult? Function()? emailOtpSendLoading,
-    TResult? Function(String message)? emailOtpSendFailure,
-    TResult? Function()? emailOtpSendSuccess,
-    TResult? Function()? otpSignInLoading,
-    TResult? Function(String message)? otpSignInFailure,
+    TResult? Function()? otpSendLoading,
+    TResult? Function(String message)? otpSendFailure,
+    TResult? Function()? otpSendSuccess,
+    TResult? Function()? otpResendSuccess,
+    TResult? Function()? otpVerifyLoading,
+    TResult? Function(String message)? otpVerifyFailure,
     TResult? Function(User user)? success,
     TResult? Function()? accountNotVerified,
   }) {
@@ -376,11 +390,12 @@ class _$SignInLoadingImpl implements _SignInLoading {
     TResult Function(String message)? signInFailure,
     TResult Function()? signUpLoading,
     TResult Function(String message)? signUpFailure,
-    TResult Function()? emailOtpSendLoading,
-    TResult Function(String message)? emailOtpSendFailure,
-    TResult Function()? emailOtpSendSuccess,
-    TResult Function()? otpSignInLoading,
-    TResult Function(String message)? otpSignInFailure,
+    TResult Function()? otpSendLoading,
+    TResult Function(String message)? otpSendFailure,
+    TResult Function()? otpSendSuccess,
+    TResult Function()? otpResendSuccess,
+    TResult Function()? otpVerifyLoading,
+    TResult Function(String message)? otpVerifyFailure,
     TResult Function(User user)? success,
     TResult Function()? accountNotVerified,
     required TResult orElse(),
@@ -399,11 +414,12 @@ class _$SignInLoadingImpl implements _SignInLoading {
     required TResult Function(_SignInFailure value) signInFailure,
     required TResult Function(_SignUpLoading value) signUpLoading,
     required TResult Function(_SignUpFailure value) signUpFailure,
-    required TResult Function(_EmailOtpLoading value) emailOtpSendLoading,
-    required TResult Function(_EmailOtpSendFailure value) emailOtpSendFailure,
-    required TResult Function(_EmailOtpSendSuccess value) emailOtpSendSuccess,
-    required TResult Function(_OtpSignInLoading value) otpSignInLoading,
-    required TResult Function(_OtpSignInFailure value) otpSignInFailure,
+    required TResult Function(_OtpSendLoading value) otpSendLoading,
+    required TResult Function(_OtpSendFailure value) otpSendFailure,
+    required TResult Function(_OtpSendSuccess value) otpSendSuccess,
+    required TResult Function(_OtpResendSuccess value) otpResendSuccess,
+    required TResult Function(_OtpVerifyLoading value) otpVerifyLoading,
+    required TResult Function(_OtpVerifyFailure value) otpVerifyFailure,
     required TResult Function(_Success value) success,
     required TResult Function(_AccountNotVerified value) accountNotVerified,
   }) {
@@ -418,11 +434,12 @@ class _$SignInLoadingImpl implements _SignInLoading {
     TResult? Function(_SignInFailure value)? signInFailure,
     TResult? Function(_SignUpLoading value)? signUpLoading,
     TResult? Function(_SignUpFailure value)? signUpFailure,
-    TResult? Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult? Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult? Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult? Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult? Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult? Function(_OtpSendLoading value)? otpSendLoading,
+    TResult? Function(_OtpSendFailure value)? otpSendFailure,
+    TResult? Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult? Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult? Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult? Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult? Function(_Success value)? success,
     TResult? Function(_AccountNotVerified value)? accountNotVerified,
   }) {
@@ -437,11 +454,12 @@ class _$SignInLoadingImpl implements _SignInLoading {
     TResult Function(_SignInFailure value)? signInFailure,
     TResult Function(_SignUpLoading value)? signUpLoading,
     TResult Function(_SignUpFailure value)? signUpFailure,
-    TResult Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult Function(_OtpSendLoading value)? otpSendLoading,
+    TResult Function(_OtpSendFailure value)? otpSendFailure,
+    TResult Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult Function(_Success value)? success,
     TResult Function(_AccountNotVerified value)? accountNotVerified,
     required TResult orElse(),
@@ -526,11 +544,12 @@ class _$SignInFailureImpl implements _SignInFailure {
     required TResult Function(String message) signInFailure,
     required TResult Function() signUpLoading,
     required TResult Function(String message) signUpFailure,
-    required TResult Function() emailOtpSendLoading,
-    required TResult Function(String message) emailOtpSendFailure,
-    required TResult Function() emailOtpSendSuccess,
-    required TResult Function() otpSignInLoading,
-    required TResult Function(String message) otpSignInFailure,
+    required TResult Function() otpSendLoading,
+    required TResult Function(String message) otpSendFailure,
+    required TResult Function() otpSendSuccess,
+    required TResult Function() otpResendSuccess,
+    required TResult Function() otpVerifyLoading,
+    required TResult Function(String message) otpVerifyFailure,
     required TResult Function(User user) success,
     required TResult Function() accountNotVerified,
   }) {
@@ -545,11 +564,12 @@ class _$SignInFailureImpl implements _SignInFailure {
     TResult? Function(String message)? signInFailure,
     TResult? Function()? signUpLoading,
     TResult? Function(String message)? signUpFailure,
-    TResult? Function()? emailOtpSendLoading,
-    TResult? Function(String message)? emailOtpSendFailure,
-    TResult? Function()? emailOtpSendSuccess,
-    TResult? Function()? otpSignInLoading,
-    TResult? Function(String message)? otpSignInFailure,
+    TResult? Function()? otpSendLoading,
+    TResult? Function(String message)? otpSendFailure,
+    TResult? Function()? otpSendSuccess,
+    TResult? Function()? otpResendSuccess,
+    TResult? Function()? otpVerifyLoading,
+    TResult? Function(String message)? otpVerifyFailure,
     TResult? Function(User user)? success,
     TResult? Function()? accountNotVerified,
   }) {
@@ -564,11 +584,12 @@ class _$SignInFailureImpl implements _SignInFailure {
     TResult Function(String message)? signInFailure,
     TResult Function()? signUpLoading,
     TResult Function(String message)? signUpFailure,
-    TResult Function()? emailOtpSendLoading,
-    TResult Function(String message)? emailOtpSendFailure,
-    TResult Function()? emailOtpSendSuccess,
-    TResult Function()? otpSignInLoading,
-    TResult Function(String message)? otpSignInFailure,
+    TResult Function()? otpSendLoading,
+    TResult Function(String message)? otpSendFailure,
+    TResult Function()? otpSendSuccess,
+    TResult Function()? otpResendSuccess,
+    TResult Function()? otpVerifyLoading,
+    TResult Function(String message)? otpVerifyFailure,
     TResult Function(User user)? success,
     TResult Function()? accountNotVerified,
     required TResult orElse(),
@@ -587,11 +608,12 @@ class _$SignInFailureImpl implements _SignInFailure {
     required TResult Function(_SignInFailure value) signInFailure,
     required TResult Function(_SignUpLoading value) signUpLoading,
     required TResult Function(_SignUpFailure value) signUpFailure,
-    required TResult Function(_EmailOtpLoading value) emailOtpSendLoading,
-    required TResult Function(_EmailOtpSendFailure value) emailOtpSendFailure,
-    required TResult Function(_EmailOtpSendSuccess value) emailOtpSendSuccess,
-    required TResult Function(_OtpSignInLoading value) otpSignInLoading,
-    required TResult Function(_OtpSignInFailure value) otpSignInFailure,
+    required TResult Function(_OtpSendLoading value) otpSendLoading,
+    required TResult Function(_OtpSendFailure value) otpSendFailure,
+    required TResult Function(_OtpSendSuccess value) otpSendSuccess,
+    required TResult Function(_OtpResendSuccess value) otpResendSuccess,
+    required TResult Function(_OtpVerifyLoading value) otpVerifyLoading,
+    required TResult Function(_OtpVerifyFailure value) otpVerifyFailure,
     required TResult Function(_Success value) success,
     required TResult Function(_AccountNotVerified value) accountNotVerified,
   }) {
@@ -606,11 +628,12 @@ class _$SignInFailureImpl implements _SignInFailure {
     TResult? Function(_SignInFailure value)? signInFailure,
     TResult? Function(_SignUpLoading value)? signUpLoading,
     TResult? Function(_SignUpFailure value)? signUpFailure,
-    TResult? Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult? Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult? Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult? Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult? Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult? Function(_OtpSendLoading value)? otpSendLoading,
+    TResult? Function(_OtpSendFailure value)? otpSendFailure,
+    TResult? Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult? Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult? Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult? Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult? Function(_Success value)? success,
     TResult? Function(_AccountNotVerified value)? accountNotVerified,
   }) {
@@ -625,11 +648,12 @@ class _$SignInFailureImpl implements _SignInFailure {
     TResult Function(_SignInFailure value)? signInFailure,
     TResult Function(_SignUpLoading value)? signUpLoading,
     TResult Function(_SignUpFailure value)? signUpFailure,
-    TResult Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult Function(_OtpSendLoading value)? otpSendLoading,
+    TResult Function(_OtpSendFailure value)? otpSendFailure,
+    TResult Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult Function(_Success value)? success,
     TResult Function(_AccountNotVerified value)? accountNotVerified,
     required TResult orElse(),
@@ -693,11 +717,12 @@ class _$SignUpLoadingImpl implements _SignUpLoading {
     required TResult Function(String message) signInFailure,
     required TResult Function() signUpLoading,
     required TResult Function(String message) signUpFailure,
-    required TResult Function() emailOtpSendLoading,
-    required TResult Function(String message) emailOtpSendFailure,
-    required TResult Function() emailOtpSendSuccess,
-    required TResult Function() otpSignInLoading,
-    required TResult Function(String message) otpSignInFailure,
+    required TResult Function() otpSendLoading,
+    required TResult Function(String message) otpSendFailure,
+    required TResult Function() otpSendSuccess,
+    required TResult Function() otpResendSuccess,
+    required TResult Function() otpVerifyLoading,
+    required TResult Function(String message) otpVerifyFailure,
     required TResult Function(User user) success,
     required TResult Function() accountNotVerified,
   }) {
@@ -712,11 +737,12 @@ class _$SignUpLoadingImpl implements _SignUpLoading {
     TResult? Function(String message)? signInFailure,
     TResult? Function()? signUpLoading,
     TResult? Function(String message)? signUpFailure,
-    TResult? Function()? emailOtpSendLoading,
-    TResult? Function(String message)? emailOtpSendFailure,
-    TResult? Function()? emailOtpSendSuccess,
-    TResult? Function()? otpSignInLoading,
-    TResult? Function(String message)? otpSignInFailure,
+    TResult? Function()? otpSendLoading,
+    TResult? Function(String message)? otpSendFailure,
+    TResult? Function()? otpSendSuccess,
+    TResult? Function()? otpResendSuccess,
+    TResult? Function()? otpVerifyLoading,
+    TResult? Function(String message)? otpVerifyFailure,
     TResult? Function(User user)? success,
     TResult? Function()? accountNotVerified,
   }) {
@@ -731,11 +757,12 @@ class _$SignUpLoadingImpl implements _SignUpLoading {
     TResult Function(String message)? signInFailure,
     TResult Function()? signUpLoading,
     TResult Function(String message)? signUpFailure,
-    TResult Function()? emailOtpSendLoading,
-    TResult Function(String message)? emailOtpSendFailure,
-    TResult Function()? emailOtpSendSuccess,
-    TResult Function()? otpSignInLoading,
-    TResult Function(String message)? otpSignInFailure,
+    TResult Function()? otpSendLoading,
+    TResult Function(String message)? otpSendFailure,
+    TResult Function()? otpSendSuccess,
+    TResult Function()? otpResendSuccess,
+    TResult Function()? otpVerifyLoading,
+    TResult Function(String message)? otpVerifyFailure,
     TResult Function(User user)? success,
     TResult Function()? accountNotVerified,
     required TResult orElse(),
@@ -754,11 +781,12 @@ class _$SignUpLoadingImpl implements _SignUpLoading {
     required TResult Function(_SignInFailure value) signInFailure,
     required TResult Function(_SignUpLoading value) signUpLoading,
     required TResult Function(_SignUpFailure value) signUpFailure,
-    required TResult Function(_EmailOtpLoading value) emailOtpSendLoading,
-    required TResult Function(_EmailOtpSendFailure value) emailOtpSendFailure,
-    required TResult Function(_EmailOtpSendSuccess value) emailOtpSendSuccess,
-    required TResult Function(_OtpSignInLoading value) otpSignInLoading,
-    required TResult Function(_OtpSignInFailure value) otpSignInFailure,
+    required TResult Function(_OtpSendLoading value) otpSendLoading,
+    required TResult Function(_OtpSendFailure value) otpSendFailure,
+    required TResult Function(_OtpSendSuccess value) otpSendSuccess,
+    required TResult Function(_OtpResendSuccess value) otpResendSuccess,
+    required TResult Function(_OtpVerifyLoading value) otpVerifyLoading,
+    required TResult Function(_OtpVerifyFailure value) otpVerifyFailure,
     required TResult Function(_Success value) success,
     required TResult Function(_AccountNotVerified value) accountNotVerified,
   }) {
@@ -773,11 +801,12 @@ class _$SignUpLoadingImpl implements _SignUpLoading {
     TResult? Function(_SignInFailure value)? signInFailure,
     TResult? Function(_SignUpLoading value)? signUpLoading,
     TResult? Function(_SignUpFailure value)? signUpFailure,
-    TResult? Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult? Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult? Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult? Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult? Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult? Function(_OtpSendLoading value)? otpSendLoading,
+    TResult? Function(_OtpSendFailure value)? otpSendFailure,
+    TResult? Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult? Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult? Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult? Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult? Function(_Success value)? success,
     TResult? Function(_AccountNotVerified value)? accountNotVerified,
   }) {
@@ -792,11 +821,12 @@ class _$SignUpLoadingImpl implements _SignUpLoading {
     TResult Function(_SignInFailure value)? signInFailure,
     TResult Function(_SignUpLoading value)? signUpLoading,
     TResult Function(_SignUpFailure value)? signUpFailure,
-    TResult Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult Function(_OtpSendLoading value)? otpSendLoading,
+    TResult Function(_OtpSendFailure value)? otpSendFailure,
+    TResult Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult Function(_Success value)? success,
     TResult Function(_AccountNotVerified value)? accountNotVerified,
     required TResult orElse(),
@@ -881,11 +911,12 @@ class _$SignUpFailureImpl implements _SignUpFailure {
     required TResult Function(String message) signInFailure,
     required TResult Function() signUpLoading,
     required TResult Function(String message) signUpFailure,
-    required TResult Function() emailOtpSendLoading,
-    required TResult Function(String message) emailOtpSendFailure,
-    required TResult Function() emailOtpSendSuccess,
-    required TResult Function() otpSignInLoading,
-    required TResult Function(String message) otpSignInFailure,
+    required TResult Function() otpSendLoading,
+    required TResult Function(String message) otpSendFailure,
+    required TResult Function() otpSendSuccess,
+    required TResult Function() otpResendSuccess,
+    required TResult Function() otpVerifyLoading,
+    required TResult Function(String message) otpVerifyFailure,
     required TResult Function(User user) success,
     required TResult Function() accountNotVerified,
   }) {
@@ -900,11 +931,12 @@ class _$SignUpFailureImpl implements _SignUpFailure {
     TResult? Function(String message)? signInFailure,
     TResult? Function()? signUpLoading,
     TResult? Function(String message)? signUpFailure,
-    TResult? Function()? emailOtpSendLoading,
-    TResult? Function(String message)? emailOtpSendFailure,
-    TResult? Function()? emailOtpSendSuccess,
-    TResult? Function()? otpSignInLoading,
-    TResult? Function(String message)? otpSignInFailure,
+    TResult? Function()? otpSendLoading,
+    TResult? Function(String message)? otpSendFailure,
+    TResult? Function()? otpSendSuccess,
+    TResult? Function()? otpResendSuccess,
+    TResult? Function()? otpVerifyLoading,
+    TResult? Function(String message)? otpVerifyFailure,
     TResult? Function(User user)? success,
     TResult? Function()? accountNotVerified,
   }) {
@@ -919,11 +951,12 @@ class _$SignUpFailureImpl implements _SignUpFailure {
     TResult Function(String message)? signInFailure,
     TResult Function()? signUpLoading,
     TResult Function(String message)? signUpFailure,
-    TResult Function()? emailOtpSendLoading,
-    TResult Function(String message)? emailOtpSendFailure,
-    TResult Function()? emailOtpSendSuccess,
-    TResult Function()? otpSignInLoading,
-    TResult Function(String message)? otpSignInFailure,
+    TResult Function()? otpSendLoading,
+    TResult Function(String message)? otpSendFailure,
+    TResult Function()? otpSendSuccess,
+    TResult Function()? otpResendSuccess,
+    TResult Function()? otpVerifyLoading,
+    TResult Function(String message)? otpVerifyFailure,
     TResult Function(User user)? success,
     TResult Function()? accountNotVerified,
     required TResult orElse(),
@@ -942,11 +975,12 @@ class _$SignUpFailureImpl implements _SignUpFailure {
     required TResult Function(_SignInFailure value) signInFailure,
     required TResult Function(_SignUpLoading value) signUpLoading,
     required TResult Function(_SignUpFailure value) signUpFailure,
-    required TResult Function(_EmailOtpLoading value) emailOtpSendLoading,
-    required TResult Function(_EmailOtpSendFailure value) emailOtpSendFailure,
-    required TResult Function(_EmailOtpSendSuccess value) emailOtpSendSuccess,
-    required TResult Function(_OtpSignInLoading value) otpSignInLoading,
-    required TResult Function(_OtpSignInFailure value) otpSignInFailure,
+    required TResult Function(_OtpSendLoading value) otpSendLoading,
+    required TResult Function(_OtpSendFailure value) otpSendFailure,
+    required TResult Function(_OtpSendSuccess value) otpSendSuccess,
+    required TResult Function(_OtpResendSuccess value) otpResendSuccess,
+    required TResult Function(_OtpVerifyLoading value) otpVerifyLoading,
+    required TResult Function(_OtpVerifyFailure value) otpVerifyFailure,
     required TResult Function(_Success value) success,
     required TResult Function(_AccountNotVerified value) accountNotVerified,
   }) {
@@ -961,11 +995,12 @@ class _$SignUpFailureImpl implements _SignUpFailure {
     TResult? Function(_SignInFailure value)? signInFailure,
     TResult? Function(_SignUpLoading value)? signUpLoading,
     TResult? Function(_SignUpFailure value)? signUpFailure,
-    TResult? Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult? Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult? Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult? Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult? Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult? Function(_OtpSendLoading value)? otpSendLoading,
+    TResult? Function(_OtpSendFailure value)? otpSendFailure,
+    TResult? Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult? Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult? Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult? Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult? Function(_Success value)? success,
     TResult? Function(_AccountNotVerified value)? accountNotVerified,
   }) {
@@ -980,11 +1015,12 @@ class _$SignUpFailureImpl implements _SignUpFailure {
     TResult Function(_SignInFailure value)? signInFailure,
     TResult Function(_SignUpLoading value)? signUpLoading,
     TResult Function(_SignUpFailure value)? signUpFailure,
-    TResult Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult Function(_OtpSendLoading value)? otpSendLoading,
+    TResult Function(_OtpSendFailure value)? otpSendFailure,
+    TResult Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult Function(_Success value)? success,
     TResult Function(_AccountNotVerified value)? accountNotVerified,
     required TResult orElse(),
@@ -1006,35 +1042,35 @@ abstract class _SignUpFailure implements AuthState {
 }
 
 /// @nodoc
-abstract class _$$EmailOtpLoadingImplCopyWith<$Res> {
-  factory _$$EmailOtpLoadingImplCopyWith(_$EmailOtpLoadingImpl value,
-          $Res Function(_$EmailOtpLoadingImpl) then) =
-      __$$EmailOtpLoadingImplCopyWithImpl<$Res>;
+abstract class _$$OtpSendLoadingImplCopyWith<$Res> {
+  factory _$$OtpSendLoadingImplCopyWith(_$OtpSendLoadingImpl value,
+          $Res Function(_$OtpSendLoadingImpl) then) =
+      __$$OtpSendLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$EmailOtpLoadingImplCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$EmailOtpLoadingImpl>
-    implements _$$EmailOtpLoadingImplCopyWith<$Res> {
-  __$$EmailOtpLoadingImplCopyWithImpl(
-      _$EmailOtpLoadingImpl _value, $Res Function(_$EmailOtpLoadingImpl) _then)
+class __$$OtpSendLoadingImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$OtpSendLoadingImpl>
+    implements _$$OtpSendLoadingImplCopyWith<$Res> {
+  __$$OtpSendLoadingImplCopyWithImpl(
+      _$OtpSendLoadingImpl _value, $Res Function(_$OtpSendLoadingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$EmailOtpLoadingImpl implements _EmailOtpLoading {
-  const _$EmailOtpLoadingImpl();
+class _$OtpSendLoadingImpl implements _OtpSendLoading {
+  const _$OtpSendLoadingImpl();
 
   @override
   String toString() {
-    return 'AuthState.emailOtpSendLoading()';
+    return 'AuthState.otpSendLoading()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$EmailOtpLoadingImpl);
+        (other.runtimeType == runtimeType && other is _$OtpSendLoadingImpl);
   }
 
   @override
@@ -1048,15 +1084,16 @@ class _$EmailOtpLoadingImpl implements _EmailOtpLoading {
     required TResult Function(String message) signInFailure,
     required TResult Function() signUpLoading,
     required TResult Function(String message) signUpFailure,
-    required TResult Function() emailOtpSendLoading,
-    required TResult Function(String message) emailOtpSendFailure,
-    required TResult Function() emailOtpSendSuccess,
-    required TResult Function() otpSignInLoading,
-    required TResult Function(String message) otpSignInFailure,
+    required TResult Function() otpSendLoading,
+    required TResult Function(String message) otpSendFailure,
+    required TResult Function() otpSendSuccess,
+    required TResult Function() otpResendSuccess,
+    required TResult Function() otpVerifyLoading,
+    required TResult Function(String message) otpVerifyFailure,
     required TResult Function(User user) success,
     required TResult Function() accountNotVerified,
   }) {
-    return emailOtpSendLoading();
+    return otpSendLoading();
   }
 
   @override
@@ -1067,15 +1104,16 @@ class _$EmailOtpLoadingImpl implements _EmailOtpLoading {
     TResult? Function(String message)? signInFailure,
     TResult? Function()? signUpLoading,
     TResult? Function(String message)? signUpFailure,
-    TResult? Function()? emailOtpSendLoading,
-    TResult? Function(String message)? emailOtpSendFailure,
-    TResult? Function()? emailOtpSendSuccess,
-    TResult? Function()? otpSignInLoading,
-    TResult? Function(String message)? otpSignInFailure,
+    TResult? Function()? otpSendLoading,
+    TResult? Function(String message)? otpSendFailure,
+    TResult? Function()? otpSendSuccess,
+    TResult? Function()? otpResendSuccess,
+    TResult? Function()? otpVerifyLoading,
+    TResult? Function(String message)? otpVerifyFailure,
     TResult? Function(User user)? success,
     TResult? Function()? accountNotVerified,
   }) {
-    return emailOtpSendLoading?.call();
+    return otpSendLoading?.call();
   }
 
   @override
@@ -1086,17 +1124,18 @@ class _$EmailOtpLoadingImpl implements _EmailOtpLoading {
     TResult Function(String message)? signInFailure,
     TResult Function()? signUpLoading,
     TResult Function(String message)? signUpFailure,
-    TResult Function()? emailOtpSendLoading,
-    TResult Function(String message)? emailOtpSendFailure,
-    TResult Function()? emailOtpSendSuccess,
-    TResult Function()? otpSignInLoading,
-    TResult Function(String message)? otpSignInFailure,
+    TResult Function()? otpSendLoading,
+    TResult Function(String message)? otpSendFailure,
+    TResult Function()? otpSendSuccess,
+    TResult Function()? otpResendSuccess,
+    TResult Function()? otpVerifyLoading,
+    TResult Function(String message)? otpVerifyFailure,
     TResult Function(User user)? success,
     TResult Function()? accountNotVerified,
     required TResult orElse(),
   }) {
-    if (emailOtpSendLoading != null) {
-      return emailOtpSendLoading();
+    if (otpSendLoading != null) {
+      return otpSendLoading();
     }
     return orElse();
   }
@@ -1109,15 +1148,16 @@ class _$EmailOtpLoadingImpl implements _EmailOtpLoading {
     required TResult Function(_SignInFailure value) signInFailure,
     required TResult Function(_SignUpLoading value) signUpLoading,
     required TResult Function(_SignUpFailure value) signUpFailure,
-    required TResult Function(_EmailOtpLoading value) emailOtpSendLoading,
-    required TResult Function(_EmailOtpSendFailure value) emailOtpSendFailure,
-    required TResult Function(_EmailOtpSendSuccess value) emailOtpSendSuccess,
-    required TResult Function(_OtpSignInLoading value) otpSignInLoading,
-    required TResult Function(_OtpSignInFailure value) otpSignInFailure,
+    required TResult Function(_OtpSendLoading value) otpSendLoading,
+    required TResult Function(_OtpSendFailure value) otpSendFailure,
+    required TResult Function(_OtpSendSuccess value) otpSendSuccess,
+    required TResult Function(_OtpResendSuccess value) otpResendSuccess,
+    required TResult Function(_OtpVerifyLoading value) otpVerifyLoading,
+    required TResult Function(_OtpVerifyFailure value) otpVerifyFailure,
     required TResult Function(_Success value) success,
     required TResult Function(_AccountNotVerified value) accountNotVerified,
   }) {
-    return emailOtpSendLoading(this);
+    return otpSendLoading(this);
   }
 
   @override
@@ -1128,15 +1168,16 @@ class _$EmailOtpLoadingImpl implements _EmailOtpLoading {
     TResult? Function(_SignInFailure value)? signInFailure,
     TResult? Function(_SignUpLoading value)? signUpLoading,
     TResult? Function(_SignUpFailure value)? signUpFailure,
-    TResult? Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult? Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult? Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult? Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult? Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult? Function(_OtpSendLoading value)? otpSendLoading,
+    TResult? Function(_OtpSendFailure value)? otpSendFailure,
+    TResult? Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult? Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult? Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult? Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult? Function(_Success value)? success,
     TResult? Function(_AccountNotVerified value)? accountNotVerified,
   }) {
-    return emailOtpSendLoading?.call(this);
+    return otpSendLoading?.call(this);
   }
 
   @override
@@ -1147,41 +1188,42 @@ class _$EmailOtpLoadingImpl implements _EmailOtpLoading {
     TResult Function(_SignInFailure value)? signInFailure,
     TResult Function(_SignUpLoading value)? signUpLoading,
     TResult Function(_SignUpFailure value)? signUpFailure,
-    TResult Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult Function(_OtpSendLoading value)? otpSendLoading,
+    TResult Function(_OtpSendFailure value)? otpSendFailure,
+    TResult Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult Function(_Success value)? success,
     TResult Function(_AccountNotVerified value)? accountNotVerified,
     required TResult orElse(),
   }) {
-    if (emailOtpSendLoading != null) {
-      return emailOtpSendLoading(this);
+    if (otpSendLoading != null) {
+      return otpSendLoading(this);
     }
     return orElse();
   }
 }
 
-abstract class _EmailOtpLoading implements AuthState {
-  const factory _EmailOtpLoading() = _$EmailOtpLoadingImpl;
+abstract class _OtpSendLoading implements AuthState {
+  const factory _OtpSendLoading() = _$OtpSendLoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$EmailOtpSendFailureImplCopyWith<$Res> {
-  factory _$$EmailOtpSendFailureImplCopyWith(_$EmailOtpSendFailureImpl value,
-          $Res Function(_$EmailOtpSendFailureImpl) then) =
-      __$$EmailOtpSendFailureImplCopyWithImpl<$Res>;
+abstract class _$$OtpSendFailureImplCopyWith<$Res> {
+  factory _$$OtpSendFailureImplCopyWith(_$OtpSendFailureImpl value,
+          $Res Function(_$OtpSendFailureImpl) then) =
+      __$$OtpSendFailureImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$EmailOtpSendFailureImplCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$EmailOtpSendFailureImpl>
-    implements _$$EmailOtpSendFailureImplCopyWith<$Res> {
-  __$$EmailOtpSendFailureImplCopyWithImpl(_$EmailOtpSendFailureImpl _value,
-      $Res Function(_$EmailOtpSendFailureImpl) _then)
+class __$$OtpSendFailureImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$OtpSendFailureImpl>
+    implements _$$OtpSendFailureImplCopyWith<$Res> {
+  __$$OtpSendFailureImplCopyWithImpl(
+      _$OtpSendFailureImpl _value, $Res Function(_$OtpSendFailureImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1189,7 +1231,7 @@ class __$$EmailOtpSendFailureImplCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$EmailOtpSendFailureImpl(
+    return _then(_$OtpSendFailureImpl(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -1200,22 +1242,22 @@ class __$$EmailOtpSendFailureImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$EmailOtpSendFailureImpl implements _EmailOtpSendFailure {
-  const _$EmailOtpSendFailureImpl(this.message);
+class _$OtpSendFailureImpl implements _OtpSendFailure {
+  const _$OtpSendFailureImpl(this.message);
 
   @override
   final String message;
 
   @override
   String toString() {
-    return 'AuthState.emailOtpSendFailure(message: $message)';
+    return 'AuthState.otpSendFailure(message: $message)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$EmailOtpSendFailureImpl &&
+            other is _$OtpSendFailureImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -1225,8 +1267,8 @@ class _$EmailOtpSendFailureImpl implements _EmailOtpSendFailure {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$EmailOtpSendFailureImplCopyWith<_$EmailOtpSendFailureImpl> get copyWith =>
-      __$$EmailOtpSendFailureImplCopyWithImpl<_$EmailOtpSendFailureImpl>(
+  _$$OtpSendFailureImplCopyWith<_$OtpSendFailureImpl> get copyWith =>
+      __$$OtpSendFailureImplCopyWithImpl<_$OtpSendFailureImpl>(
           this, _$identity);
 
   @override
@@ -1237,15 +1279,16 @@ class _$EmailOtpSendFailureImpl implements _EmailOtpSendFailure {
     required TResult Function(String message) signInFailure,
     required TResult Function() signUpLoading,
     required TResult Function(String message) signUpFailure,
-    required TResult Function() emailOtpSendLoading,
-    required TResult Function(String message) emailOtpSendFailure,
-    required TResult Function() emailOtpSendSuccess,
-    required TResult Function() otpSignInLoading,
-    required TResult Function(String message) otpSignInFailure,
+    required TResult Function() otpSendLoading,
+    required TResult Function(String message) otpSendFailure,
+    required TResult Function() otpSendSuccess,
+    required TResult Function() otpResendSuccess,
+    required TResult Function() otpVerifyLoading,
+    required TResult Function(String message) otpVerifyFailure,
     required TResult Function(User user) success,
     required TResult Function() accountNotVerified,
   }) {
-    return emailOtpSendFailure(message);
+    return otpSendFailure(message);
   }
 
   @override
@@ -1256,15 +1299,16 @@ class _$EmailOtpSendFailureImpl implements _EmailOtpSendFailure {
     TResult? Function(String message)? signInFailure,
     TResult? Function()? signUpLoading,
     TResult? Function(String message)? signUpFailure,
-    TResult? Function()? emailOtpSendLoading,
-    TResult? Function(String message)? emailOtpSendFailure,
-    TResult? Function()? emailOtpSendSuccess,
-    TResult? Function()? otpSignInLoading,
-    TResult? Function(String message)? otpSignInFailure,
+    TResult? Function()? otpSendLoading,
+    TResult? Function(String message)? otpSendFailure,
+    TResult? Function()? otpSendSuccess,
+    TResult? Function()? otpResendSuccess,
+    TResult? Function()? otpVerifyLoading,
+    TResult? Function(String message)? otpVerifyFailure,
     TResult? Function(User user)? success,
     TResult? Function()? accountNotVerified,
   }) {
-    return emailOtpSendFailure?.call(message);
+    return otpSendFailure?.call(message);
   }
 
   @override
@@ -1275,17 +1319,18 @@ class _$EmailOtpSendFailureImpl implements _EmailOtpSendFailure {
     TResult Function(String message)? signInFailure,
     TResult Function()? signUpLoading,
     TResult Function(String message)? signUpFailure,
-    TResult Function()? emailOtpSendLoading,
-    TResult Function(String message)? emailOtpSendFailure,
-    TResult Function()? emailOtpSendSuccess,
-    TResult Function()? otpSignInLoading,
-    TResult Function(String message)? otpSignInFailure,
+    TResult Function()? otpSendLoading,
+    TResult Function(String message)? otpSendFailure,
+    TResult Function()? otpSendSuccess,
+    TResult Function()? otpResendSuccess,
+    TResult Function()? otpVerifyLoading,
+    TResult Function(String message)? otpVerifyFailure,
     TResult Function(User user)? success,
     TResult Function()? accountNotVerified,
     required TResult orElse(),
   }) {
-    if (emailOtpSendFailure != null) {
-      return emailOtpSendFailure(message);
+    if (otpSendFailure != null) {
+      return otpSendFailure(message);
     }
     return orElse();
   }
@@ -1298,15 +1343,16 @@ class _$EmailOtpSendFailureImpl implements _EmailOtpSendFailure {
     required TResult Function(_SignInFailure value) signInFailure,
     required TResult Function(_SignUpLoading value) signUpLoading,
     required TResult Function(_SignUpFailure value) signUpFailure,
-    required TResult Function(_EmailOtpLoading value) emailOtpSendLoading,
-    required TResult Function(_EmailOtpSendFailure value) emailOtpSendFailure,
-    required TResult Function(_EmailOtpSendSuccess value) emailOtpSendSuccess,
-    required TResult Function(_OtpSignInLoading value) otpSignInLoading,
-    required TResult Function(_OtpSignInFailure value) otpSignInFailure,
+    required TResult Function(_OtpSendLoading value) otpSendLoading,
+    required TResult Function(_OtpSendFailure value) otpSendFailure,
+    required TResult Function(_OtpSendSuccess value) otpSendSuccess,
+    required TResult Function(_OtpResendSuccess value) otpResendSuccess,
+    required TResult Function(_OtpVerifyLoading value) otpVerifyLoading,
+    required TResult Function(_OtpVerifyFailure value) otpVerifyFailure,
     required TResult Function(_Success value) success,
     required TResult Function(_AccountNotVerified value) accountNotVerified,
   }) {
-    return emailOtpSendFailure(this);
+    return otpSendFailure(this);
   }
 
   @override
@@ -1317,15 +1363,16 @@ class _$EmailOtpSendFailureImpl implements _EmailOtpSendFailure {
     TResult? Function(_SignInFailure value)? signInFailure,
     TResult? Function(_SignUpLoading value)? signUpLoading,
     TResult? Function(_SignUpFailure value)? signUpFailure,
-    TResult? Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult? Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult? Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult? Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult? Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult? Function(_OtpSendLoading value)? otpSendLoading,
+    TResult? Function(_OtpSendFailure value)? otpSendFailure,
+    TResult? Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult? Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult? Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult? Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult? Function(_Success value)? success,
     TResult? Function(_AccountNotVerified value)? accountNotVerified,
   }) {
-    return emailOtpSendFailure?.call(this);
+    return otpSendFailure?.call(this);
   }
 
   @override
@@ -1336,63 +1383,62 @@ class _$EmailOtpSendFailureImpl implements _EmailOtpSendFailure {
     TResult Function(_SignInFailure value)? signInFailure,
     TResult Function(_SignUpLoading value)? signUpLoading,
     TResult Function(_SignUpFailure value)? signUpFailure,
-    TResult Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult Function(_OtpSendLoading value)? otpSendLoading,
+    TResult Function(_OtpSendFailure value)? otpSendFailure,
+    TResult Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult Function(_Success value)? success,
     TResult Function(_AccountNotVerified value)? accountNotVerified,
     required TResult orElse(),
   }) {
-    if (emailOtpSendFailure != null) {
-      return emailOtpSendFailure(this);
+    if (otpSendFailure != null) {
+      return otpSendFailure(this);
     }
     return orElse();
   }
 }
 
-abstract class _EmailOtpSendFailure implements AuthState {
-  const factory _EmailOtpSendFailure(final String message) =
-      _$EmailOtpSendFailureImpl;
+abstract class _OtpSendFailure implements AuthState {
+  const factory _OtpSendFailure(final String message) = _$OtpSendFailureImpl;
 
   String get message;
   @JsonKey(ignore: true)
-  _$$EmailOtpSendFailureImplCopyWith<_$EmailOtpSendFailureImpl> get copyWith =>
+  _$$OtpSendFailureImplCopyWith<_$OtpSendFailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$EmailOtpSendSuccessImplCopyWith<$Res> {
-  factory _$$EmailOtpSendSuccessImplCopyWith(_$EmailOtpSendSuccessImpl value,
-          $Res Function(_$EmailOtpSendSuccessImpl) then) =
-      __$$EmailOtpSendSuccessImplCopyWithImpl<$Res>;
+abstract class _$$OtpSendSuccessImplCopyWith<$Res> {
+  factory _$$OtpSendSuccessImplCopyWith(_$OtpSendSuccessImpl value,
+          $Res Function(_$OtpSendSuccessImpl) then) =
+      __$$OtpSendSuccessImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$EmailOtpSendSuccessImplCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$EmailOtpSendSuccessImpl>
-    implements _$$EmailOtpSendSuccessImplCopyWith<$Res> {
-  __$$EmailOtpSendSuccessImplCopyWithImpl(_$EmailOtpSendSuccessImpl _value,
-      $Res Function(_$EmailOtpSendSuccessImpl) _then)
+class __$$OtpSendSuccessImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$OtpSendSuccessImpl>
+    implements _$$OtpSendSuccessImplCopyWith<$Res> {
+  __$$OtpSendSuccessImplCopyWithImpl(
+      _$OtpSendSuccessImpl _value, $Res Function(_$OtpSendSuccessImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$EmailOtpSendSuccessImpl implements _EmailOtpSendSuccess {
-  const _$EmailOtpSendSuccessImpl();
+class _$OtpSendSuccessImpl implements _OtpSendSuccess {
+  const _$OtpSendSuccessImpl();
 
   @override
   String toString() {
-    return 'AuthState.emailOtpSendSuccess()';
+    return 'AuthState.otpSendSuccess()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$EmailOtpSendSuccessImpl);
+        (other.runtimeType == runtimeType && other is _$OtpSendSuccessImpl);
   }
 
   @override
@@ -1406,15 +1452,16 @@ class _$EmailOtpSendSuccessImpl implements _EmailOtpSendSuccess {
     required TResult Function(String message) signInFailure,
     required TResult Function() signUpLoading,
     required TResult Function(String message) signUpFailure,
-    required TResult Function() emailOtpSendLoading,
-    required TResult Function(String message) emailOtpSendFailure,
-    required TResult Function() emailOtpSendSuccess,
-    required TResult Function() otpSignInLoading,
-    required TResult Function(String message) otpSignInFailure,
+    required TResult Function() otpSendLoading,
+    required TResult Function(String message) otpSendFailure,
+    required TResult Function() otpSendSuccess,
+    required TResult Function() otpResendSuccess,
+    required TResult Function() otpVerifyLoading,
+    required TResult Function(String message) otpVerifyFailure,
     required TResult Function(User user) success,
     required TResult Function() accountNotVerified,
   }) {
-    return emailOtpSendSuccess();
+    return otpSendSuccess();
   }
 
   @override
@@ -1425,15 +1472,16 @@ class _$EmailOtpSendSuccessImpl implements _EmailOtpSendSuccess {
     TResult? Function(String message)? signInFailure,
     TResult? Function()? signUpLoading,
     TResult? Function(String message)? signUpFailure,
-    TResult? Function()? emailOtpSendLoading,
-    TResult? Function(String message)? emailOtpSendFailure,
-    TResult? Function()? emailOtpSendSuccess,
-    TResult? Function()? otpSignInLoading,
-    TResult? Function(String message)? otpSignInFailure,
+    TResult? Function()? otpSendLoading,
+    TResult? Function(String message)? otpSendFailure,
+    TResult? Function()? otpSendSuccess,
+    TResult? Function()? otpResendSuccess,
+    TResult? Function()? otpVerifyLoading,
+    TResult? Function(String message)? otpVerifyFailure,
     TResult? Function(User user)? success,
     TResult? Function()? accountNotVerified,
   }) {
-    return emailOtpSendSuccess?.call();
+    return otpSendSuccess?.call();
   }
 
   @override
@@ -1444,17 +1492,18 @@ class _$EmailOtpSendSuccessImpl implements _EmailOtpSendSuccess {
     TResult Function(String message)? signInFailure,
     TResult Function()? signUpLoading,
     TResult Function(String message)? signUpFailure,
-    TResult Function()? emailOtpSendLoading,
-    TResult Function(String message)? emailOtpSendFailure,
-    TResult Function()? emailOtpSendSuccess,
-    TResult Function()? otpSignInLoading,
-    TResult Function(String message)? otpSignInFailure,
+    TResult Function()? otpSendLoading,
+    TResult Function(String message)? otpSendFailure,
+    TResult Function()? otpSendSuccess,
+    TResult Function()? otpResendSuccess,
+    TResult Function()? otpVerifyLoading,
+    TResult Function(String message)? otpVerifyFailure,
     TResult Function(User user)? success,
     TResult Function()? accountNotVerified,
     required TResult orElse(),
   }) {
-    if (emailOtpSendSuccess != null) {
-      return emailOtpSendSuccess();
+    if (otpSendSuccess != null) {
+      return otpSendSuccess();
     }
     return orElse();
   }
@@ -1467,15 +1516,16 @@ class _$EmailOtpSendSuccessImpl implements _EmailOtpSendSuccess {
     required TResult Function(_SignInFailure value) signInFailure,
     required TResult Function(_SignUpLoading value) signUpLoading,
     required TResult Function(_SignUpFailure value) signUpFailure,
-    required TResult Function(_EmailOtpLoading value) emailOtpSendLoading,
-    required TResult Function(_EmailOtpSendFailure value) emailOtpSendFailure,
-    required TResult Function(_EmailOtpSendSuccess value) emailOtpSendSuccess,
-    required TResult Function(_OtpSignInLoading value) otpSignInLoading,
-    required TResult Function(_OtpSignInFailure value) otpSignInFailure,
+    required TResult Function(_OtpSendLoading value) otpSendLoading,
+    required TResult Function(_OtpSendFailure value) otpSendFailure,
+    required TResult Function(_OtpSendSuccess value) otpSendSuccess,
+    required TResult Function(_OtpResendSuccess value) otpResendSuccess,
+    required TResult Function(_OtpVerifyLoading value) otpVerifyLoading,
+    required TResult Function(_OtpVerifyFailure value) otpVerifyFailure,
     required TResult Function(_Success value) success,
     required TResult Function(_AccountNotVerified value) accountNotVerified,
   }) {
-    return emailOtpSendSuccess(this);
+    return otpSendSuccess(this);
   }
 
   @override
@@ -1486,15 +1536,16 @@ class _$EmailOtpSendSuccessImpl implements _EmailOtpSendSuccess {
     TResult? Function(_SignInFailure value)? signInFailure,
     TResult? Function(_SignUpLoading value)? signUpLoading,
     TResult? Function(_SignUpFailure value)? signUpFailure,
-    TResult? Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult? Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult? Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult? Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult? Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult? Function(_OtpSendLoading value)? otpSendLoading,
+    TResult? Function(_OtpSendFailure value)? otpSendFailure,
+    TResult? Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult? Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult? Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult? Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult? Function(_Success value)? success,
     TResult? Function(_AccountNotVerified value)? accountNotVerified,
   }) {
-    return emailOtpSendSuccess?.call(this);
+    return otpSendSuccess?.call(this);
   }
 
   @override
@@ -1505,56 +1556,57 @@ class _$EmailOtpSendSuccessImpl implements _EmailOtpSendSuccess {
     TResult Function(_SignInFailure value)? signInFailure,
     TResult Function(_SignUpLoading value)? signUpLoading,
     TResult Function(_SignUpFailure value)? signUpFailure,
-    TResult Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult Function(_OtpSendLoading value)? otpSendLoading,
+    TResult Function(_OtpSendFailure value)? otpSendFailure,
+    TResult Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult Function(_Success value)? success,
     TResult Function(_AccountNotVerified value)? accountNotVerified,
     required TResult orElse(),
   }) {
-    if (emailOtpSendSuccess != null) {
-      return emailOtpSendSuccess(this);
+    if (otpSendSuccess != null) {
+      return otpSendSuccess(this);
     }
     return orElse();
   }
 }
 
-abstract class _EmailOtpSendSuccess implements AuthState {
-  const factory _EmailOtpSendSuccess() = _$EmailOtpSendSuccessImpl;
+abstract class _OtpSendSuccess implements AuthState {
+  const factory _OtpSendSuccess() = _$OtpSendSuccessImpl;
 }
 
 /// @nodoc
-abstract class _$$OtpSignInLoadingImplCopyWith<$Res> {
-  factory _$$OtpSignInLoadingImplCopyWith(_$OtpSignInLoadingImpl value,
-          $Res Function(_$OtpSignInLoadingImpl) then) =
-      __$$OtpSignInLoadingImplCopyWithImpl<$Res>;
+abstract class _$$OtpResendSuccessImplCopyWith<$Res> {
+  factory _$$OtpResendSuccessImplCopyWith(_$OtpResendSuccessImpl value,
+          $Res Function(_$OtpResendSuccessImpl) then) =
+      __$$OtpResendSuccessImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$OtpSignInLoadingImplCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$OtpSignInLoadingImpl>
-    implements _$$OtpSignInLoadingImplCopyWith<$Res> {
-  __$$OtpSignInLoadingImplCopyWithImpl(_$OtpSignInLoadingImpl _value,
-      $Res Function(_$OtpSignInLoadingImpl) _then)
+class __$$OtpResendSuccessImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$OtpResendSuccessImpl>
+    implements _$$OtpResendSuccessImplCopyWith<$Res> {
+  __$$OtpResendSuccessImplCopyWithImpl(_$OtpResendSuccessImpl _value,
+      $Res Function(_$OtpResendSuccessImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$OtpSignInLoadingImpl implements _OtpSignInLoading {
-  const _$OtpSignInLoadingImpl();
+class _$OtpResendSuccessImpl implements _OtpResendSuccess {
+  const _$OtpResendSuccessImpl();
 
   @override
   String toString() {
-    return 'AuthState.otpSignInLoading()';
+    return 'AuthState.otpResendSuccess()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$OtpSignInLoadingImpl);
+        (other.runtimeType == runtimeType && other is _$OtpResendSuccessImpl);
   }
 
   @override
@@ -1568,15 +1620,16 @@ class _$OtpSignInLoadingImpl implements _OtpSignInLoading {
     required TResult Function(String message) signInFailure,
     required TResult Function() signUpLoading,
     required TResult Function(String message) signUpFailure,
-    required TResult Function() emailOtpSendLoading,
-    required TResult Function(String message) emailOtpSendFailure,
-    required TResult Function() emailOtpSendSuccess,
-    required TResult Function() otpSignInLoading,
-    required TResult Function(String message) otpSignInFailure,
+    required TResult Function() otpSendLoading,
+    required TResult Function(String message) otpSendFailure,
+    required TResult Function() otpSendSuccess,
+    required TResult Function() otpResendSuccess,
+    required TResult Function() otpVerifyLoading,
+    required TResult Function(String message) otpVerifyFailure,
     required TResult Function(User user) success,
     required TResult Function() accountNotVerified,
   }) {
-    return otpSignInLoading();
+    return otpResendSuccess();
   }
 
   @override
@@ -1587,15 +1640,16 @@ class _$OtpSignInLoadingImpl implements _OtpSignInLoading {
     TResult? Function(String message)? signInFailure,
     TResult? Function()? signUpLoading,
     TResult? Function(String message)? signUpFailure,
-    TResult? Function()? emailOtpSendLoading,
-    TResult? Function(String message)? emailOtpSendFailure,
-    TResult? Function()? emailOtpSendSuccess,
-    TResult? Function()? otpSignInLoading,
-    TResult? Function(String message)? otpSignInFailure,
+    TResult? Function()? otpSendLoading,
+    TResult? Function(String message)? otpSendFailure,
+    TResult? Function()? otpSendSuccess,
+    TResult? Function()? otpResendSuccess,
+    TResult? Function()? otpVerifyLoading,
+    TResult? Function(String message)? otpVerifyFailure,
     TResult? Function(User user)? success,
     TResult? Function()? accountNotVerified,
   }) {
-    return otpSignInLoading?.call();
+    return otpResendSuccess?.call();
   }
 
   @override
@@ -1606,17 +1660,18 @@ class _$OtpSignInLoadingImpl implements _OtpSignInLoading {
     TResult Function(String message)? signInFailure,
     TResult Function()? signUpLoading,
     TResult Function(String message)? signUpFailure,
-    TResult Function()? emailOtpSendLoading,
-    TResult Function(String message)? emailOtpSendFailure,
-    TResult Function()? emailOtpSendSuccess,
-    TResult Function()? otpSignInLoading,
-    TResult Function(String message)? otpSignInFailure,
+    TResult Function()? otpSendLoading,
+    TResult Function(String message)? otpSendFailure,
+    TResult Function()? otpSendSuccess,
+    TResult Function()? otpResendSuccess,
+    TResult Function()? otpVerifyLoading,
+    TResult Function(String message)? otpVerifyFailure,
     TResult Function(User user)? success,
     TResult Function()? accountNotVerified,
     required TResult orElse(),
   }) {
-    if (otpSignInLoading != null) {
-      return otpSignInLoading();
+    if (otpResendSuccess != null) {
+      return otpResendSuccess();
     }
     return orElse();
   }
@@ -1629,15 +1684,16 @@ class _$OtpSignInLoadingImpl implements _OtpSignInLoading {
     required TResult Function(_SignInFailure value) signInFailure,
     required TResult Function(_SignUpLoading value) signUpLoading,
     required TResult Function(_SignUpFailure value) signUpFailure,
-    required TResult Function(_EmailOtpLoading value) emailOtpSendLoading,
-    required TResult Function(_EmailOtpSendFailure value) emailOtpSendFailure,
-    required TResult Function(_EmailOtpSendSuccess value) emailOtpSendSuccess,
-    required TResult Function(_OtpSignInLoading value) otpSignInLoading,
-    required TResult Function(_OtpSignInFailure value) otpSignInFailure,
+    required TResult Function(_OtpSendLoading value) otpSendLoading,
+    required TResult Function(_OtpSendFailure value) otpSendFailure,
+    required TResult Function(_OtpSendSuccess value) otpSendSuccess,
+    required TResult Function(_OtpResendSuccess value) otpResendSuccess,
+    required TResult Function(_OtpVerifyLoading value) otpVerifyLoading,
+    required TResult Function(_OtpVerifyFailure value) otpVerifyFailure,
     required TResult Function(_Success value) success,
     required TResult Function(_AccountNotVerified value) accountNotVerified,
   }) {
-    return otpSignInLoading(this);
+    return otpResendSuccess(this);
   }
 
   @override
@@ -1648,15 +1704,16 @@ class _$OtpSignInLoadingImpl implements _OtpSignInLoading {
     TResult? Function(_SignInFailure value)? signInFailure,
     TResult? Function(_SignUpLoading value)? signUpLoading,
     TResult? Function(_SignUpFailure value)? signUpFailure,
-    TResult? Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult? Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult? Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult? Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult? Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult? Function(_OtpSendLoading value)? otpSendLoading,
+    TResult? Function(_OtpSendFailure value)? otpSendFailure,
+    TResult? Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult? Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult? Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult? Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult? Function(_Success value)? success,
     TResult? Function(_AccountNotVerified value)? accountNotVerified,
   }) {
-    return otpSignInLoading?.call(this);
+    return otpResendSuccess?.call(this);
   }
 
   @override
@@ -1667,41 +1724,210 @@ class _$OtpSignInLoadingImpl implements _OtpSignInLoading {
     TResult Function(_SignInFailure value)? signInFailure,
     TResult Function(_SignUpLoading value)? signUpLoading,
     TResult Function(_SignUpFailure value)? signUpFailure,
-    TResult Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult Function(_OtpSendLoading value)? otpSendLoading,
+    TResult Function(_OtpSendFailure value)? otpSendFailure,
+    TResult Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult Function(_Success value)? success,
     TResult Function(_AccountNotVerified value)? accountNotVerified,
     required TResult orElse(),
   }) {
-    if (otpSignInLoading != null) {
-      return otpSignInLoading(this);
+    if (otpResendSuccess != null) {
+      return otpResendSuccess(this);
     }
     return orElse();
   }
 }
 
-abstract class _OtpSignInLoading implements AuthState {
-  const factory _OtpSignInLoading() = _$OtpSignInLoadingImpl;
+abstract class _OtpResendSuccess implements AuthState {
+  const factory _OtpResendSuccess() = _$OtpResendSuccessImpl;
 }
 
 /// @nodoc
-abstract class _$$OtpSignInFailureImplCopyWith<$Res> {
-  factory _$$OtpSignInFailureImplCopyWith(_$OtpSignInFailureImpl value,
-          $Res Function(_$OtpSignInFailureImpl) then) =
-      __$$OtpSignInFailureImplCopyWithImpl<$Res>;
+abstract class _$$OtpVerifyLoadingImplCopyWith<$Res> {
+  factory _$$OtpVerifyLoadingImplCopyWith(_$OtpVerifyLoadingImpl value,
+          $Res Function(_$OtpVerifyLoadingImpl) then) =
+      __$$OtpVerifyLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OtpVerifyLoadingImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$OtpVerifyLoadingImpl>
+    implements _$$OtpVerifyLoadingImplCopyWith<$Res> {
+  __$$OtpVerifyLoadingImplCopyWithImpl(_$OtpVerifyLoadingImpl _value,
+      $Res Function(_$OtpVerifyLoadingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$OtpVerifyLoadingImpl implements _OtpVerifyLoading {
+  const _$OtpVerifyLoadingImpl();
+
+  @override
+  String toString() {
+    return 'AuthState.otpVerifyLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$OtpVerifyLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() signInLoading,
+    required TResult Function(String message) signInFailure,
+    required TResult Function() signUpLoading,
+    required TResult Function(String message) signUpFailure,
+    required TResult Function() otpSendLoading,
+    required TResult Function(String message) otpSendFailure,
+    required TResult Function() otpSendSuccess,
+    required TResult Function() otpResendSuccess,
+    required TResult Function() otpVerifyLoading,
+    required TResult Function(String message) otpVerifyFailure,
+    required TResult Function(User user) success,
+    required TResult Function() accountNotVerified,
+  }) {
+    return otpVerifyLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? signInLoading,
+    TResult? Function(String message)? signInFailure,
+    TResult? Function()? signUpLoading,
+    TResult? Function(String message)? signUpFailure,
+    TResult? Function()? otpSendLoading,
+    TResult? Function(String message)? otpSendFailure,
+    TResult? Function()? otpSendSuccess,
+    TResult? Function()? otpResendSuccess,
+    TResult? Function()? otpVerifyLoading,
+    TResult? Function(String message)? otpVerifyFailure,
+    TResult? Function(User user)? success,
+    TResult? Function()? accountNotVerified,
+  }) {
+    return otpVerifyLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? signInLoading,
+    TResult Function(String message)? signInFailure,
+    TResult Function()? signUpLoading,
+    TResult Function(String message)? signUpFailure,
+    TResult Function()? otpSendLoading,
+    TResult Function(String message)? otpSendFailure,
+    TResult Function()? otpSendSuccess,
+    TResult Function()? otpResendSuccess,
+    TResult Function()? otpVerifyLoading,
+    TResult Function(String message)? otpVerifyFailure,
+    TResult Function(User user)? success,
+    TResult Function()? accountNotVerified,
+    required TResult orElse(),
+  }) {
+    if (otpVerifyLoading != null) {
+      return otpVerifyLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_SignInLoading value) signInLoading,
+    required TResult Function(_SignInFailure value) signInFailure,
+    required TResult Function(_SignUpLoading value) signUpLoading,
+    required TResult Function(_SignUpFailure value) signUpFailure,
+    required TResult Function(_OtpSendLoading value) otpSendLoading,
+    required TResult Function(_OtpSendFailure value) otpSendFailure,
+    required TResult Function(_OtpSendSuccess value) otpSendSuccess,
+    required TResult Function(_OtpResendSuccess value) otpResendSuccess,
+    required TResult Function(_OtpVerifyLoading value) otpVerifyLoading,
+    required TResult Function(_OtpVerifyFailure value) otpVerifyFailure,
+    required TResult Function(_Success value) success,
+    required TResult Function(_AccountNotVerified value) accountNotVerified,
+  }) {
+    return otpVerifyLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_SignInLoading value)? signInLoading,
+    TResult? Function(_SignInFailure value)? signInFailure,
+    TResult? Function(_SignUpLoading value)? signUpLoading,
+    TResult? Function(_SignUpFailure value)? signUpFailure,
+    TResult? Function(_OtpSendLoading value)? otpSendLoading,
+    TResult? Function(_OtpSendFailure value)? otpSendFailure,
+    TResult? Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult? Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult? Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult? Function(_OtpVerifyFailure value)? otpVerifyFailure,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_AccountNotVerified value)? accountNotVerified,
+  }) {
+    return otpVerifyLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_SignInLoading value)? signInLoading,
+    TResult Function(_SignInFailure value)? signInFailure,
+    TResult Function(_SignUpLoading value)? signUpLoading,
+    TResult Function(_SignUpFailure value)? signUpFailure,
+    TResult Function(_OtpSendLoading value)? otpSendLoading,
+    TResult Function(_OtpSendFailure value)? otpSendFailure,
+    TResult Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult Function(_OtpVerifyFailure value)? otpVerifyFailure,
+    TResult Function(_Success value)? success,
+    TResult Function(_AccountNotVerified value)? accountNotVerified,
+    required TResult orElse(),
+  }) {
+    if (otpVerifyLoading != null) {
+      return otpVerifyLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OtpVerifyLoading implements AuthState {
+  const factory _OtpVerifyLoading() = _$OtpVerifyLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$OtpVerifyFailureImplCopyWith<$Res> {
+  factory _$$OtpVerifyFailureImplCopyWith(_$OtpVerifyFailureImpl value,
+          $Res Function(_$OtpVerifyFailureImpl) then) =
+      __$$OtpVerifyFailureImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$OtpSignInFailureImplCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$OtpSignInFailureImpl>
-    implements _$$OtpSignInFailureImplCopyWith<$Res> {
-  __$$OtpSignInFailureImplCopyWithImpl(_$OtpSignInFailureImpl _value,
-      $Res Function(_$OtpSignInFailureImpl) _then)
+class __$$OtpVerifyFailureImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$OtpVerifyFailureImpl>
+    implements _$$OtpVerifyFailureImplCopyWith<$Res> {
+  __$$OtpVerifyFailureImplCopyWithImpl(_$OtpVerifyFailureImpl _value,
+      $Res Function(_$OtpVerifyFailureImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1709,7 +1935,7 @@ class __$$OtpSignInFailureImplCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$OtpSignInFailureImpl(
+    return _then(_$OtpVerifyFailureImpl(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -1720,22 +1946,22 @@ class __$$OtpSignInFailureImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OtpSignInFailureImpl implements _OtpSignInFailure {
-  const _$OtpSignInFailureImpl(this.message);
+class _$OtpVerifyFailureImpl implements _OtpVerifyFailure {
+  const _$OtpVerifyFailureImpl(this.message);
 
   @override
   final String message;
 
   @override
   String toString() {
-    return 'AuthState.otpSignInFailure(message: $message)';
+    return 'AuthState.otpVerifyFailure(message: $message)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OtpSignInFailureImpl &&
+            other is _$OtpVerifyFailureImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -1745,8 +1971,8 @@ class _$OtpSignInFailureImpl implements _OtpSignInFailure {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$OtpSignInFailureImplCopyWith<_$OtpSignInFailureImpl> get copyWith =>
-      __$$OtpSignInFailureImplCopyWithImpl<_$OtpSignInFailureImpl>(
+  _$$OtpVerifyFailureImplCopyWith<_$OtpVerifyFailureImpl> get copyWith =>
+      __$$OtpVerifyFailureImplCopyWithImpl<_$OtpVerifyFailureImpl>(
           this, _$identity);
 
   @override
@@ -1757,15 +1983,16 @@ class _$OtpSignInFailureImpl implements _OtpSignInFailure {
     required TResult Function(String message) signInFailure,
     required TResult Function() signUpLoading,
     required TResult Function(String message) signUpFailure,
-    required TResult Function() emailOtpSendLoading,
-    required TResult Function(String message) emailOtpSendFailure,
-    required TResult Function() emailOtpSendSuccess,
-    required TResult Function() otpSignInLoading,
-    required TResult Function(String message) otpSignInFailure,
+    required TResult Function() otpSendLoading,
+    required TResult Function(String message) otpSendFailure,
+    required TResult Function() otpSendSuccess,
+    required TResult Function() otpResendSuccess,
+    required TResult Function() otpVerifyLoading,
+    required TResult Function(String message) otpVerifyFailure,
     required TResult Function(User user) success,
     required TResult Function() accountNotVerified,
   }) {
-    return otpSignInFailure(message);
+    return otpVerifyFailure(message);
   }
 
   @override
@@ -1776,15 +2003,16 @@ class _$OtpSignInFailureImpl implements _OtpSignInFailure {
     TResult? Function(String message)? signInFailure,
     TResult? Function()? signUpLoading,
     TResult? Function(String message)? signUpFailure,
-    TResult? Function()? emailOtpSendLoading,
-    TResult? Function(String message)? emailOtpSendFailure,
-    TResult? Function()? emailOtpSendSuccess,
-    TResult? Function()? otpSignInLoading,
-    TResult? Function(String message)? otpSignInFailure,
+    TResult? Function()? otpSendLoading,
+    TResult? Function(String message)? otpSendFailure,
+    TResult? Function()? otpSendSuccess,
+    TResult? Function()? otpResendSuccess,
+    TResult? Function()? otpVerifyLoading,
+    TResult? Function(String message)? otpVerifyFailure,
     TResult? Function(User user)? success,
     TResult? Function()? accountNotVerified,
   }) {
-    return otpSignInFailure?.call(message);
+    return otpVerifyFailure?.call(message);
   }
 
   @override
@@ -1795,17 +2023,18 @@ class _$OtpSignInFailureImpl implements _OtpSignInFailure {
     TResult Function(String message)? signInFailure,
     TResult Function()? signUpLoading,
     TResult Function(String message)? signUpFailure,
-    TResult Function()? emailOtpSendLoading,
-    TResult Function(String message)? emailOtpSendFailure,
-    TResult Function()? emailOtpSendSuccess,
-    TResult Function()? otpSignInLoading,
-    TResult Function(String message)? otpSignInFailure,
+    TResult Function()? otpSendLoading,
+    TResult Function(String message)? otpSendFailure,
+    TResult Function()? otpSendSuccess,
+    TResult Function()? otpResendSuccess,
+    TResult Function()? otpVerifyLoading,
+    TResult Function(String message)? otpVerifyFailure,
     TResult Function(User user)? success,
     TResult Function()? accountNotVerified,
     required TResult orElse(),
   }) {
-    if (otpSignInFailure != null) {
-      return otpSignInFailure(message);
+    if (otpVerifyFailure != null) {
+      return otpVerifyFailure(message);
     }
     return orElse();
   }
@@ -1818,15 +2047,16 @@ class _$OtpSignInFailureImpl implements _OtpSignInFailure {
     required TResult Function(_SignInFailure value) signInFailure,
     required TResult Function(_SignUpLoading value) signUpLoading,
     required TResult Function(_SignUpFailure value) signUpFailure,
-    required TResult Function(_EmailOtpLoading value) emailOtpSendLoading,
-    required TResult Function(_EmailOtpSendFailure value) emailOtpSendFailure,
-    required TResult Function(_EmailOtpSendSuccess value) emailOtpSendSuccess,
-    required TResult Function(_OtpSignInLoading value) otpSignInLoading,
-    required TResult Function(_OtpSignInFailure value) otpSignInFailure,
+    required TResult Function(_OtpSendLoading value) otpSendLoading,
+    required TResult Function(_OtpSendFailure value) otpSendFailure,
+    required TResult Function(_OtpSendSuccess value) otpSendSuccess,
+    required TResult Function(_OtpResendSuccess value) otpResendSuccess,
+    required TResult Function(_OtpVerifyLoading value) otpVerifyLoading,
+    required TResult Function(_OtpVerifyFailure value) otpVerifyFailure,
     required TResult Function(_Success value) success,
     required TResult Function(_AccountNotVerified value) accountNotVerified,
   }) {
-    return otpSignInFailure(this);
+    return otpVerifyFailure(this);
   }
 
   @override
@@ -1837,15 +2067,16 @@ class _$OtpSignInFailureImpl implements _OtpSignInFailure {
     TResult? Function(_SignInFailure value)? signInFailure,
     TResult? Function(_SignUpLoading value)? signUpLoading,
     TResult? Function(_SignUpFailure value)? signUpFailure,
-    TResult? Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult? Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult? Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult? Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult? Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult? Function(_OtpSendLoading value)? otpSendLoading,
+    TResult? Function(_OtpSendFailure value)? otpSendFailure,
+    TResult? Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult? Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult? Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult? Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult? Function(_Success value)? success,
     TResult? Function(_AccountNotVerified value)? accountNotVerified,
   }) {
-    return otpSignInFailure?.call(this);
+    return otpVerifyFailure?.call(this);
   }
 
   @override
@@ -1856,29 +2087,30 @@ class _$OtpSignInFailureImpl implements _OtpSignInFailure {
     TResult Function(_SignInFailure value)? signInFailure,
     TResult Function(_SignUpLoading value)? signUpLoading,
     TResult Function(_SignUpFailure value)? signUpFailure,
-    TResult Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult Function(_OtpSendLoading value)? otpSendLoading,
+    TResult Function(_OtpSendFailure value)? otpSendFailure,
+    TResult Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult Function(_Success value)? success,
     TResult Function(_AccountNotVerified value)? accountNotVerified,
     required TResult orElse(),
   }) {
-    if (otpSignInFailure != null) {
-      return otpSignInFailure(this);
+    if (otpVerifyFailure != null) {
+      return otpVerifyFailure(this);
     }
     return orElse();
   }
 }
 
-abstract class _OtpSignInFailure implements AuthState {
-  const factory _OtpSignInFailure(final String message) =
-      _$OtpSignInFailureImpl;
+abstract class _OtpVerifyFailure implements AuthState {
+  const factory _OtpVerifyFailure(final String message) =
+      _$OtpVerifyFailureImpl;
 
   String get message;
   @JsonKey(ignore: true)
-  _$$OtpSignInFailureImplCopyWith<_$OtpSignInFailureImpl> get copyWith =>
+  _$$OtpVerifyFailureImplCopyWith<_$OtpVerifyFailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1961,11 +2193,12 @@ class _$SuccessImpl implements _Success {
     required TResult Function(String message) signInFailure,
     required TResult Function() signUpLoading,
     required TResult Function(String message) signUpFailure,
-    required TResult Function() emailOtpSendLoading,
-    required TResult Function(String message) emailOtpSendFailure,
-    required TResult Function() emailOtpSendSuccess,
-    required TResult Function() otpSignInLoading,
-    required TResult Function(String message) otpSignInFailure,
+    required TResult Function() otpSendLoading,
+    required TResult Function(String message) otpSendFailure,
+    required TResult Function() otpSendSuccess,
+    required TResult Function() otpResendSuccess,
+    required TResult Function() otpVerifyLoading,
+    required TResult Function(String message) otpVerifyFailure,
     required TResult Function(User user) success,
     required TResult Function() accountNotVerified,
   }) {
@@ -1980,11 +2213,12 @@ class _$SuccessImpl implements _Success {
     TResult? Function(String message)? signInFailure,
     TResult? Function()? signUpLoading,
     TResult? Function(String message)? signUpFailure,
-    TResult? Function()? emailOtpSendLoading,
-    TResult? Function(String message)? emailOtpSendFailure,
-    TResult? Function()? emailOtpSendSuccess,
-    TResult? Function()? otpSignInLoading,
-    TResult? Function(String message)? otpSignInFailure,
+    TResult? Function()? otpSendLoading,
+    TResult? Function(String message)? otpSendFailure,
+    TResult? Function()? otpSendSuccess,
+    TResult? Function()? otpResendSuccess,
+    TResult? Function()? otpVerifyLoading,
+    TResult? Function(String message)? otpVerifyFailure,
     TResult? Function(User user)? success,
     TResult? Function()? accountNotVerified,
   }) {
@@ -1999,11 +2233,12 @@ class _$SuccessImpl implements _Success {
     TResult Function(String message)? signInFailure,
     TResult Function()? signUpLoading,
     TResult Function(String message)? signUpFailure,
-    TResult Function()? emailOtpSendLoading,
-    TResult Function(String message)? emailOtpSendFailure,
-    TResult Function()? emailOtpSendSuccess,
-    TResult Function()? otpSignInLoading,
-    TResult Function(String message)? otpSignInFailure,
+    TResult Function()? otpSendLoading,
+    TResult Function(String message)? otpSendFailure,
+    TResult Function()? otpSendSuccess,
+    TResult Function()? otpResendSuccess,
+    TResult Function()? otpVerifyLoading,
+    TResult Function(String message)? otpVerifyFailure,
     TResult Function(User user)? success,
     TResult Function()? accountNotVerified,
     required TResult orElse(),
@@ -2022,11 +2257,12 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_SignInFailure value) signInFailure,
     required TResult Function(_SignUpLoading value) signUpLoading,
     required TResult Function(_SignUpFailure value) signUpFailure,
-    required TResult Function(_EmailOtpLoading value) emailOtpSendLoading,
-    required TResult Function(_EmailOtpSendFailure value) emailOtpSendFailure,
-    required TResult Function(_EmailOtpSendSuccess value) emailOtpSendSuccess,
-    required TResult Function(_OtpSignInLoading value) otpSignInLoading,
-    required TResult Function(_OtpSignInFailure value) otpSignInFailure,
+    required TResult Function(_OtpSendLoading value) otpSendLoading,
+    required TResult Function(_OtpSendFailure value) otpSendFailure,
+    required TResult Function(_OtpSendSuccess value) otpSendSuccess,
+    required TResult Function(_OtpResendSuccess value) otpResendSuccess,
+    required TResult Function(_OtpVerifyLoading value) otpVerifyLoading,
+    required TResult Function(_OtpVerifyFailure value) otpVerifyFailure,
     required TResult Function(_Success value) success,
     required TResult Function(_AccountNotVerified value) accountNotVerified,
   }) {
@@ -2041,11 +2277,12 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_SignInFailure value)? signInFailure,
     TResult? Function(_SignUpLoading value)? signUpLoading,
     TResult? Function(_SignUpFailure value)? signUpFailure,
-    TResult? Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult? Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult? Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult? Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult? Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult? Function(_OtpSendLoading value)? otpSendLoading,
+    TResult? Function(_OtpSendFailure value)? otpSendFailure,
+    TResult? Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult? Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult? Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult? Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult? Function(_Success value)? success,
     TResult? Function(_AccountNotVerified value)? accountNotVerified,
   }) {
@@ -2060,11 +2297,12 @@ class _$SuccessImpl implements _Success {
     TResult Function(_SignInFailure value)? signInFailure,
     TResult Function(_SignUpLoading value)? signUpLoading,
     TResult Function(_SignUpFailure value)? signUpFailure,
-    TResult Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult Function(_OtpSendLoading value)? otpSendLoading,
+    TResult Function(_OtpSendFailure value)? otpSendFailure,
+    TResult Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult Function(_Success value)? success,
     TResult Function(_AccountNotVerified value)? accountNotVerified,
     required TResult orElse(),
@@ -2128,11 +2366,12 @@ class _$AccountNotVerifiedImpl implements _AccountNotVerified {
     required TResult Function(String message) signInFailure,
     required TResult Function() signUpLoading,
     required TResult Function(String message) signUpFailure,
-    required TResult Function() emailOtpSendLoading,
-    required TResult Function(String message) emailOtpSendFailure,
-    required TResult Function() emailOtpSendSuccess,
-    required TResult Function() otpSignInLoading,
-    required TResult Function(String message) otpSignInFailure,
+    required TResult Function() otpSendLoading,
+    required TResult Function(String message) otpSendFailure,
+    required TResult Function() otpSendSuccess,
+    required TResult Function() otpResendSuccess,
+    required TResult Function() otpVerifyLoading,
+    required TResult Function(String message) otpVerifyFailure,
     required TResult Function(User user) success,
     required TResult Function() accountNotVerified,
   }) {
@@ -2147,11 +2386,12 @@ class _$AccountNotVerifiedImpl implements _AccountNotVerified {
     TResult? Function(String message)? signInFailure,
     TResult? Function()? signUpLoading,
     TResult? Function(String message)? signUpFailure,
-    TResult? Function()? emailOtpSendLoading,
-    TResult? Function(String message)? emailOtpSendFailure,
-    TResult? Function()? emailOtpSendSuccess,
-    TResult? Function()? otpSignInLoading,
-    TResult? Function(String message)? otpSignInFailure,
+    TResult? Function()? otpSendLoading,
+    TResult? Function(String message)? otpSendFailure,
+    TResult? Function()? otpSendSuccess,
+    TResult? Function()? otpResendSuccess,
+    TResult? Function()? otpVerifyLoading,
+    TResult? Function(String message)? otpVerifyFailure,
     TResult? Function(User user)? success,
     TResult? Function()? accountNotVerified,
   }) {
@@ -2166,11 +2406,12 @@ class _$AccountNotVerifiedImpl implements _AccountNotVerified {
     TResult Function(String message)? signInFailure,
     TResult Function()? signUpLoading,
     TResult Function(String message)? signUpFailure,
-    TResult Function()? emailOtpSendLoading,
-    TResult Function(String message)? emailOtpSendFailure,
-    TResult Function()? emailOtpSendSuccess,
-    TResult Function()? otpSignInLoading,
-    TResult Function(String message)? otpSignInFailure,
+    TResult Function()? otpSendLoading,
+    TResult Function(String message)? otpSendFailure,
+    TResult Function()? otpSendSuccess,
+    TResult Function()? otpResendSuccess,
+    TResult Function()? otpVerifyLoading,
+    TResult Function(String message)? otpVerifyFailure,
     TResult Function(User user)? success,
     TResult Function()? accountNotVerified,
     required TResult orElse(),
@@ -2189,11 +2430,12 @@ class _$AccountNotVerifiedImpl implements _AccountNotVerified {
     required TResult Function(_SignInFailure value) signInFailure,
     required TResult Function(_SignUpLoading value) signUpLoading,
     required TResult Function(_SignUpFailure value) signUpFailure,
-    required TResult Function(_EmailOtpLoading value) emailOtpSendLoading,
-    required TResult Function(_EmailOtpSendFailure value) emailOtpSendFailure,
-    required TResult Function(_EmailOtpSendSuccess value) emailOtpSendSuccess,
-    required TResult Function(_OtpSignInLoading value) otpSignInLoading,
-    required TResult Function(_OtpSignInFailure value) otpSignInFailure,
+    required TResult Function(_OtpSendLoading value) otpSendLoading,
+    required TResult Function(_OtpSendFailure value) otpSendFailure,
+    required TResult Function(_OtpSendSuccess value) otpSendSuccess,
+    required TResult Function(_OtpResendSuccess value) otpResendSuccess,
+    required TResult Function(_OtpVerifyLoading value) otpVerifyLoading,
+    required TResult Function(_OtpVerifyFailure value) otpVerifyFailure,
     required TResult Function(_Success value) success,
     required TResult Function(_AccountNotVerified value) accountNotVerified,
   }) {
@@ -2208,11 +2450,12 @@ class _$AccountNotVerifiedImpl implements _AccountNotVerified {
     TResult? Function(_SignInFailure value)? signInFailure,
     TResult? Function(_SignUpLoading value)? signUpLoading,
     TResult? Function(_SignUpFailure value)? signUpFailure,
-    TResult? Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult? Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult? Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult? Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult? Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult? Function(_OtpSendLoading value)? otpSendLoading,
+    TResult? Function(_OtpSendFailure value)? otpSendFailure,
+    TResult? Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult? Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult? Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult? Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult? Function(_Success value)? success,
     TResult? Function(_AccountNotVerified value)? accountNotVerified,
   }) {
@@ -2227,11 +2470,12 @@ class _$AccountNotVerifiedImpl implements _AccountNotVerified {
     TResult Function(_SignInFailure value)? signInFailure,
     TResult Function(_SignUpLoading value)? signUpLoading,
     TResult Function(_SignUpFailure value)? signUpFailure,
-    TResult Function(_EmailOtpLoading value)? emailOtpSendLoading,
-    TResult Function(_EmailOtpSendFailure value)? emailOtpSendFailure,
-    TResult Function(_EmailOtpSendSuccess value)? emailOtpSendSuccess,
-    TResult Function(_OtpSignInLoading value)? otpSignInLoading,
-    TResult Function(_OtpSignInFailure value)? otpSignInFailure,
+    TResult Function(_OtpSendLoading value)? otpSendLoading,
+    TResult Function(_OtpSendFailure value)? otpSendFailure,
+    TResult Function(_OtpSendSuccess value)? otpSendSuccess,
+    TResult Function(_OtpResendSuccess value)? otpResendSuccess,
+    TResult Function(_OtpVerifyLoading value)? otpVerifyLoading,
+    TResult Function(_OtpVerifyFailure value)? otpVerifyFailure,
     TResult Function(_Success value)? success,
     TResult Function(_AccountNotVerified value)? accountNotVerified,
     required TResult orElse(),

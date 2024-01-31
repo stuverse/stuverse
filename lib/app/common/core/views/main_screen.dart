@@ -35,7 +35,8 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: NavigationBar(
         selectedIndex: widget.navigationShell.currentIndex,
         destinations: const [
-          NavigationDestination(label: 'Forum', icon: Icon(Icons.message)),
+          NavigationDestination(
+              label: 'Home', icon: Icon(Icons.home)), //! This is Forum Module
           NavigationDestination(
               label: 'Fund', icon: Icon(Icons.monetization_on)),
           NavigationDestination(label: 'Job', icon: Icon(Icons.work)),

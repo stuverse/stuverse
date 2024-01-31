@@ -49,8 +49,36 @@ class AuthRepo implements IAuthRepo {
     } on DioException catch (e) {
       log(e.toString());
       if (e.response?.statusCode == 400) {
-        if (e.response?.data['non_field_errors']) {
+        if (e.response?.data['non_field_errors'] != null) {
           return left(const AuthFailure.authInvalidCredential());
+        }
+      }
+      return left(const AuthFailure.authServerFailure());
+    } catch (e) {
+      return left(const AuthFailure.authClientFailure());
+    }
+  }
+
+  @override
+  Future<Either<AuthFailure, User>> verifyOtp({
+    required String email,
+    required String otp,
+  }) async {
+    try {
+      final resp = await dioClient.post(
+        VERIFY_OTP_API,
+        data: {
+          'email': email,
+          'otp': otp,
+        },
+      );
+      final user = User.fromJson(resp.data);
+      return right(user);
+    } on DioException catch (e) {
+      log(e.toString());
+      if (e.response?.statusCode == 400) {
+        if (e.response?.data['non_field_errors'] != null) {
+          return left(const AuthFailure.authInvalidOTP());
         }
       }
       return left(const AuthFailure.authServerFailure());

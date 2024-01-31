@@ -9,13 +9,13 @@ class AuthState with _$AuthState {
   const factory AuthState.signUpLoading() = _SignUpLoading;
   const factory AuthState.signUpFailure(String message) = _SignUpFailure;
 
-  const factory AuthState.emailOtpSendLoading() = _EmailOtpLoading;
-  const factory AuthState.emailOtpSendFailure(String message) =
-      _EmailOtpSendFailure;
-  const factory AuthState.emailOtpSendSuccess() = _EmailOtpSendSuccess;
+  const factory AuthState.otpSendLoading() = _OtpSendLoading;
+  const factory AuthState.otpSendFailure(String message) = _OtpSendFailure;
+  const factory AuthState.otpSendSuccess() = _OtpSendSuccess;
+  const factory AuthState.otpResendSuccess() = _OtpResendSuccess;
 
-  const factory AuthState.otpSignInLoading() = _OtpSignInLoading;
-  const factory AuthState.otpSignInFailure(String message) = _OtpSignInFailure;
+  const factory AuthState.otpVerifyLoading() = _OtpVerifyLoading;
+  const factory AuthState.otpVerifyFailure(String message) = _OtpVerifyFailure;
 
   const factory AuthState.success(
     User user,

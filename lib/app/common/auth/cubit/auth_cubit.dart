@@ -38,8 +38,9 @@ class AuthCubit extends Cubit<AuthState> {
 
   void sendOtp({
     required String email,
+    bool isResend = false,
   }) async {
-    emit(AuthState.emailOtpSendLoading());
+    emit(AuthState.otpSendLoading());
     final result = await _authRepo.sendOtp(
       email: email,
     );
@@ -47,14 +48,39 @@ class AuthCubit extends Cubit<AuthState> {
       (failure) {
         failure.maybeMap(
           authInvalidCredential: (_) =>
-              emit(AuthState.emailOtpSendFailure("Email not found")),
-          authServerFailure: (_) => emit(AuthState.emailOtpSendFailure(
+              emit(AuthState.otpSendFailure("Email not found")),
+          authServerFailure: (_) => emit(AuthState.otpSendFailure(
               "Something went wrong. Please try again later")),
-          orElse: () =>
-              emit(AuthState.emailOtpSendFailure("Something went wrong")),
+          orElse: () => emit(AuthState.otpSendFailure("Something went wrong")),
         );
       },
-      (_) => emit(AuthState.emailOtpSendSuccess()),
+      (_) => isResend
+          ? emit(AuthState.otpResendSuccess())
+          : emit(AuthState.otpSendSuccess()),
+    );
+  }
+
+  void verifyOtp({
+    required String email,
+    required String otp,
+  }) async {
+    emit(AuthState.otpVerifyLoading());
+    final result = await _authRepo.verifyOtp(
+      email: email,
+      otp: otp,
+    );
+    result.fold(
+      (failure) {
+        failure.maybeMap(
+          authInvalidOTP: (_) =>
+              emit(AuthState.otpVerifyFailure("Invalid OTP")),
+          authServerFailure: (_) => emit(AuthState.otpVerifyFailure(
+              "Something went wrong. Please try again later")),
+          orElse: () =>
+              emit(AuthState.otpVerifyFailure("Something went wrong")),
+        );
+      },
+      (user) => emit(AuthState.success(user)),
     );
   }
 }
