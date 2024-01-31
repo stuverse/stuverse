@@ -94,7 +94,7 @@ class _OtpSigningScreenState extends State<OtpSigningScreen> {
             ),
           ),
         ),
-      ),
-    );
+      );
+    
   }
 }
