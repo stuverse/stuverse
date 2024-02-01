@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
@@ -98,13 +99,13 @@ class _SignInScreenState extends State<SignInScreen> {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                           onPressed: () {
-
+                            HapticFeedback.lightImpact();
                             if (_formKey.currentState!.validate()) {
-                              context.push(CommonRoutes.otpSignin,extra: _emailController.text);
-                            }else{
+                              context.push(CommonRoutes.otpSignin,
+                                  extra: _emailController.text);
+                            } else {
                               context.push(CommonRoutes.otpSignin);
                             }
-                            
                           },
                           child: Text(
                             'Signin with Otp?',
@@ -154,6 +155,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                               orElse: () => FilledButton(
                                 onPressed: () {
+                                  HapticFeedback.lightImpact();
                                   if (_formKey.currentState!.validate()) {
                                     context
                                         .read<AuthCubit>()
@@ -185,6 +187,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         TextButton(
                           onPressed: () {
+                            HapticFeedback.lightImpact();
                             context.push(CommonRoutes.signup);
                           },
                           child: Text(

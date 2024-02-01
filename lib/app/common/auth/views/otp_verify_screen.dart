@@ -54,12 +54,6 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    void onOtpFieldChanged(String value) {
-      if (value.length == 1) {
-        FocusScope.of(context).nextFocus();
-      }
-    }
-
     return Scaffold(
       resizeToAvoidBottomInset: true,
       extendBodyBehindAppBar: true,
@@ -116,6 +110,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                               ),
                               TextButton(
                                 onPressed: () {
+                                  HapticFeedback.lightImpact();
                                   context.pop();
                                 },
                                 child: Text(
@@ -136,22 +131,21 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               OtpField(
-                                  otpController: _otpController1,
+                                otpController: _otpController1,
                               ),
                               20.widthBox,
                               OtpField(
-                                  otpController: _otpController2,
+                                otpController: _otpController2,
                               ),
                               20.widthBox,
                               OtpField(
-                                  otpController: _otpController3,
+                                otpController: _otpController3,
                               ),
                               20.widthBox,
                               OtpField(
-                                  otpController: _otpController4,
-                                  isLastField: true,
+                                otpController: _otpController4,
+                                isLastField: true,
                               ),
-
                             ],
                           ),
                           20.heightBox,
@@ -193,6 +187,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                                 onPressed: _resendCountdown > 0
                                     ? null
                                     : () {
+                                        HapticFeedback.lightImpact();
                                         context.read<AuthCubit>().sendOtp(
                                               email: widget.email,
                                               isResend: true,
@@ -203,8 +198,8 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                                         });
                                       },
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                       vertical: 10),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
                                   child: Text(
                                     "Resend",
                                     style: TextStyle(fontSize: 15),
@@ -214,6 +209,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                               10.widthBox,
                               FilledButton(
                                   onPressed: () {
+                                    HapticFeedback.lightImpact();
                                     if (_formKey.currentState!.validate()) {
                                       otp = _otpController1.text +
                                           _otpController2.text +
@@ -227,7 +223,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
-                                         vertical: 10),
+                                        vertical: 10),
                                     child: Text(
                                       "Confirm",
                                       style: TextStyle(
