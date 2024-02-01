@@ -4,6 +4,9 @@ class AppImages {
   static const String logo200 = "assets/app/logo/stuverse200.png";
   static const String logo100 = "assets/app/logo/stuverse100.png";
   static const String logo50 = "assets/app/logo/stuverse50.png";
+  static const String logoGlow = "assets/app/logo/stuverseGlow.png";
+  static const String logoGlow200 = "assets/app/logo/stuverseGlow200.png";
+
   static const String forum = "assets/common/forum4.png";
   static const String mentorship = "assets/common/mentor.png";
   static const String jobPosting = "assets/common/jobposting.png";
