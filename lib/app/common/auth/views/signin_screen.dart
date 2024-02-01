@@ -32,9 +32,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     Center(
                       child: Image.asset(
-                        AppImages.logo,
-                        height: context.minSize * 0.5,
-                        width: context.minSize * 0.5,
+                        AppImages.logoGlow,
+                        height: context.minSize * 0.6,
+                        width: context.minSize * 0.6,
                       ),
                     ),
                     Text(
@@ -137,6 +137,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   cancelButtonTitle: "Cancel");
                             },
                             success: (user) {
+                              context.read<CoreCubit>().setUser(user.user);
                               context.go(ForumRoutes.forumHome);
                             },
                           );

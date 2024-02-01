@@ -17,6 +17,8 @@ extension SnackBarExt on BuildContext {
     Animation<double>? animation,
     void Function()? onVisible,
   }) {
+    if (backgroundColor == null) backgroundColor = this.colorScheme.primary;
+    if (foregroundColor == null) foregroundColor = this.colorScheme.onPrimary;
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
         closeIconColor: foregroundColor,

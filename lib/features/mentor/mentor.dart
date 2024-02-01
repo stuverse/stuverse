@@ -1,3 +1,1 @@
-export 'detail/detail.dart';
-export 'home/home.dart';
-export 'manage/manage.dart';
+export 'views/mentor_home_screen.dart';

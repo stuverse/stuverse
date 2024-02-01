@@ -86,4 +86,62 @@ class AuthRepo implements IAuthRepo {
       return left(const AuthFailure.authClientFailure());
     }
   }
+
+  @override
+  Future<Either<AuthFailure, Unit>> signUpWithEmailAndPassword({
+    required String email,
+    required String name,
+    required String password,
+    required String mobile,
+    required String branch,
+    required String type,
+  }) async {
+    try {
+      final resp = await dioClient.post(
+        SIGN_UP_API,
+        data: {
+          'email': email,
+          'name': name,
+          'password': password,
+          'mobile': mobile,
+          'branch': branch,
+          'type': type,
+        },
+      );
+
+      return right(unit);
+    } on DioException catch (e) {
+      log(e.toString());
+      if (e.response?.statusCode == 400) {
+        if (e.response?.data['email'] != null) {
+          return left(const AuthFailure.authEmailAlreadyInUse());
+        }
+        if (e.response?.data['non_field_errors'] != null) {
+          if ((e.response?.data['non_field_errors'][0] ?? "")
+              .toString()
+              .contains("You are not a Student of MEA Engineering College")) {
+            return left(const AuthFailure.authInvalidEmailDomain());
+          }
+        }
+      }
+      return left(const AuthFailure.authServerFailure());
+    } catch (e) {
+      return left(const AuthFailure.authClientFailure());
+    }
+  }
+
+  @override
+  Future<Either<AuthFailure, User>> getUserProfile() async {
+    try {
+      final resp = await dioClient.get(
+        USER_PROFILE_API,
+      );
+      final user = User.fromJson(resp.data);
+      return right(user);
+    } on DioException catch (_) {
+      return left(const AuthFailure.authServerFailure());
+    } catch (e) {
+      return left(const AuthFailure.authClientFailure());
+    }
+  }
 }
