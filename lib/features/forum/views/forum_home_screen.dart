@@ -8,8 +8,8 @@ class ForumHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.read<CoreCubit>().state.user;
-    return Scaffold(
-      body: Center(
+    return SafeArea(
+      child: Center(
         child: Text(
           "Hi ${user?.name ?? ""}!",
           style: TextStyle(fontSize: 24),

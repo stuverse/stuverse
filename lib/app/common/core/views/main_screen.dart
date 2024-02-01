@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:stuverse/app/app.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({required this.navigationShell, Key? key})
@@ -18,6 +20,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _goBranch(int index) {
+    HapticFeedback.lightImpact();
     widget.navigationShell.goBranch(
       index,
       // A common pattern when using bottom navigation bars is to support
@@ -31,8 +34,18 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widget.navigationShell,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+      ),
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      backgroundColor: Colors.transparent,
+      body: BgGradient(child: widget.navigationShell),
       bottomNavigationBar: NavigationBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         selectedIndex: widget.navigationShell.currentIndex,
         destinations: const [
           NavigationDestination(

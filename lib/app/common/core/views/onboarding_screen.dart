@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stuverse/app/app.dart';
@@ -62,6 +63,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                   onPressed: () {
+                    HapticFeedback.lightImpact();
                     context.go(CommonRoutes.signin);
                   },
                   child: Text(
@@ -77,6 +79,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   children: [
                     GestureDetector(
                       onTap: () {
+                        HapticFeedback.lightImpact();
                         _pageController.jumpToPage(3);
                       },
                       child: Text('SKIP', style: context.bodyLarge).bold(),
@@ -94,6 +97,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         )),
                     GestureDetector(
                       onTap: () {
+                        HapticFeedback.lightImpact();
                         _pageController.nextPage(
                             duration: const Duration(milliseconds: 500),
                             curve: Curves.easeIn);

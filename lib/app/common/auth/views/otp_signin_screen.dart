@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
@@ -100,6 +101,7 @@ class _OtpSigningScreenState extends State<OtpSigningScreen> {
                             ),
                         orElse: () => FilledButton(
                               onPressed: () {
+                                HapticFeedback.lightImpact();
                                 if (_emailController.text.isNotEmpty)
                                   context.read<AuthCubit>().sendOtp(
                                         email: _emailController.text,
