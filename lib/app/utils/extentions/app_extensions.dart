@@ -9,6 +9,7 @@ part 'context/media_query_extensions.dart';
 part 'context/dialog_extension.dart';
 part 'context/theme_extension.dart';
 part 'context/snackbar_extension.dart';
+part 'context/padding_extension.dart';
 
 part 'widgets/sized_box_extensions.dart';
 part 'number/number_extensions.dart';

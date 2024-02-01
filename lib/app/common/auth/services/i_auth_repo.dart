@@ -10,4 +10,9 @@ abstract class IAuthRepo {
   Future<Either<AuthFailure, Unit>> sendOtp({
     required String email,
   });
+
+  Future<Either<AuthFailure, User>> verifyOtp({
+    required String email,
+    required String otp,
+  });
 }

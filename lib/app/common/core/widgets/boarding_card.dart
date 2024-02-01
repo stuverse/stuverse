@@ -15,6 +15,8 @@ class BoardingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return BgGradient(
       child: SafeArea(
+          child: Padding(
+        padding: context.paddingHorz,
         child: Column(
           children: [
             Image.asset(
@@ -37,11 +39,8 @@ class BoardingCard extends StatelessWidget {
               style: context.bodyLarge,
             ),
           ],
-        ).paddingSymmetric(
-          horizontal: context.width * 0.05,
-          vertical: context.height * 0.05,
         ),
-      ),
+      )),
     );
   }
 }

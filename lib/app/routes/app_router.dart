@@ -27,7 +27,9 @@ class AppRouter {
       ),
       GoRoute(
         path: CommonRoutes.otpVerify,
-        builder: (context, state) => const OtpVerifyScreen(),
+        builder: (context, state) => OtpVerifyScreen(
+          email: (state.extra as String?) ?? '',
+        ),
       ),
       GoRoute(
         path: CommonRoutes.onBoarding,

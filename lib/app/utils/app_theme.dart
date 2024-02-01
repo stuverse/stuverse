@@ -95,7 +95,7 @@ class AppTheme {
   );
 
   static const _flexSchemeDark = FlexSchemeColor(
-    primary: Color(0xff4e8ecd),
+    primary: Color(0xFF1D72C6),
     primaryContainer: Color(0xff001d34),
     secondary: Color(0xfffabf93),
     secondaryContainer: Color(0xFF8EC8F5),
