@@ -99,6 +99,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                           onPressed: () {
+                            HapticFeedback.lightImpact();
                             if (_formKey.currentState!.validate()) {
                               context.push(CommonRoutes.otpSignin,
                                   extra: _emailController.text);
