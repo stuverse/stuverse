@@ -53,7 +53,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ),
             if (onLastPage)
               Positioned(
-                bottom: 100,
+                bottom: 40,
                 left: 0,
                 right: 0,
                 child: FilledButton(
@@ -71,7 +71,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               )
             else
               Container(
-                alignment: Alignment(0, 0.75),
+                alignment: Alignment(0, 0.85),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -79,22 +79,26 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       onTap: () {
                         _pageController.jumpToPage(3);
                       },
-                      child: Text(
-                        'SKIP',
-                        style: context.bodyLarge
-                      ).bold(),
+                      child: Text('SKIP', style: context.bodyLarge).bold(),
                     ),
-                    SmoothPageIndicator(controller: _pageController, count: 4),
+                    SmoothPageIndicator(
+                        controller: _pageController,
+                        count: 4,
+                        effect: JumpingDotEffect(
+                          dotHeight: 12,
+                          dotWidth: 12,
+                          verticalOffset: 5,
+                          jumpScale: 2,
+                          activeDotColor: context.colorScheme.secondary,
+                          dotColor: context.colorScheme.primary,
+                        )),
                     GestureDetector(
                       onTap: () {
                         _pageController.nextPage(
                             duration: const Duration(milliseconds: 500),
                             curve: Curves.easeIn);
                       },
-                      child: Text(
-                        'NEXT',
-                        style: context.bodyLarge
-                      ).bold(),
+                      child: Text('NEXT', style: context.bodyLarge).bold(),
                     ),
                   ],
                 ),
