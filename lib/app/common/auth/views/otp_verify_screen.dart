@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
+import 'package:stuverse/app/common/auth/widgets/otp_field.dart';
 
 class OtpVerifyScreen extends StatefulWidget {
   OtpVerifyScreen({super.key, required this.email});
@@ -113,7 +115,9 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                                 width: 3,
                               ),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  context.pop();
+                                },
                                 child: Text(
                                   "Change Email?",
                                   style: TextStyle(
@@ -131,130 +135,23 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(
-                                height: 68,
-                                width: 68,
-                                child: TextFormField(
-                                  validator: validateOtpField,
-                                  onSaved: (pin1) {},
-                                  onChanged: onOtpFieldChanged,
-                                  controller: _otpController1,
-                                  decoration: InputDecoration(
-                                    hintText: "0",
-                                    hintStyle: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onPrimary
-                                            .withOpacity(0.1),
-                                        letterSpacing: 25),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  ),
-                                  style:
-                                      Theme.of(context).textTheme.headlineLarge,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(1),
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                ),
+                              OtpField(
+                                  otpController: _otpController1,
                               ),
-                              SizedBox(
-                                width: 28,
+                              20.widthBox,
+                              OtpField(
+                                  otpController: _otpController2,
                               ),
-                              SizedBox(
-                                height: 68,
-                                width: 68,
-                                child: TextFormField(
-                                  validator: validateOtpField,
-                                  onSaved: (pin2) {},
-                                  onChanged: onOtpFieldChanged,
-                                  controller: _otpController2,
-                                  decoration: InputDecoration(
-                                    hintText: "0",
-                                    hintStyle: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onPrimary
-                                            .withOpacity(0.1),
-                                        letterSpacing: 25),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  ),
-                                  style:
-                                      Theme.of(context).textTheme.headlineLarge,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(1),
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                ),
+                              20.widthBox,
+                              OtpField(
+                                  otpController: _otpController3,
                               ),
-                              SizedBox(
-                                width: 28,
+                              20.widthBox,
+                              OtpField(
+                                  otpController: _otpController4,
+                                  isLastField: true,
                               ),
-                              SizedBox(
-                                height: 68,
-                                width: 68,
-                                child: TextFormField(
-                                  validator: validateOtpField,
-                                  onSaved: (pin2) {},
-                                  onChanged: onOtpFieldChanged,
-                                  controller: _otpController3,
-                                  decoration: InputDecoration(
-                                    hintText: "0",
-                                    hintStyle: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onPrimary
-                                            .withOpacity(0.1),
-                                        letterSpacing: 25),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  ),
-                                  style:
-                                      Theme.of(context).textTheme.headlineLarge,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(1),
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: 28,
-                              ),
-                              SizedBox(
-                                height: 68,
-                                width: 68,
-                                child: TextFormField(
-                                  validator: validateOtpField,
-                                  onSaved: (pin2) {},
-                                  controller: _otpController4,
-                                  decoration: InputDecoration(
-                                    hintText: "0",
-                                    hintStyle: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onPrimary
-                                            .withOpacity(0.1),
-                                        letterSpacing: 25),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  ),
-                                  style:
-                                      Theme.of(context).textTheme.headlineLarge,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(1),
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                ),
-                              ),
+
                             ],
                           ),
                           20.heightBox,
@@ -307,7 +204,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                                       },
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 30, vertical: 10),
+                                       vertical: 10),
                                   child: Text(
                                     "Resend",
                                     style: TextStyle(fontSize: 15),
@@ -330,7 +227,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 30, vertical: 10),
+                                         vertical: 10),
                                     child: Text(
                                       "Confirm",
                                       style: TextStyle(
