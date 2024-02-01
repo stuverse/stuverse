@@ -98,7 +98,13 @@ class _SignInScreenState extends State<SignInScreen> {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                           onPressed: () {
-                            context.push(CommonRoutes.otpSignin);
+
+                            if (_formKey.currentState!.validate()) {
+                              context.push(CommonRoutes.otpSignin,extra: _emailController.text);
+                            }else{
+                              context.push(CommonRoutes.otpSignin);
+                            }
+                            
                           },
                           child: Text(
                             'Signin with Otp?',
