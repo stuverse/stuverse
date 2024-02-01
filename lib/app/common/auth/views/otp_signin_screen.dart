@@ -37,7 +37,6 @@ class _OtpSigningScreenState extends State<OtpSigningScreen> {
       ),
       body: BgGradient(
         child: SafeArea(
-
           child: Padding(
             padding: context.paddingHorz,
             child: SingleChildScrollView(
@@ -124,10 +123,9 @@ class _OtpSigningScreenState extends State<OtpSigningScreen> {
                 ],
               ),
             ),
-
           ),
         ),
-      );
-    
+      ),
+    );
   }
 }
