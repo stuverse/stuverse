@@ -29,3 +29,11 @@ class User with _$User {
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
+
+class UserTypes {
+  static const String STUDENT = 'student';
+  static const String STAFF = 'staff';
+  static const String ALUMNI = 'alumni';
+  static const String COMPANY = 'company';
+  static const String ADMIN = 'admin';
+}

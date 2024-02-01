@@ -8,6 +8,7 @@ class AuthState with _$AuthState {
 
   const factory AuthState.signUpLoading() = _SignUpLoading;
   const factory AuthState.signUpFailure(String message) = _SignUpFailure;
+  const factory AuthState.signUpSuccess() = _SignUpSuccess;
 
   const factory AuthState.otpSendLoading() = _OtpSendLoading;
   const factory AuthState.otpSendFailure(String message) = _OtpSendFailure;

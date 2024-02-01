@@ -15,4 +15,15 @@ abstract class IAuthRepo {
     required String email,
     required String otp,
   });
+
+  Future<Either<AuthFailure, Unit>> signUpWithEmailAndPassword({
+    required String email,
+    required String name,
+    required String password,
+    required String mobile,
+    required String branch,
+    required String type,
+  });
+
+  Future<Either<AuthFailure, User>> getUserProfile();
 }
