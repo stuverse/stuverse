@@ -11,17 +11,16 @@ class SplashScreen extends StatelessWidget {
     return BlocConsumer<CoreCubit, CoreState>(
       listener: (context, state) {
         if (state.isUserLoading == false) {
-          context.go(CommonRoutes.onBoarding);
-          // if (state.isFirstTime) {
-          //   context.read<CoreCubit>().setIsFirstTime(false);
-          //   context.go(CommonRoutes.onBoarding);
-          // } else {
-          //   if (state.user == null) {
-          //     context.go(CommonRoutes.signin);
-          //   } else {
-          //     context.go(ForumRoutes.forumHome);
-          //   }
-          // }
+          if (state.isFirstTime) {
+            context.read<CoreCubit>().setIsFirstTime(false);
+            context.go(CommonRoutes.onBoarding);
+          } else {
+            if (state.user == null) {
+              context.go(CommonRoutes.signin);
+            } else {
+              context.go(ForumRoutes.forumHome);
+            }
+          }
         }
       },
       builder: (context, state) {

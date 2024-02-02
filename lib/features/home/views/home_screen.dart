@@ -2,25 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stuverse/app/app.dart';
 
-class ForumHomeScreen extends StatefulWidget {
-  const ForumHomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<ForumHomeScreen> createState() => _ForumHomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _ForumHomeScreenState extends State<ForumHomeScreen> {
-  final categoryList = [
-    HorzTabItem(title: "Top", id: 1),
-    HorzTabItem(title: "Public", id: 2),
-    HorzTabItem(title: "Private", id: 3),
-  ];
-
-  late final ValueNotifier<HorzTabItem> selectedCategory;
-
+class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    selectedCategory = ValueNotifier(categoryList.first);
     super.initState();
   }
 
@@ -44,16 +35,6 @@ class _ForumHomeScreenState extends State<ForumHomeScreen> {
                     color: Theme.of(context).colorScheme.onBackground,
                     fontWeight: FontWeight.bold)),
             20.heightBox,
-            ValueListenableBuilder(
-                valueListenable: selectedCategory,
-                builder: (context, child, _) {
-                  return HorzTabBar(
-                      categoryList: categoryList,
-                      onSelected: (item) {
-                        selectedCategory.value = item;
-                      },
-                      selectedCategory: selectedCategory.value);
-                }),
           ],
         ),
       ),

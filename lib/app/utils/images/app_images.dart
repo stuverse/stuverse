@@ -23,4 +23,8 @@ class AppImages {
   static const String mentorSVG = "assets/app/icons/mentor.svg";
   static const String mentorSolidSVG = "assets/app/icons/mentor-solid.svg";
   static const String menuSVG = "assets/app/icons/menu.svg";
+  static const String homeSVG = "assets/app/icons/home.svg";
+  static const String homeSolidSVG = "assets/app/icons/home-solid.svg";
+  static const String searchSVG = "assets/app/icons/search.svg";
+  static const String bellSVG = "assets/app/icons/bell-solid.svg";
 }

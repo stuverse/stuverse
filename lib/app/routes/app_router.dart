@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
+import 'package:stuverse/app/routes/home_routes.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
+  static final _homeNavigatorKey =
+      GlobalKey<NavigatorState>(debugLabel: 'home');
   static final _forumNavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'forum');
   static final _fundNavigatorKey =
@@ -48,6 +51,11 @@ class AppRouter {
           );
         },
         branches: [
+          // StatefulShellBranch(
+          //   navigatorKey: _homeNavigatorKey,
+          //   initialLocation: HomeRoutes.home,
+          //   routes: HomeRoutes.homeRoutes,
+          // ),
           StatefulShellBranch(
             navigatorKey: _forumNavigatorKey,
             initialLocation: ForumRoutes.forumHome,

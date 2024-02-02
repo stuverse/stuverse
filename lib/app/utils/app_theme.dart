@@ -1,5 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // Theme config for FlexColorScheme version 7.3.x. Make sure you use
@@ -38,7 +39,7 @@ class AppTheme {
     useMaterial3: true,
     swapLegacyOnMaterial3: true,
     // To use the Playground font, add GoogleFonts package and uncomment
-    // fontFamily: GoogleFonts.notoSans().fontFamily,
+    fontFamily: GoogleFonts.nunitoSans().fontFamily,
   );
 
   static final darkTheme = FlexThemeData.dark(
@@ -78,7 +79,7 @@ class AppTheme {
     useMaterial3: true,
     swapLegacyOnMaterial3: true,
     // To use the Playground font, add GoogleFonts package and uncomment
-    // fontFamily: GoogleFonts.notoSans().fontFamily,
+    fontFamily: GoogleFonts.nunitoSans().fontFamily,
   );
 
 // Light and dark ColorSchemes made by FlexColorScheme v7.3.1.

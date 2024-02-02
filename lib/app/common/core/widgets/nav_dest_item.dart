@@ -6,26 +6,28 @@ class NavDestItem extends StatelessWidget {
   const NavDestItem({
     super.key,
     required this.label,
-    required this.svgPath,
+    required this.regularSvgPath,
+    required this.solidSvgPath,
   });
   final String label;
-  final String svgPath;
+  final String regularSvgPath;
+  final String solidSvgPath;
 
   @override
   Widget build(BuildContext context) {
     return NavigationDestination(
       label: label,
       icon: SvgPicture.asset(
-        svgPath,
+        regularSvgPath,
         colorFilter: ColorFilter.mode(
-          context.colorScheme.onBackground,
+          context.colorScheme.onBackground.withOpacity(0.7),
           BlendMode.srcIn,
         ),
       ),
       selectedIcon: SvgPicture.asset(
-        svgPath,
+        solidSvgPath,
         colorFilter: ColorFilter.mode(
-          context.colorScheme.onSecondaryContainer,
+          context.colorScheme.secondaryContainer,
           BlendMode.srcIn,
         ),
       ),
