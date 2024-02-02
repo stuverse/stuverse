@@ -11,7 +11,7 @@ class ForumHomeScreen extends StatelessWidget {
     return SafeArea(
       child: Center(
         child: Text(
-          "Hi ${user?.name ?? ""}!",
+          "Hi ${user?.name ?? ""}! There",
           style: TextStyle(fontSize: 24),
         ),
       ),
