@@ -31,41 +31,75 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
+    final currentIndex = widget.navigationShell.currentIndex;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        scrolledUnderElevation: 0,
-      ),
+      key: _scaffoldKey,
+      drawer: MainDrawer(),
       extendBodyBehindAppBar: true,
       extendBody: true,
-      backgroundColor: Colors.transparent,
-      body: BgGradient(child: widget.navigationShell),
-      bottomNavigationBar: NavigationBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        selectedIndex: widget.navigationShell.currentIndex,
-        destinations: const [
-          NavigationDestination(
-              label: 'Home', icon: Icon(Icons.home)), //! This is Forum Module
-          NavigationDestination(
-              label: 'Fund', icon: Icon(Icons.monetization_on)),
-          NavigationDestination(label: 'Job', icon: Icon(Icons.work)),
-          NavigationDestination(
-              label: 'Mentor', icon: Icon(Icons.person_search))
-        ],
-        onDestinationSelected: _goBranch,
+      body: BgGradient(
+          child: SafeArea(
+        child: Padding(
+          padding: context.paddingHorzWith(0.03),
+          child: Stack(
+            children: [
+              widget.navigationShell,
+              Positioned(
+                top: 0,
+                left: 0,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.menu,
+                    color: context.colorScheme.onBackground,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    _scaffoldKey.currentState!.openDrawer();
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      )),
+      bottomNavigationBar: NavigationBarTheme(
+        data: NavigationBarThemeData(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          indicatorColor: context.colorScheme.secondaryContainer,
+          labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
+              (Set<MaterialState> states) =>
+                  states.contains(MaterialState.selected)
+                      ? TextStyle(color: context.colorScheme.secondaryContainer)
+                      : TextStyle(color: context.colorScheme.onBackground)),
+        ),
+        child: NavigationBar(
+          selectedIndex: currentIndex,
+          destinations: [
+            NavDestItem(
+              label: 'Forum',
+              svgPath: AppImages.forumSolidSVG,
+            ),
+            NavDestItem(
+              label: 'Funds',
+              svgPath: AppImages.fundSolidSVG,
+            ),
+            NavDestItem(
+              label: 'Job',
+              svgPath: AppImages.jobSolidSVG,
+            ),
+            NavDestItem(
+              label: 'Mentor',
+              svgPath: AppImages.mentorSolidSVG,
+            ),
+          ],
+          onDestinationSelected: _goBranch,
+        ),
       ),
     );
   }
-}
-
-class NamedNavigationBarItemWidget extends BottomNavigationBarItem {
-  final String initialLocation;
-
-  const NamedNavigationBarItemWidget(
-      {required this.initialLocation, required Widget icon, String? label})
-      : super(icon: icon, label: label);
 }

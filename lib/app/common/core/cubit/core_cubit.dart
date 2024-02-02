@@ -45,4 +45,11 @@ class CoreCubit extends Cubit<CoreState> {
   void setUser(User user) async {
     emit(state.copyWith(user: user));
   }
+
+  void signOut() async {
+    final _sharedPreferences = await SharedPreferences.getInstance();
+    await _sharedPreferences.remove("token_refresh");
+    await _sharedPreferences.remove("token_access");
+    emit(state.copyWith(user: null));
+  }
 }

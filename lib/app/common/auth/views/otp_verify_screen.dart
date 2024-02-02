@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
@@ -68,185 +69,181 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
               key: _formKey,
               child: Padding(
                 padding: context.paddingHorz,
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Text(
-                            "Verification Code",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Theme.of(context).colorScheme.onBackground,
+                child: Column(children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text(
+                          "Verification Code",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Theme.of(context).colorScheme.onBackground,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "We have sent the code verification to",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onBackground
+                                .withOpacity(0.6),
+                          ),
+                        ),
+                        5.heightBox,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              widget.email,
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "We have sent the code verification to",
-                            style: TextStyle(
-                              fontSize: 14,
+                            SizedBox(
+                              width: 3,
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                HapticFeedback.lightImpact();
+                                context.pop();
+                              },
+                              child: Text(
+                                "Change Email?",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            OtpField(
+                              otpController: _otpController1,
+                            ),
+                            20.widthBox,
+                            OtpField(
+                              otpController: _otpController2,
+                            ),
+                            20.widthBox,
+                            OtpField(
+                              otpController: _otpController3,
+                            ),
+                            20.widthBox,
+                            OtpField(
+                              otpController: _otpController4,
+                              isLastField: true,
+                            ),
+                          ].defaultHorzListAnimation(),
+                        ),
+                        20.heightBox,
+                        Text(
+                          _resendCountdown > 0
+                              ? "Resend in $_resendCountdown"
+                              : "",
+                          style: context.labelMedium!.copyWith(
                               color: Theme.of(context)
                                   .colorScheme
                                   .onBackground
-                                  .withOpacity(0.6),
-                            ),
+                                  .withOpacity(0.7)),
+                        ),
+                        const SizedBox(
+                          height: 28,
+                        ),
+                        Spacer(),
+                      ].defaultListAnimation(),
+                    ),
+                  ),
+                  BlocConsumer<AuthCubit, AuthState>(
+                    listener: (context, state) {
+                      state.mapOrNull(
+                        otpVerifyFailure: (state) {
+                          context.showErrorMessage(message: state.message);
+                        },
+                      );
+                    },
+                    builder: (context, state) {
+                      return state.maybeMap(
+                        otpVerifyLoading: (state) => Center(
+                          child: CircularProgressIndicator(
+                            color: context.colorScheme.onBackground,
                           ),
-                          5.heightBox,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                widget.email,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
+                        ),
+                        orElse: () => Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: _resendCountdown > 0
+                                  ? null
+                                  : () {
+                                      HapticFeedback.lightImpact();
+                                      context.read<AuthCubit>().sendOtp(
+                                            email: widget.email,
+                                            isResend: true,
+                                          );
+                                      setState(() {
+                                        _resendCountdown = _resendDuration;
+                                        startResendTimer();
+                                      });
+                                    },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                child: Text(
+                                  "Resend",
+                                  style: TextStyle(fontSize: 15),
                                 ),
                               ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              TextButton(
+                            ).expanded(),
+                            10.widthBox,
+                            FilledButton(
                                 onPressed: () {
                                   HapticFeedback.lightImpact();
-                                  context.pop();
+                                  if (_formKey.currentState!.validate()) {
+                                    otp = _otpController1.text +
+                                        _otpController2.text +
+                                        _otpController3.text +
+                                        _otpController4.text;
+                                    context.read<AuthCubit>().verifyOtp(
+                                          email: widget.email,
+                                          otp: otp,
+                                        );
+                                  }
                                 },
-                                child: Text(
-                                  "Change Email?",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              OtpField(
-                                otpController: _otpController1,
-                              ),
-                              20.widthBox,
-                              OtpField(
-                                otpController: _otpController2,
-                              ),
-                              20.widthBox,
-                              OtpField(
-                                otpController: _otpController3,
-                              ),
-                              20.widthBox,
-                              OtpField(
-                                otpController: _otpController4,
-                                isLastField: true,
-                              ),
-                            ],
-                          ),
-                          20.heightBox,
-                          Text(
-                            _resendCountdown > 0
-                                ? "Resend in $_resendCountdown"
-                                : "",
-                            style: context.labelMedium!.copyWith(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onBackground
-                                    .withOpacity(0.7)),
-                          ),
-                          const SizedBox(
-                            height: 28,
-                          ),
-                          Spacer(),
-                        ],
-                      ),
-                    ),
-                    BlocConsumer<AuthCubit, AuthState>(
-                      listener: (context, state) {
-                        state.mapOrNull(
-                          otpVerifyFailure: (state) {
-                            context.showErrorMessage(message: state.message);
-                          },
-                        );
-                      },
-                      builder: (context, state) {
-                        return state.maybeMap(
-                          otpVerifyLoading: (state) => Center(
-                            child: CircularProgressIndicator(
-                              color: context.colorScheme.onBackground,
-                            ),
-                          ),
-                          orElse: () => Row(
-                            children: [
-                              ElevatedButton(
-                                onPressed: _resendCountdown > 0
-                                    ? null
-                                    : () {
-                                        HapticFeedback.lightImpact();
-                                        context.read<AuthCubit>().sendOtp(
-                                              email: widget.email,
-                                              isResend: true,
-                                            );
-                                        setState(() {
-                                          _resendCountdown = _resendDuration;
-                                          startResendTimer();
-                                        });
-                                      },
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 10),
                                   child: Text(
-                                    "Resend",
-                                    style: TextStyle(fontSize: 15),
+                                    "Confirm",
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary),
                                   ),
                                 ),
-                              ).expanded(),
-                              10.widthBox,
-                              FilledButton(
-                                  onPressed: () {
-                                    HapticFeedback.lightImpact();
-                                    if (_formKey.currentState!.validate()) {
-                                      otp = _otpController1.text +
-                                          _otpController2.text +
-                                          _otpController3.text +
-                                          _otpController4.text;
-                                      context.read<AuthCubit>().verifyOtp(
-                                            email: widget.email,
-                                            otp: otp,
-                                          );
-                                    }
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10),
-                                    child: Text(
-                                      "Confirm",
-                                      style: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onPrimary),
-                                    ),
+                                style: FilledButton.styleFrom(
+                                  backgroundColor:
+                                      Theme.of(context).colorScheme.primary,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
-                                  style: FilledButton.styleFrom(
-                                    backgroundColor:
-                                        Theme.of(context).colorScheme.primary,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  )).expanded(),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                    10.heightBox,
-                  ],
-                ),
+                                )).expanded(),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                  10.heightBox,
+                ]),
               )),
         ),
       ),

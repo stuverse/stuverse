@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
@@ -36,7 +37,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         AppImages.logoGlow,
                         height: context.minSize * 0.6,
                         width: context.minSize * 0.6,
-                      ),
+                      )
+                          .animate(
+                            onComplete: (controller) => controller.repeat(),
+                          )
+                          .shimmer(
+                            duration: 6000.ms,
+                          ),
                     ),
                     Text(
                       'Welcome to StuVerse!',
@@ -205,7 +212,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ],
                     )
-                  ],
+                  ].defaultListAnimation(),
                 ),
               ),
             ),

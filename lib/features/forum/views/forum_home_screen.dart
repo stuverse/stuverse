@@ -8,12 +8,17 @@ class ForumHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.read<CoreCubit>().state.user;
-    return SafeArea(
-      child: Center(
-        child: Text(
-          "Hi ${user?.name ?? ""}! There",
-          style: TextStyle(fontSize: 24),
-        ),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Center(
+            child: Text(
+              "Hi ${user?.name ?? ""}!",
+              style: TextStyle(fontSize: 24),
+            ),
+          ),
+          800.heightBox,
+        ],
       ),
     );
   }
