@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stuverse/app/app.dart';
+import 'dart:math';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -92,7 +93,7 @@ class ThreadCard extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: Image.network(
-                "https://picsum.photos/200/300",
+                "https://picsum.photos/id/${Random().nextInt(20) + 20}/200/300/",
                 width: double.infinity,
                 height: context.minSize * 0.8,
                 fit: BoxFit.cover,
