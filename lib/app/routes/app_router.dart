@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
-import 'package:stuverse/app/routes/home_routes.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -53,8 +52,13 @@ class AppRouter {
         branches: [
           StatefulShellBranch(
             navigatorKey: _homeNavigatorKey,
-            initialLocation: HomeRoutes.home,
-            routes: HomeRoutes.homeRoutes,
+            initialLocation: CommonRoutes.home,
+            routes: [
+              GoRoute(
+                path: CommonRoutes.home,
+                builder: (context, state) => const HomeScreen(),
+              ),
+            ],
           ),
           StatefulShellBranch(
             navigatorKey: _forumNavigatorKey,

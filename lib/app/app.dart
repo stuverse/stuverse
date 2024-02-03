@@ -10,7 +10,6 @@ export 'routes/forum_routes.dart';
 export 'routes/fund_routes.dart';
 export 'routes/job_routes.dart';
 export 'routes/mentor_routes.dart';
-export 'routes/home_routes.dart';
 
 //! Utils
 export 'utils/images/app_images.dart';

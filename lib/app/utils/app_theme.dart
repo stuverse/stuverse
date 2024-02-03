@@ -86,7 +86,7 @@ class AppTheme {
 // These ColorScheme objects require Flutter 3.7 or later.
   static const _flexSchemeLight = FlexSchemeColor(
     primary: Color(0xff1d72c6),
-    primaryContainer: Color(0xff00172d),
+    primaryContainer: Color(0xFF92CCFF),
     secondary: Color(0xfffac595),
     secondaryContainer: Color(0xff0052a2),
     tertiary: Color(0xff00264d),

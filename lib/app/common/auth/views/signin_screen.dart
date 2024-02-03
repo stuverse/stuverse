@@ -152,7 +152,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             },
                             success: (user) {
                               context.read<CoreCubit>().setUser(user.user);
-                              context.go(ForumRoutes.forumHome);
+                              context.go(CommonRoutes.home);
                             },
                           );
                         },

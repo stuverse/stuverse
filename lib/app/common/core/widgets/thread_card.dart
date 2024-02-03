@@ -1,36 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:stuverse/app/app.dart';
 import 'dart:math';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final user = context.read<CoreCubit>().state.user;
-    return SafeArea(
-        child: ListView.separated(
-            itemBuilder: (ctx, index) {
-              return ThreadCard(user: user, showImage: index.isEven);
-            },
-            separatorBuilder: (ctx, int) {
-              return Divider();
-            },
-            itemCount: 20));
-  }
-}
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:stuverse/app/app.dart';
 
 class ThreadCard extends StatelessWidget {
   const ThreadCard({
@@ -80,6 +52,21 @@ class ThreadCard extends StatelessWidget {
                 color: Theme.of(context).colorScheme.onBackground,
                 fontSize: 20,
                 fontWeight: FontWeight.bold),
+          ),
+          5.heightBox,
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondaryContainer,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            padding: context.paddingHorzWith(0.01),
+            child: Text(
+              "Setup",
+              style: context.bodyMedium!.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.onSecondaryContainer,
+              ),
+            ),
           ),
           5.heightBox,
           Text(

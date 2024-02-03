@@ -6,4 +6,5 @@ class CommonRoutes {
   static const String onBoarding = '/onboarding';
   static const String splash = '/';
   static const String notFound = '/not-found';
+  static const String home = '/home';
 }

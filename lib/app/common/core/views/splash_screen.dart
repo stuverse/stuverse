@@ -18,7 +18,7 @@ class SplashScreen extends StatelessWidget {
             if (state.user == null) {
               context.go(CommonRoutes.signin);
             } else {
-              context.go(ForumRoutes.forumHome);
+              context.go(CommonRoutes.home);
             }
           }
         }
