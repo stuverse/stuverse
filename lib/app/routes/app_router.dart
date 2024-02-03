@@ -51,11 +51,11 @@ class AppRouter {
           );
         },
         branches: [
-          // StatefulShellBranch(
-          //   navigatorKey: _homeNavigatorKey,
-          //   initialLocation: HomeRoutes.home,
-          //   routes: HomeRoutes.homeRoutes,
-          // ),
+          StatefulShellBranch(
+            navigatorKey: _homeNavigatorKey,
+            initialLocation: HomeRoutes.home,
+            routes: HomeRoutes.homeRoutes,
+          ),
           StatefulShellBranch(
             navigatorKey: _forumNavigatorKey,
             initialLocation: ForumRoutes.forumHome,

@@ -32,28 +32,16 @@ class _ForumHomeScreenState extends State<ForumHomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(CommonUtils.getGreeting(),
-                style: context.titleLarge!.copyWith(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onBackground
-                        .withOpacity(0.8),
-                    fontWeight: FontWeight.w400)),
-            Text("${CommonUtils.toTitleCase(user?.name ?? "")}",
-                style: context.headlineLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                    fontWeight: FontWeight.bold)),
-            20.heightBox,
-            ValueListenableBuilder(
-                valueListenable: selectedCategory,
-                builder: (context, child, _) {
-                  return HorzTabBar(
-                      categoryList: categoryList,
-                      onSelected: (item) {
-                        selectedCategory.value = item;
-                      },
-                      selectedCategory: selectedCategory.value);
-                }),
+            // ValueListenableBuilder(
+            //     valueListenable: selectedCategory,
+            //     builder: (context, child, _) {
+            //       return HorzTabBar(
+            //           categoryList: categoryList,
+            //           onSelected: (item) {
+            //             selectedCategory.value = item;
+            //           },
+            //           selectedCategory: selectedCategory.value);
+            //     }),
           ],
         ),
       ),

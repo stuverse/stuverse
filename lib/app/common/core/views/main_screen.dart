@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 
@@ -17,15 +17,18 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
+    user = context.read<CoreCubit>().state.user;
     super.initState();
   }
 
+  late final User? user;
+
   final navItems = [
-    // NavDestItem(
-    //   label: 'Home',
-    //   regularSvgPath: AppImages.homeSVG,
-    //   solidSvgPath: AppImages.homeSolidSVG,
-    // ),
+    NavDestItem(
+      label: 'Home',
+      regularSvgPath: AppImages.homeSVG,
+      solidSvgPath: AppImages.homeSolidSVG,
+    ),
     NavDestItem(
       label: 'Forum',
       regularSvgPath: AppImages.forumSVG,
@@ -73,105 +76,30 @@ class _MainScreenState extends State<MainScreen> {
           navItems[currentIndex].label,
         ),
         actions: [
+          // NotificationIcon(
+          //   hasNotification: false,
+          //   onPressed: () {},
+          // ),
           IconButton(
-            icon: SvgPicture.asset(
-              AppImages.bellSVG,
-              colorFilter: ColorFilter.mode(
-                  context.colorScheme.onBackground, BlendMode.srcIn),
-              height: 25,
-            ),
             onPressed: () {},
-          ),
+            icon: CircleAvatar(
+              backgroundColor: context.colorScheme.secondaryContainer,
+              radius: 15,
+              backgroundImage: NetworkImage(
+                user?.image ?? "",
+              ),
+            ),
+          )
         ],
       ),
       drawer: MainDrawer(),
       extendBodyBehindAppBar: true,
       extendBody: true,
       body: BgGradient(
-          child: SafeArea(
-        child: Padding(
-          padding: context.paddingHorzWith(0.02),
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  (context.height * 0.08).heightBox,
-                  Expanded(
-                      child: Padding(
-                    padding: context.paddingHorzWith(0.025),
-                    child: widget.navigationShell,
-                  )),
-                ],
-              ),
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.menu,
-                        color: context.colorScheme.onBackground,
-                        size: 30,
-                      ),
-                      onPressed: () {
-                        _scaffoldKey.currentState!.openDrawer();
-                      },
-                    ),
-                    Spacer(),
-                    Text(
-                      navItems[currentIndex].label,
-                      style: context.titleLarge!.copyWith(
-                        color: context.colorScheme.onBackground,
-                      ),
-                    ),
-                    Spacer(),
-                    IconButton(
-                      icon: Stack(
-                        children: [
-                          SvgPicture.asset(
-                            AppImages.bellSVG,
-                            colorFilter: ColorFilter.mode(
-                                context.colorScheme.onBackground,
-                                BlendMode.srcIn),
-                            height: 25,
-                          ),
-                          Positioned(
-                            right: 0,
-                            top: -2,
-                            child: Container(
-                              padding: EdgeInsets.all(2),
-                              decoration: BoxDecoration(
-                                color: context.colorScheme.error,
-                                shape: BoxShape.circle,
-                              ),
-                              constraints: BoxConstraints(
-                                minWidth: 16,
-                                minHeight: 16,
-                              ),
-                              child: Text(
-                                '2',
-                                style: TextStyle(
-                                  color: context.colorScheme.onError,
-                                  fontSize: 10,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+        child: SafeArea(
+          child: widget.navigationShell,
         ),
-      )),
+      ),
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
           elevation: 5,

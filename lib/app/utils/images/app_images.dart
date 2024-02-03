@@ -27,4 +27,13 @@ class AppImages {
   static const String homeSolidSVG = "assets/app/icons/home-solid.svg";
   static const String searchSVG = "assets/app/icons/search.svg";
   static const String bellSVG = "assets/app/icons/bell-solid.svg";
+  static const String userSVG = "assets/app/icons/user.svg";
+  static const String userSolidSVG = "assets/app/icons/user-solid.svg";
+  static const String upSVG = "assets/app/icons/up.svg";
+  static const String upSolidSVG = "assets/app/icons/up-solid.svg";
+  static const String downSVG = "assets/app/icons/down.svg";
+  static const String downSolidSVG = "assets/app/icons/down-solid.svg";
+  static const String commentSVG = "assets/app/icons/comment.svg";
+  static const String commentSolidSVG = "assets/app/icons/comment-solid.svg";
+  static const String shareSVG = "assets/app/icons/share.svg";
 }
