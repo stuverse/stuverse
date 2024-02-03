@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 part 'context/media_query_extensions.dart';
 part 'context/dialog_extension.dart';
@@ -16,6 +17,7 @@ part 'number/number_extensions.dart';
 part 'string/string_extensions.dart';
 part 'text/text_extensions.dart';
 part 'text/text_style_extensions.dart';
+part 'list/list_extensions.dart';
 
 part 'widgets/align_extension.dart';
 part 'widgets/center_extension.dart';

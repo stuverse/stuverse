@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stuverse/app/app.dart';
@@ -29,23 +30,23 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               },
               children: const [
                 BoardingCard(
-                    img: AppImages.forum,
+                    img: AppImages.forumOnboarding,
                     title: 'Stuverse: Your Academic Universe',
                     description:
                         'Embark on a journey where students, alumni, and opportunities unite. Redefine your academic experience in a vibrant, limitless community.'),
                 BoardingCard(
-                    img: AppImages.mentorship,
+                    img: AppImages.mentorshipOnboarding,
                     title: 'Mentorship Beyond Boundaries',
                     description:
                         'Forge connections with experienced mentors. Gain valuable insights and shape your academic path beyond boundaries. Connect, learn, and thrive.'),
                 BoardingCard(
-                  img: AppImages.jobPosting,
+                  img: AppImages.jobPostingOnboarding,
                   title: 'Unlock Your Career Potential',
                   description:
                       'Unlock job and internship postings that bridge academia and industry. Your pathway to success starts here. Explore, apply, and advance your career.',
                 ),
                 BoardingCard(
-                  img: AppImages.fundraising,
+                  img: AppImages.fundraisingOnboarding,
                   title: 'Innovate, Captivate, Fundraise',
                   description:
                       'Request funds for your needs, events, or charity. Transparent fundraising processes, top contributors recognized. Innovate, captivate, and make a difference.',
@@ -54,7 +55,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ),
             if (onLastPage)
               Positioned(
-                bottom: 40,
+                bottom: context.height * 0.06,
                 left: 0,
                 right: 0,
                 child: FilledButton(
@@ -70,7 +71,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     'GET STARTED',
                   ).toCenter(),
                 ).paddingSymmetric(horizontal: 70),
-              )
+              ).animate().shake()
             else
               Container(
                 alignment: Alignment(0, 0.85),
@@ -92,7 +93,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           dotWidth: 12,
                           verticalOffset: 5,
                           jumpScale: 2,
-                          activeDotColor: context.colorScheme.secondary,
+                          activeDotColor:
+                              context.colorScheme.secondaryContainer,
                           dotColor: context.colorScheme.primary,
                         )),
                     GestureDetector(
@@ -104,7 +106,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       },
                       child: Text('NEXT', style: context.bodyLarge).bold(),
                     ),
-                  ],
+                  ].animate(interval: 100.ms).slide(
+                        begin: Offset(0, 5),
+                        end: Offset(0, 0),
+                      ),
                 ),
               ),
           ],

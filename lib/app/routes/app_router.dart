@@ -4,6 +4,8 @@ import 'package:stuverse/app/app.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
+  static final _homeNavigatorKey =
+      GlobalKey<NavigatorState>(debugLabel: 'home');
   static final _forumNavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'forum');
   static final _fundNavigatorKey =
@@ -48,6 +50,16 @@ class AppRouter {
           );
         },
         branches: [
+          StatefulShellBranch(
+            navigatorKey: _homeNavigatorKey,
+            initialLocation: CommonRoutes.home,
+            routes: [
+              GoRoute(
+                path: CommonRoutes.home,
+                builder: (context, state) => const HomeScreen(),
+              ),
+            ],
+          ),
           StatefulShellBranch(
             navigatorKey: _forumNavigatorKey,
             initialLocation: ForumRoutes.forumHome,
