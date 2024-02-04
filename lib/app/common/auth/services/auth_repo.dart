@@ -92,8 +92,6 @@ class AuthRepo implements IAuthRepo {
     required String email,
     required String name,
     required String password,
-    required String mobile,
-    required String branch,
     required String type,
   }) async {
     try {
@@ -103,8 +101,6 @@ class AuthRepo implements IAuthRepo {
           'email': email,
           'name': name,
           'password': password,
-          'mobile': mobile,
-          'branch': branch,
           'type': type,
         },
       );

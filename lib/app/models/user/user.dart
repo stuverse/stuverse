@@ -22,9 +22,6 @@ class User with _$User {
     String? about,
     @JsonKey(name: 'is_verified') bool? isVerified,
     String? image,
-    int? year,
-    String? branch,
-    String? linkedin,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

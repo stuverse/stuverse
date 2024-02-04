@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:stuverse/app/app.dart';
+import 'package:stuverse/features/forum/forum.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,15 +19,36 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<CoreCubit>().state.user;
+    // final user = context.read<CoreCubit>().state.user;
     return SafeArea(
-        child: ListView.separated(
-            itemBuilder: (ctx, index) {
-              return ThreadCard(user: user, showImage: index.isEven);
+        child: BlocConsumer<HomeCubit, HomeState>(
+      listener: (context, state) {
+        state.mapOrNull(
+          failure: (state) {
+            context.showErrorMessage(message: state.message);
+          },
+        );
+      },
+      builder: (context, state) {
+        return state.maybeMap(
+          loaded: (state) => RefreshIndicator(
+            onRefresh: () async {
+              context.read<HomeCubit>().getHomeData();
             },
-            separatorBuilder: (ctx, int) {
-              return Divider();
-            },
-            itemCount: 20));
+            child: ListView.separated(
+                itemBuilder: (ctx, index) {
+                  return ThreadCard(thread: state.threads[index]);
+                },
+                separatorBuilder: (ctx, int) {
+                  return Divider();
+                },
+                itemCount: state.threads.length),
+          ),
+          orElse: () => const Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
+    ));
   }
 }

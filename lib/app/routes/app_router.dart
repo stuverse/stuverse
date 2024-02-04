@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stuverse/features/forum/forum.dart';
+import 'package:stuverse/features/fund/fund.dart';
+import 'package:stuverse/features/job/job.dart';
+import 'package:stuverse/features/mentor/mentor.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -56,7 +61,17 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: CommonRoutes.home,
-                builder: (context, state) => const HomeScreen(),
+                builder: (context, state) => BlocProvider(
+                  create: (context) => HomeCubit()..getHomeData(),
+                  child: HomeScreen(),
+                ),
+                redirect: (ctx, state) {
+                  final user = ctx.read<CoreCubit>().state.user;
+                  if (user == null) {
+                    return CommonRoutes.signin;
+                  }
+                  return null;
+                },
               ),
             ],
           ),

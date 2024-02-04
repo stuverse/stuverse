@@ -3,18 +3,23 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stuverse/app/utils/logman_dio_interceptor.dart';
 
-bool isDev = false;
+bool isDev = true;
+bool isEmulator = false;
+
+String getBaseUrl() {
+  if (isDev) {
+    if (Platform.isAndroid && isEmulator) return 'http://10.0.2.2:8000/api';
+    return 'https://c4af-43-229-90-64.ngrok-free.app/api';
+  } else {
+    return 'https://stuverse.in/api';
+  }
+}
+
 const String JWT_REFRESH_API = '/token/refresh/';
-
-final APIBASEURL = isDev
-    ? Platform.isAndroid
-        ? 'http://10.0.2.2:8000/api'
-        : 'http://127.0.0.1:8000/api'
-    : 'https://stuverse.in/api';
-
 final _baseOptions = BaseOptions(
-  baseUrl: APIBASEURL,
+  baseUrl: 'https://58a7-43-229-90-64.ngrok-free.app/api',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
@@ -23,7 +28,9 @@ final _baseOptions = BaseOptions(
 
 final dioClient = Dio(
   _baseOptions,
-)..interceptors.add(interceptorWrapper);
+)
+  ..interceptors.add(interceptorWrapper)
+  ..interceptors.add(LogmanDioInterceptor());
 
 final interceptorWrapper =
     InterceptorsWrapper(onRequest: (options, handler) async {

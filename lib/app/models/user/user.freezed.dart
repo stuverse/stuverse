@@ -39,9 +39,6 @@ mixin _$User {
   @JsonKey(name: 'is_verified')
   bool? get isVerified => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
-  int? get year => throw _privateConstructorUsedError;
-  String? get branch => throw _privateConstructorUsedError;
-  String? get linkedin => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -67,10 +64,7 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       String? about,
       @JsonKey(name: 'is_verified') bool? isVerified,
-      String? image,
-      int? year,
-      String? branch,
-      String? linkedin});
+      String? image});
 
   $TokenCopyWith<$Res>? get token;
 }
@@ -102,9 +96,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? about = freezed,
     Object? isVerified = freezed,
     Object? image = freezed,
-    Object? year = freezed,
-    Object? branch = freezed,
-    Object? linkedin = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -163,18 +154,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
-      year: freezed == year
-          ? _value.year
-          : year // ignore: cast_nullable_to_non_nullable
-              as int?,
-      branch: freezed == branch
-          ? _value.branch
-          : branch // ignore: cast_nullable_to_non_nullable
-              as String?,
-      linkedin: freezed == linkedin
-          ? _value.linkedin
-          : linkedin // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 
@@ -212,10 +191,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       String? about,
       @JsonKey(name: 'is_verified') bool? isVerified,
-      String? image,
-      int? year,
-      String? branch,
-      String? linkedin});
+      String? image});
 
   @override
   $TokenCopyWith<$Res>? get token;
@@ -245,9 +221,6 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? about = freezed,
     Object? isVerified = freezed,
     Object? image = freezed,
-    Object? year = freezed,
-    Object? branch = freezed,
-    Object? linkedin = freezed,
   }) {
     return _then(_$UserImpl(
       id: freezed == id
@@ -306,18 +279,6 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
-      year: freezed == year
-          ? _value.year
-          : year // ignore: cast_nullable_to_non_nullable
-              as int?,
-      branch: freezed == branch
-          ? _value.branch
-          : branch // ignore: cast_nullable_to_non_nullable
-              as String?,
-      linkedin: freezed == linkedin
-          ? _value.linkedin
-          : linkedin // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -339,10 +300,7 @@ class _$UserImpl implements _User {
       @JsonKey(name: 'updated_at') this.updatedAt,
       this.about,
       @JsonKey(name: 'is_verified') this.isVerified,
-      this.image,
-      this.year,
-      this.branch,
-      this.linkedin});
+      this.image});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -380,16 +338,10 @@ class _$UserImpl implements _User {
   final bool? isVerified;
   @override
   final String? image;
-  @override
-  final int? year;
-  @override
-  final String? branch;
-  @override
-  final String? linkedin;
 
   @override
   String toString() {
-    return 'User(id: $id, token: $token, email: $email, name: $name, type: $type, username: $username, isActive: $isActive, isSuperuser: $isSuperuser, mobile: $mobile, createdAt: $createdAt, updatedAt: $updatedAt, about: $about, isVerified: $isVerified, image: $image, year: $year, branch: $branch, linkedin: $linkedin)';
+    return 'User(id: $id, token: $token, email: $email, name: $name, type: $type, username: $username, isActive: $isActive, isSuperuser: $isSuperuser, mobile: $mobile, createdAt: $createdAt, updatedAt: $updatedAt, about: $about, isVerified: $isVerified, image: $image)';
   }
 
   @override
@@ -416,11 +368,7 @@ class _$UserImpl implements _User {
             (identical(other.about, about) || other.about == about) &&
             (identical(other.isVerified, isVerified) ||
                 other.isVerified == isVerified) &&
-            (identical(other.image, image) || other.image == image) &&
-            (identical(other.year, year) || other.year == year) &&
-            (identical(other.branch, branch) || other.branch == branch) &&
-            (identical(other.linkedin, linkedin) ||
-                other.linkedin == linkedin));
+            (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
@@ -440,10 +388,7 @@ class _$UserImpl implements _User {
       updatedAt,
       about,
       isVerified,
-      image,
-      year,
-      branch,
-      linkedin);
+      image);
 
   @JsonKey(ignore: true)
   @override
@@ -474,10 +419,7 @@ abstract class _User implements User {
       @JsonKey(name: 'updated_at') final DateTime? updatedAt,
       final String? about,
       @JsonKey(name: 'is_verified') final bool? isVerified,
-      final String? image,
-      final int? year,
-      final String? branch,
-      final String? linkedin}) = _$UserImpl;
+      final String? image}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -514,12 +456,6 @@ abstract class _User implements User {
   bool? get isVerified;
   @override
   String? get image;
-  @override
-  int? get year;
-  @override
-  String? get branch;
-  @override
-  String? get linkedin;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

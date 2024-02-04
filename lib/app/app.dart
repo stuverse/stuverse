@@ -4,13 +4,6 @@ export 'common/common.dart';
 //! Models
 export 'models/user/user.dart';
 
-//! Route
-export 'routes/common_routes.dart';
-export 'routes/forum_routes.dart';
-export 'routes/fund_routes.dart';
-export 'routes/job_routes.dart';
-export 'routes/mentor_routes.dart';
-
 //! Utils
 export 'utils/images/app_images.dart';
 export 'utils/images/home_images.dart';
