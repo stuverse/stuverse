@@ -11,4 +11,13 @@ class CommentState with _$CommentState {
   const factory CommentState.error({
     required String message,
   }) = _Error;
+
+  const factory CommentState.commentAdding() = _CommentAdding;
+  const factory CommentState.commentAdded({
+    required ThreadComment comment,
+  }) = _CommentAdded;
+
+  const factory CommentState.commentAddFailed({
+    required String message,
+  }) = _CommentAddFailed;
 }

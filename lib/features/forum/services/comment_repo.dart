@@ -20,4 +20,26 @@ class CommentRepo {
       return left("Something went wrong");
     }
   }
+
+  Future<Either<String, ThreadComment>> addThreadComment({
+    required int threadId,
+    required String content,
+    int? parentId,
+  }) async {
+    try {
+      final resp = await dioClient.post(
+        ADD_THREAD_COMMENT,
+        data: {
+          'thread_id': threadId,
+          'content': content,
+          if (parentId != null) 'parent_id': parentId,
+        },
+      );
+      return right(ThreadComment.fromJson(resp.data));
+    } on DioException catch (_) {
+      return left("Unable to add thread comment");
+    } catch (e) {
+      return left("Something went wrong");
+    }
+  }
 }

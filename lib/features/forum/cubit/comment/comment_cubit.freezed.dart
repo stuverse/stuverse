@@ -22,6 +22,9 @@ mixin _$CommentState {
     required TResult Function() loading,
     required TResult Function(List<ThreadComment> comments) success,
     required TResult Function(String message) error,
+    required TResult Function() commentAdding,
+    required TResult Function(ThreadComment comment) commentAdded,
+    required TResult Function(String message) commentAddFailed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +33,9 @@ mixin _$CommentState {
     TResult? Function()? loading,
     TResult? Function(List<ThreadComment> comments)? success,
     TResult? Function(String message)? error,
+    TResult? Function()? commentAdding,
+    TResult? Function(ThreadComment comment)? commentAdded,
+    TResult? Function(String message)? commentAddFailed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +44,9 @@ mixin _$CommentState {
     TResult Function()? loading,
     TResult Function(List<ThreadComment> comments)? success,
     TResult Function(String message)? error,
+    TResult Function()? commentAdding,
+    TResult Function(ThreadComment comment)? commentAdded,
+    TResult Function(String message)? commentAddFailed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +56,9 @@ mixin _$CommentState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
+    required TResult Function(_CommentAdding value) commentAdding,
+    required TResult Function(_CommentAdded value) commentAdded,
+    required TResult Function(_CommentAddFailed value) commentAddFailed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +67,9 @@ mixin _$CommentState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
+    TResult? Function(_CommentAdding value)? commentAdding,
+    TResult? Function(_CommentAdded value)? commentAdded,
+    TResult? Function(_CommentAddFailed value)? commentAddFailed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +78,9 @@ mixin _$CommentState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
+    TResult Function(_CommentAdding value)? commentAdding,
+    TResult Function(_CommentAdded value)? commentAdded,
+    TResult Function(_CommentAddFailed value)? commentAddFailed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -128,6 +146,9 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(List<ThreadComment> comments) success,
     required TResult Function(String message) error,
+    required TResult Function() commentAdding,
+    required TResult Function(ThreadComment comment) commentAdded,
+    required TResult Function(String message) commentAddFailed,
   }) {
     return initial();
   }
@@ -139,6 +160,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loading,
     TResult? Function(List<ThreadComment> comments)? success,
     TResult? Function(String message)? error,
+    TResult? Function()? commentAdding,
+    TResult? Function(ThreadComment comment)? commentAdded,
+    TResult? Function(String message)? commentAddFailed,
   }) {
     return initial?.call();
   }
@@ -150,6 +174,9 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loading,
     TResult Function(List<ThreadComment> comments)? success,
     TResult Function(String message)? error,
+    TResult Function()? commentAdding,
+    TResult Function(ThreadComment comment)? commentAdded,
+    TResult Function(String message)? commentAddFailed,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -165,6 +192,9 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
+    required TResult Function(_CommentAdding value) commentAdding,
+    required TResult Function(_CommentAdded value) commentAdded,
+    required TResult Function(_CommentAddFailed value) commentAddFailed,
   }) {
     return initial(this);
   }
@@ -176,6 +206,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
+    TResult? Function(_CommentAdding value)? commentAdding,
+    TResult? Function(_CommentAdded value)? commentAdded,
+    TResult? Function(_CommentAddFailed value)? commentAddFailed,
   }) {
     return initial?.call(this);
   }
@@ -187,6 +220,9 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
+    TResult Function(_CommentAdding value)? commentAdding,
+    TResult Function(_CommentAdded value)? commentAdded,
+    TResult Function(_CommentAddFailed value)? commentAddFailed,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -242,6 +278,9 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() loading,
     required TResult Function(List<ThreadComment> comments) success,
     required TResult Function(String message) error,
+    required TResult Function() commentAdding,
+    required TResult Function(ThreadComment comment) commentAdded,
+    required TResult Function(String message) commentAddFailed,
   }) {
     return loading();
   }
@@ -253,6 +292,9 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? loading,
     TResult? Function(List<ThreadComment> comments)? success,
     TResult? Function(String message)? error,
+    TResult? Function()? commentAdding,
+    TResult? Function(ThreadComment comment)? commentAdded,
+    TResult? Function(String message)? commentAddFailed,
   }) {
     return loading?.call();
   }
@@ -264,6 +306,9 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? loading,
     TResult Function(List<ThreadComment> comments)? success,
     TResult Function(String message)? error,
+    TResult Function()? commentAdding,
+    TResult Function(ThreadComment comment)? commentAdded,
+    TResult Function(String message)? commentAddFailed,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -279,6 +324,9 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
+    required TResult Function(_CommentAdding value) commentAdding,
+    required TResult Function(_CommentAdded value) commentAdded,
+    required TResult Function(_CommentAddFailed value) commentAddFailed,
   }) {
     return loading(this);
   }
@@ -290,6 +338,9 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
+    TResult? Function(_CommentAdding value)? commentAdding,
+    TResult? Function(_CommentAdded value)? commentAdded,
+    TResult? Function(_CommentAddFailed value)? commentAddFailed,
   }) {
     return loading?.call(this);
   }
@@ -301,6 +352,9 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
+    TResult Function(_CommentAdding value)? commentAdding,
+    TResult Function(_CommentAdded value)? commentAdded,
+    TResult Function(_CommentAddFailed value)? commentAddFailed,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -389,6 +443,9 @@ class _$SuccessImpl implements _Success {
     required TResult Function() loading,
     required TResult Function(List<ThreadComment> comments) success,
     required TResult Function(String message) error,
+    required TResult Function() commentAdding,
+    required TResult Function(ThreadComment comment) commentAdded,
+    required TResult Function(String message) commentAddFailed,
   }) {
     return success(comments);
   }
@@ -400,6 +457,9 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? loading,
     TResult? Function(List<ThreadComment> comments)? success,
     TResult? Function(String message)? error,
+    TResult? Function()? commentAdding,
+    TResult? Function(ThreadComment comment)? commentAdded,
+    TResult? Function(String message)? commentAddFailed,
   }) {
     return success?.call(comments);
   }
@@ -411,6 +471,9 @@ class _$SuccessImpl implements _Success {
     TResult Function()? loading,
     TResult Function(List<ThreadComment> comments)? success,
     TResult Function(String message)? error,
+    TResult Function()? commentAdding,
+    TResult Function(ThreadComment comment)? commentAdded,
+    TResult Function(String message)? commentAddFailed,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -426,6 +489,9 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
+    required TResult Function(_CommentAdding value) commentAdding,
+    required TResult Function(_CommentAdded value) commentAdded,
+    required TResult Function(_CommentAddFailed value) commentAddFailed,
   }) {
     return success(this);
   }
@@ -437,6 +503,9 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
+    TResult? Function(_CommentAdding value)? commentAdding,
+    TResult? Function(_CommentAdded value)? commentAdded,
+    TResult? Function(_CommentAddFailed value)? commentAddFailed,
   }) {
     return success?.call(this);
   }
@@ -448,6 +517,9 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
+    TResult Function(_CommentAdding value)? commentAdding,
+    TResult Function(_CommentAdded value)? commentAdded,
+    TResult Function(_CommentAddFailed value)? commentAddFailed,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -535,6 +607,9 @@ class _$ErrorImpl implements _Error {
     required TResult Function() loading,
     required TResult Function(List<ThreadComment> comments) success,
     required TResult Function(String message) error,
+    required TResult Function() commentAdding,
+    required TResult Function(ThreadComment comment) commentAdded,
+    required TResult Function(String message) commentAddFailed,
   }) {
     return error(message);
   }
@@ -546,6 +621,9 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? loading,
     TResult? Function(List<ThreadComment> comments)? success,
     TResult? Function(String message)? error,
+    TResult? Function()? commentAdding,
+    TResult? Function(ThreadComment comment)? commentAdded,
+    TResult? Function(String message)? commentAddFailed,
   }) {
     return error?.call(message);
   }
@@ -557,6 +635,9 @@ class _$ErrorImpl implements _Error {
     TResult Function()? loading,
     TResult Function(List<ThreadComment> comments)? success,
     TResult Function(String message)? error,
+    TResult Function()? commentAdding,
+    TResult Function(ThreadComment comment)? commentAdded,
+    TResult Function(String message)? commentAddFailed,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -572,6 +653,9 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
+    required TResult Function(_CommentAdding value) commentAdding,
+    required TResult Function(_CommentAdded value) commentAdded,
+    required TResult Function(_CommentAddFailed value) commentAddFailed,
   }) {
     return error(this);
   }
@@ -583,6 +667,9 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
+    TResult? Function(_CommentAdding value)? commentAdding,
+    TResult? Function(_CommentAdded value)? commentAdded,
+    TResult? Function(_CommentAddFailed value)? commentAddFailed,
   }) {
     return error?.call(this);
   }
@@ -594,6 +681,9 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
+    TResult Function(_CommentAdding value)? commentAdding,
+    TResult Function(_CommentAdded value)? commentAdded,
+    TResult Function(_CommentAddFailed value)? commentAddFailed,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -609,5 +699,466 @@ abstract class _Error implements CommentState {
   String get message;
   @JsonKey(ignore: true)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CommentAddingImplCopyWith<$Res> {
+  factory _$$CommentAddingImplCopyWith(
+          _$CommentAddingImpl value, $Res Function(_$CommentAddingImpl) then) =
+      __$$CommentAddingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CommentAddingImplCopyWithImpl<$Res>
+    extends _$CommentStateCopyWithImpl<$Res, _$CommentAddingImpl>
+    implements _$$CommentAddingImplCopyWith<$Res> {
+  __$$CommentAddingImplCopyWithImpl(
+      _$CommentAddingImpl _value, $Res Function(_$CommentAddingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$CommentAddingImpl implements _CommentAdding {
+  const _$CommentAddingImpl();
+
+  @override
+  String toString() {
+    return 'CommentState.commentAdding()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$CommentAddingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ThreadComment> comments) success,
+    required TResult Function(String message) error,
+    required TResult Function() commentAdding,
+    required TResult Function(ThreadComment comment) commentAdded,
+    required TResult Function(String message) commentAddFailed,
+  }) {
+    return commentAdding();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<ThreadComment> comments)? success,
+    TResult? Function(String message)? error,
+    TResult? Function()? commentAdding,
+    TResult? Function(ThreadComment comment)? commentAdded,
+    TResult? Function(String message)? commentAddFailed,
+  }) {
+    return commentAdding?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ThreadComment> comments)? success,
+    TResult Function(String message)? error,
+    TResult Function()? commentAdding,
+    TResult Function(ThreadComment comment)? commentAdded,
+    TResult Function(String message)? commentAddFailed,
+    required TResult orElse(),
+  }) {
+    if (commentAdding != null) {
+      return commentAdding();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_CommentAdding value) commentAdding,
+    required TResult Function(_CommentAdded value) commentAdded,
+    required TResult Function(_CommentAddFailed value) commentAddFailed,
+  }) {
+    return commentAdding(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_CommentAdding value)? commentAdding,
+    TResult? Function(_CommentAdded value)? commentAdded,
+    TResult? Function(_CommentAddFailed value)? commentAddFailed,
+  }) {
+    return commentAdding?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_CommentAdding value)? commentAdding,
+    TResult Function(_CommentAdded value)? commentAdded,
+    TResult Function(_CommentAddFailed value)? commentAddFailed,
+    required TResult orElse(),
+  }) {
+    if (commentAdding != null) {
+      return commentAdding(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CommentAdding implements CommentState {
+  const factory _CommentAdding() = _$CommentAddingImpl;
+}
+
+/// @nodoc
+abstract class _$$CommentAddedImplCopyWith<$Res> {
+  factory _$$CommentAddedImplCopyWith(
+          _$CommentAddedImpl value, $Res Function(_$CommentAddedImpl) then) =
+      __$$CommentAddedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ThreadComment comment});
+}
+
+/// @nodoc
+class __$$CommentAddedImplCopyWithImpl<$Res>
+    extends _$CommentStateCopyWithImpl<$Res, _$CommentAddedImpl>
+    implements _$$CommentAddedImplCopyWith<$Res> {
+  __$$CommentAddedImplCopyWithImpl(
+      _$CommentAddedImpl _value, $Res Function(_$CommentAddedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? comment = null,
+  }) {
+    return _then(_$CommentAddedImpl(
+      comment: null == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as ThreadComment,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CommentAddedImpl implements _CommentAdded {
+  const _$CommentAddedImpl({required this.comment});
+
+  @override
+  final ThreadComment comment;
+
+  @override
+  String toString() {
+    return 'CommentState.commentAdded(comment: $comment)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CommentAddedImpl &&
+            (identical(other.comment, comment) || other.comment == comment));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, comment);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CommentAddedImplCopyWith<_$CommentAddedImpl> get copyWith =>
+      __$$CommentAddedImplCopyWithImpl<_$CommentAddedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ThreadComment> comments) success,
+    required TResult Function(String message) error,
+    required TResult Function() commentAdding,
+    required TResult Function(ThreadComment comment) commentAdded,
+    required TResult Function(String message) commentAddFailed,
+  }) {
+    return commentAdded(comment);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<ThreadComment> comments)? success,
+    TResult? Function(String message)? error,
+    TResult? Function()? commentAdding,
+    TResult? Function(ThreadComment comment)? commentAdded,
+    TResult? Function(String message)? commentAddFailed,
+  }) {
+    return commentAdded?.call(comment);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ThreadComment> comments)? success,
+    TResult Function(String message)? error,
+    TResult Function()? commentAdding,
+    TResult Function(ThreadComment comment)? commentAdded,
+    TResult Function(String message)? commentAddFailed,
+    required TResult orElse(),
+  }) {
+    if (commentAdded != null) {
+      return commentAdded(comment);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_CommentAdding value) commentAdding,
+    required TResult Function(_CommentAdded value) commentAdded,
+    required TResult Function(_CommentAddFailed value) commentAddFailed,
+  }) {
+    return commentAdded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_CommentAdding value)? commentAdding,
+    TResult? Function(_CommentAdded value)? commentAdded,
+    TResult? Function(_CommentAddFailed value)? commentAddFailed,
+  }) {
+    return commentAdded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_CommentAdding value)? commentAdding,
+    TResult Function(_CommentAdded value)? commentAdded,
+    TResult Function(_CommentAddFailed value)? commentAddFailed,
+    required TResult orElse(),
+  }) {
+    if (commentAdded != null) {
+      return commentAdded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CommentAdded implements CommentState {
+  const factory _CommentAdded({required final ThreadComment comment}) =
+      _$CommentAddedImpl;
+
+  ThreadComment get comment;
+  @JsonKey(ignore: true)
+  _$$CommentAddedImplCopyWith<_$CommentAddedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CommentAddFailedImplCopyWith<$Res> {
+  factory _$$CommentAddFailedImplCopyWith(_$CommentAddFailedImpl value,
+          $Res Function(_$CommentAddFailedImpl) then) =
+      __$$CommentAddFailedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$CommentAddFailedImplCopyWithImpl<$Res>
+    extends _$CommentStateCopyWithImpl<$Res, _$CommentAddFailedImpl>
+    implements _$$CommentAddFailedImplCopyWith<$Res> {
+  __$$CommentAddFailedImplCopyWithImpl(_$CommentAddFailedImpl _value,
+      $Res Function(_$CommentAddFailedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$CommentAddFailedImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CommentAddFailedImpl implements _CommentAddFailed {
+  const _$CommentAddFailedImpl({required this.message});
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'CommentState.commentAddFailed(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CommentAddFailedImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CommentAddFailedImplCopyWith<_$CommentAddFailedImpl> get copyWith =>
+      __$$CommentAddFailedImplCopyWithImpl<_$CommentAddFailedImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ThreadComment> comments) success,
+    required TResult Function(String message) error,
+    required TResult Function() commentAdding,
+    required TResult Function(ThreadComment comment) commentAdded,
+    required TResult Function(String message) commentAddFailed,
+  }) {
+    return commentAddFailed(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<ThreadComment> comments)? success,
+    TResult? Function(String message)? error,
+    TResult? Function()? commentAdding,
+    TResult? Function(ThreadComment comment)? commentAdded,
+    TResult? Function(String message)? commentAddFailed,
+  }) {
+    return commentAddFailed?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ThreadComment> comments)? success,
+    TResult Function(String message)? error,
+    TResult Function()? commentAdding,
+    TResult Function(ThreadComment comment)? commentAdded,
+    TResult Function(String message)? commentAddFailed,
+    required TResult orElse(),
+  }) {
+    if (commentAddFailed != null) {
+      return commentAddFailed(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_CommentAdding value) commentAdding,
+    required TResult Function(_CommentAdded value) commentAdded,
+    required TResult Function(_CommentAddFailed value) commentAddFailed,
+  }) {
+    return commentAddFailed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_CommentAdding value)? commentAdding,
+    TResult? Function(_CommentAdded value)? commentAdded,
+    TResult? Function(_CommentAddFailed value)? commentAddFailed,
+  }) {
+    return commentAddFailed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_CommentAdding value)? commentAdding,
+    TResult Function(_CommentAdded value)? commentAdded,
+    TResult Function(_CommentAddFailed value)? commentAddFailed,
+    required TResult orElse(),
+  }) {
+    if (commentAddFailed != null) {
+      return commentAddFailed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CommentAddFailed implements CommentState {
+  const factory _CommentAddFailed({required final String message}) =
+      _$CommentAddFailedImpl;
+
+  String get message;
+  @JsonKey(ignore: true)
+  _$$CommentAddFailedImplCopyWith<_$CommentAddFailedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,3 +1,4 @@
+import 'package:animated_tree_view/animated_tree_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stuverse/app/app.dart';
@@ -7,15 +8,13 @@ import '../forum.dart';
 class CommentCard extends StatelessWidget {
   const CommentCard({
     super.key,
-    required this.commentController,
     required this.comment,
-    required this.commentFocusNode,
+    required this.onReply,
   });
 
-  final ThreadComment comment;
+  final TreeNode<ThreadComment> comment;
 
-  final TextEditingController commentController;
-  final FocusNode commentFocusNode;
+  final Function(TreeNode<ThreadComment>?) onReply;
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +35,15 @@ class CommentCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 20,
-                backgroundImage: NetworkImage(comment.author?.image ?? ""),
+                backgroundImage:
+                    NetworkImage(comment.data?.author?.image ?? ""),
               ),
               10.widthBox,
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${CommonUtils.getFirstLetter(comment.author?.type ?? "u")}/${comment.author?.username ?? "User"}",
+                    "${CommonUtils.getFirstLetter(comment.data?.author?.type ?? "u")}/${comment.data?.author?.username ?? "User"}",
                     style: context.bodyLarge!.copyWith(
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
@@ -55,7 +55,7 @@ class CommentCard extends StatelessWidget {
                 heightFactor: 0.8,
                 alignment: Alignment.bottomCenter,
                 child: Text(
-                  CommonUtils.relativeTime(comment.createdAt),
+                  CommonUtils.relativeTime(comment.data?.createdAt),
                   style: context.bodyMedium!.copyWith(
                     color: Theme.of(context)
                         .colorScheme
@@ -70,7 +70,7 @@ class CommentCard extends StatelessWidget {
             ],
           ),
           Text(
-            comment.content ?? "",
+            comment.data?.content ?? "",
             style: context.bodyLarge!.copyWith(
               color: Theme.of(context).colorScheme.onBackground,
             ),
@@ -80,22 +80,17 @@ class CommentCard extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (comment.replyCount != null && comment.replyCount != 0)
+                if (comment.data?.replyCount != null &&
+                    comment.data?.replyCount != 0)
                   Text(
-                    "${comment.replyCount ?? 0} ${comment.replyCount == 1 ? "Reply" : "Replies"}",
+                    "${comment.data?.replyCount ?? 0} ${comment.data?.replyCount == 1 ? "Reply" : "Replies"}",
                     style: context.bodyMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
                   ),
                 TextButton(
                   onPressed: () {
-                    commentController.text =
-                        "@${comment.author?.username ?? ""} ";
-                    commentController.selection = TextSelection.fromPosition(
-                      TextPosition(offset: commentController.text.length),
-                    );
-                    //focus
-                    FocusScope.of(context).requestFocus(commentFocusNode);
+                    onReply(comment);
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,

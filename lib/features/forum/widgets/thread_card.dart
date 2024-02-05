@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -16,10 +15,12 @@ class ThreadCard extends StatelessWidget {
     super.key,
     required this.thread,
     this.isDetailScreen = false,
+    this.commentFocusNode,
   });
 
   final Thread thread;
   final bool isDetailScreen;
+  final FocusNode? commentFocusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +149,12 @@ class ThreadCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
+                ).onTap(() => {
+                      if (isDetailScreen)
+                        {
+                          commentFocusNode?.requestFocus(),
+                        }
+                    }),
                 Spacer(),
                 Chip(
                   side: BorderSide(
@@ -346,6 +352,7 @@ class _VoteChipState extends State<VoteChip> with TickerProviderStateMixin {
               width: 1,
             ),
           ),
+          padding: context.paddingHorzWith(0.02),
           child: Row(
             children: [
               Padding(
