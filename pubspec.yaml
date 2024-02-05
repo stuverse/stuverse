@@ -7,6 +7,7 @@ environment:
   sdk: ">=3.1.0 <4.0.0"
 
 dependencies:
+  animated_tree_view: ^2.2.0
   bloc: ^8.1.2
   device_preview: ^1.1.0
   dio: ^5.4.0
@@ -46,11 +47,15 @@ flutter:
   assets:
     - assets/app/icons/
     - assets/app/logo/
-    - assets/common/
-    - assets/forum/
-    - assets/fund/
-    - assets/job/
-    - assets/mentor/
+    - assets/app/images/
+    - assets/forum/icons/
+    - assets/forum/images/
+    - assets/fund/icons/
+    - assets/fund/images/
+    - assets/job/icons/
+    - assets/job/images/
+    - assets/mentor/icons/
+    - assets/mentor/images/
 
 
 

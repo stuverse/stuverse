@@ -26,6 +26,17 @@ extension PaddingExtension on BuildContext {
   EdgeInsets paddingHorzWith(double factor) => EdgeInsets.symmetric(
         horizontal: width * factor,
       );
+  EdgeInsets paddingHorzWithVertical({
+    double? factor,
+    double? top,
+    double? bottom,
+  }) =>
+      EdgeInsets.only(
+        left: width * (factor ?? defaultPaddingFactor),
+        right: width * (factor ?? defaultPaddingFactor),
+        top: top ?? 0,
+        bottom: bottom ?? 0,
+      );
   EdgeInsets paddingOnlyWith(
           {double? left, double? right, double? top, double? bottom}) =>
       EdgeInsets.only(

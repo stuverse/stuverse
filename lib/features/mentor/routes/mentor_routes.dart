@@ -2,13 +2,15 @@ import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/mentor/mentor.dart';
 
 class MentorRoutes {
-  static const String mentorHome = '/mentor/home';
+  //! ---DO NOT MODIFY-----
+  static const String mentorHome = '/mentor';
+  static final GoRoute mentorHomeRoute = GoRoute(
+    path: mentorHome,
+    builder: (context, state) => const MentorHomeScreen(),
+  );
+  //! ----------------
 
   static List<GoRoute> mentorRoutes = [
-    GoRoute(
-      path: mentorHome,
-      builder: (context, state) => const MentorHomeScreen(),
-    ),
     // GoRoute(
     //   path: '/mentor/detail',
     //   builder: (context, state) => const MentorDetailScreen(),

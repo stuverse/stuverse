@@ -1,17 +1,27 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class ThreadTag {
+  int? id;
+  String? name;
+  String? background;
+  String? onBackground;
 
-part 'tag.freezed.dart';
-part 'tag.g.dart';
+  ThreadTag({this.id, this.name, this.background, this.onBackground});
 
-@freezed
-class ThreadTag with _$ThreadTag {
-  factory ThreadTag({
-    int? id,
-    String? name,
-    String? background,
-    @JsonKey(name: 'on_background') String? onBackground,
-  }) = _Tag;
+  @override
+  String toString() {
+    return 'Tag(id: $id, name: $name, background: $background, onBackground: $onBackground)';
+  }
 
-  factory ThreadTag.fromJson(Map<String, dynamic> json) =>
-      _$ThreadTagFromJson(json);
+  factory ThreadTag.fromJson(Map<String, dynamic> json) => ThreadTag(
+        id: json['id'] as int?,
+        name: json['name'] as String?,
+        background: json['background'] as String?,
+        onBackground: json['on_background'] as String?,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'background': background,
+        'on_background': onBackground,
+      };
 }

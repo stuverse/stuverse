@@ -25,4 +25,18 @@ class HomeCubit extends Cubit<HomeState> {
       },
     );
   }
+
+  void updateThread({
+    required Thread thread,
+  }) {
+    state.mapOrNull(
+      loaded: (state) {
+        final threads = state.threads;
+        final index = threads.indexWhere((element) => element.id == thread.id);
+        if (index == -1) return;
+        threads[index] = thread;
+        emit(HomeState.loaded(threads: threads));
+      },
+    );
+  }
 }

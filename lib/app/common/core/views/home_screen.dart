@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/forum/forum.dart';
@@ -14,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
+    context.read<HomeCubit>().getHomeData();
     super.initState();
   }
 
@@ -37,7 +41,12 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: ListView.separated(
                 itemBuilder: (ctx, index) {
-                  return ThreadCard(thread: state.threads[index]);
+                  return Padding(
+                    padding: context.paddingHorzWith(0.02),
+                    child: ThreadCard(
+                      thread: state.threads[index],
+                    ),
+                  );
                 },
                 separatorBuilder: (ctx, int) {
                   return Divider();

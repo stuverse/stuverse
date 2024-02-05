@@ -87,7 +87,7 @@ class AppTheme {
   static const _flexSchemeLight = FlexSchemeColor(
     primary: Color(0xff1d72c6),
     primaryContainer: Color(0xFF92CCFF),
-    secondary: Color(0xfffac595),
+    secondary: Color(0xFFEC9840),
     secondaryContainer: Color(0xff0052a2),
     tertiary: Color(0xff00264d),
     tertiaryContainer: Color(0xffebd9da),

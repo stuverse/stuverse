@@ -5,12 +5,7 @@ export 'common/common.dart';
 export 'models/user/user.dart';
 
 //! Utils
-export 'utils/images/app_images.dart';
-export 'utils/images/home_images.dart';
-export 'utils/images/job_images.dart';
-export 'utils/images/mentor_images.dart';
-export 'utils/images/fund_images.dart';
-export 'utils/images/forum_images.dart';
+export 'utils/app_images.dart';
 export 'utils/app_theme.dart';
 export 'utils/dio_client.dart';
 export 'utils/common_utils.dart';

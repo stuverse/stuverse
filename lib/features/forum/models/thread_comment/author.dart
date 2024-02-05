@@ -1,4 +1,4 @@
-class ThreadAuthor {
+class CommentAuthor {
   int? id;
   String? image;
   String? name;
@@ -6,15 +6,21 @@ class ThreadAuthor {
   String? email;
   String? type;
 
-  ThreadAuthor(
-      {this.id, this.image, this.name, this.username, this.email, this.type});
+  CommentAuthor({
+    this.id,
+    this.image,
+    this.name,
+    this.username,
+    this.email,
+    this.type,
+  });
 
   @override
   String toString() {
-    return 'Author(id: $id, image: $image, name: $name, username: $username, email: $email)';
+    return 'Author(id: $id, image: $image, name: $name, username: $username, email: $email, type: $type)';
   }
 
-  factory ThreadAuthor.fromJson(Map<String, dynamic> json) => ThreadAuthor(
+  factory CommentAuthor.fromJson(Map<String, dynamic> json) => CommentAuthor(
         id: json['id'] as int?,
         image: json['image'] as String?,
         name: json['name'] as String?,

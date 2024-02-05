@@ -11,7 +11,7 @@ bool isEmulator = false;
 String getBaseUrl() {
   if (isDev) {
     if (Platform.isAndroid && isEmulator) return 'http://10.0.2.2:8000/api';
-    return 'https://c4af-43-229-90-64.ngrok-free.app/api';
+    return 'http://localhost:8000/api';
   } else {
     return 'https://stuverse.in/api';
   }
@@ -19,7 +19,7 @@ String getBaseUrl() {
 
 const String JWT_REFRESH_API = '/token/refresh/';
 final _baseOptions = BaseOptions(
-  baseUrl: 'https://58a7-43-229-90-64.ngrok-free.app/api',
+  baseUrl: getBaseUrl(),
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
