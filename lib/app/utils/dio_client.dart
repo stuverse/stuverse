@@ -54,8 +54,8 @@ final interceptorWrapper =
     final sharedPrefs = await SharedPreferences.getInstance();
     tokenRefresh = sharedPrefs.getString("token_refresh");
 
-    await sharedPrefs.setString("token_refresh", "");
-    await sharedPrefs.setString("token_access", "");
+    // await sharedPrefs.setString("token_refresh", "");
+    // await sharedPrefs.setString("token_access", "");
   } catch (e) {
     log(e.toString());
   }

@@ -3,13 +3,13 @@ import 'dart:developer';
 import 'package:animated_tree_view/animated_tree_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/forum/forum.dart';
 import 'package:stuverse/features/forum/utils/forum_utils.dart';
 
-import '../cubit/comment/comment_cubit.dart';
-import '../widgets/comment_card.dart';
+import '../../cubit/comment/comment_cubit.dart';
 
 class ThreadDetailScreen extends StatefulWidget {
   const ThreadDetailScreen(
@@ -43,13 +43,27 @@ class _ThreadDetailScreenState extends State<ThreadDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Thread Detail",
-        ),
         centerTitle: true,
         elevation: 0,
         scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
+        actions: [
+          SvgPicture.asset(
+            AppImages.searchSVG,
+            height: 20,
+            width: 20,
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.onBackground,
+              BlendMode.srcIn,
+            ),
+          ),
+          //more actions
+          IconButton(
+            icon: Icon(Icons.more_horiz),
+            onPressed: () {},
+          ),
+          (0.02 * context.minSize).widthBox
+        ],
       ),
       extendBodyBehindAppBar: true,
       body: BgGradient(

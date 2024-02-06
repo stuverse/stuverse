@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stuverse/app/app.dart';
 
-import '../forum.dart';
+import '../../forum.dart';
 
 class CommentCard extends StatelessWidget {
   const CommentCard({
@@ -44,7 +44,7 @@ class CommentCard extends StatelessWidget {
                 children: [
                   Text(
                     "${CommonUtils.getFirstLetter(comment.data?.author?.type ?? "u")}/${comment.data?.author?.username ?? "User"}",
-                    style: context.bodyLarge!.copyWith(
+                    style: context.bodyMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
                   ),
@@ -56,7 +56,7 @@ class CommentCard extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: Text(
                   CommonUtils.relativeTime(comment.data?.createdAt),
-                  style: context.bodyMedium!.copyWith(
+                  style: context.bodySmall!.copyWith(
                     color: Theme.of(context)
                         .colorScheme
                         .onBackground
@@ -88,8 +88,8 @@ class CommentCard extends StatelessWidget {
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
                   ),
-                TextButton(
-                  onPressed: () {
+                InkWell(
+                  onTap: () {
                     onReply(comment);
                   },
                   child: Row(

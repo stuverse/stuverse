@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stuverse/app/app.dart';
 
-import '../models/thread/tag.dart';
+import '../../forum.dart';
 
 class ThreadTagChip extends StatelessWidget {
   const ThreadTagChip({

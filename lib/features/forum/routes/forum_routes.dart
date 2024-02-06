@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/forum/forum.dart';
 
-import '../views/thread_detail_screen.dart';
+import '../views/thread/thread_detail_screen.dart';
 
 class ForumRoutes {
   //! ---DO NOT MODIFY-----

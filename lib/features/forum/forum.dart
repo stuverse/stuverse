@@ -15,5 +15,7 @@ export 'utils/forum_providers.dart';
 export 'utils/forum_images.dart';
 
 export 'views/forum_home_screen.dart';
-export 'widgets/thread_card.dart';
-export 'widgets/thread_tag_chip.dart';
+export 'widgets/thread/thread_card.dart';
+export 'widgets/thread/thread_tag_chip.dart';
+export 'widgets/thread/vote_chip.dart';
+export 'widgets/thread/comment_card.dart';

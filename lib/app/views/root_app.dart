@@ -34,7 +34,9 @@ class _App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.dark,
+      themeMode: !context.watch<CoreCubit>().state.isDarkMode
+          ? ThemeMode.light
+          : ThemeMode.dark,
       routerConfig: AppRouter.router,
     );
   }

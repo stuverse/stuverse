@@ -19,34 +19,36 @@ extension SnackBarExt on BuildContext {
   }) {
     if (backgroundColor == null) backgroundColor = this.colorScheme.primary;
     if (foregroundColor == null) foregroundColor = this.colorScheme.onPrimary;
-    ScaffoldMessenger.of(this).showSnackBar(
-      SnackBar(
-        closeIconColor: foregroundColor,
-        showCloseIcon: true,
-        content: Row(
-          children: [
-            if (showIcon) Icon(icon, color: foregroundColor),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Text(
-                message,
-                style: TextStyle(color: foregroundColor),
+    ScaffoldMessenger.of(this)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          closeIconColor: foregroundColor,
+          showCloseIcon: true,
+          content: Row(
+            children: [
+              if (showIcon) Icon(icon, color: foregroundColor),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  message,
+                  style: TextStyle(color: foregroundColor),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
+          duration: duration,
+          action: action,
+          backgroundColor: backgroundColor,
+          elevation: elevation,
+          margin: margin,
+          padding: padding,
+          shape: shape,
+          behavior: behavior,
+          animation: animation,
+          onVisible: onVisible,
         ),
-        duration: duration,
-        action: action,
-        backgroundColor: backgroundColor,
-        elevation: elevation,
-        margin: margin,
-        padding: padding,
-        shape: shape,
-        behavior: behavior,
-        animation: animation,
-        onVisible: onVisible,
-      ),
-    );
+      );
   }
 
   void showErrorMessage({
