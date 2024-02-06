@@ -58,21 +58,21 @@ class _VoteChipState extends State<VoteChip> with TickerProviderStateMixin {
   void didChangeDependencies() {
     _upVoteAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 300),
     );
 
     _downVoteAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 300),
     );
 
     _upVoteJumpAnimation = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(begin: 0, end: -40), // Jump up
+        tween: Tween<double>(begin: 0, end: -20), // Jump up
         weight: 1,
       ),
       TweenSequenceItem(
-        tween: Tween<double>(begin: -40, end: 0), // Come back down
+        tween: Tween<double>(begin: -20, end: 0), // Come back down
         weight: 1,
       ),
     ]).animate(CurvedAnimation(
@@ -82,11 +82,11 @@ class _VoteChipState extends State<VoteChip> with TickerProviderStateMixin {
 
     _downVoteJumpAnimation = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(begin: 0, end: 40), // Jump down
+        tween: Tween<double>(begin: 0, end: 20), // Jump down
         weight: 1,
       ),
       TweenSequenceItem(
-        tween: Tween<double>(begin: 40, end: 0), // Come back up
+        tween: Tween<double>(begin: 20, end: 0), // Come back up
         weight: 1,
       ),
     ]).animate(CurvedAnimation(

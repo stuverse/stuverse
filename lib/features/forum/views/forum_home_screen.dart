@@ -103,7 +103,7 @@ class _ForumHomeScreenState extends State<ForumHomeScreen> {
               //           },
               //           selectedCategory: selectedCategory.value);
               //     }),
-            ],
+            ].defaultListAnimation(),
           ),
         ),
       ),
