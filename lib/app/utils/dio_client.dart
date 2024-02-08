@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stuverse/app/utils/logman_dio_interceptor.dart';
 
-bool isDev = false;
+bool isDev = true;
 bool isEmulator = false;
 
 String getBaseUrl() {
@@ -83,6 +83,9 @@ final interceptorWrapper =
 
       return handler.resolve(response);
     } catch (e, s) {
+      final sharedPrefs = await SharedPreferences.getInstance();
+      await sharedPrefs.setString("token_refresh", "");
+      await sharedPrefs.setString("token_access", "");
       print(e);
       print(s);
 
