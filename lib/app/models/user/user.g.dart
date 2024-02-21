@@ -11,6 +11,9 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       token: json['token'] == null
           ? null
           : Token.fromJson(json['token'] as Map<String, dynamic>),
+      skills: (json['skills'] as List<dynamic>?)
+          ?.map((e) => Skill.fromJson(e as Map<String, dynamic>))
+          .toList(),
       email: json['email'] as String?,
       name: json['name'] as String?,
       type: json['type'] as String?,
@@ -27,12 +30,16 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       about: json['about'] as String?,
       isVerified: json['is_verified'] as bool?,
       image: json['image'] as String?,
+      linkedin: json['linkedin'],
+      github: json['github'],
+      resume: json['resume'],
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'token': instance.token,
+      'skills': instance.skills,
       'email': instance.email,
       'name': instance.name,
       'type': instance.type,
@@ -45,4 +52,7 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'about': instance.about,
       'is_verified': instance.isVerified,
       'image': instance.image,
+      'linkedin': instance.linkedin,
+      'github': instance.github,
+      'resume': instance.resume,
     };
