@@ -7,6 +7,7 @@ environment:
   sdk: ">=3.1.0 <4.0.0"
 
 dependencies:
+  animated_tree_view: ^2.2.0
   bloc: ^8.1.2
   device_preview: ^1.1.0
   dio: ^5.4.0
@@ -25,8 +26,11 @@ dependencies:
   google_fonts: ^6.1.0
   intl: ^0.18.0
   json_annotation: ^4.8.1
+  logman: ^0.0.5
   shared_preferences: ^2.2.2
+  skeletonizer: ^1.0.1
   smooth_page_indicator: ^1.1.0
+  web_socket_channel: ^2.4.0
 
 dev_dependencies:
   bloc_test: ^9.1.4
@@ -45,11 +49,15 @@ flutter:
   assets:
     - assets/app/icons/
     - assets/app/logo/
-    - assets/common/
-    - assets/forum/
-    - assets/fund/
-    - assets/job/
-    - assets/mentor/
+    - assets/app/images/
+    - assets/forum/icons/
+    - assets/forum/images/
+    - assets/fund/icons/
+    - assets/fund/images/
+    - assets/job/icons/
+    - assets/job/images/
+    - assets/mentor/icons/
+    - assets/mentor/images/
 
 
 

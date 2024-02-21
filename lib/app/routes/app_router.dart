@@ -1,6 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stuverse/features/forum/forum.dart';
+import 'package:stuverse/features/fund/fund.dart';
+import 'package:stuverse/features/job/job.dart';
+import 'package:stuverse/features/mentor/mentor.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -14,10 +21,26 @@ class AppRouter {
   static final _mentorNavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'mentor');
 
+  static final unProtectedRoutes = [
+    CommonRoutes.signin,
+    CommonRoutes.signup,
+    CommonRoutes.otpVerify,
+    CommonRoutes.otpSignin,
+    CommonRoutes.onBoarding,
+    CommonRoutes.splash,
+  ];
+
   static final GoRouter _router = GoRouter(
     initialLocation: CommonRoutes.splash,
     debugLogDiagnostics: true,
     navigatorKey: _rootNavigatorKey,
+    redirect: (ctx, state) {
+      final user = ctx.read<CoreCubit>().state.user;
+      if (user == null && !unProtectedRoutes.contains(state.uri.path)) {
+        return CommonRoutes.signin;
+      }
+      return null;
+    },
     routes: [
       GoRoute(
         path: CommonRoutes.signin,
@@ -43,6 +66,10 @@ class AppRouter {
           email: state.extra as String?,
         ),
       ),
+      GoRoute(
+        path: CommonRoutes.splash,
+        builder: (context, state) => const SplashScreen(),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return MainScreen(
@@ -56,36 +83,45 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: CommonRoutes.home,
-                builder: (context, state) => const HomeScreen(),
+                builder: (context, state) {
+                  return HomeScreen();
+                },
               ),
             ],
           ),
           StatefulShellBranch(
             navigatorKey: _forumNavigatorKey,
             initialLocation: ForumRoutes.forumHome,
-            routes: ForumRoutes.forumRoutes,
+            routes: [
+              ForumRoutes.forumHomeRoute,
+            ],
           ),
           StatefulShellBranch(
-            navigatorKey: _fundNavigatorKey,
-            initialLocation: FundRoutes.fundHome,
-            routes: FundRoutes.fundRoutes,
-          ),
+              navigatorKey: _fundNavigatorKey,
+              initialLocation: FundRoutes.fundHome,
+              routes: [
+                FundRoutes.fundHomeRoute,
+              ]),
           StatefulShellBranch(
             navigatorKey: _jobNavigatorKey,
             initialLocation: JobRoutes.jobHome,
-            routes: JobRoutes.jobRoutes,
+            routes: [
+              JobRoutes.jobHomeRoute,
+            ],
           ),
           StatefulShellBranch(
             navigatorKey: _mentorNavigatorKey,
             initialLocation: MentorRoutes.mentorHome,
-            routes: MentorRoutes.mentorRoutes,
+            routes: [
+              MentorRoutes.mentorHomeRoute,
+            ],
           ),
         ],
       ),
-      GoRoute(
-        path: CommonRoutes.splash,
-        builder: (context, state) => const SplashScreen(),
-      ),
+      ...ForumRoutes.forumRoutes,
+      ...FundRoutes.fundRoutes,
+      ...JobRoutes.jobRoutes,
+      ...MentorRoutes.mentorRoutes,
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),
   );

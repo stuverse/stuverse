@@ -40,12 +40,12 @@ class _MainScreenState extends State<MainScreen> {
       solidSvgPath: AppImages.fundSolidSVG,
     ),
     NavDestItem(
-      label: 'Job Portal',
+      label: 'Jobs',
       regularSvgPath: AppImages.jobSVG,
       solidSvgPath: AppImages.jobSolidSVG,
     ),
     NavDestItem(
-      label: 'Mentor Portal',
+      label: 'Mentoring',
       regularSvgPath: AppImages.mentorSVG,
       solidSvgPath: AppImages.mentorSolidSVG,
     ),
@@ -72,8 +72,9 @@ class _MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(
-          navItems[currentIndex].label,
+        title: Image.asset(
+          AppImages.logoGlow,
+          width: 90,
         ),
         actions: [
           // NotificationIcon(
@@ -113,7 +114,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
         child: NavigationBar(
           selectedIndex: currentIndex,
-          labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
           destinations: navItems,
           onDestinationSelected: _goBranch,
         ),

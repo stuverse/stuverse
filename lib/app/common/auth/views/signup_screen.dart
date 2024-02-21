@@ -1,7 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
@@ -17,21 +16,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _mobileController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  final List<_BranchChoice> branches = [
-    _BranchChoice(label: 'Computer Science and Engineering', value: 'cse'),
-    _BranchChoice(
-        label: 'Electronics and Communication Engineering', value: 'ece'),
-    _BranchChoice(
-        label: 'Electrical and Electronics Engineering', value: 'eee'),
-    _BranchChoice(label: 'Mechanical Engineering', value: 'me'),
-    _BranchChoice(label: 'Civil Engineering', value: 'ce'),
-    _BranchChoice(label: 'Information Technology', value: 'it'),
-  ];
-
-  String? selectedBranch;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -96,52 +82,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     10.heightBox,
                     LabeledFormInput(
-                      label: 'Mobile',
-                      isRequired: true,
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value?.length != 10) {
-                            return 'Please enter a valid mobile number';
-                          }
-                          return null;
-                        },
-                        controller: _mobileController,
-                        decoration: const InputDecoration(
-                          hintText: 'Enter your mobile number',
-                        ),
-                      ),
-                    ),
-                    10.heightBox,
-                    LabeledFormInput(
-                      label: 'Branch',
-                      isRequired: true,
-                      child: DropdownButtonFormField<String>(
-                        value: selectedBranch,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedBranch = value!;
-                          });
-                        },
-                        items: branches.map((branch) {
-                          return DropdownMenuItem<String>(
-                            value: branch.value,
-                            child: Text(branch.label),
-                          );
-                        }).toList(),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please select your branch';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Select your branch',
-                        ),
-                        isExpanded: true,
-                      ),
-                    ),
-                    10.heightBox,
-                    LabeledFormInput(
                       label: 'Password',
                       isRequired: true,
                       child: TextFormField(
@@ -185,19 +125,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 onPressed: () {
                                   HapticFeedback.lightImpact();
                                   if (_formKey.currentState!.validate()) {
-                                    if (selectedBranch == null) {
-                                      context.showErrorMessage(
-                                          message: 'Please select your branch');
-                                      return;
-                                    }
                                     context
                                         .read<AuthCubit>()
                                         .signUpWithEmailAndPassword(
                                           email: _emailController.text,
                                           name: _nameController.text,
                                           password: _passwordController.text,
-                                          mobile: _mobileController.text,
-                                          branch: selectedBranch!,
                                         );
                                   }
                                 },

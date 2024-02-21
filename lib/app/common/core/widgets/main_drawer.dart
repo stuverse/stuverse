@@ -39,14 +39,17 @@ class MainDrawer extends StatelessWidget {
           ),
           ListTile(
             title: const Text('Profile'),
-            onTap: () {
-              context.go('/profile');
-            },
+            onTap: () {},
           ),
           ListTile(
             title: const Text('Settings'),
+            onTap: () {},
+          ),
+          //Change Theme
+          ListTile(
+            title: const Text('Change Theme'),
             onTap: () {
-              context.go('/settings');
+              context.read<CoreCubit>().toggleTheme();
             },
           ),
           ListTile(

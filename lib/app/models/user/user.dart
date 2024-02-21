@@ -22,9 +22,6 @@ class User with _$User {
     String? about,
     @JsonKey(name: 'is_verified') bool? isVerified,
     String? image,
-    int? year,
-    String? branch,
-    String? linkedin,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -32,7 +29,7 @@ class User with _$User {
 
 class UserTypes {
   static const String STUDENT = 'student';
-  static const String STAFF = 'staff';
+  static const String FACULTY = 'faculty';
   static const String ALUMNI = 'alumni';
   static const String COMPANY = 'company';
   static const String ADMIN = 'admin';

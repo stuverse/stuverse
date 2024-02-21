@@ -52,4 +52,11 @@ class CoreCubit extends Cubit<CoreState> {
     await _sharedPreferences.remove("token_access");
     emit(state.copyWith(user: null));
   }
+
+  void toggleTheme() async {
+    final _sharedPreferences = await SharedPreferences.getInstance();
+    final _isDarkMode = !state.isDarkMode;
+    await _sharedPreferences.setBool("isDarkMode", _isDarkMode);
+    emit(state.copyWith(isDarkMode: _isDarkMode));
+  }
 }

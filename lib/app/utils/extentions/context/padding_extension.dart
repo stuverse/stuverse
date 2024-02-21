@@ -1,6 +1,6 @@
 part of '../app_extensions.dart';
 
-const defaultPaddingFactor = 0.05;
+const defaultPaddingFactor = 0.04;
 
 extension PaddingExtension on BuildContext {
   //Return EdgeInset all ,symmetrical ,only with default padding factor with respect to screen size
@@ -12,6 +12,8 @@ extension PaddingExtension on BuildContext {
   EdgeInsets get paddingHorz => EdgeInsets.symmetric(
         horizontal: width * defaultPaddingFactor,
       );
+  EdgeInsets get paddingLeft =>
+      EdgeInsets.only(left: width * defaultPaddingFactor);
 
   EdgeInsets get paddingHorzWithTop => EdgeInsets.only(
         left: width * defaultPaddingFactor,
@@ -25,6 +27,17 @@ extension PaddingExtension on BuildContext {
       horizontal: width * factor, vertical: height * factor);
   EdgeInsets paddingHorzWith(double factor) => EdgeInsets.symmetric(
         horizontal: width * factor,
+      );
+  EdgeInsets paddingHorzWithVertical({
+    double? factor,
+    double? top,
+    double? bottom,
+  }) =>
+      EdgeInsets.only(
+        left: width * (factor ?? defaultPaddingFactor),
+        right: width * (factor ?? defaultPaddingFactor),
+        top: top ?? 0,
+        bottom: bottom ?? 0,
       );
   EdgeInsets paddingOnlyWith(
           {double? left, double? right, double? top, double? bottom}) =>

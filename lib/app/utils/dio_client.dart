@@ -3,18 +3,23 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stuverse/app/utils/logman_dio_interceptor.dart';
 
 bool isDev = false;
+bool isEmulator = false;
+
+String getBaseUrl() {
+  if (isDev) {
+    if (Platform.isAndroid && isEmulator) return 'http://10.0.2.2:8000/api';
+    return 'http://localhost:8000/api';
+  } else {
+    return 'https://stuverse.in/api';
+  }
+}
+
 const String JWT_REFRESH_API = '/token/refresh/';
-
-final APIBASEURL = isDev
-    ? Platform.isAndroid
-        ? 'http://10.0.2.2:8000/api'
-        : 'http://127.0.0.1:8000/api'
-    : 'https://stuverse.in/api';
-
 final _baseOptions = BaseOptions(
-  baseUrl: APIBASEURL,
+  baseUrl: getBaseUrl(),
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
@@ -23,7 +28,9 @@ final _baseOptions = BaseOptions(
 
 final dioClient = Dio(
   _baseOptions,
-)..interceptors.add(interceptorWrapper);
+)
+  ..interceptors.add(interceptorWrapper)
+  ..interceptors.add(LogmanDioInterceptor());
 
 final interceptorWrapper =
     InterceptorsWrapper(onRequest: (options, handler) async {
@@ -47,8 +54,8 @@ final interceptorWrapper =
     final sharedPrefs = await SharedPreferences.getInstance();
     tokenRefresh = sharedPrefs.getString("token_refresh");
 
-    await sharedPrefs.setString("token_refresh", "");
-    await sharedPrefs.setString("token_access", "");
+    // await sharedPrefs.setString("token_refresh", "");
+    // await sharedPrefs.setString("token_access", "");
   } catch (e) {
     log(e.toString());
   }
@@ -76,6 +83,9 @@ final interceptorWrapper =
 
       return handler.resolve(response);
     } catch (e, s) {
+      final sharedPrefs = await SharedPreferences.getInstance();
+      await sharedPrefs.setString("token_refresh", "");
+      await sharedPrefs.setString("token_access", "");
       print(e);
       print(s);
 

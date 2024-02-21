@@ -20,8 +20,6 @@ abstract class IAuthRepo {
     required String email,
     required String name,
     required String password,
-    required String mobile,
-    required String branch,
     required String type,
   });
 
