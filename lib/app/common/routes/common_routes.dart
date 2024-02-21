@@ -7,4 +7,5 @@ class CommonRoutes {
   static const String splash = '/';
   static const String notFound = '/not-found';
   static const String home = '/home';
+  static const String webView = '/web-view';
 }

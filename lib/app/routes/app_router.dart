@@ -70,6 +70,17 @@ class AppRouter {
         path: CommonRoutes.splash,
         builder: (context, state) => const SplashScreen(),
       ),
+      GoRoute(
+          path: CommonRoutes.webView,
+          redirect: (context, state) {
+            if (state.extra == null) {
+              return CommonRoutes.notFound;
+            }
+            return null;
+          },
+          builder: (context, state) => WebViewScreen(
+                url: (state.extra as String?) ?? "",
+              )),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return MainScreen(
