@@ -30,6 +30,7 @@ dependencies:
   shared_preferences: ^2.2.2
   skeletonizer: ^1.0.1
   smooth_page_indicator: ^1.1.0
+  web_socket_channel: ^2.4.0
 
 dev_dependencies:
   bloc_test: ^9.1.4

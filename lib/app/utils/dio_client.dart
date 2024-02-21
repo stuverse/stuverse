@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stuverse/app/utils/logman_dio_interceptor.dart';
 
-bool isDev = true;
+bool isDev = false;
 bool isEmulator = false;
 
 String getBaseUrl() {
