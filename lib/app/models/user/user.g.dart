@@ -30,9 +30,10 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       about: json['about'] as String?,
       isVerified: json['is_verified'] as bool?,
       image: json['image'] as String?,
-      linkedin: json['linkedin'],
-      github: json['github'],
-      resume: json['resume'],
+      linkedin: json['linkedin'] as String?,
+      github: json['github'] as String?,
+      resume: json['resume'] as String?,
+      experienceYears: json['experience_years'] as int?,
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
@@ -55,4 +56,5 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'linkedin': instance.linkedin,
       'github': instance.github,
       'resume': instance.resume,
+      'experience_years': instance.experienceYears,
     };

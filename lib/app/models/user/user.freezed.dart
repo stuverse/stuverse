@@ -40,9 +40,11 @@ mixin _$User {
   @JsonKey(name: 'is_verified')
   bool? get isVerified => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
-  dynamic get linkedin => throw _privateConstructorUsedError;
-  dynamic get github => throw _privateConstructorUsedError;
-  dynamic get resume => throw _privateConstructorUsedError;
+  String? get linkedin => throw _privateConstructorUsedError;
+  String? get github => throw _privateConstructorUsedError;
+  String? get resume => throw _privateConstructorUsedError;
+  @JsonKey(name: 'experience_years')
+  int? get experienceYears => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -70,9 +72,10 @@ abstract class $UserCopyWith<$Res> {
       String? about,
       @JsonKey(name: 'is_verified') bool? isVerified,
       String? image,
-      dynamic linkedin,
-      dynamic github,
-      dynamic resume});
+      String? linkedin,
+      String? github,
+      String? resume,
+      @JsonKey(name: 'experience_years') int? experienceYears});
 
   $TokenCopyWith<$Res>? get token;
 }
@@ -108,6 +111,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? linkedin = freezed,
     Object? github = freezed,
     Object? resume = freezed,
+    Object? experienceYears = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -173,15 +177,19 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       linkedin: freezed == linkedin
           ? _value.linkedin
           : linkedin // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       github: freezed == github
           ? _value.github
           : github // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       resume: freezed == resume
           ? _value.resume
           : resume // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
+      experienceYears: freezed == experienceYears
+          ? _value.experienceYears
+          : experienceYears // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 
@@ -221,9 +229,10 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? about,
       @JsonKey(name: 'is_verified') bool? isVerified,
       String? image,
-      dynamic linkedin,
-      dynamic github,
-      dynamic resume});
+      String? linkedin,
+      String? github,
+      String? resume,
+      @JsonKey(name: 'experience_years') int? experienceYears});
 
   @override
   $TokenCopyWith<$Res>? get token;
@@ -257,6 +266,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? linkedin = freezed,
     Object? github = freezed,
     Object? resume = freezed,
+    Object? experienceYears = freezed,
   }) {
     return _then(_$UserImpl(
       id: freezed == id
@@ -322,15 +332,19 @@ class __$$UserImplCopyWithImpl<$Res>
       linkedin: freezed == linkedin
           ? _value.linkedin
           : linkedin // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       github: freezed == github
           ? _value.github
           : github // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       resume: freezed == resume
           ? _value.resume
           : resume // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
+      experienceYears: freezed == experienceYears
+          ? _value.experienceYears
+          : experienceYears // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -356,7 +370,8 @@ class _$UserImpl implements _User {
       this.image,
       this.linkedin,
       this.github,
-      this.resume})
+      this.resume,
+      @JsonKey(name: 'experience_years') this.experienceYears})
       : _skills = skills;
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
@@ -406,15 +421,18 @@ class _$UserImpl implements _User {
   @override
   final String? image;
   @override
-  final dynamic linkedin;
+  final String? linkedin;
   @override
-  final dynamic github;
+  final String? github;
   @override
-  final dynamic resume;
+  final String? resume;
+  @override
+  @JsonKey(name: 'experience_years')
+  final int? experienceYears;
 
   @override
   String toString() {
-    return 'User(id: $id, token: $token, skills: $skills, email: $email, name: $name, type: $type, username: $username, isActive: $isActive, isSuperuser: $isSuperuser, mobile: $mobile, createdAt: $createdAt, updatedAt: $updatedAt, about: $about, isVerified: $isVerified, image: $image, linkedin: $linkedin, github: $github, resume: $resume)';
+    return 'User(id: $id, token: $token, skills: $skills, email: $email, name: $name, type: $type, username: $username, isActive: $isActive, isSuperuser: $isSuperuser, mobile: $mobile, createdAt: $createdAt, updatedAt: $updatedAt, about: $about, isVerified: $isVerified, image: $image, linkedin: $linkedin, github: $github, resume: $resume, experienceYears: $experienceYears)';
   }
 
   @override
@@ -443,33 +461,38 @@ class _$UserImpl implements _User {
             (identical(other.isVerified, isVerified) ||
                 other.isVerified == isVerified) &&
             (identical(other.image, image) || other.image == image) &&
-            const DeepCollectionEquality().equals(other.linkedin, linkedin) &&
-            const DeepCollectionEquality().equals(other.github, github) &&
-            const DeepCollectionEquality().equals(other.resume, resume));
+            (identical(other.linkedin, linkedin) ||
+                other.linkedin == linkedin) &&
+            (identical(other.github, github) || other.github == github) &&
+            (identical(other.resume, resume) || other.resume == resume) &&
+            (identical(other.experienceYears, experienceYears) ||
+                other.experienceYears == experienceYears));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      token,
-      const DeepCollectionEquality().hash(_skills),
-      email,
-      name,
-      type,
-      username,
-      isActive,
-      isSuperuser,
-      mobile,
-      createdAt,
-      updatedAt,
-      about,
-      isVerified,
-      image,
-      const DeepCollectionEquality().hash(linkedin),
-      const DeepCollectionEquality().hash(github),
-      const DeepCollectionEquality().hash(resume));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        token,
+        const DeepCollectionEquality().hash(_skills),
+        email,
+        name,
+        type,
+        username,
+        isActive,
+        isSuperuser,
+        mobile,
+        createdAt,
+        updatedAt,
+        about,
+        isVerified,
+        image,
+        linkedin,
+        github,
+        resume,
+        experienceYears
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -487,24 +510,26 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   factory _User(
-      {final int? id,
-      final Token? token,
-      final List<Skill>? skills,
-      final String? email,
-      final String? name,
-      final String? type,
-      final String? username,
-      @JsonKey(name: 'is_active') final bool? isActive,
-      @JsonKey(name: 'is_superuser') final bool? isSuperuser,
-      final String? mobile,
-      @JsonKey(name: 'created_at') final DateTime? createdAt,
-      @JsonKey(name: 'updated_at') final DateTime? updatedAt,
-      final String? about,
-      @JsonKey(name: 'is_verified') final bool? isVerified,
-      final String? image,
-      final dynamic linkedin,
-      final dynamic github,
-      final dynamic resume}) = _$UserImpl;
+          {final int? id,
+          final Token? token,
+          final List<Skill>? skills,
+          final String? email,
+          final String? name,
+          final String? type,
+          final String? username,
+          @JsonKey(name: 'is_active') final bool? isActive,
+          @JsonKey(name: 'is_superuser') final bool? isSuperuser,
+          final String? mobile,
+          @JsonKey(name: 'created_at') final DateTime? createdAt,
+          @JsonKey(name: 'updated_at') final DateTime? updatedAt,
+          final String? about,
+          @JsonKey(name: 'is_verified') final bool? isVerified,
+          final String? image,
+          final String? linkedin,
+          final String? github,
+          final String? resume,
+          @JsonKey(name: 'experience_years') final int? experienceYears}) =
+      _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -544,11 +569,14 @@ abstract class _User implements User {
   @override
   String? get image;
   @override
-  dynamic get linkedin;
+  String? get linkedin;
   @override
-  dynamic get github;
+  String? get github;
   @override
-  dynamic get resume;
+  String? get resume;
+  @override
+  @JsonKey(name: 'experience_years')
+  int? get experienceYears;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
