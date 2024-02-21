@@ -76,6 +76,7 @@ class _MainScreenState extends State<MainScreen> {
           AppImages.logoGlow,
           width: 90,
         ),
+        centerTitle: true,
         actions: [
           // NotificationIcon(
           //   hasNotification: false,
