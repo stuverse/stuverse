@@ -22,6 +22,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   int? get id => throw _privateConstructorUsedError;
   Token? get token => throw _privateConstructorUsedError;
+  List<Skill>? get skills => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
@@ -39,6 +40,9 @@ mixin _$User {
   @JsonKey(name: 'is_verified')
   bool? get isVerified => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
+  dynamic get linkedin => throw _privateConstructorUsedError;
+  dynamic get github => throw _privateConstructorUsedError;
+  dynamic get resume => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,6 +57,7 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {int? id,
       Token? token,
+      List<Skill>? skills,
       String? email,
       String? name,
       String? type,
@@ -64,7 +69,10 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       String? about,
       @JsonKey(name: 'is_verified') bool? isVerified,
-      String? image});
+      String? image,
+      dynamic linkedin,
+      dynamic github,
+      dynamic resume});
 
   $TokenCopyWith<$Res>? get token;
 }
@@ -84,6 +92,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? id = freezed,
     Object? token = freezed,
+    Object? skills = freezed,
     Object? email = freezed,
     Object? name = freezed,
     Object? type = freezed,
@@ -96,6 +105,9 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? about = freezed,
     Object? isVerified = freezed,
     Object? image = freezed,
+    Object? linkedin = freezed,
+    Object? github = freezed,
+    Object? resume = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -106,6 +118,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as Token?,
+      skills: freezed == skills
+          ? _value.skills
+          : skills // ignore: cast_nullable_to_non_nullable
+              as List<Skill>?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -154,6 +170,18 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
+      linkedin: freezed == linkedin
+          ? _value.linkedin
+          : linkedin // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      github: freezed == github
+          ? _value.github
+          : github // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      resume: freezed == resume
+          ? _value.resume
+          : resume // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 
@@ -180,6 +208,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {int? id,
       Token? token,
+      List<Skill>? skills,
       String? email,
       String? name,
       String? type,
@@ -191,7 +220,10 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       String? about,
       @JsonKey(name: 'is_verified') bool? isVerified,
-      String? image});
+      String? image,
+      dynamic linkedin,
+      dynamic github,
+      dynamic resume});
 
   @override
   $TokenCopyWith<$Res>? get token;
@@ -209,6 +241,7 @@ class __$$UserImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? token = freezed,
+    Object? skills = freezed,
     Object? email = freezed,
     Object? name = freezed,
     Object? type = freezed,
@@ -221,6 +254,9 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? about = freezed,
     Object? isVerified = freezed,
     Object? image = freezed,
+    Object? linkedin = freezed,
+    Object? github = freezed,
+    Object? resume = freezed,
   }) {
     return _then(_$UserImpl(
       id: freezed == id
@@ -231,6 +267,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as Token?,
+      skills: freezed == skills
+          ? _value._skills
+          : skills // ignore: cast_nullable_to_non_nullable
+              as List<Skill>?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -279,6 +319,18 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
+      linkedin: freezed == linkedin
+          ? _value.linkedin
+          : linkedin // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      github: freezed == github
+          ? _value.github
+          : github // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      resume: freezed == resume
+          ? _value.resume
+          : resume // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -289,6 +341,7 @@ class _$UserImpl implements _User {
   _$UserImpl(
       {this.id,
       this.token,
+      final List<Skill>? skills,
       this.email,
       this.name,
       this.type,
@@ -300,7 +353,11 @@ class _$UserImpl implements _User {
       @JsonKey(name: 'updated_at') this.updatedAt,
       this.about,
       @JsonKey(name: 'is_verified') this.isVerified,
-      this.image});
+      this.image,
+      this.linkedin,
+      this.github,
+      this.resume})
+      : _skills = skills;
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -309,6 +366,16 @@ class _$UserImpl implements _User {
   final int? id;
   @override
   final Token? token;
+  final List<Skill>? _skills;
+  @override
+  List<Skill>? get skills {
+    final value = _skills;
+    if (value == null) return null;
+    if (_skills is EqualUnmodifiableListView) return _skills;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final String? email;
   @override
@@ -338,10 +405,16 @@ class _$UserImpl implements _User {
   final bool? isVerified;
   @override
   final String? image;
+  @override
+  final dynamic linkedin;
+  @override
+  final dynamic github;
+  @override
+  final dynamic resume;
 
   @override
   String toString() {
-    return 'User(id: $id, token: $token, email: $email, name: $name, type: $type, username: $username, isActive: $isActive, isSuperuser: $isSuperuser, mobile: $mobile, createdAt: $createdAt, updatedAt: $updatedAt, about: $about, isVerified: $isVerified, image: $image)';
+    return 'User(id: $id, token: $token, skills: $skills, email: $email, name: $name, type: $type, username: $username, isActive: $isActive, isSuperuser: $isSuperuser, mobile: $mobile, createdAt: $createdAt, updatedAt: $updatedAt, about: $about, isVerified: $isVerified, image: $image, linkedin: $linkedin, github: $github, resume: $resume)';
   }
 
   @override
@@ -351,6 +424,7 @@ class _$UserImpl implements _User {
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.token, token) || other.token == token) &&
+            const DeepCollectionEquality().equals(other._skills, _skills) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
@@ -368,7 +442,10 @@ class _$UserImpl implements _User {
             (identical(other.about, about) || other.about == about) &&
             (identical(other.isVerified, isVerified) ||
                 other.isVerified == isVerified) &&
-            (identical(other.image, image) || other.image == image));
+            (identical(other.image, image) || other.image == image) &&
+            const DeepCollectionEquality().equals(other.linkedin, linkedin) &&
+            const DeepCollectionEquality().equals(other.github, github) &&
+            const DeepCollectionEquality().equals(other.resume, resume));
   }
 
   @JsonKey(ignore: true)
@@ -377,6 +454,7 @@ class _$UserImpl implements _User {
       runtimeType,
       id,
       token,
+      const DeepCollectionEquality().hash(_skills),
       email,
       name,
       type,
@@ -388,7 +466,10 @@ class _$UserImpl implements _User {
       updatedAt,
       about,
       isVerified,
-      image);
+      image,
+      const DeepCollectionEquality().hash(linkedin),
+      const DeepCollectionEquality().hash(github),
+      const DeepCollectionEquality().hash(resume));
 
   @JsonKey(ignore: true)
   @override
@@ -408,6 +489,7 @@ abstract class _User implements User {
   factory _User(
       {final int? id,
       final Token? token,
+      final List<Skill>? skills,
       final String? email,
       final String? name,
       final String? type,
@@ -419,7 +501,10 @@ abstract class _User implements User {
       @JsonKey(name: 'updated_at') final DateTime? updatedAt,
       final String? about,
       @JsonKey(name: 'is_verified') final bool? isVerified,
-      final String? image}) = _$UserImpl;
+      final String? image,
+      final dynamic linkedin,
+      final dynamic github,
+      final dynamic resume}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -427,6 +512,8 @@ abstract class _User implements User {
   int? get id;
   @override
   Token? get token;
+  @override
+  List<Skill>? get skills;
   @override
   String? get email;
   @override
@@ -456,6 +543,12 @@ abstract class _User implements User {
   bool? get isVerified;
   @override
   String? get image;
+  @override
+  dynamic get linkedin;
+  @override
+  dynamic get github;
+  @override
+  dynamic get resume;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
