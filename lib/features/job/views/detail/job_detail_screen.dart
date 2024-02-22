@@ -30,23 +30,23 @@ class JobDetailScreen extends StatelessWidget {
                       Center(
                           child: Column(
                         children: [
-                          // Container(
-                          //   padding: EdgeInsets.all(10),
-                          //   height: 250,
-                          //   width: double.infinity,
-                          //   decoration: BoxDecoration(
-                          //       borderRadius: BorderRadius.circular(15),
-                          //       border: Border.all(),
-                          //       image: DecorationImage(
-                          //           image: NetworkImage(post.image),
-                          //           fit: BoxFit.cover)),
-                          // ),
-                          CircleAvatar(
-                            radius: 85,
-                            backgroundImage: NetworkImage(
-                              post.image,
-                            ),
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            height: 200,
+                            width: 250,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                border: Border.all(),
+                                image: DecorationImage(
+                                    image: NetworkImage(post.image),
+                                    fit: BoxFit.cover)),
                           ),
+                          // CircleAvatar(
+                          //   radius: 85,
+                          //   backgroundImage: NetworkImage(
+                          //     post.image,
+                          //   ),
+                          // ),
                           const SizedBox(height: 10),
                           Text(
                             post.title,
