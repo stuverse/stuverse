@@ -59,22 +59,34 @@ class JobDetailScreen extends StatelessWidget {
                       const SizedBox(height: 15),
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.business_center,
-                              size: 25,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .secondaryContainer,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              post.jobType,
-                            )
-                          ],
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.secondary,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          padding: const EdgeInsets.all(8),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.business_center,
+                                size: 25,
+                                color: Theme.of(context).colorScheme.tertiary,
+                              ),
+                              const SizedBox(
+                                width: 6,
+                              ),
+                              Text(
+                                post.jobType,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .tertiary),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(

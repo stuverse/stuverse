@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:go_router/go_router.dart';
 
-import 'package:intl/intl.dart';
 import 'package:stuverse/app/app.dart';
 
 import '../cubit/add_edit/manage_job_cubit.dart';
@@ -33,7 +32,7 @@ class _JobListTileState extends State<JobListTile> {
         );
       },
       child: Card(
-        color: context.colorScheme.secondary.withAlpha(30),
+        color: context.colorScheme.tertiaryContainer.withAlpha(40),
         elevation: 0,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -45,8 +44,8 @@ class _JobListTileState extends State<JobListTile> {
                 Card(
                   elevation: 5,
                   child: Container(
-                      height: 50,
-                      width: 50,
+                      height: 55,
+                      width: 55,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           image: DecorationImage(
@@ -62,36 +61,35 @@ class _JobListTileState extends State<JobListTile> {
                         widget.post.title,
                       ),
                       Text(widget.post.companyName),
-                      SizedBox(
-                        height: 5,
-                      ),
                       Row(
                         children: [
                           Icon(
                             Icons.location_on_outlined,
-                            size: 12,
+                            size: 14,
+                            color: context.colorScheme.secondaryContainer,
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Text(
                             widget.post.place,
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        DateFormat('dd-MM-yyyy  hh:mm a').format(
-                            DateTime.parse(widget.post.createdAt).toLocal()),
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Text(
+                          CommonUtils.relativeTime(
+                            DateTime.parse(widget.post.createdAt),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
                 if (user?.type == UserTypes.ADMIN ||
                     user?.type == UserTypes.FACULTY)
                   PopupMenuButton(
-                      iconSize: 15,
+                      padding: EdgeInsets.zero,
+                      iconSize: 18,
                       itemBuilder: (context) {
                         return [
                           PopupMenuItem(
