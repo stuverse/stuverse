@@ -50,9 +50,11 @@ class JobDetailScreen extends StatelessWidget {
                           const SizedBox(height: 10),
                           Text(
                             post.title,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                           Text(
                             "${post.companyName} - ${post.place}",
+                            style: Theme.of(context).textTheme.titleSmall,
                           ),
                         ],
                       )),
@@ -90,15 +92,17 @@ class JobDetailScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 8,
+                        height: 15,
                       ),
-                      Text(
-                        "Job Description",
-                      ),
+                      Text("Job Description",
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge!
+                              .copyWith(fontWeight: FontWeight.bold)),
+                      Divider(),
                       const SizedBox(height: 5),
-                      Text(
-                        post.description,
-                      ),
+                      Text(post.description,
+                          style: Theme.of(context).textTheme.bodyLarge),
                     ],
                   ),
                 ),
@@ -109,6 +113,10 @@ class JobDetailScreen extends StatelessWidget {
                 },
                 child: Text(
                   "Apply Now",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(180, 50),
