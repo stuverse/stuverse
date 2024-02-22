@@ -6,11 +6,12 @@ import 'package:stuverse/app/app.dart';
 
 import '../../models/job_post.dart';
 
-part 'add_edit_job_post_state.dart';
+part 'manage_job_state.dart';
 
-class AddEditJobPostCubit extends Cubit<AddEditJobPostState> {
-  AddEditJobPostCubit() : super(AddEditJobPostInitial());
-  void addJobPost(
+class ManageJobCubit extends Cubit<ManageJobState> {
+  ManageJobCubit() : super(ManageJobInitial());
+
+  void addJob(
       {required String title,
       required String description,
       required String place,
@@ -18,7 +19,7 @@ class AddEditJobPostCubit extends Cubit<AddEditJobPostState> {
       required String url,
       XFile? image,
       required String companyName}) async {
-    emit(AddEditJobPostLoading());
+    emit(ManageJobLoading());
     try {
       final formData = FormData.fromMap({
         "title": title,
@@ -38,27 +39,30 @@ class AddEditJobPostCubit extends Cubit<AddEditJobPostState> {
 
       print(response.data);
 
-      emit(AddEditJobPostSuccess());
+      emit(ManageJobSuccess(
+        message: "Successfully added job post",
+        action: JobPostAction.add,
+      ));
     } on DioException catch (e) {
       print(e);
       print(e.response?.data?.toString());
-      emit(AddEditJobPostError(e.toString()));
+      emit(ManageJobError(e.toString()));
     } catch (e) {
       print(e);
-      emit(AddEditJobPostError(e.toString()));
+      emit(ManageJobError(e.toString()));
     }
   }
 
-  void editJobPost(
+  void editJob(
       {required String title,
       required String description,
       required String place,
-      required JobPost post,
+      required int id,
       required String jobType,
       required String url,
       XFile? image,
       required String companyName}) async {
-    emit(AddEditJobPostLoading());
+    emit(ManageJobLoading());
     try {
       final formData = FormData.fromMap({
         "title": title,
@@ -75,17 +79,40 @@ class AddEditJobPostCubit extends Cubit<AddEditJobPostState> {
       });
       print("before");
       final response =
-          await dioClient.patch("/job/posts/${post.id}/", data: formData);
+          await dioClient.patch("/job/posts/${id}/", data: formData);
       print(response.data);
-      emit(AddEditJobPostSuccess());
+      emit(ManageJobSuccess(
+        message: "Successfully edited job post",
+        action: JobPostAction.edit,
+      ));
     } on DioException catch (e) {
       print(e);
       print(e.response?.data?.toString());
 
-      emit(AddEditJobPostError(e.toString()));
+      emit(ManageJobError(
+        e.toString(),
+      ));
     } catch (e) {
       print(e);
-      emit(AddEditJobPostError(e.toString()));
+      emit(ManageJobError(e.toString()));
+    }
+  }
+
+  void deleteJob({required int id}) async {
+    emit(ManageJobLoading());
+    try {
+      await dioClient.delete(
+        "/job/posts/$id/",
+      );
+      emit(ManageJobSuccess(
+        message: "Successfully deleted job post",
+        action: JobPostAction.delete,
+      ));
+    } catch (e) {
+      print(e);
+      emit(ManageJobError(
+        "Failed to delete job post",
+      ));
     }
   }
 }

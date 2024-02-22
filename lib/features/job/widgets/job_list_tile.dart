@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:go_router/go_router.dart';
 
 import 'package:intl/intl.dart';
 import 'package:stuverse/app/app.dart';
 
+import '../cubit/add_edit/manage_job_cubit.dart';
 import '../models/job_post.dart';
 import '../routes/job_routes.dart';
 
@@ -22,6 +24,7 @@ class JobListTile extends StatefulWidget {
 class _JobListTileState extends State<JobListTile> {
   @override
   Widget build(BuildContext context) {
+    final user = context.read<CoreCubit>().state.user;
     return InkWell(
       onTap: () {
         context.push(
@@ -30,7 +33,7 @@ class _JobListTileState extends State<JobListTile> {
         );
       },
       child: Card(
-        color: context.colorScheme.primary,
+        color: context.colorScheme.secondary.withAlpha(30),
         elevation: 0,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -78,60 +81,50 @@ class _JobListTileState extends State<JobListTile> {
                         height: 5,
                       ),
                       Text(
-                        DateFormat('dd-MM-yyyy  hh:mm a').format(DateTime.parse(
-                          widget.post.createdAt,
-                        ).toLocal()),
+                        DateFormat('dd-MM-yyyy  hh:mm a').format(
+                            DateTime.parse(widget.post.createdAt).toLocal()),
+                        style: Theme.of(context).textTheme.titleSmall,
                       ),
                     ],
                   ),
                 ),
-                PopupMenuButton(
-                    iconSize: 15,
-                    itemBuilder: (context) {
-                      return [
-                        PopupMenuItem(
-                            textStyle: TextStyle(fontSize: 15),
+                if (user?.type == UserTypes.ADMIN ||
+                    user?.type == UserTypes.FACULTY)
+                  PopupMenuButton(
+                      iconSize: 15,
+                      itemBuilder: (context) {
+                        return [
+                          PopupMenuItem(
+                              textStyle: TextStyle(fontSize: 15),
+                              onTap: () {
+                                context.push(
+                                  JobRoutes.jobAddEdit,
+                                  extra: widget.post,
+                                );
+                              },
+                              child: Row(
+                                children: [
+                                  Icon(Icons.edit_outlined),
+                                  SizedBox(width: 8),
+                                  Text('Edit'),
+                                ],
+                              )),
+                          PopupMenuItem(
                             onTap: () {
-                              context.push(
-                                JobRoutes.jobAddEdit,
-                                extra: widget.post,
-                              );
+                              context
+                                  .read<ManageJobCubit>()
+                                  .deleteJob(id: widget.post.id);
                             },
                             child: Row(
                               children: [
-                                Icon(Icons.edit_outlined),
+                                Icon(Icons.delete_outline),
                                 SizedBox(width: 8),
-                                Text('Edit'),
+                                Text('Delete'),
                               ],
-                            )),
-                        PopupMenuItem(
-                          onTap: () {},
-                          child: Row(
-                            children: [
-                              Icon(Icons.delete_outline),
-                              SizedBox(width: 8),
-                              Text('Delete'),
-                            ],
+                            ),
                           ),
-                        ),
-                        const PopupMenuItem(
-                            child: Row(
-                          children: [
-                            Icon(Icons.bookmark_outline),
-                            SizedBox(width: 8),
-                            Text('Save'),
-                          ],
-                        )),
-                        const PopupMenuItem(
-                            child: Row(
-                          children: [
-                            Icon(Icons.flag_outlined),
-                            SizedBox(width: 8),
-                            Text('Report '),
-                          ],
-                        )),
-                      ];
-                    }),
+                        ];
+                      }),
               ],
             ),
           ]),

@@ -6,20 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../cubit/add_edit/add_edit_job_post_cubit.dart';
+import '../../cubit/add_edit/manage_job_cubit.dart';
 import '../../cubit/home/job_home_cubit.dart';
 import '../../models/job_post.dart';
 
-class AddEditJobPost extends StatefulWidget {
-  const AddEditJobPost({super.key, this.post});
+class AddEditJobPostScreen extends StatefulWidget {
+  const AddEditJobPostScreen({super.key, this.post});
 
   final JobPost? post;
 
   @override
-  State<AddEditJobPost> createState() => _AddEditJobPostState();
+  State<AddEditJobPostScreen> createState() => _AddEditJobPostScreenState();
 }
 
-class _AddEditJobPostState extends State<AddEditJobPost> {
+class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _companyNameController = TextEditingController();
@@ -194,34 +194,16 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                       return null;
                     }),
                 const SizedBox(height: 30),
-                BlocConsumer<AddEditJobPostCubit, AddEditJobPostState>(
-                  listener: (context, state) {
-                    if (state is AddEditJobPostSuccess) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: widget.post != null
-                            ? const Text("Post Edited Successfully")
-                            : const Text("Post Added Successfully"),
-                      ));
-
-                      context.read<JobHomeCubit>().getJobHomeData();
-
-                      Navigator.pop(context);
-                    }
-                    if (state is AddEditJobPostError) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(state.error),
-                      ));
-                    }
-                  },
+                BlocBuilder<ManageJobCubit, ManageJobState>(
                   builder: (context, state) {
-                    if (state is AddEditJobPostLoading) {
+                    if (state is ManageJobLoading) {
                       return const CircularProgressIndicator();
                     }
                     return ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           widget.post == null
-                              ? context.read<AddEditJobPostCubit>().addJobPost(
+                              ? context.read<ManageJobCubit>().addJob(
                                     title: _titleController.text,
                                     description: _descriptionController.text,
                                     place: _placeController.text,
@@ -230,8 +212,8 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                                     url: _urlController.text,
                                     image: _selectedImage,
                                   )
-                              : context.read<AddEditJobPostCubit>().editJobPost(
-                                    post: widget.post!,
+                              : context.read<ManageJobCubit>().editJob(
+                                    id: widget.post!.id,
                                     title: _titleController.text,
                                     description: _descriptionController.text,
                                     place: _placeController.text,
