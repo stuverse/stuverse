@@ -12,3 +12,4 @@ export 'widgets/main_drawer.dart';
 
 export 'cubit/core_cubit.dart';
 export 'cubit/home/home_cubit.dart';
+export 'cubit/ai/ai_cubit.dart';

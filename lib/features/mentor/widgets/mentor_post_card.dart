@@ -95,40 +95,44 @@ class _MentorPostCardState extends State<MentorPostCard> {
                                         },
                                         child: Text('Cancel'),
                                       ),
-                                      BlocConsumer<ManageMentorPostCubit, ManageMentorPostState>(
-                                        listener: (context, state) {
-                                          if (state is ManageMentorPostFailure) {
-                                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                              content: Text(
-                                                state.message),
-                                            ));
-                                          }
-                                          if (state is ManageMentorPostLoaded) {
-                                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                              content: Text(
-                                                state.message),
-                                            ));
-                                            context.pushReplacement(MentorRoutes.mentorHome);
-                                            context
-                                              .read<MentorHomeCubit>()
-                                              .getMentorHomeData();
-                                          }
-                                        },
-                                        builder: (context, state) => state is ManageMentorPostLoading
-                                            ? CircularProgressIndicator()
-                                            :
-                                          TextButton(
-                                            onPressed: () async {
+                                      BlocConsumer<ManageMentorPostCubit,
+                                              ManageMentorPostState>(
+                                          listener: (context, state) {
+                                            if (state
+                                                is ManageMentorPostFailure) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                content: Text(state.message),
+                                              ));
+                                            }
+                                            if (state
+                                                is ManageMentorPostLoaded) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                content: Text(state.message),
+                                              ));
+                                              context.pushReplacement(
+                                                  MentorRoutes.mentorHome);
                                               context
-                                                  .read<ManageMentorPostCubit>()
-                                                  .deletePost(
-                                                      id: widget.post.id!);
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Text('Delete'),
-                                          )
-                                        
-                                      ),
+                                                  .read<MentorHomeCubit>()
+                                                  .getMentorHomeData();
+                                            }
+                                          },
+                                          builder: (context, state) => state
+                                                  is ManageMentorPostLoading
+                                              ? CircularProgressIndicator()
+                                              : TextButton(
+                                                  onPressed: () async {
+                                                    context
+                                                        .read<
+                                                            ManageMentorPostCubit>()
+                                                        .deletePost(
+                                                            id: widget
+                                                                .post.id!);
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text('Delete'),
+                                                )),
                                     ],
                                   );
                                 },

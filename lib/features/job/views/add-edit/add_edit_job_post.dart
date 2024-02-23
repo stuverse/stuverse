@@ -284,8 +284,8 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                               initialText: _descriptionController.text,
                             ));
                       },
-                      icon: const Icon(Icons.edit),
-                      label: const Text("Edit Description"),
+                      icon: const Icon(Icons.visibility),
+                      label: const Text("Preview / Edit"),
                     ),
                   ],
                 ),
