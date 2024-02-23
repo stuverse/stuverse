@@ -1,36 +1,44 @@
+import 'mentor.dart';
+
 class MentorPost {
+  int? id;
+  Mentor? mentor;
+  String? name;
+  bool? isFree;
+  String? description;
+  String? price;
+
   MentorPost({
-    required this.id,
-    required this.name,
-    required this.isFree,
-    required this.description,
-    required this.price,
-    required this.mentor,
+    this.id,
+    this.mentor,
+    this.name,
+    this.isFree,
+    this.description,
+    this.price,
   });
-  late final int id;
-  late final String name;
-  late final bool isFree;
-  late final String description;
-  late final String price;
-  late final int mentor;
-  
-  MentorPost.fromJson(Map<String, dynamic> json){
-    id = json['id'];
-    name = json['name'];
-    isFree = json['isFree'];
-    description = json['description'];
-    price = json['price'];
-    mentor = json['mentor'];
+
+  @override
+  String toString() {
+    return 'MentorPost(id: $id, mentor: $mentor, name: $name, isFree: $isFree, description: $description, price: $price)';
   }
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['name'] = name;
-    _data['isFree'] = isFree;
-    _data['description'] = description;
-    _data['price'] = price;
-    _data['mentor'] = mentor;
-    return _data;
-  }
+  factory MentorPost.fromJson(Map<String, dynamic> json) => MentorPost(
+        id: json['id'] as int?,
+        mentor: json['mentor'] == null
+            ? null
+            : Mentor.fromJson(json['mentor'] as Map<String, dynamic>),
+        name: json['name'] as String?,
+        isFree: json['isFree'] as bool?,
+        description: json['description'] as String?,
+        price: json['price'] as String?,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'mentor': mentor?.toJson(),
+        'name': name,
+        'isFree': isFree,
+        'description': description,
+        'price': price,
+      };
 }

@@ -18,6 +18,7 @@ class JobPost {
   late final String image;
   late final String description;
   late final String jobType;
+  late final String jobLocationType;
   late final String url;
   late final String createdAt;
   late final String updatedAt;
@@ -30,6 +31,7 @@ class JobPost {
     image = json['image'];
     description = json['description'];
     jobType = json['jobType'];
+    jobLocationType = json['jobLocationType'];
     url = json['url'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
@@ -44,9 +46,24 @@ class JobPost {
     _data['image'] = image;
     _data['description'] = description;
     _data['jobType'] = jobType;
+    _data['jobLocationType'] = jobLocationType;
     _data['url'] = url;
     _data['createdAt'] = createdAt;
     _data['updatedAt'] = updatedAt;
     return _data;
   }
+}
+
+class JOB_TYPE {
+  static const FULL_TIME = 'fulltime';
+  static const PART_TIME = 'parttime';
+  static const CONTRACT = 'contract';
+  static const INTERNSHIP = 'internship';
+  static const TEMPORARY = 'temporary';
+}
+
+class JOB_LOCATION_TYPE {
+  static const ONSITE = 'onsite';
+  static const REMOTE = 'remote';
+  static const HYBRID = 'hybrid';
 }

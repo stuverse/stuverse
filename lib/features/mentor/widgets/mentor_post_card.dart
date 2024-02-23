@@ -16,7 +16,7 @@ class MentorPostCard extends StatefulWidget {
 class _MentorPostCardState extends State<MentorPostCard> {
   @override
   Widget build(BuildContext context) {
-  final user=context.read<CoreCubit>().state.user;
+    final user = context.read<CoreCubit>().state.user;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: InkWell(
@@ -37,9 +37,7 @@ class _MentorPostCardState extends State<MentorPostCard> {
                 children: [
                   CircleAvatar(
                     radius: 18,
-                    backgroundImage: NetworkImage(
-                    user!.image.toString()
-                    ),
+                    backgroundImage: NetworkImage(user!.image.toString()),
                   ),
                   SizedBox(
                     width: 10,
@@ -47,8 +45,8 @@ class _MentorPostCardState extends State<MentorPostCard> {
                   Text(
                     user.username.toString(),
                     style: context.bodyLarge!.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      fontWeight: FontWeight.bold,
+                    ),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
@@ -68,44 +66,35 @@ class _MentorPostCardState extends State<MentorPostCard> {
                     children: [
                       Row(
                         children: [
-                          Icon(
-                            Icons.payment,
-                            color: context.colorScheme.onBackground
-                        
-                          ),
+                          Icon(Icons.payment,
+                              color: context.colorScheme.onBackground),
                           SizedBox(
                             width: 5,
                           ),
-                          widget.post.isFree
-                          ?Text(
-                            'Free',
-                            style: context
-                                .bodyMedium!
-                                .copyWith(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12),
-                          )
-                          :
-                          Text(
-                            'Paid',
-                            style: context
-                                .bodyMedium!
-                                .copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12),
-                          )
+                          (widget.post.isFree!)
+                              ? Text(
+                                  'Free',
+                                  style: context.bodyMedium!.copyWith(
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),
+                                )
+                              : Text(
+                                  'Paid',
+                                  style: context.bodyMedium!.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),
+                                )
                         ],
                       ),
                       SizedBox(
                         height: 10,
                       ),
                       Text(
-                        widget.post.name,
-                        style:
-                            context.bodyMedium!.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                ),
+                        widget.post.name ?? "",
+                        style: context.bodyMedium!.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
                         maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                       ),

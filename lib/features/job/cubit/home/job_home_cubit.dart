@@ -13,13 +13,18 @@ class JobHomeCubit extends Cubit<JobHomeState> {
     emit(JobHomeLoading());
     try {
       final response = await dioClient.get(
-        "/job/posts",
+        "/job/home/",
       );
-      final List<JobPost> postList = [];
-      for (final post in response.data) {
-        postList.add(JobPost.fromJson(post));
-      }
-      emit(JobHomeSuccess(postList.reversed.toList()));
+      final List<JobPost> latestJobs = [
+        for (final post in response.data['latest_jobs']) JobPost.fromJson(post),
+      ];
+      final List<JobPost> bestInternships = [
+        for (final post in response.data['best_internships'])
+          JobPost.fromJson(post),
+      ];
+
+      emit(JobHomeSuccess(
+          latestJobs: latestJobs, bestInternships: bestInternships));
     } catch (e) {
       print(e);
       emit(JobHomeError(e.toString()));

@@ -5,10 +5,10 @@ part 'skill.g.dart';
 
 @freezed
 class Skill with _$Skill {
-	factory Skill({
-		int? id,
-		String? name,
-	}) = _Skill;
+  factory Skill({
+    int? id,
+    String? name,
+  }) = _Skill;
 
-	factory Skill.fromJson(Map<String, dynamic> json) => _$SkillFromJson(json);
+  factory Skill.fromJson(Map<String, dynamic> json) => _$SkillFromJson(json);
 }

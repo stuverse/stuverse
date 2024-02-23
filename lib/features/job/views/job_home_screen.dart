@@ -56,7 +56,6 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
                       listener: (context, state) {},
                       builder: (context, state) {
                         if (state is JobHomeSuccess) {
-                          final first3Posts = state.postList.take(3).toList();
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -154,7 +153,41 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
                                 ],
                               ),
                               Column(children: [
-                                for (var post in first3Posts)
+                                for (var post in state.latestJobs)
+                                  JobListTile(post: post),
+                              ]),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Best Internship Jobs',
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
+                                  ),
+                                  Spacer(),
+                                  TextButton.icon(
+                                    onPressed: () {
+                                      context.push(JobRoutes.jobSearch);
+                                    },
+                                    label: Text(
+                                      'Show all',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall,
+                                    ),
+                                    style: TextButton.styleFrom(
+                                      foregroundColor: Theme.of(context)
+                                          .colorScheme
+                                          .secondaryContainer,
+                                    ),
+                                    icon: Icon(
+                                      Icons.arrow_forward,
+                                      size: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(children: [
+                                for (var post in state.bestInternships)
                                   JobListTile(post: post),
                               ]),
                             ].defaultListAnimation(),
