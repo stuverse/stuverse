@@ -4,7 +4,6 @@ export 'common/common.dart';
 //! Models
 export 'models/user/user.dart';
 
-
 //! Utils
 export 'utils/app_images.dart';
 export 'utils/app_theme.dart';

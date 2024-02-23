@@ -2,10 +2,7 @@
 // import 'package:go_router/go_router.dart';
 // import 'package:stuverse/app/app.dart';
 
-
 // import '../models/mentor_post.dart';
-
-
 
 // class MentorDetailsScreen extends StatefulWidget {
 //   MentorDetailsScreen({super.key,required this.post});
@@ -25,7 +22,7 @@
 //             padding: const EdgeInsets.all(10),
 //             child: Column(
 //               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [            
+//               children: [
 //                Stack(
 //                  children: [
 //                   ClipRRect(
@@ -38,7 +35,7 @@
 //                     ),
 //                    ),
 //                  ),
-                 
+
 //                   Positioned(
 //                     top: 20,
 //                     child: IconButton(onPressed: (){
@@ -76,7 +73,7 @@
 //                                         style: context.bodySmall!.copyWith(
 //                                         ),
 //                                         ),
-                                 
+
 //                                         Text('${widget.post.mentor.experience.toString()} Years',
 //                                         style: context.bodyMedium!.copyWith(
 //                                         fontWeight: FontWeight.bold
@@ -84,9 +81,9 @@
 //                                         ),
 //                                       ],
 //                                     ),
-                                 
+
 //                                      Container(
-//                                     height: 30, 
+//                                     height: 30,
 //                                     child: VerticalDivider(
 //                                     color: Theme.of(context).colorScheme.onBackground,
 //                                        thickness: 1,
@@ -138,12 +135,12 @@
 //                               )
 //                             ),
 //                             )
-                              
+
 //                           ],
 //                          ),
 //                        ),
 //                      ),
-//                    ) 
+//                    )
 //                  ),
 //                  ]
 //                ),

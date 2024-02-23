@@ -28,6 +28,7 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
   final _jobTypeController = TextEditingController();
   final _urlController = TextEditingController();
   XFile? _selectedImage;
+  String? _selectedJobType;
 
   void _pickImage() async {
     try {
@@ -53,6 +54,7 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
       _descriptionController.text = widget.post!.description;
       _jobTypeController.text = widget.post!.jobType;
       _urlController.text = widget.post!.url;
+      _selectedJobType = widget.post!.jobType;
     }
     super.initState();
   }
@@ -159,19 +161,34 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                       return null;
                     }),
                 const SizedBox(height: 10),
-                TextFormField(
-                    maxLength: 50,
-                    onTap: () {},
-                    controller: _jobTypeController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'jobType',
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
+                DropdownButton(
+                    value: _selectedJobType,
+                    items: [
+                      DropdownMenuItem(
+                        child: Text("Full Time"),
+                        value: JOB_TYPE.FULL_TIME,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Part Time"),
+                        value: JOB_TYPE.PART_TIME,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Contract"),
+                        value: JOB_TYPE.CONTRACT,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Internship"),
+                        value: JOB_TYPE.INTERNSHIP,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Temporary"),
+                        value: JOB_TYPE.TEMPORARY,
+                      ),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedJobType = value;
+                      });
                     }),
                 const SizedBox(height: 10),
                 TextFormField(
@@ -202,6 +219,14 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                     return ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
+                          if (_selectedJobType == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Please select a job type"),
+                              ),
+                            );
+                            return;
+                          }
                           widget.post == null
                               ? context.read<ManageJobCubit>().addJob(
                                     title: _titleController.text,
