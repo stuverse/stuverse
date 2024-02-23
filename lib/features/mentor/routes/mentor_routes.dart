@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/mentor/mentor.dart';
 import 'package:stuverse/features/mentor/models/mentor_post.dart';
-import 'package:stuverse/features/mentor/views/add_edit_post_screen.dart';
+import 'package:stuverse/features/mentor/views/manage_mentor_post.dart';
 
 class MentorRoutes {
   //! ---DO NOT MODIFY-----
@@ -12,12 +12,12 @@ class MentorRoutes {
   );
   //! ----------------
 
-  static const String addMentor = '/mentor/addPost';
+  static const String manageMentorPost = '/mentor/manageMentorPost';
 
   static List<GoRoute> mentorRoutes = [
     GoRoute(
-      path: '/mentor/addPost',
-      builder: (context, state) => AddEditPostScreen(
+      path: '/mentor/manageMentorPost',
+      builder: (context, state) => ManageMentorPostScreen(
         post: state.extra as MentorPost?,
       ),
     ),

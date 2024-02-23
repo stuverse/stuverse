@@ -4,18 +4,20 @@ import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/mentor/mentor.dart';
 import 'package:stuverse/features/mentor/models/mentor_post.dart';
-import '../cubit/add_post/add_edit_post_cubit.dart';
-import '../cubit/add_post/add_edit_post_state.dart';
-import '../cubit/home/mentor_home_cubit.dart';
 
-class AddEditPostScreen extends StatefulWidget {
-  const AddEditPostScreen({super.key, this.post});
+import '../cubit/home/mentor_home_cubit.dart';
+import '../cubit/manage_mentor_post/manage_mentor_post_cubit.dart';
+import '../cubit/manage_mentor_post/manage_mentor_post_state.dart';
+
+
+class ManageMentorPostScreen extends StatefulWidget {
+  const ManageMentorPostScreen({super.key, this.post});
   final MentorPost? post;
   @override
-  State<AddEditPostScreen> createState() => _AddEditPostScreenState();
+  State<ManageMentorPostScreen> createState() => _ManageMentorPostScreenState();
 }
 
-class _AddEditPostScreenState extends State<AddEditPostScreen> {
+class _ManageMentorPostScreenState extends State<ManageMentorPostScreen> {
   final _formKey = GlobalKey<FormState>();
   final _postController = TextEditingController();
   final _descriptionController = TextEditingController();
@@ -176,27 +178,25 @@ class _AddEditPostScreenState extends State<AddEditPostScreen> {
                         ),
                       ),
                     SizedBox(height: 10),
-                    BlocConsumer<AddEditPostCubit, AddEditPostState>(
-                      listener: (context, state) {
-                        if (state is AddEditPostFailure) {
+                    BlocConsumer<ManageMentorPostCubit ,ManageMentorPostState>(
+                     listener: (context, state) {
+                        if (state is ManageMentorPostFailure) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
-                              'Something went wrong'),
+                              state.message),
+                          
                           ));
                         }
-                        if (state is AddEditPostLoaded) {
+                        if (state is ManageMentorPostLoaded) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
-                              widget.post!=null
-                               ? 'Edited successfully'
-
-                              :'Posted successfully'),
+                              state.message),
                           ));
                           context.pushReplacement(MentorRoutes.mentorHome);
                           context.read<MentorHomeCubit>().getMentorHomeData();
                         }
                       },
-                      builder: (context, state) => state is AddEditPostLoading
+                      builder: (context, state) => state is ManageMentorPostLoading
                           ? CircularProgressIndicator()
                           : ElevatedButton(
                               onPressed: () {
@@ -209,7 +209,7 @@ class _AddEditPostScreenState extends State<AddEditPostScreen> {
                                       _descriptionController.text;
                                   widget.post == null
                                       ? context
-                                          .read<AddEditPostCubit>()
+                                          .read<ManageMentorPostCubit>()
                                           .addPost(
                                               postName: postName,
                                               fee: double.parse(fee),
@@ -218,22 +218,20 @@ class _AddEditPostScreenState extends State<AddEditPostScreen> {
                                               mentorId: user!.id!,
                                           )
                                       : context
-                                          .read<AddEditPostCubit>()
+                                          .read<ManageMentorPostCubit>()
                                           .editPost(
-                                              userId: user!.id!,
+                                              id:widget.post!.id!,
                                             postName: postName,
                                               fee: double.parse(fee),
                                               isFree: isFree,
                                               description: description,
                                                  mentorId: user!.id!,
                                           );
-                                          
-                  
                                 }
                               },
                               child: Text(
                                 widget.post!=null
-                               ? 'Edit'
+                               ? 'Save'
                                 :'Post',
                                   style: Theme.of(context)
                                       .textTheme
