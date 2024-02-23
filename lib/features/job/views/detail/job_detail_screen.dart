@@ -41,12 +41,6 @@ class JobDetailScreen extends StatelessWidget {
                                     image: NetworkImage(post.image),
                                     fit: BoxFit.cover)),
                           ),
-                          // CircleAvatar(
-                          //   radius: 85,
-                          //   backgroundImage: NetworkImage(
-                          //     post.image,
-                          //   ),
-                          // ),
                           const SizedBox(height: 10),
                           Text(
                             post.title,
@@ -77,16 +71,14 @@ class JobDetailScreen extends StatelessWidget {
                               const SizedBox(
                                 width: 6,
                               ),
-                              Text(
-                                post.jobType,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .tertiary),
-                              )
+                              Text("${post.jobType} - ${post.jobLocationType}",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .tertiary)),
                             ],
                           ),
                         ),
