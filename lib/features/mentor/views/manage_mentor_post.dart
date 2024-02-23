@@ -9,7 +9,6 @@ import '../cubit/home/mentor_home_cubit.dart';
 import '../cubit/manage_mentor_post/manage_mentor_post_cubit.dart';
 import '../cubit/manage_mentor_post/manage_mentor_post_state.dart';
 
-
 class ManageMentorPostScreen extends StatefulWidget {
   const ManageMentorPostScreen({super.key, this.post});
   final MentorPost? post;
@@ -24,7 +23,7 @@ class _ManageMentorPostScreenState extends State<ManageMentorPostScreen> {
   final _priceController = TextEditingController();
 
   bool isFree = true;
- 
+
   @override
   void initState() {
     if (widget.post != null) {
@@ -63,9 +62,9 @@ class _ManageMentorPostScreenState extends State<ManageMentorPostScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.post!=null
-                     ?'Edit Your Mentorship Post'
-                     :  'Craft Your Mentorship Offer',
+                      widget.post != null
+                          ? 'Edit Your Mentorship Post'
+                          : 'Craft Your Mentorship Offer',
                       style: Theme.of(context)
                           .textTheme
                           .headlineLarge!
@@ -100,12 +99,32 @@ class _ManageMentorPostScreenState extends State<ManageMentorPostScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      'Description',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium!
-                          .copyWith(fontWeight: FontWeight.bold),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Description',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        ElevatedButton.icon(
+                          onPressed: () {
+                            context.push(CommonRoutes.markdownEditor,
+                                extra: MarkDownScreenProps(
+                                  onSaved: (value) {
+                                    _descriptionController.text = value;
+                                    setState(() {});
+                                    context.pop();
+                                  },
+                                  initialText: _descriptionController.text,
+                                ));
+                          },
+                          icon: const Icon(Icons.visibility),
+                          label: const Text("Preview / Edit"),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: 5,
@@ -117,6 +136,7 @@ class _ManageMentorPostScreenState extends State<ManageMentorPostScreen> {
                         }
                         return null;
                       },
+                      enabled: true,
                       controller: _descriptionController,
                       decoration: InputDecoration(
                         hintText: 'Enter the post description',
@@ -178,61 +198,55 @@ class _ManageMentorPostScreenState extends State<ManageMentorPostScreen> {
                         ),
                       ),
                     SizedBox(height: 10),
-                    BlocConsumer<ManageMentorPostCubit ,ManageMentorPostState>(
-                     listener: (context, state) {
+                    BlocConsumer<ManageMentorPostCubit, ManageMentorPostState>(
+                      listener: (context, state) {
                         if (state is ManageMentorPostFailure) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(
-                              state.message),
-                          
+                            content: Text(state.message),
                           ));
                         }
                         if (state is ManageMentorPostLoaded) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(
-                              state.message),
+                            content: Text(state.message),
                           ));
                           context.pushReplacement(MentorRoutes.mentorHome);
                           context.read<MentorHomeCubit>().getMentorHomeData();
                         }
                       },
-                      builder: (context, state) => state is ManageMentorPostLoading
+                      builder: (context, state) => state
+                              is ManageMentorPostLoading
                           ? CircularProgressIndicator()
                           : ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   final postName = _postController.text;
-                                  final fee = isFree
-                                      ? '0.00'
-                                      : _priceController.text;
+                                  final fee =
+                                      isFree ? '0.00' : _priceController.text;
                                   final description =
                                       _descriptionController.text;
                                   widget.post == null
                                       ? context
                                           .read<ManageMentorPostCubit>()
                                           .addPost(
-                                              postName: postName,
-                                              fee: double.parse(fee),
-                                              isFree: isFree,
-                                              description: description,
-                                              mentorId: user!.id!,
+                                            postName: postName,
+                                            fee: double.parse(fee),
+                                            isFree: isFree,
+                                            description: description,
+                                            mentorId: user!.id!,
                                           )
                                       : context
                                           .read<ManageMentorPostCubit>()
                                           .editPost(
-                                              id:widget.post!.id!,
+                                            id: widget.post!.id!,
                                             postName: postName,
-                                              fee: double.parse(fee),
-                                              isFree: isFree,
-                                              description: description,
-                                                 mentorId: user!.id!,
+                                            fee: double.parse(fee),
+                                            isFree: isFree,
+                                            description: description,
+                                            mentorId: user!.id!,
                                           );
                                 }
                               },
-                              child: Text(
-                                widget.post!=null
-                               ? 'Save'
-                                :'Post',
+                              child: Text(widget.post != null ? 'Save' : 'Post',
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleSmall!

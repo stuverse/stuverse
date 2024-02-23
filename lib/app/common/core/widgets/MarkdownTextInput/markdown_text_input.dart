@@ -35,6 +35,10 @@ class MarkdownTextInput extends StatefulWidget {
   /// Default value is true.
   final bool insertLinksByDialog;
 
+  /// If you prefer to use the dialog to insert image, you can choose to use the markdown syntax directly by setting [insertImageByDialog] to false. In this case, the selected text will be used as label and image.
+  /// Default value is true.
+  final bool insertImageByDialog;
+
   //Preview type
   final bool isFullPreview;
 
@@ -54,14 +58,15 @@ class MarkdownTextInput extends StatefulWidget {
       MarkdownType.link,
       MarkdownType.list,
       MarkdownType.strikethrough,
-      MarkdownType.code,
-      MarkdownType.blockquote,
+      // MarkdownType.code,
+      // MarkdownType.blockquote,
       MarkdownType.separator,
       MarkdownType.image
     ],
     this.textStyle,
     this.controller,
     this.insertLinksByDialog = true,
+    this.insertImageByDialog = true,
     required this.isFullPreview,
   });
 
@@ -183,99 +188,108 @@ class _MarkdownTextInputState extends State<MarkdownTextInput> {
           ),
         );
       case MarkdownType.link:
+        return _basicInkwell(type,
+            customOnTap: !widget.insertLinksByDialog
+                ? null
+                : () {
+                    showDialogueForLink(type);
+                  });
+      case MarkdownType.image:
         return _basicInkwell(
           type,
-          customOnTap: !widget.insertLinksByDialog
+          customOnTap: !widget.insertImageByDialog
               ? null
-              : () async {
-                  var text = _controller.text.substring(
-                      textSelection.baseOffset, textSelection.extentOffset);
-
-                  var textController = TextEditingController()..text = text;
-                  var linkController = TextEditingController();
-                  var textFocus = FocusNode();
-                  var linkFocus = FocusNode();
-
-                  var color = Theme.of(context).colorScheme.secondary;
-
-                  await showDialog<void>(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            GestureDetector(
-                                child: const Icon(Icons.close),
-                                onTap: () => Navigator.pop(context))
-                          ],
-                        ),
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            TextField(
-                              controller: textController,
-                              decoration: InputDecoration(
-                                hintText: 'example',
-                                label: Text("Text"),
-                                labelStyle: TextStyle(color: color),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: color, width: 2)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: color, width: 2)),
-                              ),
-                              autofocus: text.isEmpty,
-                              focusNode: textFocus,
-                              textInputAction: TextInputAction.next,
-                              onSubmitted: (value) {
-                                textFocus.unfocus();
-                                FocusScope.of(context).requestFocus(linkFocus);
-                              },
-                            ),
-                            const SizedBox(height: 10),
-                            TextField(
-                              controller: linkController,
-                              decoration: InputDecoration(
-                                hintText: 'https://www.example.com',
-                                label: Text("Link"),
-                                labelStyle: TextStyle(color: color),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: color, width: 2),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: color, width: 2),
-                                ),
-                              ),
-                              autofocus: text.isNotEmpty,
-                              focusNode: linkFocus,
-                            ),
-                          ],
-                        ),
-                        contentPadding:
-                            const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 0),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              onTap(type,
-                                  link: linkController.text,
-                                  selectedText: textController.text);
-                              Navigator.pop(context);
-                            },
-                            child: Text("Ok"),
-                          ),
-                        ],
-                      );
-                    },
-                  );
+              : () {
+                  showDialogueForLink(type);
                 },
         );
       default:
         return _basicInkwell(type);
     }
+  }
+
+  void showDialogueForLink(MarkdownType type) async {
+    var text = _controller.text
+        .substring(textSelection.baseOffset, textSelection.extentOffset);
+
+    var textController = TextEditingController()..text = text;
+    var linkController = TextEditingController();
+    var textFocus = FocusNode();
+    var linkFocus = FocusNode();
+
+    var color = Theme.of(context).colorScheme.secondary;
+
+    await showDialog<void>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              GestureDetector(
+                  child: const Icon(Icons.close),
+                  onTap: () => Navigator.pop(context))
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: textController,
+                decoration: InputDecoration(
+                  hintText: 'example',
+                  label: Text("title"),
+                  labelStyle: TextStyle(color: color),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: color, width: 2)),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: color, width: 2)),
+                ),
+                autofocus: text.isEmpty,
+                focusNode: textFocus,
+                textInputAction: TextInputAction.next,
+                onSubmitted: (value) {
+                  textFocus.unfocus();
+                  FocusScope.of(context).requestFocus(linkFocus);
+                },
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: linkController,
+                decoration: InputDecoration(
+                  hintText: type.name == MarkdownType.link.name
+                      ? 'https://www.example.com'
+                      : 'https://www.example.com/image.png',
+                  label: Text(
+                      type.name == MarkdownType.link.name ? "Link" : "Image"),
+                  labelStyle: TextStyle(color: color),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: color, width: 2),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: color, width: 2),
+                  ),
+                ),
+                autofocus: text.isNotEmpty,
+                focusNode: linkFocus,
+              ),
+            ],
+          ),
+          contentPadding: const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 0),
+          actions: [
+            TextButton(
+              onPressed: () {
+                onTap(type,
+                    link: linkController.text,
+                    selectedText: textController.text);
+                Navigator.pop(context);
+              },
+              child: Text("Ok"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
