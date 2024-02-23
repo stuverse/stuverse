@@ -16,7 +16,9 @@ class MentorHomeScreen extends StatefulWidget {
 
 class _MentorHomeScreenState extends State<MentorHomeScreen> {
   void initState() {
-    context.read<MentorHomeCubit>().getMentorHomeData(search:_searchController.text);
+    context
+        .read<MentorHomeCubit>()
+        .getMentorHomeData(search: _searchController.text);
     super.initState();
   }
 
@@ -24,9 +26,6 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return BgGradient(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -34,137 +33,128 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
           elevation: 0,
           backgroundColor: Colors.transparent,
         ),
-        floatingActionButton: FloatingActionButton.extended(onPressed: (){
-          context.push(MentorRoutes.addMentor);
-        },icon: Icon(Icons.add),label: Text("Add Post"),),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            context.push(MentorRoutes.addMentor);
+          },
+          icon: Icon(Icons.add),
+          label: Text("Add Post"),
+        ),
         body: BgGradient(
           child: SafeArea(
-                  child: RefreshIndicator(
-                    onRefresh: () async {
-                      context.read<MentorHomeCubit>().getMentorHomeData(search:_searchController.text);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Find Your',
-                            style: context.headlineMedium!.copyWith(
-                            fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'Perfect Mentor',
-                            style:
-                               context.headlineLarge!.copyWith(
-                                fontWeight: FontWeight.bold
-                               )
-                          ),
-                          SizedBox(height: 5),
-                          ListViewCard(
-                            title: 'Unlock Your Potential!',
-                            description:
-                                'Inspire and empower others with your knowledge. Join as a mentor today.',
-                            buttonText: 'Join Now',
-                          ),
-                          SizedBox(height: 15),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(27),
-                              color: Color.fromARGB(242, 231, 230, 230),
-                            ),
-                            child: TextField(
-                              controller: _searchController,
-                              onChanged: (value) {
-                                context
-                                    .read<MentorHomeCubit>()
-                                    .getMentorHomeData(search:_searchController.text);
-                              },
-                              decoration: InputDecoration(
-                
-                                hintText: 'Search',
-                                border: InputBorder.none,
-                                prefixIcon: Icon(
-                                  Icons.search,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          BlocConsumer<MentorHomeCubit, MentorHomeState>(
-                            listener: (context, state) {
-                            },
-                            builder: (context, state) {
-                               if (state is MentorHomeFailure) {
-                return Center(child: Text('Error'));
-              }
-              if (state is MentorHomeLoaded) {
-                // final first3Mentors = state.posts.take(3).toList();
-                              return  Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                                              'Top Mentors',
-                                                              style: context
-                                                                  .titleMedium!
-                                                                  .copyWith(
-                                      fontWeight: FontWeight.w600,
-                                                                  ),
-                                                            ),
-                                      TextButton(
-                                        onPressed: () {
-                                       
-                                        },
-                                        child: Text(
-                                          'See All',
-                                          style: context
-                                              .bodyMedium!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .primary),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 5,),
-                                 SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                   child: Row(
-                                    children: [
-                                      for(final post in state.posts) MentorPostCard(post: post),
-                                    ],
-                                   ),
-                                 )
-                                ],
-                              );
-              }
-                              return Center(child: CircularProgressIndicator());
-                            },
-                          
-                          ),
-                        ],
+            child: RefreshIndicator(
+              onRefresh: () async {
+                context
+                    .read<MentorHomeCubit>()
+                    .getMentorHomeData(search: _searchController.text);
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Find Your',
+                      style: context.headlineMedium!.copyWith(
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                  ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text('Perfect Mentor',
+                        style: context.headlineLarge!
+                            .copyWith(fontWeight: FontWeight.bold)),
+                    SizedBox(height: 5),
+                    ListViewCard(
+                      title: 'Unlock Your Potential!',
+                      description:
+                          'Inspire and empower others with your knowledge. Join as a mentor today.',
+                      buttonText: 'Join Now',
+                    ),
+                    SizedBox(height: 15),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(27),
+                        color: Color.fromARGB(242, 231, 230, 230),
+                      ),
+                      child: TextField(
+                        controller: _searchController,
+                        onChanged: (value) {
+                          context.read<MentorHomeCubit>().getMentorHomeData(
+                              search: _searchController.text);
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Search',
+                          border: InputBorder.none,
+                          prefixIcon: Icon(
+                            Icons.search,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    BlocConsumer<MentorHomeCubit, MentorHomeState>(
+                      listener: (context, state) {},
+                      builder: (context, state) {
+                        if (state is MentorHomeFailure) {
+                          return Center(child: Text('Error'));
+                        }
+                        if (state is MentorHomeLoaded) {
+                          // final first3Mentors = state.posts.take(3).toList();
+                          return Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Top Mentors',
+                                    style: context.titleMedium!.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      'See All',
+                                      style: context.bodyMedium!.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    for (final post in state.posts)
+                                      MentorPostCard(post: post),
+                                  ],
+                                ),
+                              )
+                            ],
+                          );
+                        }
+                        return Center(child: CircularProgressIndicator());
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
-              ),
+      ),
     );
-  
-        }
-      
-    
   }
-
+}
 
 class ListViewCard extends StatelessWidget {
   const ListViewCard(
@@ -194,8 +184,7 @@ class ListViewCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: context
-                        .titleLarge!
+                    style: context.titleLarge!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
@@ -211,18 +200,13 @@ class ListViewCard extends StatelessWidget {
                   ),
                   Center(
                     child: ElevatedButton(
-                      onPressed: () {
-                       
-                      },
+                      onPressed: () {},
                       child: Text(buttonText,
-                          style: context
-                              .titleSmall!
-                              .copyWith(
-                                  color: context.colorScheme.surface,
-                                  fontWeight: FontWeight.bold)),
+                          style: context.titleSmall!.copyWith(
+                              color: context.colorScheme.surface,
+                              fontWeight: FontWeight.bold)),
                       style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                             context.colorScheme.secondary,
+                          backgroundColor: context.colorScheme.secondary,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12))),
                     ),
