@@ -2,30 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
-import 'package:stuverse/features/job/models/job_post.dart';
 import 'package:stuverse/features/mentor/mentor.dart';
-
-import '../cubit/add_post/add_post_cubit.dart';
-import '../cubit/add_post/add_post_state.dart';
+import 'package:stuverse/features/mentor/models/mentor_post.dart';
+import '../cubit/add_post/add_edit_post_cubit.dart';
+import '../cubit/add_post/add_edit_post_state.dart';
 import '../cubit/home/mentor_home_cubit.dart';
 
-class AddPostScreen extends StatefulWidget {
-  const AddPostScreen({super.key, this.post});
-  final JobPost? post;
+class AddEditPostScreen extends StatefulWidget {
+  const AddEditPostScreen({super.key, this.post});
+  final MentorPost? post;
   @override
-  State<AddPostScreen> createState() => _AddPostScreenState();
+  State<AddEditPostScreen> createState() => _AddEditPostScreenState();
 }
 
-class _AddPostScreenState extends State<AddPostScreen> {
+class _AddEditPostScreenState extends State<AddEditPostScreen> {
   final _formKey = GlobalKey<FormState>();
-
   final _postController = TextEditingController();
-  final _feeController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _priceController = TextEditingController();
 
   bool isFree = true;
-  String _selectedFee = 'Select';
+ 
+  @override
+  void initState() {
+    if (widget.post != null) {
+      _postController.text = widget.post!.name!;
+      _descriptionController.text = widget.post!.description!;
+      _priceController.text = widget.post!.price!.toString();
+      if (widget.post!.isFree!) {
+        isFree = true;
+      }
+      if (!widget.post!.isFree!) {
+        isFree = false;
+      }
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +61,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Craft Your Mentorship Offer',
+                      widget.post!=null
+                     ?'Edit Your Mentorship Post'
+                     :  'Craft Your Mentorship Offer',
                       style: Theme.of(context)
                           .textTheme
                           .headlineLarge!
@@ -162,45 +176,65 @@ class _AddPostScreenState extends State<AddPostScreen> {
                         ),
                       ),
                     SizedBox(height: 10),
-                    BlocConsumer<AddPostCubit, AddPostState>(
+                    BlocConsumer<AddEditPostCubit, AddEditPostState>(
                       listener: (context, state) {
-                        if (state is AddPostFailure) {
+                        if (state is AddEditPostFailure) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text('Cannot post'),
+                            content: Text(
+                              'Something went wrong'),
                           ));
                         }
-                        if (state is AddPostLoaded) {
+                        if (state is AddEditPostLoaded) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text('Posted successfully'),
+                            content: Text(
+                              widget.post!=null
+                               ? 'Edited successfully'
+
+                              :'Posted successfully'),
                           ));
                           context.pushReplacement(MentorRoutes.mentorHome);
                           context.read<MentorHomeCubit>().getMentorHomeData();
                         }
                       },
-                      builder: (context, state) => state is AddPostLoading
+                      builder: (context, state) => state is AddEditPostLoading
                           ? CircularProgressIndicator()
                           : ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   final postName = _postController.text;
-                                  final fee = _selectedFee == 'Free'
+                                  final fee = isFree
                                       ? '0.00'
                                       : _priceController.text;
                                   final description =
                                       _descriptionController.text;
-
-                                  context.read<AddPostCubit>().addPost(
-                                      postName: postName,
-                                      fee: double.parse(fee),
-                                      isFree: isFree,
-                                      description: description,
-                                      mentorId: user!.id!);
-                                  context.pushReplacement(
-                                    MentorRoutes.mentorHome,
-                                  );
+                                  widget.post == null
+                                      ? context
+                                          .read<AddEditPostCubit>()
+                                          .addPost(
+                                              postName: postName,
+                                              fee: double.parse(fee),
+                                              isFree: isFree,
+                                              description: description,
+                                              mentorId: user!.id!,
+                                          )
+                                      : context
+                                          .read<AddEditPostCubit>()
+                                          .editPost(
+                                              userId: user!.id!,
+                                            postName: postName,
+                                              fee: double.parse(fee),
+                                              isFree: isFree,
+                                              description: description,
+                                                 mentorId: user!.id!,
+                                          );
+                                          
+                  
                                 }
                               },
-                              child: Text('Post',
+                              child: Text(
+                                widget.post!=null
+                               ? 'Edit'
+                                :'Post',
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleSmall!

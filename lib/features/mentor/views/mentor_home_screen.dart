@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
-import 'package:stuverse/features/mentor/models/mentor_post.dart';
 import '../cubit/home/mentor_home_cubit.dart';
 import '../routes/mentor_routes.dart';
 import '../widgets/mentor_post_card.dart';
