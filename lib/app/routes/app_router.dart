@@ -81,6 +81,17 @@ class AppRouter {
           builder: (context, state) => WebViewScreen(
                 url: (state.extra as String?) ?? "",
               )),
+      GoRoute(
+          path: CommonRoutes.markdownEditor,
+          redirect: (context, state) {
+            if (state.extra == null) {
+              return CommonRoutes.notFound;
+            }
+            return null;
+          },
+          builder: (context, state) => MarkDownScreen(
+                onSaved: (state.extra as Function(String)) ?? (s) {},
+              )),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return MainScreen(
