@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
-
+import 'package:stuverse/features/mentor/models/mentor_post.dart';
 import '../cubit/home/mentor_home_cubit.dart';
+import '../routes/mentor_routes.dart';
 import '../widgets/mentor_post_card.dart';
 
 class MentorHomeScreen extends StatefulWidget {
-  MentorHomeScreen({Key? key}) : super(key: key);
+  MentorHomeScreen({super.key});
 
   @override
   _MentorHomeScreenState createState() => _MentorHomeScreenState();
@@ -22,6 +24,9 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return BgGradient(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -29,7 +34,9 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
           elevation: 0,
           backgroundColor: Colors.transparent,
         ),
-        floatingActionButton: FloatingActionButton.extended(onPressed: (){},icon: Icon(Icons.add),label: Text("Add Post"),),
+        floatingActionButton: FloatingActionButton.extended(onPressed: (){
+          context.push(MentorRoutes.addMentor);
+        },icon: Icon(Icons.add),label: Text("Add Post"),),
         body: BgGradient(
           child: SafeArea(
                   child: RefreshIndicator(
@@ -96,8 +103,8 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                 return Center(child: Text('Error'));
               }
               if (state is MentorHomeLoaded) {
-                final first3Mentors = state.posts.take(3).toList();
-                              return Column(
+                // final first3Mentors = state.posts.take(3).toList();
+                              return  Column(
                                 children: [
                                   Row(
                                     mainAxisAlignment:
@@ -133,7 +140,7 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                                   scrollDirection: Axis.horizontal,
                                    child: Row(
                                     children: [
-                                      for(final mentor in first3Mentors) MentorPostCard(post: mentor),
+                                      for(final post in state.posts) MentorPostCard(post: post),
                                     ],
                                    ),
                                  )

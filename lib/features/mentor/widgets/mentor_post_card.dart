@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stuverse/app/app.dart';
-import 'package:stuverse/features/mentor/mentor.dart';
 
 import '../models/mentor_post.dart';
 
@@ -17,12 +16,12 @@ class MentorPostCard extends StatefulWidget {
 class _MentorPostCardState extends State<MentorPostCard> {
   @override
   Widget build(BuildContext context) {
-
+  final user=context.read<CoreCubit>().state.user;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: InkWell(
         onTap: () {
-          context.push(MentorRoutes.mentorDetails,extra: widget.post);
+          // context.push(MentorRoutes.mentorDetails,extra: widget.post);
         },
         child: Container(
           height: MediaQuery.of(context).size.height * 0.23,
@@ -39,14 +38,14 @@ class _MentorPostCardState extends State<MentorPostCard> {
                   CircleAvatar(
                     radius: 18,
                     backgroundImage: NetworkImage(
-                    widget.post.mentor.image
+                    user!.image.toString()
                     ),
                   ),
                   SizedBox(
                     width: 10,
                   ),
                   Text(
-                    widget.post.mentor.username,
+                    user.username.toString(),
                     style: context.bodyLarge!.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
