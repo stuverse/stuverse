@@ -1,9 +1,10 @@
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/job/job.dart';
-import 'package:stuverse/features/job/views/add-edit/add_edit_job_post.dart';
+
 import 'package:stuverse/features/job/views/job_search_screen.dart';
 
 import '../models/job_post.dart';
+import '../views/add-edit/add_edit_job_post.dart';
 import '../views/detail/job_detail_screen.dart';
 
 class JobRoutes {
@@ -14,7 +15,7 @@ class JobRoutes {
   static List<GoRoute> jobRoutes = [
     GoRoute(
         path: jobAddEdit,
-        builder: (context, state) => AddEditJobPost(
+        builder: (context, state) => AddEditJobPostScreen(
               post: state.extra as JobPost?,
             )),
     GoRoute(

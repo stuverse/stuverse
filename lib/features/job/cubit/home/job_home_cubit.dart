@@ -9,11 +9,12 @@ part 'job_home_state.dart';
 
 class JobHomeCubit extends Cubit<JobHomeState> {
   JobHomeCubit() : super(JobHomeInitial());
-  void getJobHomeData({String? search}) async {
+  void getJobHomeData() async {
     emit(JobHomeLoading());
     try {
-      final response = await dioClient.get("/job/posts",
-          queryParameters: {if (search != null) "search": search});
+      final response = await dioClient.get(
+        "/job/posts",
+      );
       final List<JobPost> postList = [];
       for (final post in response.data) {
         postList.add(JobPost.fromJson(post));
