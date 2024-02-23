@@ -82,7 +82,7 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
                                     },
                                     child: Container(
                                       padding:
-                                          EdgeInsets.only(top: 3, bottom: 3),
+                                          EdgeInsets.only(top: 4, bottom: 4),
                                       width: 55,
                                       decoration: BoxDecoration(
                                           borderRadius:
