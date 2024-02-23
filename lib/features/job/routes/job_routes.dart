@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/job/job.dart';
 
-import 'package:stuverse/features/job/views/job_search_screen.dart';
+import 'package:stuverse/features/job/views/home/job_search_screen.dart';
 
 import '../models/job_post.dart';
 import '../views/add-edit/add_edit_job_post.dart';

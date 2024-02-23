@@ -5,8 +5,8 @@ import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/job/cubit/add_edit/manage_job_cubit.dart';
 import 'package:stuverse/features/job/job.dart';
 
-import '../cubit/home/job_home_cubit.dart';
-import '../widgets/job_list_tile.dart';
+import '../../cubit/home/job_home_cubit.dart';
+import '../../widgets/job_list_tile.dart';
 
 class JobHomeScreen extends StatefulWidget {
   const JobHomeScreen({super.key});
@@ -82,7 +82,7 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
                                     },
                                     child: Container(
                                       padding:
-                                          EdgeInsets.only(top: 3, bottom: 3),
+                                          EdgeInsets.only(top: 4, bottom: 4),
                                       width: 55,
                                       decoration: BoxDecoration(
                                           borderRadius:
