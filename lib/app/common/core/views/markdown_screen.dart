@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:stuverse/app/common/core/widgets/MarkdownTextInput/markdown_text_input.dart';
+
 import 'package:url_launcher/url_launcher.dart';
+
+import '../widgets/MarkdownTextInput/markdown_text_input.dart';
 
 enum MenuItem {
   switchView,
@@ -10,14 +12,15 @@ enum MenuItem {
   save,
 }
 
-class FundHomeScreen extends StatefulWidget {
-  const FundHomeScreen({super.key});
+class MarkDownScreen extends StatefulWidget {
+  const MarkDownScreen({super.key, required this.onSaved});
+  final Function(String) onSaved;
 
   @override
-  State<FundHomeScreen> createState() => _FundHomeScreenState();
+  State<MarkDownScreen> createState() => _MarkDownScreenState();
 }
 
-class _FundHomeScreenState extends State<FundHomeScreen>
+class _MarkDownScreenState extends State<MarkDownScreen>
     with WidgetsBindingObserver {
   final TextEditingController _inputTextEditingController =
       TextEditingController();
@@ -57,7 +60,7 @@ class _FundHomeScreenState extends State<FundHomeScreen>
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text("Fund"),
+        title: Text("Editor"),
         actions: [
           if (!isVerticalView)
             IconButton(
@@ -76,6 +79,7 @@ class _FundHomeScreenState extends State<FundHomeScreen>
                   clearText();
                   break;
                 case MenuItem.save:
+                  widget.onSaved(inputText);
                   break;
               }
             },
