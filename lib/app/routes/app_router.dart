@@ -82,16 +82,16 @@ class AppRouter {
                 url: (state.extra as String?) ?? "",
               )),
       GoRoute(
-          path: CommonRoutes.markdownEditor,
-          redirect: (context, state) {
-            if (state.extra == null) {
-              return CommonRoutes.notFound;
-            }
-            return null;
-          },
-          builder: (context, state) => MarkDownScreen(
-                onSaved: (state.extra as Function(String)) ?? (s) {},
-              )),
+        path: CommonRoutes.markdownEditor,
+        redirect: (context, state) {
+          if (state.extra == null) {
+            return CommonRoutes.notFound;
+          }
+          return null;
+        },
+        builder: (context, state) =>
+            MarkDownScreen(props: state.extra as MarkDownScreenProps),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return MainScreen(

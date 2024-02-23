@@ -4,7 +4,10 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:stuverse/app/app.dart';
 
 import '../../cubit/add_edit/manage_job_cubit.dart';
 import '../../models/job_post.dart';
@@ -24,7 +27,7 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
   final _companyNameController = TextEditingController();
   final _placeController = TextEditingController();
   final _descriptionController = TextEditingController();
-  final _jobTypeController = TextEditingController();
+
   final _urlController = TextEditingController();
   XFile? _selectedImage;
   String? _selectedJobType;
@@ -52,7 +55,6 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
       _companyNameController.text = widget.post!.companyName;
       _placeController.text = widget.post!.place;
       _descriptionController.text = widget.post!.description;
-      _jobTypeController.text = widget.post!.jobType;
       _urlController.text = widget.post!.url;
       _selectedJobType = widget.post!.jobType;
       _selectedJobLocationType = widget.post!.jobLocationType;
@@ -184,41 +186,42 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                InputDecorator(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                  ),
-                  child: DropdownButton(
-                      isExpanded: true,
-                      value: _selectedJobType,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("Full Time"),
-                          value: JOB_TYPE.FULL_TIME,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Part Time"),
-                          value: JOB_TYPE.PART_TIME,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Contract"),
-                          value: JOB_TYPE.CONTRACT,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Internship"),
-                          value: JOB_TYPE.INTERNSHIP,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Temporary"),
-                          value: JOB_TYPE.TEMPORARY,
-                        ),
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedJobType = value;
-                        });
-                      }),
-                ),
+                DropdownButtonFormField(
+                    isExpanded: true,
+                    value: _selectedJobType,
+                    validator: (value) {
+                      if (value == null) {
+                        return "Please select a job type";
+                      }
+                      return null;
+                    },
+                    items: [
+                      DropdownMenuItem(
+                        child: Text("Full Time"),
+                        value: JOB_TYPE.FULL_TIME,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Part Time"),
+                        value: JOB_TYPE.PART_TIME,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Contract"),
+                        value: JOB_TYPE.CONTRACT,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Internship"),
+                        value: JOB_TYPE.INTERNSHIP,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Temporary"),
+                        value: JOB_TYPE.TEMPORARY,
+                      ),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedJobType = value;
+                      });
+                    }),
                 SizedBox(height: 15),
                 const Text(
                   "Choose job Location type",
@@ -230,46 +233,68 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                 SizedBox(
                   height: 8,
                 ),
-                InputDecorator(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                  ),
-                  child: DropdownButton(
-                      isExpanded: true,
-                      value: _selectedJobLocationType,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("Remote"),
-                          value: JOB_LOCATION_TYPE.REMOTE,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Hybrid"),
-                          value: JOB_LOCATION_TYPE.HYBRID,
-                        ),
-                        DropdownMenuItem(
-                            child: Text("Onsite"),
-                            value: JOB_LOCATION_TYPE.ONSITE),
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedJobLocationType = value;
-                        });
-                      }),
-                ),
+                DropdownButtonFormField(
+                    isExpanded: true,
+                    value: _selectedJobLocationType,
+                    validator: (value) {
+                      if (value == null) {
+                        return "Please select a job Location type";
+                      }
+                      return null;
+                    },
+                    items: [
+                      DropdownMenuItem(
+                        child: Text("Remote"),
+                        value: JOB_LOCATION_TYPE.REMOTE,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Hybrid"),
+                        value: JOB_LOCATION_TYPE.HYBRID,
+                      ),
+                      DropdownMenuItem(
+                          child: Text("Onsite"),
+                          value: JOB_LOCATION_TYPE.ONSITE),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedJobLocationType = value;
+                      });
+                    }),
 
                 const SizedBox(height: 15),
-                Text(
-                  "Job Description",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Job Description",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        context.push(CommonRoutes.markdownEditor,
+                            extra: MarkDownScreenProps(
+                              onSaved: (value) {
+                                _descriptionController.text = value;
+                                setState(() {});
+                                context.pop();
+                              },
+                              initialText: _descriptionController.text,
+                            ));
+                      },
+                      icon: const Icon(Icons.edit),
+                      label: const Text("Edit Description"),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 10),
+
                 TextFormField(
                     maxLength: 5000,
                     maxLines: 7,
-                    onTap: () {},
+                    enabled: false,
                     controller: _descriptionController,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -337,7 +362,9 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                                       description: _descriptionController.text,
                                       place: _placeController.text,
                                       companyName: _companyNameController.text,
-                                      jobType: _jobTypeController.text,
+                                      jobType: _selectedJobType!,
+                                      jobLocationType:
+                                          _selectedJobLocationType!,
                                       url: _urlController.text,
                                       image: _selectedImage,
                                     )
@@ -347,7 +374,9 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                                       description: _descriptionController.text,
                                       place: _placeController.text,
                                       companyName: _companyNameController.text,
-                                      jobType: _jobTypeController.text,
+                                      jobType: _selectedJobType!,
+                                      jobLocationType:
+                                          _selectedJobLocationType!,
                                       url: _urlController.text,
                                       image: _selectedImage,
                                     );
@@ -355,13 +384,13 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                         },
                         child: Text(
                           widget.post != null ? "Edit Post" : "Post Job",
-                          style: Theme.of(context)
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          textStyle: Theme.of(context)
                               .textTheme
                               .bodyLarge!
                               .copyWith(
                                   fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        style: ElevatedButton.styleFrom(
                           minimumSize: Size(150, 50),
                           backgroundColor: Color.fromARGB(255, 1, 27, 72),
                           foregroundColor: Colors.white,
