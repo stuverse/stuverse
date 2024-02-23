@@ -4,7 +4,7 @@ import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/job/cubit/search/job_search_cubit.dart';
 import 'package:stuverse/features/job/widgets/job_list_tile.dart';
 
-import '../cubit/home/job_home_cubit.dart';
+import '../../cubit/home/job_home_cubit.dart';
 
 class JobSearchScreen extends StatefulWidget {
   const JobSearchScreen({super.key});
