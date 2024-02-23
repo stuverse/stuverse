@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:stuverse/app/app.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,9 +13,16 @@ enum MenuItem {
   save,
 }
 
-class MarkDownScreen extends StatefulWidget {
-  const MarkDownScreen({super.key, required this.onSaved});
+class MarkDownScreenProps {
   final Function(String) onSaved;
+  final String? initialText;
+
+  MarkDownScreenProps({required this.onSaved, this.initialText});
+}
+
+class MarkDownScreen extends StatefulWidget {
+  const MarkDownScreen({super.key, required this.props});
+  final MarkDownScreenProps props;
 
   @override
   State<MarkDownScreen> createState() => _MarkDownScreenState();
@@ -32,7 +40,10 @@ class _MarkDownScreenState extends State<MarkDownScreen>
   @override
   void initState() {
     super.initState();
-
+    if (widget.props.initialText != null) {
+      inputText = widget.props.initialText!;
+      _inputTextEditingController.text = widget.props.initialText!;
+    }
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -62,59 +73,25 @@ class _MarkDownScreenState extends State<MarkDownScreen>
         elevation: 0,
         title: Text("Editor"),
         actions: [
-          if (!isVerticalView)
-            IconButton(
-              onPressed: switchPreview,
-              tooltip: "Preview",
-              icon: Icon(isPreview ? Icons.visibility_off : Icons.visibility),
-            ),
-          PopupMenuButton<MenuItem>(
-            onSelected: (selectedMenuItem) {
-              switch (selectedMenuItem) {
-                case MenuItem.switchView:
-                  switchView();
-                  break;
-
-                case MenuItem.clear:
-                  clearText();
-                  break;
-                case MenuItem.save:
-                  widget.onSaved(inputText);
-                  break;
-              }
-            },
-            itemBuilder: (context) => [
-              PopupMenuItem(
-                value: MenuItem.switchView,
-                child: Row(
-                  children: [
-                    const Icon(Icons.rotate_left),
-                    const SizedBox(width: 8),
-                    Text("Switch View"),
-                  ],
-                ),
-              ),
-              PopupMenuItem(
-                value: MenuItem.clear,
-                child: Row(
-                  children: [
-                    const Icon(Icons.clear_all),
-                    const SizedBox(width: 8),
-                    Text("Clear"),
-                  ],
-                ),
-              ),
-              PopupMenuItem(
-                value: MenuItem.save,
-                child: Row(
-                  children: [
-                    const Icon(Icons.save),
-                    const SizedBox(width: 8),
-                    Text("Save"),
-                  ],
-                ),
-              ),
-            ],
+          IconButton(
+            onPressed: isVerticalView ? null : switchPreview,
+            tooltip: "Preview",
+            icon: Icon(isPreview ? Icons.visibility_off : Icons.visibility),
+          ),
+          IconButton(
+            onPressed: switchView,
+            tooltip: "Switch View",
+            icon: Icon(Icons.rotate_left),
+          ),
+          IconButton(
+            onPressed: clearText,
+            tooltip: "Clear",
+            icon: Icon(Icons.clear_all),
+          ),
+          IconButton(
+            onPressed: () => widget.props.onSaved(inputText),
+            tooltip: "Save",
+            icon: Icon(Icons.save),
           ),
         ],
       ),
@@ -167,21 +144,8 @@ class _MarkDownScreenState extends State<MarkDownScreen>
           radius: const Radius.circular(8),
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(8),
-            child: MarkdownBody(
-              data: inputText,
-              shrinkWrap: true,
-              softLineBreak: true,
-              imageBuilder: (imageUri, _, alternateText) {
-                return Image.network(
-                  imageUri.toString(),
-                  errorBuilder: (_, __, ___) {
-                    return Text(alternateText ?? "");
-                  },
-                );
-              },
-              onTapLink: (i, j, k) {
-                launchUrl(Uri.parse(j ?? ""));
-              },
+            child: CustomMarkdownBody(
+              inputText: inputText,
             ),
           ),
         ),
@@ -200,9 +164,10 @@ class _MarkDownScreenState extends State<MarkDownScreen>
           const SizedBox(height: 5),
           MarkdownTextInput(
             (String value) => setState(() => inputText = value),
-            "inputText",
+            inputText,
             controller: _inputTextEditingController,
             maxLines: 8,
+            isFullPreview: false,
             label: "Type your markdown here",
           ),
         ],
@@ -222,6 +187,7 @@ class _MarkDownScreenState extends State<MarkDownScreen>
                 (String value) => setState(() => inputText = value),
                 inputText,
                 controller: _inputTextEditingController,
+                isFullPreview: true,
                 label: "",
               ),
       ),

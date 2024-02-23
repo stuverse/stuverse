@@ -1,6 +1,7 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 
@@ -86,15 +87,9 @@ class JobDetailScreen extends StatelessWidget {
                       const SizedBox(
                         height: 15,
                       ),
-                      Text("Job Description",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .copyWith(fontWeight: FontWeight.bold)),
                       Divider(),
                       const SizedBox(height: 5),
-                      Text(post.description,
-                          style: Theme.of(context).textTheme.bodyLarge),
+                      CustomMarkdownBody(inputText: post.description),
                     ],
                   ),
                 ),

@@ -16,6 +16,7 @@ class ManageJobCubit extends Cubit<ManageJobState> {
       required String description,
       required String place,
       required String jobType,
+      required String jobLocationType,
       required String url,
       XFile? image,
       required String companyName}) async {
@@ -27,6 +28,7 @@ class ManageJobCubit extends Cubit<ManageJobState> {
         "place": place,
         "companyName": companyName,
         "jobType": jobType,
+        "jobLocationType": jobLocationType,
         "url": url,
         if (image != null)
           "image": await MultipartFile.fromFile(
@@ -59,6 +61,7 @@ class ManageJobCubit extends Cubit<ManageJobState> {
       required String place,
       required int id,
       required String jobType,
+      required String jobLocationType,
       required String url,
       XFile? image,
       required String companyName}) async {
@@ -70,6 +73,7 @@ class ManageJobCubit extends Cubit<ManageJobState> {
         "place": place,
         "companyName": companyName,
         "jobType": jobType,
+        "jobLocationType": jobLocationType,
         "url": url,
         if (image != null)
           "image": await MultipartFile.fromFile(
