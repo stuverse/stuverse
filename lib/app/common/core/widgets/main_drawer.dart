@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
+import 'package:stuverse/features/forum/forum.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({
@@ -38,8 +39,10 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text('Profile'),
-            onTap: () {},
+            title: const Text('Manage Communities'),
+            onTap: () {
+              context.push(ForumRoutes.communityManage);
+            },
           ),
           ListTile(
             title: const Text('Settings'),

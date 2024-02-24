@@ -6,6 +6,7 @@ import 'package:stuverse/features/forum/forum.dart';
 import 'package:stuverse/features/fund/fund.dart';
 import 'package:stuverse/features/job/job.dart';
 import 'package:stuverse/features/mentor/mentor.dart';
+import 'package:stuverse/features/profile/profile.dart';
 
 class RootApp extends StatelessWidget {
   const RootApp({super.key});
@@ -19,6 +20,7 @@ class RootApp extends StatelessWidget {
         ...JobProviders.blocProviders,
         ...ForumProviders.blocProviders,
         ...MentorProviders.blocProviders,
+        ...ProfileProviders.blocProviders,
       ],
       child: _App(),
     );

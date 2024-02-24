@@ -9,7 +9,7 @@ import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/forum/forum.dart';
 import 'package:stuverse/features/forum/utils/forum_utils.dart';
 
-import '../../cubit/comment/comment_cubit.dart';
+import '../../cubit/comment/thread_comment_cubit.dart';
 
 class ThreadDetailScreen extends StatefulWidget {
   const ThreadDetailScreen(
@@ -35,7 +35,7 @@ class _ThreadDetailScreenState extends State<ThreadDetailScreen> {
 
   @override
   void initState() {
-    context.read<CommentCubit>().getComments(threadId: widget.thread.id!);
+    context.read<ThreadCommentCubit>().getComments(threadId: widget.thread.id!);
     super.initState();
   }
 
@@ -90,7 +90,7 @@ class _ThreadDetailScreenState extends State<ThreadDetailScreen> {
                           thickness: 0.5,
                         ),
                         10.heightBox,
-                        BlocConsumer<CommentCubit, CommentState>(
+                        BlocConsumer<ThreadCommentCubit, ThreadCommentState>(
                           listener: (context, state) {
                             state.mapOrNull(
                               error: (value) {
@@ -237,7 +237,8 @@ class _ThreadDetailScreenState extends State<ThreadDetailScreen> {
                                 ),
                               ),
                               10.widthBox,
-                              BlocConsumer<CommentCubit, CommentState>(
+                              BlocConsumer<ThreadCommentCubit,
+                                  ThreadCommentState>(
                                 listener: (context, state) {
                                   state.mapOrNull(
                                     commentAddFailed: (value) {
@@ -246,7 +247,7 @@ class _ThreadDetailScreenState extends State<ThreadDetailScreen> {
                                     },
                                     commentAdded: (value) {
                                       context
-                                          .read<CommentCubit>()
+                                          .read<ThreadCommentCubit>()
                                           .getCommentSilently(
                                             threadId: widget.thread.id!,
                                           );
@@ -262,7 +263,7 @@ class _ThreadDetailScreenState extends State<ThreadDetailScreen> {
                                       onPressed: () {
                                         if (commentController.text.isNotEmpty) {
                                           context
-                                              .read<CommentCubit>()
+                                              .read<ThreadCommentCubit>()
                                               .addComment(
                                                 threadId: widget.thread.id!,
                                                 content: commentController.text,

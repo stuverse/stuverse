@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:logman/logman.dart';
+import 'package:stuverse/features/forum/forum.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -34,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
             if (state.user == null) {
               context.go(CommonRoutes.signin);
             } else {
-              context.go(CommonRoutes.home);
+              context.go(ForumRoutes.forumHome);
             }
           }
         }

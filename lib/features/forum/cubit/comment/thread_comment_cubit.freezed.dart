@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'comment_cubit.dart';
+part of 'thread_comment_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$CommentState {
+mixin _$ThreadCommentState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -87,16 +87,16 @@ mixin _$CommentState {
 }
 
 /// @nodoc
-abstract class $CommentStateCopyWith<$Res> {
-  factory $CommentStateCopyWith(
-          CommentState value, $Res Function(CommentState) then) =
-      _$CommentStateCopyWithImpl<$Res, CommentState>;
+abstract class $ThreadCommentStateCopyWith<$Res> {
+  factory $ThreadCommentStateCopyWith(
+          ThreadCommentState value, $Res Function(ThreadCommentState) then) =
+      _$ThreadCommentStateCopyWithImpl<$Res, ThreadCommentState>;
 }
 
 /// @nodoc
-class _$CommentStateCopyWithImpl<$Res, $Val extends CommentState>
-    implements $CommentStateCopyWith<$Res> {
-  _$CommentStateCopyWithImpl(this._value, this._then);
+class _$ThreadCommentStateCopyWithImpl<$Res, $Val extends ThreadCommentState>
+    implements $ThreadCommentStateCopyWith<$Res> {
+  _$ThreadCommentStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -113,7 +113,7 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$CommentStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$ThreadCommentStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -127,7 +127,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'CommentState.initial()';
+    return 'ThreadCommentState.initial()';
   }
 
   @override
@@ -232,7 +232,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements CommentState {
+abstract class _Initial implements ThreadCommentState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -245,7 +245,7 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$CommentStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$ThreadCommentStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
@@ -259,7 +259,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'CommentState.loading()';
+    return 'ThreadCommentState.loading()';
   }
 
   @override
@@ -364,7 +364,7 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements CommentState {
+abstract class _Loading implements ThreadCommentState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -379,7 +379,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$CommentStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$ThreadCommentStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
@@ -415,7 +415,7 @@ class _$SuccessImpl implements _Success {
 
   @override
   String toString() {
-    return 'CommentState.success(comments: $comments)';
+    return 'ThreadCommentState.success(comments: $comments)';
   }
 
   @override
@@ -529,7 +529,7 @@ class _$SuccessImpl implements _Success {
   }
 }
 
-abstract class _Success implements CommentState {
+abstract class _Success implements ThreadCommentState {
   const factory _Success({required final List<ThreadComment> comments}) =
       _$SuccessImpl;
 
@@ -550,7 +550,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$CommentStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$ThreadCommentStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
@@ -580,7 +580,7 @@ class _$ErrorImpl implements _Error {
 
   @override
   String toString() {
-    return 'CommentState.error(message: $message)';
+    return 'ThreadCommentState.error(message: $message)';
   }
 
   @override
@@ -693,7 +693,7 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements CommentState {
+abstract class _Error implements ThreadCommentState {
   const factory _Error({required final String message}) = _$ErrorImpl;
 
   String get message;
@@ -711,7 +711,7 @@ abstract class _$$CommentAddingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$CommentAddingImplCopyWithImpl<$Res>
-    extends _$CommentStateCopyWithImpl<$Res, _$CommentAddingImpl>
+    extends _$ThreadCommentStateCopyWithImpl<$Res, _$CommentAddingImpl>
     implements _$$CommentAddingImplCopyWith<$Res> {
   __$$CommentAddingImplCopyWithImpl(
       _$CommentAddingImpl _value, $Res Function(_$CommentAddingImpl) _then)
@@ -725,7 +725,7 @@ class _$CommentAddingImpl implements _CommentAdding {
 
   @override
   String toString() {
-    return 'CommentState.commentAdding()';
+    return 'ThreadCommentState.commentAdding()';
   }
 
   @override
@@ -830,7 +830,7 @@ class _$CommentAddingImpl implements _CommentAdding {
   }
 }
 
-abstract class _CommentAdding implements CommentState {
+abstract class _CommentAdding implements ThreadCommentState {
   const factory _CommentAdding() = _$CommentAddingImpl;
 }
 
@@ -845,7 +845,7 @@ abstract class _$$CommentAddedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$CommentAddedImplCopyWithImpl<$Res>
-    extends _$CommentStateCopyWithImpl<$Res, _$CommentAddedImpl>
+    extends _$ThreadCommentStateCopyWithImpl<$Res, _$CommentAddedImpl>
     implements _$$CommentAddedImplCopyWith<$Res> {
   __$$CommentAddedImplCopyWithImpl(
       _$CommentAddedImpl _value, $Res Function(_$CommentAddedImpl) _then)
@@ -875,7 +875,7 @@ class _$CommentAddedImpl implements _CommentAdded {
 
   @override
   String toString() {
-    return 'CommentState.commentAdded(comment: $comment)';
+    return 'ThreadCommentState.commentAdded(comment: $comment)';
   }
 
   @override
@@ -988,7 +988,7 @@ class _$CommentAddedImpl implements _CommentAdded {
   }
 }
 
-abstract class _CommentAdded implements CommentState {
+abstract class _CommentAdded implements ThreadCommentState {
   const factory _CommentAdded({required final ThreadComment comment}) =
       _$CommentAddedImpl;
 
@@ -1009,7 +1009,7 @@ abstract class _$$CommentAddFailedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$CommentAddFailedImplCopyWithImpl<$Res>
-    extends _$CommentStateCopyWithImpl<$Res, _$CommentAddFailedImpl>
+    extends _$ThreadCommentStateCopyWithImpl<$Res, _$CommentAddFailedImpl>
     implements _$$CommentAddFailedImplCopyWith<$Res> {
   __$$CommentAddFailedImplCopyWithImpl(_$CommentAddFailedImpl _value,
       $Res Function(_$CommentAddFailedImpl) _then)
@@ -1039,7 +1039,7 @@ class _$CommentAddFailedImpl implements _CommentAddFailed {
 
   @override
   String toString() {
-    return 'CommentState.commentAddFailed(message: $message)';
+    return 'ThreadCommentState.commentAddFailed(message: $message)';
   }
 
   @override
@@ -1153,7 +1153,7 @@ class _$CommentAddFailedImpl implements _CommentAddFailed {
   }
 }
 
-abstract class _CommentAddFailed implements CommentState {
+abstract class _CommentAddFailed implements ThreadCommentState {
   const factory _CommentAddFailed({required final String message}) =
       _$CommentAddFailedImpl;
 

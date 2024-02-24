@@ -10,20 +10,21 @@ import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/forum/cubit/vote/vote_cubit.dart';
 import 'package:stuverse/features/forum/forum.dart';
 
-import 'thread_tag_chip.dart';
-import 'vote_chip.dart';
-
 class ThreadCard extends StatelessWidget {
   const ThreadCard({
     super.key,
     required this.thread,
     this.isDetailScreen = false,
+    this.isCommunityScreen = false,
+    this.isSkeleton = false,
     this.commentFocusNode,
   });
 
   final Thread thread;
   final bool isDetailScreen;
   final FocusNode? commentFocusNode;
+  final bool isCommunityScreen;
+  final bool isSkeleton;
 
   @override
   Widget build(BuildContext context) {
@@ -43,30 +44,44 @@ class ThreadCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 18.5,
-                backgroundColor: Theme.of(context).colorScheme.onBackground,
-                child: CircleAvatar(
-                  radius: 18,
-                  backgroundImage: NetworkImage(thread.community?.image ?? ""),
-                ),
+                backgroundColor:
+                    Theme.of(context).colorScheme.onBackground.withOpacity(0.6),
+                child: isSkeleton
+                    ? null
+                    : CircleAvatar(
+                        radius: 18,
+                        backgroundImage: NetworkImage(isCommunityScreen
+                            ? thread.author?.image ?? ""
+                            : thread.community?.image ?? ""),
+                      ),
               ),
               10.widthBox,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "t/${thread.community?.name}",
-                    style: context.titleMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground,
-                        fontWeight: FontWeight.bold),
+              if (isCommunityScreen)
+                Text(
+                  thread.author?.name ?? "",
+                  style: context.titleMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Text(
-                    "${CommonUtils.getFirstLetter(thread.author?.type ?? "u")}/${thread.author?.username}",
-                    style: context.labelMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground,
+                )
+              else
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "t/${thread.community?.name}",
+                      style: context.titleMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground,
+                          fontWeight: FontWeight.bold),
                     ),
-                  ),
-                ],
-              ),
+                    Text(
+                      "${CommonUtils.getFirstLetter(thread.author?.type ?? "u")}/${thread.author?.username}",
+                      style: context.labelMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
+                    ),
+                  ],
+                ),
               Spacer(),
               Align(
                 heightFactor: 0.8,
@@ -111,12 +126,21 @@ class ThreadCard extends StatelessWidget {
           if (thread.image != null)
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: Image.network(
-                thread.image!,
-                width: double.infinity,
-                height: context.minSize * 0.8,
-                fit: BoxFit.cover,
-              ),
+              child: isSkeleton
+                  ? Container(
+                      width: double.infinity,
+                      height: context.minSize * 0.8,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onBackground
+                          .withOpacity(0.1),
+                    )
+                  : Image.network(
+                      thread.image!,
+                      width: double.infinity,
+                      height: context.minSize * 0.8,
+                      fit: BoxFit.cover,
+                    ),
             ),
           10.heightBox,
           Row(
@@ -129,7 +153,15 @@ class ThreadCard extends StatelessWidget {
                 ),
               ),
               10.widthBox,
-              Chip(
+              ChoiceChip(
+                onSelected: (value) {
+                  if (isDetailScreen) {
+                    commentFocusNode?.requestFocus();
+                  } else {
+                    context.push(ForumRoutes.threadDetail, extra: thread);
+                  }
+                },
+                selected: false,
                 side: BorderSide(
                   color: Theme.of(context)
                       .colorScheme

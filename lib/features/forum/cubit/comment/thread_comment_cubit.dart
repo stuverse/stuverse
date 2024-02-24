@@ -3,24 +3,22 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:stuverse/features/forum/forum.dart';
 import 'package:stuverse/features/forum/utils/forum_utils.dart';
 
-import '../../services/comment_repo.dart';
+part 'thread_comment_state.dart';
+part 'thread_comment_cubit.freezed.dart';
 
-part 'comment_state.dart';
-part 'comment_cubit.freezed.dart';
+class ThreadCommentCubit extends Cubit<ThreadCommentState> {
+  ThreadCommentCubit() : super(ThreadCommentState.initial());
 
-class CommentCubit extends Cubit<CommentState> {
-  CommentCubit() : super(CommentState.initial());
-
-  final _commentRepo = CommentRepo();
+  final _commentRepo = ThreadCommentRepo();
 
   void getComments({
     required int threadId,
   }) async {
-    emit(CommentState.loading());
+    emit(ThreadCommentState.loading());
     final result = await _commentRepo.getThreadComment(threadId: threadId);
     result.fold(
-      (error) => emit(CommentState.error(message: error)),
-      (comments) => emit(CommentState.success(comments: comments)),
+      (error) => emit(ThreadCommentState.error(message: error)),
+      (comments) => emit(ThreadCommentState.success(comments: comments)),
     );
   }
 
@@ -29,8 +27,8 @@ class CommentCubit extends Cubit<CommentState> {
   }) async {
     final result = await _commentRepo.getThreadComment(threadId: threadId);
     result.fold(
-      (error) => emit(CommentState.error(message: error)),
-      (comments) => emit(CommentState.success(comments: comments)),
+      (error) => emit(ThreadCommentState.error(message: error)),
+      (comments) => emit(ThreadCommentState.success(comments: comments)),
     );
   }
 
@@ -40,7 +38,7 @@ class CommentCubit extends Cubit<CommentState> {
     int? parentId,
   }) async {
     await state.mapOrNull(success: (suc) async {
-      emit(CommentState.commentAdding());
+      emit(ThreadCommentState.commentAdding());
       final result = await _commentRepo.addThreadComment(
         threadId: threadId,
         content: content,
@@ -49,9 +47,9 @@ class CommentCubit extends Cubit<CommentState> {
       List<ThreadComment> newComments = [];
 
       result.fold(
-        (error) => emit(CommentState.commentAddFailed(message: error)),
+        (error) => emit(ThreadCommentState.commentAddFailed(message: error)),
         (comment) {
-          emit(CommentState.commentAdded(comment: comment));
+          emit(ThreadCommentState.commentAdded(comment: comment));
           ForumUtils.getNewCommentsState(suc.comments, comment.parent, comment);
           if (comment.parent == null) {
             newComments = [comment, ...suc.comments];
@@ -61,7 +59,7 @@ class CommentCubit extends Cubit<CommentState> {
         },
       );
 
-      emit(CommentState.success(comments: newComments));
+      emit(ThreadCommentState.success(comments: newComments));
     });
   }
 }

@@ -11,7 +11,7 @@ class VoteRepo {
   }) async {
     try {
       await dioClient.post(
-        VOTE_THREAD,
+        VOTE_THREAD_API,
         data: {
           'value': vote,
           'thread_id': threadId,

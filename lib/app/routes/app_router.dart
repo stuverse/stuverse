@@ -8,11 +8,12 @@ import 'package:stuverse/features/forum/forum.dart';
 import 'package:stuverse/features/fund/fund.dart';
 import 'package:stuverse/features/job/job.dart';
 import 'package:stuverse/features/mentor/mentor.dart';
+import 'package:stuverse/features/profile/profile.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
-  static final _homeNavigatorKey =
-      GlobalKey<NavigatorState>(debugLabel: 'home');
+  static final _profileNavigatorKey =
+      GlobalKey<NavigatorState>(debugLabel: 'profile');
   static final _forumNavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'forum');
   static final _fundNavigatorKey =
@@ -100,18 +101,6 @@ class AppRouter {
         },
         branches: [
           StatefulShellBranch(
-            navigatorKey: _homeNavigatorKey,
-            initialLocation: CommonRoutes.home,
-            routes: [
-              GoRoute(
-                path: CommonRoutes.home,
-                builder: (context, state) {
-                  return HomeScreen();
-                },
-              ),
-            ],
-          ),
-          StatefulShellBranch(
             navigatorKey: _forumNavigatorKey,
             initialLocation: ForumRoutes.forumHome,
             routes: [
@@ -138,12 +127,25 @@ class AppRouter {
               MentorRoutes.mentorHomeRoute,
             ],
           ),
+          StatefulShellBranch(
+            navigatorKey: _profileNavigatorKey,
+            initialLocation: ProfileRoutes.profileHome,
+            routes: [
+              GoRoute(
+                path: ProfileRoutes.profileHome,
+                builder: (context, state) {
+                  return ProfileHomeScreen();
+                },
+              ),
+            ],
+          ),
         ],
       ),
       ...ForumRoutes.forumRoutes,
       ...FundRoutes.fundRoutes,
       ...JobRoutes.jobRoutes,
       ...MentorRoutes.mentorRoutes,
+      ...ProfileRoutes.profileRoutes
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),
   );
