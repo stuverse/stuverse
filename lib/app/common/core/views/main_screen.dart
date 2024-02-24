@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 
@@ -18,38 +19,35 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     user = context.read<CoreCubit>().state.user;
+    navItems.addAll([
+      NavDestItem(
+        label: 'Forum',
+        regularSvgPath: AppImages.forumSVG,
+        solidSvgPath: AppImages.forumSolidSVG,
+      ),
+      NavDestItem(
+        label: 'Fundraising',
+        regularSvgPath: AppImages.fundSVG,
+        solidSvgPath: AppImages.fundSolidSVG,
+      ),
+      NavDestItem(
+        label: 'Jobs',
+        regularSvgPath: AppImages.jobSVG,
+        solidSvgPath: AppImages.jobSolidSVG,
+      ),
+      NavDestItem(
+        label: 'Mentoring',
+        regularSvgPath: AppImages.mentorSVG,
+        solidSvgPath: AppImages.mentorSolidSVG,
+      ),
+      ProfileNavItem(),
+    ]);
     super.initState();
   }
 
   late final User? user;
 
-  final navItems = [
-    NavDestItem(
-      label: 'Home',
-      regularSvgPath: AppImages.homeSVG,
-      solidSvgPath: AppImages.homeSolidSVG,
-    ),
-    NavDestItem(
-      label: 'Forum',
-      regularSvgPath: AppImages.forumSVG,
-      solidSvgPath: AppImages.forumSolidSVG,
-    ),
-    NavDestItem(
-      label: 'Fundraising',
-      regularSvgPath: AppImages.fundSVG,
-      solidSvgPath: AppImages.fundSolidSVG,
-    ),
-    NavDestItem(
-      label: 'Jobs',
-      regularSvgPath: AppImages.jobSVG,
-      solidSvgPath: AppImages.jobSolidSVG,
-    ),
-    NavDestItem(
-      label: 'Mentoring',
-      regularSvgPath: AppImages.mentorSVG,
-      solidSvgPath: AppImages.mentorSolidSVG,
-    ),
-  ];
+  final List<Widget> navItems = [];
   void _goBranch(int index) {
     HapticFeedback.lightImpact();
     widget.navigationShell.goBranch(
@@ -82,13 +80,19 @@ class _MainScreenState extends State<MainScreen> {
           //   hasNotification: false,
           //   onPressed: () {},
           // ),
-          IconButton(
-            onPressed: () {},
-            icon: CircleAvatar(
-              backgroundColor: context.colorScheme.secondaryContainer,
-              radius: 15,
-              backgroundImage: NetworkImage(
-                user?.image ?? "",
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 7,
+            ),
+            child: IconButton(
+              onPressed: () {},
+              icon: SvgPicture.asset(
+                AppImages.bellSVG,
+                height: 20,
+                colorFilter: ColorFilter.mode(
+                  context.colorScheme.onBackground,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
           )
@@ -120,6 +124,40 @@ class _MainScreenState extends State<MainScreen> {
           onDestinationSelected: _goBranch,
         ),
       ),
+    );
+  }
+}
+
+class ProfileNavItem extends StatelessWidget {
+  const ProfileNavItem({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final user = context.read<CoreCubit>().state.user;
+    return NavigationDestination(
+      icon: CircleAvatar(
+        radius: 15,
+        backgroundColor: context.colorScheme.onBackground.withOpacity(0.5),
+        child: CircleAvatar(
+          radius: 13,
+          backgroundImage: NetworkImage(
+            user?.image ?? "",
+          ),
+        ),
+      ),
+      selectedIcon: CircleAvatar(
+        radius: 15,
+        backgroundColor: context.colorScheme.secondaryContainer,
+        child: CircleAvatar(
+          radius: 13,
+          backgroundImage: NetworkImage(
+            user?.image ?? "",
+          ),
+        ),
+      ),
+      label: "Profile",
     );
   }
 }

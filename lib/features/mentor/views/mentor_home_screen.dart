@@ -96,65 +96,65 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                     ),
                     SizedBox(height: 10),
                     BlocBuilder<ManageMentorPostCubit, ManageMentorPostState>(
-                      builder: (context, state) => state is ManageMentorPostLoading
+                      builder: (context, state) => state
+                              is ManageMentorPostLoading
                           ? CircularProgressIndicator()
-                         
-                     
-                      
-                   : BlocConsumer<MentorHomeCubit, MentorHomeState>(
-                        listener: (context, state) {},
-                        builder: (context, state) {
-                          if (state is MentorHomeFailure) {
-                            return Center(child: Text('Error'));
-                          }
-                          if (state is MentorHomeLoaded) {
-                            // final first3Mentors = state.posts.take(3).toList();
-                            return Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Top Mentors',
-                                      style: context.titleMedium!.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        'See All',
-                                        style: context.bodyMedium!.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
+                          : BlocConsumer<MentorHomeCubit, MentorHomeState>(
+                              listener: (context, state) {},
+                              builder: (context, state) {
+                                if (state is MentorHomeFailure) {
+                                  return Center(child: Text('Error'));
+                                }
+                                if (state is MentorHomeLoaded) {
+                                  // final first3Mentors = state.posts.take(3).toList();
+                                  return Column(
                                     children: [
-                                      for (final post in state.posts)
-                                        MentorPostCard(post: post),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Top Mentors',
+                                            style:
+                                                context.titleMedium!.copyWith(
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {},
+                                            child: Text(
+                                              'See All',
+                                              style: context.bodyMedium!
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .primary),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Row(
+                                          children: [
+                                            for (final post in state.posts)
+                                              MentorPostCard(post: post),
+                                          ],
+                                        ),
+                                      )
                                     ],
-                                  ),
-                                )
-                              ],
-                            );
-                          }
-                          return Center(child: CircularProgressIndicator());
-                        },
-                      ),
-                    
+                                  );
+                                }
+                                return Center(
+                                    child: CircularProgressIndicator());
+                              },
+                            ),
                     ),
-  
                   ],
                 ),
               ),

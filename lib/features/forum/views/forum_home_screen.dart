@@ -1,6 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stuverse/app/app.dart';
+import 'package:stuverse/features/forum/forum.dart';
+
+import '../widgets/community/community_mini_card.dart';
 
 class ForumHomeScreen extends StatefulWidget {
   const ForumHomeScreen({super.key});
@@ -9,18 +14,16 @@ class ForumHomeScreen extends StatefulWidget {
   State<ForumHomeScreen> createState() => _ForumHomeScreenState();
 }
 
-class _ForumHomeScreenState extends State<ForumHomeScreen> {
-  final categoryList = [
-    HorzTabItem(title: "Top", id: 1),
-    HorzTabItem(title: "Public", id: 2),
-    HorzTabItem(title: "Private", id: 3),
-  ];
-
-  late final ValueNotifier<HorzTabItem> selectedCategory;
-
+class _ForumHomeScreenState extends State<ForumHomeScreen>
+    with SingleTickerProviderStateMixin {
+  late final _tabController;
   @override
   void initState() {
-    selectedCategory = ValueNotifier(categoryList.first);
+    context.read<ForumHomeCubit>().getHomeData();
+    _tabController = TabController(
+      length: 2,
+      vsync: this,
+    );
     super.initState();
   }
 
@@ -28,160 +31,165 @@ class _ForumHomeScreenState extends State<ForumHomeScreen> {
   Widget build(BuildContext context) {
     return BgGradient(
       child: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              20.heightBox,
-              Padding(
-                padding: context.paddingHorz,
-                child: Text(
-                  "Popular Communities",
-                  style: context.titleLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-                ),
-              ),
-              20.heightBox,
-              SizedBox(
-                height: 300,
-                child: PageView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: categoryList.length,
-                  controller: PageController(
-                    viewportFraction: 0.92,
-                    initialPage: 0,
-                  ),
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        CommunityMiniCard(),
-                        10.heightBox,
-                        CommunityMiniCard(),
+        child: BlocConsumer<ForumHomeCubit, ForumHomeState>(
+          listener: (context, state) {
+            if (state is ForumHomeError) {
+              context.showErrorMessage(
+                message: state.message,
+                duration: 3.seconds,
+              );
+            }
+          },
+          builder: (context, state) {
+            if (state is ForumHomeLoaded) {
+              return RefreshIndicator.adaptive(
+                onRefresh: () async {
+                  context.read<ForumHomeCubit>().getHomeData();
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TabBar(
+                      controller: _tabController,
+                      onTap: (value) {
+                        context.read<ForumHomeCubit>().getHomeData();
+                      },
+                      tabs: const [
+                        Tab(
+                          text: "Threads",
+                        ),
+                        Tab(
+                          text: "Communites",
+                        ),
                       ],
-                    );
-                  },
+                    ),
+                    Expanded(
+                      child: TabBarView(controller: _tabController, children: [
+                        SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              20.heightBox,
+                              for (final thread in state.threads)
+                                Column(
+                                  children: [
+                                    Padding(
+                                      padding: context.paddingHorz,
+                                      child: ThreadCard(
+                                        thread: thread,
+                                      ),
+                                    ),
+                                    Divider()
+                                  ],
+                                ),
+                            ].defaultListAnimation(),
+                          ),
+                        ),
+                        SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              _getTitleRow(
+                                title: "Popular Communities",
+                                onSeeAll: () {},
+                              ),
+                              _getCommunityView(state.popularCommunities),
+                              _getTitleRow(
+                                title: "Your Communities",
+                                onSeeAll: () {},
+                              ),
+                              _getCommunityView(state.yourCommunities),
+                            ],
+                          ),
+                        ),
+                      ]),
+                    ),
+                  ].defaultListAnimation(),
                 ),
-              ),
-              Padding(
-                padding: context.paddingHorz,
-                child: Text(
-                  "Latest Communities",
-                  style: context.titleLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-                ),
-              ),
-              20.heightBox,
-              SizedBox(
-                height: 300,
-                child: PageView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: categoryList.length,
-                  controller: PageController(
-                    viewportFraction: 0.92,
-                    initialPage: 0,
-                  ),
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        CommunityMiniCard(),
-                        10.heightBox,
-                        CommunityMiniCard(),
-                      ],
-                    );
-                  },
-                ),
-              ),
-              // ValueListenableBuilder(
-              //     valueListenable: selectedCategory,
-              //     builder: (context, child, _) {
-              //       return HorzTabBar(
-              //           categoryList: categoryList,
-              //           onSelected: (item) {
-              //             selectedCategory.value = item;
-              //           },
-              //           selectedCategory: selectedCategory.value);
-              //     }),
-            ].defaultListAnimation(),
-          ),
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
         ),
       ),
     );
   }
-}
 
-class CommunityMiniCard extends StatelessWidget {
-  const CommunityMiniCard({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: context.paddingOnlyWith(right: 15),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.onBackground.withOpacity(0.2),
-          width: 0.5,
+  SizedBox _getCommunityView(List<Community> communities) {
+    return SizedBox(
+      key: UniqueKey(),
+      height: 230,
+      child: PageView.builder(
+        key: UniqueKey(),
+        scrollDirection: Axis.horizontal,
+        itemCount: (communities.length / 2).ceil(),
+        controller: PageController(
+          viewportFraction: 0.92,
+          initialPage: 0,
         ),
-      ),
-      padding: context.paddingAllWith(0.02),
-      child: Column(
-        children: [
-          Row(
+        itemBuilder: (context, index) {
+          final int firstIndex = index * 2; // Adjust the index to skip pages
+          final int secondIndex = firstIndex + 1;
+          final bool hasNextCommunity = secondIndex < communities.length;
+
+          return Column(
+            key: UniqueKey(),
             children: [
-              CircleAvatar(
-                radius: 20,
-                backgroundImage: NetworkImage("https://picsum.photos/200"),
-              ),
-              10.widthBox,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "VisionPro",
-                    style: context.titleMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    "25 Members",
-                    style: context.bodyMedium!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onBackground
-                          .withOpacity(0.7),
-                    ),
-                  ),
-                ],
-              ),
-              Spacer(),
-              FilledButton(
-                onPressed: () {},
-                child: Text(
-                  "Join",
-                  style: context.bodyMedium!
-                      .copyWith(color: Theme.of(context).colorScheme.onPrimary),
+              BlocProvider(
+                key: UniqueKey(),
+                create: (context) => CommunityManageCubit(),
+                child: CommunityMiniCard(
+                  key: UniqueKey(),
+                  community: communities[firstIndex],
                 ),
               ),
+              10.heightBox,
+              if (hasNextCommunity)
+                BlocProvider(
+                  key: UniqueKey(),
+                  create: (context) => CommunityManageCubit(),
+                  child: CommunityMiniCard(
+                    key: UniqueKey(),
+                    community: communities[secondIndex],
+                  ),
+                ),
             ],
-          ),
-          10.heightBox,
-          Text(
-            "A community for developers and designers to share their knowledge and work.A community for developers and designers to share their knowledge and work.",
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: context.bodyMedium!.copyWith(
-              color:
-                  Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
+          );
+        },
+      ),
+    );
+  }
+
+  Row _getTitleRow({
+    required String title,
+    required VoidCallback onSeeAll,
+  }) {
+    return Row(
+      children: [
+        Padding(
+          padding: context.paddingHorz,
+          child: Text(
+            title,
+            style: context.titleLarge!.copyWith(
+              color: Theme.of(context).colorScheme.onBackground,
             ),
           ),
-        ],
-      ),
+        ),
+        Spacer(),
+        //see all text button
+        TextButton(
+          onPressed: onSeeAll,
+          style: TextButton.styleFrom(
+            textStyle: context.bodyMedium!.copyWith(
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+          ),
+          child: Text(
+            "See All",
+          ),
+        ),
+      ],
     );
   }
 }

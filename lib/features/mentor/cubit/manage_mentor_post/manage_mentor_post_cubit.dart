@@ -29,6 +29,7 @@ class ManageMentorPostCubit extends Cubit<ManageMentorPostState> {
       emit(ManageMentorPostFailure('Something went wrong'));
     }
   }
+
   void editPost({
     required String postName,
     required String description,
@@ -36,35 +37,28 @@ class ManageMentorPostCubit extends Cubit<ManageMentorPostState> {
     required bool isFree,
     required int mentorId,
     required int id,
-  })async{
-  emit(ManageMentorPostLoading());
-  try {
-    final resp = await dioClient.put('/mentor/posts/$id/', data: {
-      "name": postName,
-      "isFree": isFree,
-      "description": description,
-      "price": fee,
-      "mentor": mentorId,
-
-    });
-    emit(ManageMentorPostLoaded(
-      'Edited successfully'
-    ));
-  } catch (e) {
-    print(e);
-    emit(ManageMentorPostFailure('Something went wrong'));
-  }
+  }) async {
+    emit(ManageMentorPostLoading());
+    try {
+      final resp = await dioClient.put('/mentor/posts/$id/', data: {
+        "name": postName,
+        "isFree": isFree,
+        "description": description,
+        "price": fee,
+        "mentor": mentorId,
+      });
+      emit(ManageMentorPostLoaded('Edited successfully'));
+    } catch (e) {
+      print(e);
+      emit(ManageMentorPostFailure('Something went wrong'));
+    }
   }
 
-  void deletePost(
-    {required int id}
-  )async{
+  void deletePost({required int id}) async {
     emit(ManageMentorPostLoading());
     try {
       final resp = await dioClient.delete('/mentor/posts/$id/');
-      emit(ManageMentorPostLoaded(
-        'Deleted successfully'
-      ));
+      emit(ManageMentorPostLoaded('Deleted successfully'));
     } catch (e) {
       print(e);
       emit(ManageMentorPostFailure('Something went wrong'));

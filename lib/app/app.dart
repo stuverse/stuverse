@@ -6,6 +6,7 @@ export 'models/user/user.dart';
 
 //! Utils
 export 'utils/app_images.dart';
+export 'utils/constants.dart';
 export 'utils/app_theme.dart';
 export 'utils/dio_client.dart';
 export 'utils/common_utils.dart';

@@ -2,7 +2,6 @@ export 'views/main_screen.dart';
 export 'views/not_found_screen.dart';
 export 'views/splash_screen.dart';
 export 'views/onboarding_screen.dart';
-export 'views/home_screen.dart';
 export 'views/web_view_screen.dart';
 export 'views/markdown_screen.dart';
 

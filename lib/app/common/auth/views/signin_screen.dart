@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
+import 'package:stuverse/features/forum/forum.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -152,7 +153,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             },
                             success: (user) {
                               context.read<CoreCubit>().setUser(user.user);
-                              context.go(CommonRoutes.home);
+                              context.go(ForumRoutes.forumHome);
                             },
                           );
                         },
