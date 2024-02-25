@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
+
 import 'package:meta/meta.dart';
+import 'package:stuverse/app/utils/dio_client.dart';
 import 'package:stuverse/features/fund/models/projects.dart';
 
 part 'home_state.dart';
@@ -12,9 +13,7 @@ class HomeCubit extends Cubit<HomeState> {
     emit(HomeLoading());
 
     try {
-      final projects = await Dio().get(
-        "http://127.0.0.1:8000/api/project/",
-      );
+      final projects = await dioClient.get("/fund/project/");
 
       final List<Projects> projectList = [];
 

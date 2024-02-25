@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/fund/fund.dart';
+import 'package:stuverse/features/fund/views/project_desc.dart';
 
 class FundRoutes {
   //! ---DO NOT MODIFY-----
@@ -11,10 +12,10 @@ class FundRoutes {
   //! ----------------
 
   static List<GoRoute> fundRoutes = [
-    // GoRoute(
-    //   path: '/mentor/detail',
-    //   builder: (context, state) => const MentorDetailScreen(),
-    // ),
+    GoRoute(
+      path: '/fund/projectdesc',
+      builder: (context, state) => const ProjectDescScreen(),
+    ),
     // GoRoute(
     //   path: '/mentor/manage',
     //   builder: (context, state) => const MentorManageScreen(),

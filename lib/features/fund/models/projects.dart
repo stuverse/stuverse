@@ -13,7 +13,7 @@ class Projects {
   User user;
   String title;
   String description;
-  double targetAmount;
+  int targetAmount;
   DateTime startDate;
   DateTime endDate;
   DateTime createdAt;
@@ -44,7 +44,7 @@ class Projects {
         user: User.fromJson(json["user"]),
         title: json["title"],
         description: json["description"],
-        targetAmount: json["target_amount"]?.toDouble(),
+        targetAmount: json["target_amount"],
         startDate: DateTime.parse(json["start_date"]),
         endDate: DateTime.parse(json["end_date"]),
         createdAt: DateTime.parse(json["created_at"]),
@@ -77,21 +77,37 @@ class Projects {
 }
 
 class User {
-  String email;
+  int id;
   String name;
+  String type;
+  String mobile;
+  DateTime createdAt;
+  String image;
 
   User({
-    required this.email,
+    required this.id,
     required this.name,
+    required this.type,
+    required this.mobile,
+    required this.createdAt,
+    required this.image,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        email: json["email"],
+        id: json["id"],
         name: json["name"],
+        type: json["type"],
+        mobile: json["mobile"],
+        createdAt: DateTime.parse(json["created_at"]),
+        image: json["image"],
       );
 
   Map<String, dynamic> toJson() => {
-        "email": email,
+        "id": id,
         "name": name,
+        "type": type,
+        "mobile": mobile,
+        "created_at": createdAt.toIso8601String(),
+        "image": image,
       };
 }
