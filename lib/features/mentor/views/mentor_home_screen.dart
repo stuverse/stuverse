@@ -27,21 +27,14 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BgGradient(
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            context.push(MentorRoutes.manageMentorPost);
-          },
-          icon: Icon(Icons.add),
-          label: Text("Add Post"),
-        ),
-        body: BgGradient(
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: SingleChildScrollView(
+        child: BgGradient(
           child: SafeArea(
             child: RefreshIndicator(
               onRefresh: () async {
@@ -54,15 +47,24 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Find Your',
-                      style: context.headlineMedium!.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Find Your',
+                          style: context.headlineMedium!.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+
+                         IconButton(onPressed: (){
+                           context.push(MentorRoutes.manageMentorPost);
+                         }, icon:Icon(Icons.add,
+                                             
+                         ),iconSize: context.height*0.03,)
+                      ],
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
+
                     Text('Perfect Mentor',
                         style: context.headlineLarge!
                             .copyWith(fontWeight: FontWeight.bold)),
@@ -121,7 +123,10 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                                             ),
                                           ),
                                           TextButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              context.push(
+                                                  MentorRoutes.seeAllPosts);
+                                            },
                                             child: Text(
                                               'See All',
                                               style: context.bodyMedium!
@@ -182,7 +187,7 @@ class ListViewCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Theme.of(context).colorScheme.surfaceVariant,
+            color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.7),
           ),
           child: Padding(
               padding: const EdgeInsets.symmetric(

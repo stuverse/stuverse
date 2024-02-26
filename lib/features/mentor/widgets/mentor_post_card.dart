@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
@@ -22,17 +21,17 @@ class _MentorPostCardState extends State<MentorPostCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: InkWell(
         onTap: () {
-          // context.push(MentorRoutes.mentorDetails,extra: widget.post);
+          context.push(MentorRoutes.postDetails,extra: widget.post);
         },
         child: Container(
           height: MediaQuery.of(context).size.height * 0.24,
-          width: MediaQuery.of(context).size.height * 0.30,
+          width: MediaQuery.of(context).size.height * 0.31,
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: context.colorScheme.surfaceVariant,
+            color: context.colorScheme.surfaceVariant.withOpacity(0.7),
             borderRadius: BorderRadius.circular(25),
           ),
           child: Column(
