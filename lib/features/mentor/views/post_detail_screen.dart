@@ -27,7 +27,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: SafeArea(child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(15),
           child: 
               Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,92 +42,88 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                  ),
                 ),
                               ),
-            
-               SizedBox(height: 15,),
-               Padding(
-                 padding: const EdgeInsets.all(15),
-                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(widget.post.mentor!.name!,style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                            fontWeight: FontWeight.bold,
-                        ),
-                        ),
-                        SizedBox(height: 5,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Column(
+                              SizedBox(height: 15,),
+               Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(widget.post.mentor!.name!,style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          fontWeight: FontWeight.bold,
+                      ),
+                      ),
+                      SizedBox(height: 5,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            children: [
+                              Text('Experience',
+                              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                              ),
+                              ),
+                       
+                              Text('${widget.post.mentor!.experienceYears!.toString()} Years',
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.bold
+                              ),
+                              ),
+                            ],
+                          ),
+                       
+                           Container(
+                          height: 30, 
+                          child: VerticalDivider(
+                          color: Theme.of(context).colorScheme.onBackground,
+                             thickness: 1,
+                                   ),
+                                      ),
+                            Row(
                               children: [
-                                Text('Experience',
-                                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                                ),
-                                ),
-                         
-                                Text('${widget.post.mentor!.experienceYears!.toString()} Years',
-                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                fontWeight: FontWeight.bold
-                                ),
-                                ),
-                              ],
+                                 Icon(
+                                 Icons.payment,
+                                 size: 18,
+                                color: Theme.of(context).colorScheme.onBackground
+                  ),
+                  SizedBox(width: 3,),
+                       if(widget.post.isFree!)
+                            Text('Free',
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Colors.green,
+                            fontWeight: FontWeight.bold
                             ),
-                         
-                             Container(
-                            height: 30, 
-                            child: VerticalDivider(
-                            color: Theme.of(context).colorScheme.onBackground,
-                               thickness: 1,
-                                     ),
+                            )
+                            else
+                            Text('\$${widget.post.price}',
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.bold
+                            ),
+                            ),
+                              ],
+                            )
+                        ]
+                      ),
+                      SizedBox(height: 3,),
+                  ElevatedButton(
+                    onPressed: (){}, child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.send,color: Theme.of(context).colorScheme.onBackground,),
+                      SizedBox(width: 5,),
+                      Text('Connect',
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontWeight: FontWeight.bold)
+                      ),
+                    ],
                                         ),
-                              Row(
-                                children: [
-                                   Icon(
-                                   Icons.payment,
-                                   size: 18,
-                                  color: Theme.of(context).colorScheme.onBackground
-                    ),
-                    SizedBox(width: 3,),
-                         if(widget.post.isFree!)
-                              Text('Free',
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                color: Colors.green,
-                              fontWeight: FontWeight.bold
-                              ),
-                              )
-                              else
-                              Text('\$${widget.post.price}',
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              fontWeight: FontWeight.bold
-                              ),
-                              ),
-                                ],
-                              )
-                          ]
-                        ),
-                        SizedBox(height: 3,),
-                    ElevatedButton(
-                      onPressed: (){}, child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.send,color: Theme.of(context).colorScheme.onBackground,),
-                        SizedBox(width: 5,),
-                        Text('Connect',
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        fontWeight: FontWeight.bold)
-                        ),
-                      ],
-                                          ),
-                    style: ElevatedButton.styleFrom(
-                      maximumSize: Size(double.infinity, 80),
-                      backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.86),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)
-                      )
-                    ),
+                  style: ElevatedButton.styleFrom(
+                    maximumSize: Size(double.infinity, 80),
+                    backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.86),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)
                     )
-                      
-                  ],
-                 ),
+                  ),
+                  )
+                    
+                ],
                ),
                  SizedBox(height: 10),
                   Text("Insights",
