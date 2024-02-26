@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/forum/forum.dart';
+import 'package:stuverse/features/forum/views/thread/thread_add_edit_screen.dart';
 
 import '../../widgets/community/community_mini_card.dart';
 
@@ -15,13 +17,21 @@ class CommunityDetailScreen extends StatefulWidget {
 }
 
 class _CommunityDetailScreenState extends State<CommunityDetailScreen> {
+  late final User? user;
+  bool isMember = false;
+  bool isModerator = false;
   @override
   void initState() {
     if (widget.community.id != null)
       context.read<CommunityDetailCubit>().getCommunityThreads(
             communityId: widget.community.id!,
           );
-
+    user = context.read<CoreCubit>().state.user;
+    if (user != null) {
+      isModerator = widget.community.moderators!.contains(user?.id ?? -1);
+      isMember = widget.community.members!.contains(user?.id ?? -1);
+      setState(() {});
+    }
     super.initState();
   }
 
@@ -56,9 +66,27 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> {
                   onPressed: () {},
                   icon: const Icon(Icons.share),
                 ),
-                IconButton(
-                  onPressed: () {},
+
+                PopupMenuButton(
                   icon: const Icon(Icons.more_vert),
+                  itemBuilder: (context) {
+                    return [
+                      // if (isModerator)
+                      PopupMenuItem(
+                        child: Text("Add Thread"),
+                        onTap: () {
+                          context.push(
+                            ForumRoutes.threadAddEdit,
+                            extra: ThreadAddEditScreenProps(
+                                communityId: widget.community.id!),
+                          );
+                        },
+                      ),
+                      PopupMenuItem(
+                        child: Text("Manage Moderators"),
+                      ),
+                    ];
+                  },
                 ),
               ],
             ),
@@ -77,42 +105,39 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> {
                       ],
                     ),
                   ),
-                  Align(
-                    heightFactor: 0.8,
-                    child: Padding(
-                      padding: context.paddingHorz,
-                      child: BlocBuilder<CommunityDetailCubit,
-                          CommunityDetailState>(
-                        builder: (context, state) {
-                          if (state is CommunityDetailLoading) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          } else if (state is CommunityDetailLoaded) {
-                            return ListView.separated(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: state.threads.length,
-                              itemBuilder: (context, index) {
-                                return ThreadCard(
-                                  thread: state.threads[index],
-                                  isCommunityScreen: true,
-                                );
-                              },
-                              separatorBuilder: (context, index) {
-                                return Divider(
-                                  color: context.colorScheme.onBackground
-                                      .withOpacity(0.1),
-                                );
-                              },
-                            );
-                          } else {
-                            return const Center(
-                              child: Text("No threads found"),
-                            );
-                          }
-                        },
-                      ),
+                  Padding(
+                    padding: context.paddingHorz,
+                    child:
+                        BlocBuilder<CommunityDetailCubit, CommunityDetailState>(
+                      builder: (context, state) {
+                        if (state is CommunityDetailLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (state is CommunityDetailLoaded) {
+                          return ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: state.threads.length,
+                            itemBuilder: (context, index) {
+                              return ThreadCard(
+                                thread: state.threads[index],
+                                isCommunityScreen: true,
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return Divider(
+                                color: context.colorScheme.onBackground
+                                    .withOpacity(0.1),
+                              );
+                            },
+                          );
+                        } else {
+                          return const Center(
+                            child: Text("No threads found"),
+                          );
+                        }
+                      },
                     ),
                   ),
                 ],

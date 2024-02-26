@@ -12,5 +12,8 @@ class ForumProviders {
         BlocProvider<CommunityAdminCubit>(
           create: (context) => CommunityAdminCubit(),
         ),
+        BlocProvider<CommunityDetailCubit>(
+          create: (context) => CommunityDetailCubit(),
+        ),
       ];
 }

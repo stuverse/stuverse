@@ -48,20 +48,20 @@ class _ThreadDetailScreenState extends State<ThreadDetailScreen> {
         scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
         actions: [
-          SvgPicture.asset(
-            AppImages.searchSVG,
-            height: 20,
-            width: 20,
-            colorFilter: ColorFilter.mode(
-              Theme.of(context).colorScheme.onBackground,
-              BlendMode.srcIn,
-            ),
-          ),
+          // IconButton(
+          //   onPressed: () {},
+          //   icon: SvgPicture.asset(
+          //     AppImages.searchSVG,
+          //     height: 20,
+          //     width: 20,
+          //     colorFilter: ColorFilter.mode(
+          //       Theme.of(context).colorScheme.onBackground,
+          //       BlendMode.srcIn,
+          //     ),
+          //   ),
+          // ),
           //more actions
-          IconButton(
-            icon: Icon(Icons.more_horiz),
-            onPressed: () {},
-          ),
+
           (0.02 * context.minSize).widthBox
         ],
       ),

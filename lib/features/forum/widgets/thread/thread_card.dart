@@ -10,6 +10,8 @@ import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/forum/cubit/vote/vote_cubit.dart';
 import 'package:stuverse/features/forum/forum.dart';
 
+import '../../views/thread/thread_add_edit_screen.dart';
+
 class ThreadCard extends StatelessWidget {
   const ThreadCard({
     super.key,
@@ -94,7 +96,23 @@ class ThreadCard extends StatelessWidget {
                 ),
               ),
               5.widthBox,
-              IconButton(icon: Icon(Icons.more_horiz), onPressed: () {})
+              PopupMenuButton(itemBuilder: (context) {
+                return [
+                  PopupMenuItem(
+                    child: Text("Edit"),
+                    value: "edit",
+                    onTap: () {
+                      context.push(
+                        ForumRoutes.threadAddEdit,
+                        extra: ThreadAddEditScreenProps(
+                          thread: thread,
+                          communityId: thread.community!.id!,
+                        ),
+                      );
+                    },
+                  ),
+                ];
+              }),
             ],
           ),
           10.heightBox,
