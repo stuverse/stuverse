@@ -31,39 +31,38 @@ class _ForumHomeScreenState extends State<ForumHomeScreen>
   Widget build(BuildContext context) {
     return BgGradient(
       child: SafeArea(
-        child: BlocConsumer<ForumHomeCubit, ForumHomeState>(
-          listener: (context, state) {
-            if (state is ForumHomeError) {
-              context.showErrorMessage(
-                message: state.message,
-                duration: 3.seconds,
-              );
-            }
-          },
-          builder: (context, state) {
-            if (state is ForumHomeLoaded) {
-              return RefreshIndicator.adaptive(
-                onRefresh: () async {
-                  context.read<ForumHomeCubit>().getHomeData();
+        child: Column(
+          children: [
+            TabBar(
+              controller: _tabController,
+              onTap: (value) {
+                context.read<ForumHomeCubit>().getHomeData();
+              },
+              tabs: const [
+                Tab(
+                  text: "Threads",
+                ),
+                Tab(
+                  text: "Communites",
+                ),
+              ],
+            ),
+            Expanded(
+              child: BlocConsumer<ForumHomeCubit, ForumHomeState>(
+                listener: (context, state) {
+                  if (state is ForumHomeError) {
+                    context.showErrorMessage(
+                      message: state.message,
+                      duration: 3.seconds,
+                    );
+                  }
                 },
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TabBar(
-                      controller: _tabController,
-                      onTap: (value) {
+                builder: (context, state) {
+                  if (state is ForumHomeLoaded) {
+                    return RefreshIndicator.adaptive(
+                      onRefresh: () async {
                         context.read<ForumHomeCubit>().getHomeData();
                       },
-                      tabs: const [
-                        Tab(
-                          text: "Threads",
-                        ),
-                        Tab(
-                          text: "Communites",
-                        ),
-                      ],
-                    ),
-                    Expanded(
                       child: TabBarView(controller: _tabController, children: [
                         SingleChildScrollView(
                           child: Column(
@@ -101,16 +100,16 @@ class _ForumHomeScreenState extends State<ForumHomeScreen>
                           ),
                         ),
                       ]),
-                    ),
-                  ].defaultListAnimation(),
-                ),
-              );
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

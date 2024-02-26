@@ -4,6 +4,7 @@ export 'cubit/community/manage/community_manage_cubit.dart';
 export 'cubit/community/admin/community_admin_cubit.dart';
 export 'cubit/home/forum_home_cubit.dart';
 export 'cubit/vote/vote_cubit.dart';
+export 'cubit/thread/manage/thread_manage_cubit.dart';
 
 export 'models/thread/author.dart';
 export 'models/thread/community.dart';
