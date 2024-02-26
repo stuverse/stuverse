@@ -58,16 +58,21 @@ class JobDetailScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.secondary,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .surfaceVariant
+                                .withOpacity(0.5),
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          padding: const EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(10),
                           child: Row(
                             children: [
                               Icon(
                                 Icons.business_center,
                                 size: 25,
-                                color: Theme.of(context).colorScheme.tertiary,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSurfaceVariant,
                               ),
                               const SizedBox(
                                 width: 6,
@@ -79,7 +84,7 @@ class JobDetailScreen extends StatelessWidget {
                                       .copyWith(
                                           color: Theme.of(context)
                                               .colorScheme
-                                              .tertiary)),
+                                              .onSurfaceVariant)),
                             ],
                           ),
                         ),

@@ -32,7 +32,7 @@ class _JobListTileState extends State<JobListTile> {
         );
       },
       child: Card(
-        color: context.colorScheme.tertiaryContainer.withAlpha(40),
+        color: context.colorScheme.surfaceVariant.withOpacity(0.6),
         elevation: 0,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
