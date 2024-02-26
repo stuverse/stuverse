@@ -94,7 +94,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                               ),
                               )
                               else
-                              Text('\$${widget.post.price}',
+                              Text('\$${widget.post.price}/hr',
                               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               fontWeight: FontWeight.bold
                               ),
