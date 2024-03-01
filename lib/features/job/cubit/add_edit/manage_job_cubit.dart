@@ -43,7 +43,6 @@ class ManageJobCubit extends Cubit<ManageJobState> {
 
       emit(ManageJobSuccess(
         message: "Successfully added job post",
-        action: JobPostAction.add,
       ));
     } on DioException catch (e) {
       print(e);
@@ -87,7 +86,6 @@ class ManageJobCubit extends Cubit<ManageJobState> {
       print(response.data);
       emit(ManageJobSuccess(
         message: "Successfully edited job post",
-        action: JobPostAction.edit,
       ));
     } on DioException catch (e) {
       print(e);
@@ -110,7 +108,6 @@ class ManageJobCubit extends Cubit<ManageJobState> {
       );
       emit(ManageJobSuccess(
         message: "Successfully deleted job post",
-        action: JobPostAction.delete,
       ));
     } catch (e) {
       print(e);

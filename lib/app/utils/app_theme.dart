@@ -115,4 +115,7 @@ class AppTheme {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+
+  static Color get violet => Color(0xFF6200EE);
+  static Color get onViolet => Color(0xFFFFFFFF);
 }
