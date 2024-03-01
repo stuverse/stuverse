@@ -24,7 +24,10 @@ class ProjectCard extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  context.push(FundRoutes.projectDesc);
+                  context.push(
+                    FundRoutes.projectDesc,
+                    extra: project,
+                  );
                 },
                 child: Container(
                   height: 200,
@@ -96,7 +99,10 @@ class ProjectCard extends StatelessWidget {
                                 color: context.colorScheme.onSecondary,
                               ),
                               onPressed: () {
-                                context.push(FundRoutes.projectDesc);
+                                context.push(
+                                  FundRoutes.projectDesc,
+                                  extra: project,
+                                );
                               },
                               style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(
@@ -118,39 +124,3 @@ class ProjectCard extends StatelessWidget {
     );
   }
 }
-
-
-
-
-// Expanded(
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.all(8.0),
-                      //     child: Column(
-                      //       crossAxisAlignment: CrossAxisAlignment.start,
-                      //       children: [
-                      //         Text(
-                      //           project.title,
-                      //           style: context.titleLarge!
-                      //               .copyWith(fontWeight: FontWeight.bold),
-                      //         ),
-                      //         Divider(
-                      //           color: Colors.black,
-                      //           thickness: 1.5,
-                      //         ),
-                      //         Text(
-                      //           'Target Amount',
-                      //           textAlign: TextAlign.center,
-                      //           style: context.textTheme.bodyMedium!.copyWith(),
-                      //         ),
-                      //         SizedBox(
-                      //           height: 10,
-                      //         ),
-                      //         Text(
-                      //           '\$ ${project.targetAmount}',
-                      //           textAlign: TextAlign.center,
-                      //           style: context.textTheme.bodyMedium!.copyWith(),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
