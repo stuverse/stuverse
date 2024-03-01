@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
@@ -15,70 +16,141 @@ class ProjectCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        context.push(FundRoutes.projectDesc);
-      },
-      child: Container(
-        height: 150,
-        width: double.maxFinite,
-        margin: const EdgeInsets.only(bottom: 20),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceVariant,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Hero(
-                  tag: project.images,
-                  child: Image.network(
-                    project.images,
-                    height: double.maxFinite,
-                    width: double.maxFinite,
-                    fit: BoxFit.fill,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+      child: Column(
+        children: [
+          Stack(
+            children: [
+              InkWell(
+                onTap: () {
+                  context.push(FundRoutes.projectDesc);
+                },
+                child: Container(
+                  height: 200,
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                    // color: Theme.of(context).colorScheme.surfaceVariant,
+
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Hero(
+                        tag: project.images,
+                        child: Image.network(
+                          project.images,
+                          height: double.maxFinite,
+                          width: double.maxFinite,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      project.title,
-                      style: context.titleLarge!
-                          .copyWith(fontWeight: FontWeight.bold),
+              Positioned(
+                  bottom: 0,
+                  left: 35,
+                  right: 35,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Theme.of(context).colorScheme.primaryContainer),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                project.title,
+                                style: context.titleLarge!
+                                    .copyWith(fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                'By : ${project.user.name}',
+                                textAlign: TextAlign.center,
+                                style: context.textTheme.bodyMedium!.copyWith(),
+                              ),
+                              Text(
+                                'Target Amount : \$${project.targetAmount}',
+                                textAlign: TextAlign.center,
+                                style: context.textTheme.bodyMedium!.copyWith(),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            height: 50,
+                            width: 50,
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.chevron_right,
+                                color: context.colorScheme.onSecondary,
+                              ),
+                              onPressed: () {
+                                context.push(FundRoutes.projectDesc);
+                              },
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Theme.of(context).colorScheme.secondary),
+                                  shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ))),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                    Divider(
-                      color: Colors.black,
-                      thickness: 1.5,
-                    ),
-                    Text(
-                      'Target Amount',
-                      textAlign: TextAlign.center,
-                      style: context.textTheme.bodyMedium!.copyWith(),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      '\$ ${project.targetAmount}',
-                      textAlign: TextAlign.center,
-                      style: context.textTheme.bodyMedium!.copyWith(),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+                  ))
+            ],
+          ),
+        ],
       ),
     );
   }
 }
+
+
+
+
+// Expanded(
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(8.0),
+                      //     child: Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: [
+                      //         Text(
+                      //           project.title,
+                      //           style: context.titleLarge!
+                      //               .copyWith(fontWeight: FontWeight.bold),
+                      //         ),
+                      //         Divider(
+                      //           color: Colors.black,
+                      //           thickness: 1.5,
+                      //         ),
+                      //         Text(
+                      //           'Target Amount',
+                      //           textAlign: TextAlign.center,
+                      //           style: context.textTheme.bodyMedium!.copyWith(),
+                      //         ),
+                      //         SizedBox(
+                      //           height: 10,
+                      //         ),
+                      //         Text(
+                      //           '\$ ${project.targetAmount}',
+                      //           textAlign: TextAlign.center,
+                      //           style: context.textTheme.bodyMedium!.copyWith(),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
