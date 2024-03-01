@@ -16,14 +16,18 @@ class JobDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Job details"),
         centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        scrolledUnderElevation: 0,
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
+      extendBodyBehindAppBar: true,
+      body: BgGradient(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Stack(
+              children: [
+                SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,32 +99,39 @@ class JobDetailScreen extends StatelessWidget {
                       Divider(),
                       const SizedBox(height: 5),
                       CustomMarkdownBody(inputText: post.description),
+                      100.heightBox
                     ],
                   ),
                 ),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  context.push(CommonRoutes.webView, extra: post.url);
-                },
-                child: Text(
-                  "Apply Now",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge!
-                      .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(180, 50),
-                  backgroundColor:
-                      Theme.of(context).colorScheme.primaryContainer,
-                  foregroundColor: Theme.of(context).colorScheme.onBackground,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
+                Positioned(
+                  bottom: 10,
+                  left: 0,
+                  right: 0,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      context.push(CommonRoutes.webView, extra: post.url);
+                    },
+                    child: Text(
+                      "Apply Now",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(180, 50),
+                      backgroundColor:
+                          Theme.of(context).colorScheme.primaryContainer,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onBackground,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
