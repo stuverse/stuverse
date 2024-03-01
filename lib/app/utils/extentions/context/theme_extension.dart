@@ -5,6 +5,7 @@ extension ThemeExt on BuildContext {
 
   /// performs a simple [Theme.of(context)] action and returns given [result]
   ThemeData get theme => Theme.of(this);
+  bool get isDark => Theme.of(this).brightness == Brightness.dark;
   TextTheme get textTheme => Theme.of(this).textTheme;
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
 

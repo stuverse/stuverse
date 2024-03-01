@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 
+import '../routes/profile_routes.dart';
+
 class ProfileHomeScreen extends StatelessWidget {
   const ProfileHomeScreen({super.key});
 
@@ -29,7 +31,7 @@ class ProfileHomeScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.onBackground,
                           ),
                         ),
                         child: Icon(
@@ -51,7 +53,10 @@ class ProfileHomeScreen extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.white12,
+                  color: Theme.of(context)
+                      .colorScheme
+                      .surfaceVariant
+                      .withOpacity(0.2),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(25),
                     topRight: Radius.circular(25),
@@ -59,47 +64,45 @@ class ProfileHomeScreen extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      ProfileTile(
-                          title: "Edit Profile",
-                          iconData: Icons.person,
-                          color:
-                              Theme.of(context).colorScheme.tertiaryContainer,
-                          onTap: () {}),
-                      10.heightBox,
-                      ProfileTile(
-                          title: "My stats",
-                          iconData: Icons.circle_notifications_sharp,
-                          color:
-                              Theme.of(context).colorScheme.secondaryContainer,
-                          onTap: () {}),
-                      10.heightBox,
-                      ProfileTile(
-                          title: "Settings",
-                          iconData: Icons.settings,
-                          color: Theme.of(context).colorScheme.secondary,
-                          onTap: () {}),
-                      10.heightBox,
-                      Divider(
-                        thickness: 5,
-                      ),
-                      10.heightBox,
-                      ProfileTile(
-                        title: "Logout",
-                        iconData: Icons.logout,
-                        color: Theme.of(context).colorScheme.error,
+                  child: Column(children: [
+                    ProfileTile(
+                        title: "Edit Profile",
+                        iconData: Icons.person,
+                        color: context.limeM3Primary,
                         onTap: () {
-                          context.go(CommonRoutes.signin);
-                          context.read<CoreCubit>().signOut();
-                        },
-                      ),
-                    ],
-                  ),
+                          context.push(ProfileRoutes.profileEdit);
+                        }),
+                    10.heightBox,
+                    ProfileTile(
+                        title: "My stats",
+                        iconData: Icons.circle_notifications_sharp,
+                        color: context.bluePrimary,
+                        onTap: () {}),
+                    10.heightBox,
+                    ProfileTile(
+                        title: "Settings",
+                        iconData: Icons.settings,
+                        color: context.goldPrimary,
+                        onTap: () {}),
+                    10.heightBox,
+                    Divider(
+                      thickness: 5,
+                    ),
+                    10.heightBox,
+                    ProfileTile(
+                      title: "Logout",
+                      iconData: Icons.logout,
+                      color: context.pinkM3Primary,
+                      onTap: () {
+                        context.go(CommonRoutes.signin);
+                        context.read<CoreCubit>().signOut();
+                      },
+                    ),
+                  ]),
                 ),
               ),
             )
-          ],
+          ].defaultListAnimation(),
         ),
       ),
     ));
