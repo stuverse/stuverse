@@ -19,7 +19,7 @@ class FundRoutes {
 
   static List<GoRoute> fundRoutes = [
     GoRoute(
-      path: '/fund/projectdesc',
+      path: projectDesc,
       builder: (context, state) => ProjectDescScreen(
         project: state.extra as Projects,
       ),
