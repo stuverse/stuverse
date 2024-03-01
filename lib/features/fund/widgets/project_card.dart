@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/fund/models/projects.dart';
 
 class ProjectCard extends StatelessWidget {
@@ -17,7 +18,7 @@ class ProjectCard extends StatelessWidget {
       width: double.maxFinite,
       margin: const EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onPrimaryContainer,
+        color: Theme.of(context).colorScheme.surfaceVariant,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -43,32 +44,28 @@ class ProjectCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(project.title,
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.error)),
+                  Text(
+                    project.title,
+                    style: context.titleLarge!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
                   Divider(
                     color: Colors.black,
                     thickness: 1.5,
                   ),
                   Text(
                     'Target Amount',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w200,
-                      color: Colors.black,
-                    ),
+                    textAlign: TextAlign.center,
+                    style: context.textTheme.bodyMedium!.copyWith(),
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  Text('\$ ${project.targetAmount}',
-                      style: TextStyle(
-                        fontSize: 19,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      )),
+                  Text(
+                    '\$ ${project.targetAmount}',
+                    textAlign: TextAlign.center,
+                    style: context.textTheme.bodyMedium!.copyWith(),
+                  ),
                 ],
               ),
             ),
