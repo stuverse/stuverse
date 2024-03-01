@@ -1,18 +1,18 @@
 part of 'home_cubit.dart';
 
 @immutable
-sealed class HomeState {}
+sealed class FundHomeState {}
 
-final class HomeInitial extends HomeState {}
+final class HomeInitial extends FundHomeState {}
 
-final class HomeLoading extends HomeState {}
+final class HomeLoading extends FundHomeState {}
 
-final class HomeSuccess extends HomeState {
+final class HomeSuccess extends FundHomeState {
   final List<Projects> project;
   HomeSuccess({required this.project});
 }
 
-final class HomeError extends HomeState {
+final class HomeError extends FundHomeState {
   final String errorMessage;
   HomeError({required this.errorMessage});
 }

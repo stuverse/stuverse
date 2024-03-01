@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
+import 'package:stuverse/app/app.dart';
 import 'package:stuverse/app/common/core/widgets/MarkdownTextInput/markdown_text_input.dart';
 import 'package:stuverse/app/widgets/bg_gradient.dart';
 import 'package:stuverse/features/fund/cubit/cubit/home_cubit.dart';
@@ -22,7 +23,7 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
   final _searchcontroller = TextEditingController();
   @override
   void initState() {
-    context.read<HomeCubit>().getProjects();
+    context.read<FundHomeCubit>().getProjects();
     super.initState();
   }
 
@@ -56,45 +57,57 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
                     const SizedBox(
                       height: 25,
                     ),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(18),
-                          color: Theme.of(context).colorScheme.surfaceTint),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 11, horizontal: 18),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              const Text(
-                                "Start New\nFundraising",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    overflow: TextOverflow.visible),
+                    Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Theme.of(context).colorScheme.surfaceVariant,
+                          ),
+                          child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 10,
                               ),
-                              Container(
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(18),
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onTertiaryContainer),
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text(
-                                      "Start Now",
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 76, 68, 68),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Start New Fundraiser!",
+                                    style: context.titleLarge!
+                                        .copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    "Create your fundraiser and get funding fast and easy.",
+                                    textAlign: TextAlign.center,
+                                    style: context.textTheme.bodyMedium!
+                                        .copyWith(),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Center(
+                                    child: ElevatedButton(
+                                      onPressed: () {},
+                                      child: Text('Start',
+                                          style: context.titleSmall!.copyWith(
+                                              color:
+                                                  context.colorScheme.surface,
+                                              fontWeight: FontWeight.bold)),
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              context.colorScheme.secondary,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(12))),
                                     ),
-                                  )),
-                            ]),
-                      ),
-                    ),
+                                  )
+                                ],
+                              )),
+                        )),
                     const SizedBox(
                       height: 30,
                     ),
@@ -150,7 +163,7 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    BlocConsumer<HomeCubit, HomeState>(
+                    BlocConsumer<FundHomeCubit, FundHomeState>(
                       listener: (context, state) {},
                       builder: (context, state) {
                         if (state is HomeError) {
@@ -166,8 +179,7 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
                               for (final project in state.project)
                                 InkWell(
                                   onTap: () {
-                                    context
-                                        .pushReplacement(FundRoutes.fundHome);
+                                    context.push(FundRoutes.projectDesc);
                                   },
                                   child: Container(
                                     height: 150,

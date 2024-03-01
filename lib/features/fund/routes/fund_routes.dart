@@ -11,6 +11,8 @@ class FundRoutes {
   );
   //! ----------------
 
+ static const String projectDesc = '/fund/projectdesc';
+
   static List<GoRoute> fundRoutes = [
     GoRoute(
       path: '/fund/projectdesc',

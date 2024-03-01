@@ -6,8 +6,8 @@ import 'package:stuverse/features/fund/models/projects.dart';
 
 part 'home_state.dart';
 
-class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(HomeInitial());
+class FundHomeCubit extends Cubit<FundHomeState> {
+  FundHomeCubit() : super(HomeInitial());
 
   void getProjects() async {
     emit(HomeLoading());
