@@ -87,11 +87,11 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  void signUpWithEmailAndPassword({
-    required String email,
-    required String name,
-    required String password,
-  }) async {
+  void signUpWithEmailAndPassword(
+      {required String email,
+      required String name,
+      required String password,
+      S}) async {
     emit(AuthState.signUpLoading());
     final result = await _authRepo.signUpWithEmailAndPassword(
       email: email,

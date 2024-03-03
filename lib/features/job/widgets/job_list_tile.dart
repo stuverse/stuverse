@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 
 import 'package:stuverse/app/app.dart';
 
-import '../cubit/add_edit/manage_job_cubit.dart';
 import '../models/job_post.dart';
 import '../routes/job_routes.dart';
 
@@ -87,42 +86,6 @@ class _JobListTileState extends State<JobListTile> {
                 ),
                 // if (user?.type == UserTypes.ADMIN ||
                 //     user?.type == UserTypes.FACULTY)
-                PopupMenuButton(
-                    padding: EdgeInsets.zero,
-                    iconSize: 18,
-                    itemBuilder: (context) {
-                      return [
-                        PopupMenuItem(
-                            textStyle: TextStyle(fontSize: 15),
-                            onTap: () {
-                              context.push(
-                                JobRoutes.jobAddEdit,
-                                extra: widget.post,
-                              );
-                            },
-                            child: Row(
-                              children: [
-                                Icon(Icons.edit_outlined),
-                                SizedBox(width: 8),
-                                Text('Edit'),
-                              ],
-                            )),
-                        PopupMenuItem(
-                          onTap: () {
-                            context
-                                .read<ManageJobCubit>()
-                                .deleteJob(id: widget.post.id);
-                          },
-                          child: Row(
-                            children: [
-                              Icon(Icons.delete_outline),
-                              SizedBox(width: 8),
-                              Text('Delete'),
-                            ],
-                          ),
-                        ),
-                      ];
-                    }),
               ],
             ),
           ]),
