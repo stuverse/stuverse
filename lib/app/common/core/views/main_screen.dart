@@ -85,7 +85,10 @@ class _MainScreenState extends State<MainScreen> {
               top: 7,
             ),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                context.showMessage(
+                    message: "Notifications will be available soon");
+              },
               icon: SvgPicture.asset(
                 AppImages.bellSVG,
                 height: 20,

@@ -101,6 +101,17 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
                                 ],
                               ),
                               20.heightBox,
+                              BannerCard(
+                                title: 'AI Job Search✨',
+                                description:
+                                    'Find the best jobs that match your skills and expertise.',
+                                buttonText: 'Find Now',
+                                onTap: () {
+                                  context.showMessage(
+                                      message: "Feature not available yet");
+                                },
+                              ),
+                              10.heightBox,
                               Hero(
                                 tag: 'jobSearch',
                                 child: Material(
