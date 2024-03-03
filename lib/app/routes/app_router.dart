@@ -10,6 +10,8 @@ import 'package:stuverse/features/job/job.dart';
 import 'package:stuverse/features/mentor/mentor.dart';
 import 'package:stuverse/features/profile/profile.dart';
 
+import '../common/auth/views/user_request_list_screen.dart';
+
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
   static final _profileNavigatorKey =
@@ -92,6 +94,10 @@ class AppRouter {
         },
         builder: (context, state) =>
             MarkDownScreen(props: state.extra as MarkDownScreenProps),
+      ),
+      GoRoute(
+        path: CommonRoutes.userRequest,
+        builder: (context, state) => const UserRequestListScreen(),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {

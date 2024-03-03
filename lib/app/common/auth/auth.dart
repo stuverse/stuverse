@@ -9,3 +9,5 @@ export 'services/i_auth_repo.dart';
 export 'services/auth_repo.dart';
 
 export 'cubit/auth_cubit.dart';
+export 'cubit/user_request/user_request_cubit.dart';
+export 'cubit/manage_request/manage_user_request_cubit.dart';
