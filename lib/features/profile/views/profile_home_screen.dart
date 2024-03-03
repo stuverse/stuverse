@@ -10,7 +10,7 @@ class ProfileHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<CoreCubit>().state.user;
+    final user = context.watch<CoreCubit>().state.user;
     return Scaffold(
         body: BgGradient(
       child: SafeArea(

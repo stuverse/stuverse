@@ -8,8 +8,9 @@ final class ManageProfileInitial extends ManageProfileState {}
 final class ManageProfileLoading extends ManageProfileState {}
 
 final class ManageProfileSuccess extends ManageProfileState {
+  final User user;
 
-
+  ManageProfileSuccess({required this.user});
 }
 
 final class ManageProfileError extends ManageProfileState {
