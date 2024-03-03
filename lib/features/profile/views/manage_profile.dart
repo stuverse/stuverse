@@ -27,7 +27,6 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
     super.initState();
   }
 
-  int? _selectedSkill;
   FilePickerResult? result;
   PlatformFile? pickedFile;
   File? fileToDisplay;
@@ -380,6 +379,7 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
           }
           return Center(
             child: CircularProgressIndicator(),
+            
           );
         },
       ),
