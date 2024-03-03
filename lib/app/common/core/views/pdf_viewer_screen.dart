@@ -17,6 +17,9 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
     bool isPathUrl =
         widget.path.startsWith('http') || widget.path.startsWith('https');
     return Scaffold(
+        appBar: AppBar(
+          title: const Text('PDF Viewer'),
+        ),
         body: Container(
             child: isPathUrl
                 ? SfPdfViewer.network(widget.path)

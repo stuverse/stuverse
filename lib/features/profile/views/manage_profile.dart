@@ -3,13 +3,13 @@ import 'dart:io';
 
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
+
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/profile/cubit/manage_profile_cubit.dart';
 
@@ -157,7 +157,10 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                           left: 0,
                                           right: 0,
                                           child: IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              pickImage(
+                                                  source: ImageSource.gallery);
+                                            },
                                             icon: Icon(
                                               Icons.camera_alt,
                                             ),
@@ -212,6 +215,7 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                 LabeledFormInput(
                                   child: TextFormField(
                                     controller: _aboutController,
+                                    maxLines: 5,
                                     decoration: InputDecoration(
                                       prefixIcon: Icon(Icons.menu_book),
                                     ),
@@ -243,7 +247,6 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                   ),
                                   label: 'Linkedin',
                                 ),
-
                                 10.heightBox,
                                 LabeledFormInput(
                                   child: TextFormField(
@@ -269,7 +272,6 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                   ),
                                   label: 'Github',
                                 ),
-
                                 10.heightBox,
                                 Text(
                                   'Skills',
@@ -278,65 +280,19 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                           .colorScheme
                                           .secondaryContainer),
                                 ),
-                                Wrap(
-                                  children: [
-                                    for (final skill in _selectedSkills)
-                                      Chip(
-                                        label: Text(skill.name.toString()),
-                                        deleteIcon: Icon(
-                                          Icons.close,
-                                          size: 15,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onBackground,
-                                        ),
-                                        onDeleted: () {
-                                          setState(() {
-                                            _selectedSkills.remove(skill);
-                                          });
-                                        },
-                                      )
-                                  ],
+                                DropdownSearch<Skill>.multiSelection(
+                                  items: state.skills,
+                                  selectedItems: _selectedSkills,
+                                  onChanged: (selectedItems) {
+                                    setState(() {
+                                      _selectedSkills = selectedItems;
+                                    });
+                                  },
+                                  itemAsString: (item) => item.name.toString(),
+                                  popupProps: PopupPropsMultiSelection.dialog(
+                                      showSearchBox: true,
+                                      searchDelay: 100.milliseconds),
                                 ),
-                                DropdownButtonFormField<Skill>(
-                                    hint: const Text("Search skills"),
-                                    items: [
-                                      for (final skill in state.skills)
-                                        DropdownMenuItem(
-                                          value: skill,
-                                          child: Text(skill.name.toString()),
-                                        ),
-                                    ],
-                                    onChanged: (value) {
-                                      bool isAlreadySelected =
-                                          _selectedSkills.any((element) =>
-                                              element.id == value?.id);
-                                      if (isAlreadySelected) {
-                                        return;
-                                      }
-                                      setState(() {
-                                        _selectedSkills.add(value!);
-                                      });
-                                    }),
-                                //  DropdownSearch<Skill>(
-                                //   items: state.skills,
-                                //   showClearButton: true,
-                                //   onChanged: (Skill? value) {
-                                //     if (value != null) {
-                                //       setState(() {
-                                //         _selectedSkills.add(value);
-                                //       });
-                                //     }
-                                //   },
-                                //   selectedItem: null,
-                                //   searchBoxDecoration: InputDecoration(
-                                //     labelText: "Skills", // Use labelText for label
-                                //     hintText: "Select a skill", // Use hintText for hint
-                                //     border: OutlineInputBorder(),
-                                //     contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                                //   ),
-                                // ),
-
                                 10.heightBox,
                                 LabeledFormInput(
                                   child: TextFormField(
@@ -353,7 +309,6 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                   ),
                                   label: 'Experience',
                                 ),
-
                                 10.heightBox,
                                 Text(
                                   'Add Resume',
@@ -362,6 +317,29 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                           .colorScheme
                                           .secondaryContainer),
                                 ),
+                                5.heightBox,
+                                if (user!.resume != null)
+                                  ListTile(
+                                    tileColor: Theme.of(context)
+                                        .colorScheme
+                                        .surfaceVariant,
+                                    leading: Icon(Icons.insert_drive_file),
+                                    title: Text(
+                                      'Current Resume',
+                                      style: context.bodyMedium,
+                                    ),
+                                    subtitle: Text(
+                                      user!.resume.toString().split('/').last,
+                                      style: context.bodyMedium,
+                                    ),
+                                    trailing: IconButton(
+                                      onPressed: () {
+                                        context.push(CommonRoutes.pdfViewer,
+                                            extra: user!.resume.toString());
+                                      },
+                                      icon: Icon(Icons.visibility),
+                                    ),
+                                  ),
                                 5.heightBox,
                                 InkWell(
                                   onTap: pickFile,
@@ -410,7 +388,7 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                 if (_resumeFile != null)
                                   InkWell(
                                     onTap: () {
-                                      context.go(CommonRoutes.pdfViewer,
+                                      context.push(CommonRoutes.pdfViewer,
                                           extra: _resumeFile!.path);
                                     },
                                     child: Container(

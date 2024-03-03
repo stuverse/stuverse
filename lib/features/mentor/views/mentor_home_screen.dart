@@ -50,24 +50,29 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-    
-                       IconButton(onPressed: (){
-                         context.push(MentorRoutes.manageMentorPost);
-                       }, icon:Icon(Icons.add,
-                                           
-                       ),iconSize: context.height*0.03,)
+                      IconButton(
+                        onPressed: () {
+                          context.push(MentorRoutes.manageMentorPost);
+                        },
+                        icon: Icon(
+                          Icons.add,
+                        ),
+                        iconSize: context.height * 0.03,
+                      )
                     ],
                   ),
-    
                   Text('Perfect Mentor',
                       style: context.headlineLarge!
                           .copyWith(fontWeight: FontWeight.bold)),
                   SizedBox(height: 5),
-                  ListViewCard(
+                  BannerCard(
                     title: 'Unlock Your Potential!',
                     description:
                         'Inspire and empower others with your knowledge. Join as a mentor today.',
                     buttonText: 'Join Now',
+                    onTap: () {
+                      context.showMessage(message: "Feature not available yet");
+                    },
                   ),
                   SizedBox(height: 15),
                   Container(
@@ -78,8 +83,9 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                     child: TextField(
                       controller: _searchController,
                       onChanged: (value) {
-                        context.read<MentorHomeCubit>().getMentorHomeData(
-                            search: _searchController.text);
+                        context
+                            .read<MentorHomeCubit>()
+                            .getMentorHomeData(search: _searchController.text);
                       },
                       decoration: InputDecoration(
                         hintText: 'Search',
@@ -110,25 +116,22 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                                       children: [
                                         Text(
                                           'Top Mentors',
-                                          style:
-                                              context.titleMedium!.copyWith(
+                                          style: context.titleMedium!.copyWith(
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
                                         TextButton(
                                           onPressed: () {
-                                            context.push(
-                                                MentorRoutes.seeAllPosts);
+                                            context
+                                                .push(MentorRoutes.seeAllPosts);
                                           },
                                           child: Text(
                                             'See All',
-                                            style: context.bodyMedium!
-                                                .copyWith(
-                                                    fontWeight:
-                                                        FontWeight.bold,
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .primary),
+                                            style: context.bodyMedium!.copyWith(
+                                                fontWeight: FontWeight.bold,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary),
                                           ),
                                         ),
                                       ],
@@ -148,8 +151,7 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                                   ],
                                 );
                               }
-                              return Center(
-                                  child: CircularProgressIndicator());
+                              return Center(child: CircularProgressIndicator());
                             },
                           ),
                   ),
@@ -160,66 +162,5 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
         ),
       ),
     );
-  }
-}
-
-class ListViewCard extends StatelessWidget {
-  const ListViewCard(
-      {super.key,
-      required this.title,
-      required this.description,
-      required this.buttonText});
-  final String title;
-  final String description;
-  final String buttonText;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(8),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Theme.of(context).colorScheme.surfaceVariant,
-          ),
-          child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 10,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    title,
-                    style: context.titleLarge!
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    description,
-                    textAlign: TextAlign.center,
-                    style: context.textTheme.bodyMedium!.copyWith(),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text(buttonText,
-                          style: context.titleSmall!.copyWith(
-                              color: context.colorScheme.surface,
-                              fontWeight: FontWeight.bold)),
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: context.colorScheme.secondary,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12))),
-                    ),
-                  )
-                ],
-              )),
-        ));
   }
 }

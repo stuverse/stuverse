@@ -86,10 +86,10 @@ class AppRouter {
                 url: (state.extra as String?) ?? "",
               )),
       GoRoute(
-          path: CommonRoutes.webView,
+          path: CommonRoutes.pdfViewer,
           redirect: (context, state) {
             if (state.extra == null) {
-              return CommonRoutes.pdfViewer;
+              return CommonRoutes.notFound;
             }
             return null;
           },
