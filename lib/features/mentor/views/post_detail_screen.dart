@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:readmore/readmore.dart';
+import 'package:stuverse/app/app.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/mentor_post.dart';
 
 
@@ -105,7 +107,20 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                         ),
                         SizedBox(height: 3,),
                     ElevatedButton(
-                      onPressed: (){}, child: Row(
+                      onPressed: ()async{
+                        final url =  Uri.parse("http://wa.me/+91${ widget.post.mentor!.mobile}");
+                        final canlaunch = await canLaunchUrl(
+                          url
+                        );
+                        if(!canlaunch){
+                          return;
+                        }else{
+                          await launchUrl(
+                            url
+                          );
+                        }
+                        
+                      }, child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.send,color: Theme.of(context).colorScheme.onBackground,),
@@ -132,12 +147,24 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   fontWeight: FontWeight.bold
                 ),
+
                 ),
                 SizedBox(height: 5,),
-                Text(widget.post.description!,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                ReadMoreText(
+                widget.post.description!,
+                trimLines: 2,
+                colorClickableText: Theme.of(context).colorScheme.primary,
+                trimCollapsedText: 'Read more',
+                trimExpandedText: 'Show less',
+                moreStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.bold
                 ),
+                lessStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.bold
                 ),
+              ),
                 SizedBox(height: 10,),
                 Text("About Myself",
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -177,7 +204,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                       child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.7),
+                color: Theme.of(context).colorScheme.surfaceVariant,
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
