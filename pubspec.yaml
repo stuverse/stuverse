@@ -34,10 +34,12 @@ dependencies:
   intl: ^0.18.0
   json_annotation: ^4.8.1
   logman: ^0.0.5
+  permission_handler: ^11.3.0
   readmore: ^2.2.0
   shared_preferences: ^2.2.2
   skeletonizer: ^1.0.1
   smooth_page_indicator: ^1.1.0
+  syncfusion_flutter_pdfviewer: ^24.2.8
   url_launcher: ^6.2.5
   web_socket_channel: ^2.4.0
   webview_flutter: ^4.7.0

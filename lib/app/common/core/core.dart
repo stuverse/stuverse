@@ -4,6 +4,7 @@ export 'views/splash_screen.dart';
 export 'views/onboarding_screen.dart';
 export 'views/web_view_screen.dart';
 export 'views/markdown_screen.dart';
+export 'views/pdf_viewer_screen.dart';
 
 export 'widgets/boarding_card.dart';
 export 'widgets/nav_dest_item.dart';
