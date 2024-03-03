@@ -17,10 +17,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  String? _selectedRadioValue;
+  String _selectedRadioValue = UserTypes.STUDENT;
 
-  final _branchController = TextEditingController();
-  final _yearController = TextEditingController();
+  final _aboutController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +107,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Row(
                               children: [
                                 RadioMenuButton(
-                                  value: 'Student',
+                                  value: UserTypes.STUDENT,
                                   groupValue: _selectedRadioValue,
                                   onChanged: (value) {
                                     setState(() {
@@ -119,7 +118,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 10.heightBox,
                                 RadioMenuButton(
-                                  value: 'Alumini',
+                                  value: UserTypes.ALUMNI,
                                   groupValue: _selectedRadioValue,
                                   onChanged: (value) {
                                     setState(() {
@@ -131,29 +130,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ],
                             ),
                             10.heightBox,
-                            if (_selectedRadioValue == 'Alumini')
+                            if (_selectedRadioValue == UserTypes.ALUMNI)
                               ...[
                                 Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       LabeledFormInput(
-                                        label: 'Message',
+                                        label: 'About',
                                         isRequired: true,
                                         child: TextFormField(
+                                          onTapOutside: (event) {
+                                            FocusScope.of(context).unfocus();
+                                          },
                                           maxLines: 5,
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                              return 'Please enter message';
+                                              return 'Please fill about section';
                                             }
                                             return null;
                                           },
                                           decoration: const InputDecoration(
                                             hintText:
-                                                'Please enter your message to our admin.Make sure to include your branch, graduation year and any other relevent information for identification. ',
+                                                'Please enter your bio. Make sure to include your branch, graduation year and any other relevent information for identification. ',
                                           ),
-                                          controller: _branchController,
+                                          controller: _aboutController,
                                         ),
                                       ),
                                       10.heightBox,
@@ -169,9 +171,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             },
                             signUpSuccess: (state) {
                               context.pop();
-                              context.showMessage(
-                                  message:
-                                      'Account created, Now login with your credentials');
+                              if (_selectedRadioValue == UserTypes.ALUMNI) {
+                                context.showMessage(
+                                    message:
+                                        'Alumini account created successfully, you will get an approval email after identification.',
+                                    duration: 10.seconds);
+                              } else
+                                context.showMessage(
+                                    message:
+                                        'Account created, Now login with your credentials');
                             },
                           );
                         },
@@ -191,6 +199,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             email: _emailController.text,
                                             name: _nameController.text,
                                             password: _passwordController.text,
+                                            type: _selectedRadioValue,
+                                            about: _aboutController.text,
                                           );
                                     }
                                   },

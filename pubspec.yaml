@@ -51,7 +51,6 @@ dev_dependencies:
   mocktail: ^1.0.0
   very_good_analysis: ^5.1.0
 
-
 flutter:
   uses-material-design: true
   assets:
@@ -67,16 +66,11 @@ flutter:
     - assets/mentor/icons/
     - assets/mentor/images/
 
-
-
-
-
 flutter_native_splash:
   color: "#000B18"
   image: assets/app/logo/stuverse.png
   color_dark: "#000B18"
   image_dark: assets/app/logo/stuverse.png
-
 
   android_12:
     image: assets/app/logo/stuverse.png
@@ -85,7 +79,6 @@ flutter_native_splash:
     icon_background_color_dark: "#000B18"
 
   web: true
-
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -105,4 +98,3 @@ flutter_launcher_icons:
   macos:
     generate: true
     image_path: "assets/app/logo/stuverse.jpg"
-
