@@ -27,141 +27,133 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
-      body: SingleChildScrollView(
-        child: BgGradient(
-          child: SafeArea(
-            child: RefreshIndicator(
-              onRefresh: () async {
-                context
-                    .read<MentorHomeCubit>()
-                    .getMentorHomeData(search: _searchController.text);
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Find Your',
-                          style: context.headlineMedium!.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+    return SingleChildScrollView(
+      child: BgGradient(
+        child: SafeArea(
+          child: RefreshIndicator(
+            onRefresh: () async {
+              context
+                  .read<MentorHomeCubit>()
+                  .getMentorHomeData(search: _searchController.text);
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Find Your',
+                        style: context.headlineMedium!.copyWith(
+                          fontWeight: FontWeight.w600,
                         ),
-
-                         IconButton(onPressed: (){
-                           context.push(MentorRoutes.manageMentorPost);
-                         }, icon:Icon(Icons.add,
-                                             
-                         ),iconSize: context.height*0.03,)
-                      ],
-                    ),
-
-                    Text('Perfect Mentor',
-                        style: context.headlineLarge!
-                            .copyWith(fontWeight: FontWeight.bold)),
-                    SizedBox(height: 5),
-                    ListViewCard(
-                      title: 'Unlock Your Potential!',
-                      description:
-                          'Inspire and empower others with your knowledge. Join as a mentor today.',
-                      buttonText: 'Join Now',
-                    ),
-                    SizedBox(height: 15),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(27),
-                        color: Color.fromARGB(242, 231, 230, 230),
                       ),
-                      child: TextField(
-                        controller: _searchController,
-                        onChanged: (value) {
-                          context.read<MentorHomeCubit>().getMentorHomeData(
-                              search: _searchController.text);
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Search',
-                          border: InputBorder.none,
-                          prefixIcon: Icon(
-                            Icons.search,
-                          ),
+    
+                       IconButton(onPressed: (){
+                         context.push(MentorRoutes.manageMentorPost);
+                       }, icon:Icon(Icons.add,
+                                           
+                       ),iconSize: context.height*0.03,)
+                    ],
+                  ),
+    
+                  Text('Perfect Mentor',
+                      style: context.headlineLarge!
+                          .copyWith(fontWeight: FontWeight.bold)),
+                  SizedBox(height: 5),
+                  ListViewCard(
+                    title: 'Unlock Your Potential!',
+                    description:
+                        'Inspire and empower others with your knowledge. Join as a mentor today.',
+                    buttonText: 'Join Now',
+                  ),
+                  SizedBox(height: 15),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(27),
+                      color: Color.fromARGB(242, 231, 230, 230),
+                    ),
+                    child: TextField(
+                      controller: _searchController,
+                      onChanged: (value) {
+                        context.read<MentorHomeCubit>().getMentorHomeData(
+                            search: _searchController.text);
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Search',
+                        border: InputBorder.none,
+                        prefixIcon: Icon(
+                          Icons.search,
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
-                    BlocBuilder<ManageMentorPostCubit, ManageMentorPostState>(
-                      builder: (context, state) => state
-                              is ManageMentorPostLoading
-                          ? CircularProgressIndicator()
-                          : BlocConsumer<MentorHomeCubit, MentorHomeState>(
-                              listener: (context, state) {},
-                              builder: (context, state) {
-                                if (state is MentorHomeFailure) {
-                                  return Center(child: Text('Error'));
-                                }
-                                if (state is MentorHomeLoaded) {
-                                  // final first3Mentors = state.posts.take(3).toList();
-                                  return Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                  ),
+                  SizedBox(height: 10),
+                  BlocBuilder<ManageMentorPostCubit, ManageMentorPostState>(
+                    builder: (context, state) => state
+                            is ManageMentorPostLoading
+                        ? CircularProgressIndicator()
+                        : BlocConsumer<MentorHomeCubit, MentorHomeState>(
+                            listener: (context, state) {},
+                            builder: (context, state) {
+                              if (state is MentorHomeFailure) {
+                                return Center(child: Text('Error'));
+                              }
+                              if (state is MentorHomeLoaded) {
+                                return Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Top Mentors',
+                                          style:
+                                              context.titleMedium!.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            context.push(
+                                                MentorRoutes.seeAllPosts);
+                                          },
+                                          child: Text(
+                                            'See All',
+                                            style: context.bodyMedium!
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.bold,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .primary),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
                                         children: [
-                                          Text(
-                                            'Top Mentors',
-                                            style:
-                                                context.titleMedium!.copyWith(
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              context.push(
-                                                  MentorRoutes.seeAllPosts);
-                                            },
-                                            child: Text(
-                                              'See All',
-                                              style: context.bodyMedium!
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .primary),
-                                            ),
-                                          ),
+                                          for (final post in state.posts)
+                                            MentorPostCard(post: post),
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          children: [
-                                            for (final post in state.posts)
-                                              MentorPostCard(post: post),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  );
-                                }
-                                return Center(
-                                    child: CircularProgressIndicator());
-                              },
-                            ),
-                    ),
-                  ],
-                ),
+                                    )
+                                  ],
+                                );
+                              }
+                              return Center(
+                                  child: CircularProgressIndicator());
+                            },
+                          ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -187,7 +179,7 @@ class ListViewCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.7),
+            color: Theme.of(context).colorScheme.surfaceVariant,
           ),
           child: Padding(
               padding: const EdgeInsets.symmetric(

@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/profile/profile.dart';
 
-import '../views/profile_edit_screen.dart';
+import '../views/manage_profile.dart';
 
 class ProfileRoutes {
   //! ---DO NOT MODIFY-----
@@ -16,7 +16,7 @@ class ProfileRoutes {
   static List<GoRoute> profileRoutes = [
     GoRoute(
       path: profileEdit,
-      builder: (context, state) => const ProfileEditScreen(),
+      builder: (context, state) => const ManageProfileScreen(),
     ),
     // GoRoute(
     //   path: '/mentor/manage',

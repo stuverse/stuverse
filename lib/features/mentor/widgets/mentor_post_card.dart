@@ -33,7 +33,7 @@ class _MentorPostCardState extends State<MentorPostCard> {
             width: MediaQuery.of(context).size.height * 0.31,
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: context.colorScheme.surfaceVariant.withOpacity(0.7),
+              color: context.colorScheme.surfaceVariant,
               borderRadius: BorderRadius.circular(25),
             ),
             child: Column(

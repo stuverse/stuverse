@@ -3,6 +3,7 @@ export 'common/common.dart';
 
 //! Models
 export 'models/user/user.dart';
+export 'models/user/skill.dart';
 
 //! Utils
 export 'utils/app_images.dart';
