@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 
 import 'package:stuverse/app/app.dart';
 
-import '../cubit/add_edit/manage_job_cubit.dart';
 import '../models/job_post.dart';
 import '../routes/job_routes.dart';
 
