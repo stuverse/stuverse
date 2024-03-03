@@ -13,7 +13,7 @@ class Projects {
   User user;
   String title;
   String description;
-  int targetAmount;
+  double targetAmount;
   DateTime startDate;
   DateTime endDate;
   DateTime createdAt;

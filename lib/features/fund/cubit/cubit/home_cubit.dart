@@ -9,11 +9,12 @@ part 'home_state.dart';
 class FundHomeCubit extends Cubit<FundHomeState> {
   FundHomeCubit() : super(HomeInitial());
 
-  void getProjects() async {
+  void getProjects({String? search}) async {
     emit(HomeLoading());
 
     try {
-      final projects = await dioClient.get("/fund/project/");
+      final projects = await dioClient
+          .get("/fund/project/", queryParameters: {'search': search});
 
       final List<Projects> projectList = [];
 

@@ -45,6 +45,12 @@ class MainDrawer extends StatelessWidget {
             },
           ),
           ListTile(
+            title: const Text("User Requests"),
+            onTap: () {
+              context.push(CommonRoutes.userRequest);
+            },
+          ),
+          ListTile(
             title: const Text('Settings'),
             onTap: () {},
           ),

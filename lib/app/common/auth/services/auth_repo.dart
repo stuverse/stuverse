@@ -93,6 +93,7 @@ class AuthRepo implements IAuthRepo {
     required String name,
     required String password,
     required String type,
+    String? about,
   }) async {
     try {
       final resp = await dioClient.post(
@@ -102,6 +103,7 @@ class AuthRepo implements IAuthRepo {
           'name': name,
           'password': password,
           'type': type,
+          if (about != null) 'about': about
         },
       );
 

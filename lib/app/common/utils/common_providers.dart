@@ -7,5 +7,7 @@ class CommonProviders {
         BlocProvider(create: (context) => CoreCubit()..getInitialData()),
         BlocProvider(create: (context) => HomeCubit()),
         BlocProvider(create: (context) => AICubit()),
+        BlocProvider(create: (context) => UserRequestCubit()),
+        BlocProvider(create: (context) => ManageUserRequestCubit()),
       ];
 }

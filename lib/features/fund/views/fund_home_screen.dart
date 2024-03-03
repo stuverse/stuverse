@@ -24,7 +24,7 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
   final _searchcontroller = TextEditingController();
   @override
   void initState() {
-    context.read<FundHomeCubit>().getProjects();
+    context.read<FundHomeCubit>().getProjects(search: _searchcontroller.text);
     super.initState();
   }
 
@@ -35,7 +35,9 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
         child: SafeArea(
           child: RefreshIndicator(
             onRefresh: () async {
-              context.read<FundHomeCubit>().getProjects();
+              context.read<FundHomeCubit>().getProjects(
+                    search: _searchcontroller.text,
+                  );
             },
             child: Padding(
               padding:
@@ -52,7 +54,12 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
                         ),
                         child: TextField(
                             controller: _searchcontroller,
-                            style: const TextStyle(color: Colors.black),
+                            onChanged: (value) {
+                              context.read<FundHomeCubit>().getProjects(
+                                    search: _searchcontroller.text,
+                                  );
+                            },
+                            style: context.textTheme.bodyMedium!.copyWith(),
                             decoration: InputDecoration(
                               fillColor:
                                   Theme.of(context).colorScheme.background,
@@ -185,12 +192,7 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
                             return Column(
                               children: [
                                 for (final project in state.project)
-                                  InkWell(
-                                    onTap: () {
-                                      context.push(FundRoutes.projectDesc);
-                                    },
-                                    child: ProjectCard(project: project),
-                                  ),
+                                  ProjectCard(project: project),
                               ],
                             );
                           }

@@ -1,25 +1,50 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
+import 'package:stuverse/features/job/cubit/add_edit/manage_job_cubit.dart';
+import 'package:stuverse/features/job/job.dart';
 
 import '../../models/job_post.dart';
 
-class JobDetailScreen extends StatelessWidget {
+class JobDetailScreen extends StatefulWidget {
   const JobDetailScreen({super.key, required this.post});
   final JobPost post;
+
+  @override
+  State<JobDetailScreen> createState() => _JobDetailScreenState();
+}
+
+class _JobDetailScreenState extends State<JobDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Job details"),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        scrolledUnderElevation: 0,
-      ),
+          title: const Text("Job details"),
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          scrolledUnderElevation: 0,
+          actions: [
+            IconButton(
+              onPressed: () {
+                context.push(
+                  JobRoutes.jobAddEdit,
+                  extra: widget.post,
+                );
+              },
+              icon: const Icon(Icons.create_outlined),
+            ),
+            IconButton(
+              onPressed: () {
+                context.read<ManageJobCubit>().deleteJob(id: widget.post.id);
+              },
+              icon: const Icon(Icons.delete_outline),
+            )
+          ]),
       extendBodyBehindAppBar: true,
       body: BgGradient(
         child: SafeArea(
@@ -43,16 +68,16 @@ class JobDetailScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border.all(),
                                 image: DecorationImage(
-                                    image: NetworkImage(post.image),
+                                    image: NetworkImage(widget.post.image),
                                     fit: BoxFit.cover)),
                           ),
                           const SizedBox(height: 10),
                           Text(
-                            post.title,
+                            widget.post.title,
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                           Text(
-                            "${post.companyName} - ${post.place}",
+                            "${widget.post.companyName} - ${widget.post.place}",
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
                         ],
@@ -81,7 +106,8 @@ class JobDetailScreen extends StatelessWidget {
                               const SizedBox(
                                 width: 6,
                               ),
-                              Text("${post.jobType} - ${post.jobLocationType}",
+                              Text(
+                                  "${widget.post.jobType} - ${widget.post.jobLocationType}",
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
@@ -98,7 +124,7 @@ class JobDetailScreen extends StatelessWidget {
                       ),
                       Divider(),
                       const SizedBox(height: 5),
-                      CustomMarkdownBody(inputText: post.description),
+                      CustomMarkdownBody(inputText: widget.post.description),
                       100.heightBox
                     ],
                   ),
@@ -109,7 +135,8 @@ class JobDetailScreen extends StatelessWidget {
                   right: 0,
                   child: ElevatedButton(
                     onPressed: () async {
-                      context.push(CommonRoutes.webView, extra: post.url);
+                      context.push(CommonRoutes.webView,
+                          extra: widget.post.url);
                     },
                     child: Text(
                       "Apply Now",
