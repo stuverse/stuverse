@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stuverse/app/common/core/views/pdf_viewer_screen.dart';
-import 'package:stuverse/app/common/core/views/pdf_viewer_screen.dart';
 import 'package:stuverse/features/forum/forum.dart';
 import 'package:stuverse/features/fund/fund.dart';
 import 'package:stuverse/features/job/job.dart';
@@ -87,10 +86,10 @@ class AppRouter {
                 url: (state.extra as String?) ?? "",
               )),
       GoRoute(
-          path: CommonRoutes.webView,
+          path: CommonRoutes.pdfViewer,
           redirect: (context, state) {
             if (state.extra == null) {
-              return CommonRoutes.pdfViewer;
+              return CommonRoutes.notFound;
             }
             return null;
           },

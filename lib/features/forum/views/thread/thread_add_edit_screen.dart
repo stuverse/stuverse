@@ -61,147 +61,143 @@ class _ThreadAddEditScreenState extends State<ThreadAddEditScreen> {
       appBar: AppBar(
         title: Text(isEdit ? "Edit Thread" : "Add Thread"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  height: context.height * 0.3,
-                  width: double.infinity,
-                  color: Colors.grey.withOpacity(0.2),
-                  child: Stack(
-                    children: [
-                      if (_selectedImage != null)
-                        Positioned.fill(
-                          child: Image.file(
-                            File(_selectedImage!.path),
-                            fit: BoxFit.cover,
-                          ),
-                        )
-                      else if (widget.props.thread != null &&
-                          widget.props.thread!.image != null)
-                        Positioned.fill(
-                          child: Image.network(
-                            widget.props.thread!.image ?? "",
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                          ),
-                        )
-                      else if (_selectedImage == null)
-                        Center(
-                          child: Text("No Image Selected"),
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: context.height * 0.3,
+                width: double.infinity,
+                color: Colors.grey.withOpacity(0.2),
+                child: Stack(
+                  children: [
+                    if (_selectedImage != null)
+                      Positioned.fill(
+                        child: Image.file(
+                          File(_selectedImage!.path),
+                          fit: BoxFit.cover,
                         ),
-                      Positioned(
-                        bottom: 10,
-                        right: 10,
-                        child: ElevatedButton(
-                          onPressed: _pickImage,
-                          child: Text("Pick Image"),
+                      )
+                    else if (widget.props.thread != null &&
+                        widget.props.thread!.image != null)
+                      Positioned.fill(
+                        child: Image.network(
+                          widget.props.thread!.image ?? "",
+                          fit: BoxFit.cover,
+                          width: double.infinity,
                         ),
+                      )
+                    else if (_selectedImage == null)
+                      Center(
+                        child: Text("No Image Selected"),
                       ),
-                    ],
-                  ),
-                ),
-                LabeledFormInput(
-                  child: TextFormField(
-                    controller: _titleController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Title is required";
-                      }
-                      if (value.length < 3) {
-                        return "Title must be at least 3 characters";
-                      }
-                      if (value.length > 50) {
-                        return "Title must be at most 50 characters";
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      hintText: "Title",
+                    Positioned(
+                      bottom: 10,
+                      right: 10,
+                      child: ElevatedButton(
+                        onPressed: _pickImage,
+                        child: Text("Pick Image"),
+                      ),
                     ),
-                    maxLength: 50,
-                  ),
-                  label: "Title",
+                  ],
                 ),
-                LabeledFormInput(
-                  child: TextFormField(
-                    controller: _contentController,
-                    validator: (value) {
-                      if (value!.length > 400) {
-                        return "Content must be at most 400 characters";
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      hintText: "Content",
-                    ),
-                    maxLines: 5,
-                    maxLength: 400,
+              ),
+              LabeledFormInput(
+                child: TextFormField(
+                  controller: _titleController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Title is required";
+                    }
+                    if (value.length < 3) {
+                      return "Title must be at least 3 characters";
+                    }
+                    if (value.length > 50) {
+                      return "Title must be at most 50 characters";
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    hintText: "Title",
                   ),
-                  label: "Content",
+                  maxLength: 50,
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  child: FilledButton.tonal(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        if (isEdit) {
-                          context.read<ThreadManageCubit>().editThread(
-                                threadId: widget.props.thread!.id!,
-                                title: _titleController.text,
-                                content: _contentController.text,
-                                image: _selectedImage,
-                              );
-                        } else {
-                          context.read<ThreadManageCubit>().addThread(
-                                title: _titleController.text,
-                                content: _contentController.text,
-                                communityId: widget.props.communityId,
-                                image: _selectedImage,
-                              );
-                        }
+                label: "Title",
+              ),
+              LabeledFormInput(
+                child: TextFormField(
+                  controller: _contentController,
+                  validator: (value) {
+                    if (value!.length > 400) {
+                      return "Content must be at most 400 characters";
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    hintText: "Content",
+                  ),
+                  maxLines: 5,
+                  maxLength: 400,
+                ),
+                label: "Content",
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton.tonal(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      if (isEdit) {
+                        context.read<ThreadManageCubit>().editThread(
+                              threadId: widget.props.thread!.id!,
+                              title: _titleController.text,
+                              content: _contentController.text,
+                              image: _selectedImage,
+                            );
+                      } else {
+                        context.read<ThreadManageCubit>().addThread(
+                              title: _titleController.text,
+                              content: _contentController.text,
+                              communityId: widget.props.communityId,
+                              image: _selectedImage,
+                            );
+                      }
+                    }
+                  },
+                  child: BlocConsumer<ThreadManageCubit, ThreadManageState>(
+                    listener: (context, state) {
+                      if (state is ThreadUpdateError ||
+                          state is ThreadCreateError) {
+                        context.showErrorMessage(
+                          message: "Something went wrong",
+                          duration: 3.seconds,
+                        );
+                      }
+                      if (state is ThreadUpdateSuccess ||
+                          state is ThreadCreateSuccess) {
+                        context.showMessage(
+                          message: isEdit ? "Thread Updated" : "Thread Created",
+                          duration: 3.seconds,
+                        );
+                        context
+                            .read<CommunityDetailCubit>()
+                            .getCommunityThreads(
+                                communityId: widget.props.communityId);
+                        context.pop();
                       }
                     },
-                    child: BlocConsumer<ThreadManageCubit, ThreadManageState>(
-                      listener: (context, state) {
-                        if (state is ThreadUpdateError ||
-                            state is ThreadCreateError) {
-                          context.showErrorMessage(
-                            message: "Something went wrong",
-                            duration: 3.seconds,
-                          );
-                        }
-                        if (state is ThreadUpdateSuccess ||
-                            state is ThreadCreateSuccess) {
-                          context.showMessage(
-                            message:
-                                isEdit ? "Thread Updated" : "Thread Created",
-                            duration: 3.seconds,
-                          );
-                          context
-                              .read<CommunityDetailCubit>()
-                              .getCommunityThreads(
-                                  communityId: widget.props.communityId);
-                          context.pop();
-                        }
-                      },
-                      builder: (context, state) {
-                        if (state is ThreadUpdateLoading ||
-                            state is ThreadCreateLoading) {
-                          return const CircularProgressIndicator();
-                        }
+                    builder: (context, state) {
+                      if (state is ThreadUpdateLoading ||
+                          state is ThreadCreateLoading) {
+                        return const CircularProgressIndicator();
+                      }
 
-                        return Text(isEdit ? "Edit" : "Add");
-                      },
-                    ),
+                      return Text(isEdit ? "Edit" : "Add");
+                    },
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -57,32 +57,28 @@ class ProjectCard extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  project.title,
-                                  style: context.titleLarge!
-                                      .copyWith(fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  'By : ${project.user.name}',
-                                  textAlign: TextAlign.center,
-                                  style:
-                                      context.textTheme.bodyMedium!.copyWith(),
-                                ),
-                                Text(
-                                  'Target Amount : \$${project.targetAmount}',
-                                  textAlign: TextAlign.center,
-                                  style:
-                                      context.textTheme.bodyMedium!.copyWith(),
-                                ),
-                              ],
-                            ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                project.title,
+                                style: context.titleLarge!
+                                    .copyWith(fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                'By : ${project.user.name}',
+                                textAlign: TextAlign.center,
+                                style: context.textTheme.bodyMedium!.copyWith(),
+                              ),
+                              Text(
+                                'Target Amount : \$${project.targetAmount}',
+                                textAlign: TextAlign.center,
+                                style: context.textTheme.bodyMedium!.copyWith(),
+                              ),
+                            ],
                           ),
                           Container(
                             height: 50,
