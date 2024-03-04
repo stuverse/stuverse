@@ -22,31 +22,23 @@ class ProjectCard extends StatelessWidget {
         children: [
           Stack(
             children: [
-              InkWell(
-                onTap: () {
-                  context.push(
-                    FundRoutes.projectDesc,
-                    extra: project,
-                  );
-                },
-                child: Container(
-                  height: 200,
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(
-                    // color: Theme.of(context).colorScheme.surfaceVariant,
+              Container(
+                height: 200,
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  // color: Theme.of(context).colorScheme.surfaceVariant,
 
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Hero(
-                      tag: project.images,
-                      child: Image.network(
-                        project.images,
-                        height: double.maxFinite,
-                        width: double.maxFinite,
-                        fit: BoxFit.fill,
-                      ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Hero(
+                    tag: project.images,
+                    child: Image.network(
+                      project.images,
+                      height: double.maxFinite,
+                      width: double.maxFinite,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
