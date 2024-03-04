@@ -10,35 +10,18 @@ class ProfileHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<CoreCubit>().state.user;
+    final coreState = context.watch<CoreCubit>().state;
+    final user = coreState.user;
+
     return Scaffold(
         body: BgGradient(
       child: SafeArea(
         child: Column(
           children: [
             20.heightBox,
-            Stack(
-              children: [
-                CircleAvatar(
-                  radius: 65,
-                  backgroundImage: NetworkImage(user?.image ?? ""),
-                ),
-                Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Theme.of(context).colorScheme.onBackground,
-                          ),
-                        ),
-                        child: Icon(
-                          Icons.edit,
-                          size: 20,
-                        )))
-              ],
+            CircleAvatar(
+              radius: 65,
+              backgroundImage: NetworkImage(user?.image ?? ""),
             ),
             10.heightBox,
             Text(user?.name ?? "", style: context.headlineSmall),
@@ -74,16 +57,26 @@ class ProfileHomeScreen extends StatelessWidget {
                         }),
                     10.heightBox,
                     ProfileTile(
-                        title: "My stats",
-                        iconData: Icons.circle_notifications_sharp,
+                        title: coreState.isDarkMode
+                            ? "Change to Light Mode"
+                            : "Change to Dark Mode",
+                        iconData: coreState.isDarkMode
+                            ? Icons.light_mode
+                            : Icons.dark_mode,
                         color: context.bluePrimary,
-                        onTap: () {}),
+                        onTap: () {
+                          context.read<CoreCubit>().toggleTheme();
+                        }),
                     10.heightBox,
                     ProfileTile(
                         title: "Settings",
                         iconData: Icons.settings,
                         color: context.goldPrimary,
-                        onTap: () {}),
+                        onTap: () {
+                          context.showMessage(
+                              message:
+                                  "Settings will be available in future updates");
+                        }),
                     10.heightBox,
                     Divider(
                       thickness: 5,

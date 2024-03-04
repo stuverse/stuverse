@@ -71,58 +71,16 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
                       const SizedBox(
                         height: 25,
                       ),
-                      Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color:
-                                  Theme.of(context).colorScheme.surfaceVariant,
-                            ),
-                            child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 10,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Start New Project ",
-                                      style: context.titleLarge!.copyWith(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      "Create your fundraising Project and get funding fast and easy.",
-                                      textAlign: TextAlign.center,
-                                      style: context.textTheme.bodyMedium!
-                                          .copyWith(),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Center(
-                                      child: ElevatedButton(
-                                        onPressed: () {},
-                                        child: Text('Start',
-                                            style: context.titleSmall!.copyWith(
-                                                color:
-                                                    context.colorScheme.surface,
-                                                fontWeight: FontWeight.bold)),
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor:
-                                                context.colorScheme.secondary,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(12))),
-                                      ),
-                                    )
-                                  ],
-                                )),
-                          )),
+                      BannerCard(
+                        title: "Start New Project ",
+                        description:
+                            "Create your fundraising Project and get funding fast and easy.",
+                        buttonText: "Start",
+                        onTap: () {
+                          context.showMessage(
+                              message: "Feature not available yet");
+                        },
+                      ),
                       const SizedBox(
                         height: 30,
                       ),

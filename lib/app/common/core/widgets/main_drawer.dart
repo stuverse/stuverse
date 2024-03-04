@@ -19,16 +19,14 @@ class MainDrawer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Stuverse',
-                  style: context.headlineLarge!.copyWith(
-                    color: context.colorScheme.onBackground,
-                  ),
+                Image.asset(
+                  AppImages.logo,
+                  height: context.height * 0.08,
                 ),
                 10.heightBox,
                 Text(
                   'Welcome to Stuverse!',
-                  style: context.headlineMedium!.copyWith(
+                  style: context.headlineSmall!.copyWith(
                     color: context.colorScheme.onBackground,
                   ),
                 ),
@@ -48,17 +46,6 @@ class MainDrawer extends StatelessWidget {
             title: const Text("User Requests"),
             onTap: () {
               context.push(CommonRoutes.userRequest);
-            },
-          ),
-          ListTile(
-            title: const Text('Settings'),
-            onTap: () {},
-          ),
-          //Change Theme
-          ListTile(
-            title: const Text('Change Theme'),
-            onTap: () {
-              context.read<CoreCubit>().toggleTheme();
             },
           ),
           ListTile(
