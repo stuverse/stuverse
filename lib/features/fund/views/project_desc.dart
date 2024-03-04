@@ -19,12 +19,6 @@ class ProjectDescScreen extends StatefulWidget {
 
 class _ProjectDescScreenState extends State<ProjectDescScreen> {
   @override
-  void initState() {
-    context.read<FundHomeCubit>().getProjects();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
