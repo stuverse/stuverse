@@ -1,7 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:file_picker/file_picker.dart';
 
 import 'package:flutter/material.dart';
@@ -48,8 +46,10 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
     super.initState();
   }
 
+
   File? _resumeFile;
   File? _imageFile;
+
   List<Skill> _selectedSkills = [];
 
   void pickImage({
@@ -107,9 +107,9 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
       extendBodyBehindAppBar: true,
       body: BlocConsumer<SkillCubit, SkillState>(
         listener: (context, state) {
-          // TODO: implement listener
         },
         builder: (context, state) {
+
           if (state is SkillSuccess) {
             return BgGradient(
               child: SingleChildScrollView(
@@ -126,6 +126,7 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
+
                               children: [
                                 Row(
                                   children: [
@@ -267,10 +268,12 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                         return 'Invalid GitHub link';
                                       }
 
+
                                       return null;
                                     },
                                   ),
                                   label: 'Github',
+
                                 ),
                                 10.heightBox,
                                 Text(
@@ -512,6 +515,7 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
           }
           return Center(
             child: CircularProgressIndicator(),
+            
           );
         },
       ),

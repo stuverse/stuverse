@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
-import 'package:stuverse/features/mentor/cubit/home/mentor_home_cubit.dart';
 import 'package:stuverse/features/mentor/cubit/manage_mentor_post/manage_mentor_post_cubit.dart';
 import 'package:stuverse/features/mentor/cubit/manage_mentor_post/manage_mentor_post_state.dart';
 import 'package:stuverse/features/mentor/mentor.dart';
 
+import '../cubit/search/mentor_search_cubit.dart';
 import '../models/mentor_post.dart';
 
 class MentorPostCard extends StatefulWidget {
@@ -115,8 +115,8 @@ class _MentorPostCardState extends State<MentorPostCard> {
                                                 context.pushReplacement(
                                                     MentorRoutes.mentorHome);
                                                 context
-                                                    .read<MentorHomeCubit>()
-                                                    .getMentorHomeData();
+                                                    .read<MentorSearchCubit>()
+                                                    .getMentorSearchData();
                                               }
                                             },
                                             builder: (context, state) => state
