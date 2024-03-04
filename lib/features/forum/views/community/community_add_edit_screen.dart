@@ -58,163 +58,158 @@ class _CommunityAddEditScreenState extends State<CommunityAddEditScreen> {
       appBar: AppBar(
         title: Text(isEdit ? "Edit Community" : "Add Community"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  height: context.width * 0.5,
-                  width: context.width * 0.5,
-                  color: Colors.grey.withOpacity(0.2),
-                  child: Stack(
-                    children: [
-                      if (_selectedImage != null)
-                        Positioned.fill(
-                          child: Image.file(
-                            File(_selectedImage!.path),
-                            fit: BoxFit.cover,
-                          ),
-                        )
-                      else if (widget.community != null)
-                        Positioned.fill(
-                          child: Image.network(
-                            widget.community!.image ?? "",
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                          ),
-                        )
-                      else if (_selectedImage == null)
-                        Center(
-                          child: Text("No Image Selected"),
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: context.width * 0.5,
+                width: context.width * 0.5,
+                color: Colors.grey.withOpacity(0.2),
+                child: Stack(
+                  children: [
+                    if (_selectedImage != null)
+                      Positioned.fill(
+                        child: Image.file(
+                          File(_selectedImage!.path),
+                          fit: BoxFit.cover,
                         ),
-                      Positioned(
-                        bottom: 10,
-                        right: 10,
-                        child: ElevatedButton(
-                          onPressed: _pickImage,
-                          child: Text("Pick Image"),
+                      )
+                    else if (widget.community != null)
+                      Positioned.fill(
+                        child: Image.network(
+                          widget.community!.image ?? "",
+                          fit: BoxFit.cover,
+                          width: double.infinity,
                         ),
+                      )
+                    else if (_selectedImage == null)
+                      Center(
+                        child: Text("No Image Selected"),
                       ),
-                    ],
-                  ),
-                ),
-                LabeledFormInput(
-                  child: TextFormField(
-                    controller: _nameController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Name is required";
-                      }
-                      if (value.length < 3) {
-                        return "Name must be at least 3 characters";
-                      }
-                      if (value.length > 15) {
-                        return "Name must be at most 15 characters";
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      hintText: "Name",
+                    Positioned(
+                      bottom: 10,
+                      right: 10,
+                      child: ElevatedButton(
+                        onPressed: _pickImage,
+                        child: Text("Pick Image"),
+                      ),
                     ),
-                    maxLength: 15,
-                  ),
-                  label: "Name",
+                  ],
                 ),
-                LabeledFormInput(
-                  child: TextFormField(
-                    controller: _descriptionController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Description is required";
-                      }
-                      if (value.length < 3) {
-                        return "Description must be at least 3 characters";
-                      }
-                      if (value.length > 400) {
-                        return "Description must be at most 400 characters";
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      hintText: "Description",
-                    ),
-                    maxLines: 5,
-                    maxLength: 400,
-                  ),
-                  label: "Description",
-                ),
-                CheckboxListTile(
-                  value: _isPrivate,
-                  onChanged: (value) {
-                    setState(() {
-                      _isPrivate = value!;
-                    });
+              ),
+              LabeledFormInput(
+                child: TextFormField(
+                  controller: _nameController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Name is required";
+                    }
+                    if (value.length < 3) {
+                      return "Name must be at least 3 characters";
+                    }
+                    if (value.length > 15) {
+                      return "Name must be at most 15 characters";
+                    }
+                    return null;
                   },
-                  title: Text("Private"),
+                  decoration: const InputDecoration(
+                    hintText: "Name",
+                  ),
+                  maxLength: 15,
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  child: FilledButton.tonal(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        if (isEdit) {
-                          context.read<CommunityManageCubit>().editCommunity(
-                                communityId: widget.community!.id!,
-                                name: _nameController.text,
-                                description: _descriptionController.text,
-                                isPrivate: _isPrivate,
-                                image: _selectedImage,
-                              );
-                        } else {
-                          context.read<CommunityManageCubit>().addCommunity(
-                                name: _nameController.text,
-                                description: _descriptionController.text,
-                                isPrivate: _isPrivate,
-                                image: _selectedImage,
-                              );
-                        }
+                label: "Name",
+              ),
+              LabeledFormInput(
+                child: TextFormField(
+                  controller: _descriptionController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Description is required";
+                    }
+                    if (value.length < 3) {
+                      return "Description must be at least 3 characters";
+                    }
+                    if (value.length > 400) {
+                      return "Description must be at most 400 characters";
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    hintText: "Description",
+                  ),
+                  maxLines: 5,
+                  maxLength: 400,
+                ),
+                label: "Description",
+              ),
+              CheckboxListTile(
+                value: _isPrivate,
+                onChanged: (value) {
+                  setState(() {
+                    _isPrivate = value!;
+                  });
+                },
+                title: Text("Private"),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton.tonal(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      if (isEdit) {
+                        context.read<CommunityManageCubit>().editCommunity(
+                              communityId: widget.community!.id!,
+                              name: _nameController.text,
+                              description: _descriptionController.text,
+                              isPrivate: _isPrivate,
+                              image: _selectedImage,
+                            );
+                      } else {
+                        context.read<CommunityManageCubit>().addCommunity(
+                              name: _nameController.text,
+                              description: _descriptionController.text,
+                              isPrivate: _isPrivate,
+                              image: _selectedImage,
+                            );
+                      }
+                    }
+                  },
+                  child:
+                      BlocConsumer<CommunityManageCubit, CommunityManageState>(
+                    listener: (context, state) {
+                      if (state is CommunityUpdateError ||
+                          state is CommunityCreateError) {
+                        context.showErrorMessage(
+                          message: "Something went wrong",
+                          duration: 3.seconds,
+                        );
+                      }
+                      if (state is CommunityUpdateSuccess ||
+                          state is CommunityCreateSuccess) {
+                        context.showMessage(
+                          message: isEdit
+                              ? "Community Updated"
+                              : "Community Created",
+                          duration: 3.seconds,
+                        );
+                        context.read<CommunityAdminCubit>().getAllCommunities();
+                        context.pop();
                       }
                     },
-                    child: BlocConsumer<CommunityManageCubit,
-                        CommunityManageState>(
-                      listener: (context, state) {
-                        if (state is CommunityUpdateError ||
-                            state is CommunityCreateError) {
-                          context.showErrorMessage(
-                            message: "Something went wrong",
-                            duration: 3.seconds,
-                          );
-                        }
-                        if (state is CommunityUpdateSuccess ||
-                            state is CommunityCreateSuccess) {
-                          context.showMessage(
-                            message: isEdit
-                                ? "Community Updated"
-                                : "Community Created",
-                            duration: 3.seconds,
-                          );
-                          context
-                              .read<CommunityAdminCubit>()
-                              .getAllCommunities();
-                          context.pop();
-                        }
-                      },
-                      builder: (context, state) {
-                        if (state is CommunityUpdateLoading ||
-                            state is CommunityCreateLoading) {
-                          return const CircularProgressIndicator();
-                        }
+                    builder: (context, state) {
+                      if (state is CommunityUpdateLoading ||
+                          state is CommunityCreateLoading) {
+                        return const CircularProgressIndicator();
+                      }
 
-                        return Text(isEdit ? "Edit" : "Add");
-                      },
-                    ),
+                      return Text(isEdit ? "Edit" : "Add");
+                    },
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
