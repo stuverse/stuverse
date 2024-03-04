@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:developer';
 import 'dart:io';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:file_picker/file_picker.dart';
@@ -8,8 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:permission_handler/permission_handler.dart';
 import 'package:stuverse/app/app.dart';
+import 'package:stuverse/features/profile/cubit/manage_profile_cubit.dart';
 import 'package:stuverse/features/profile/cubit/manage_profile_cubit.dart';
 
 import '../cubit/skill/skill_cubit.dart';
@@ -32,10 +34,28 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
 
   final _formKey = GlobalKey<FormState>();
   User? user;
+  final _nameController = TextEditingController();
+  final _mobileController = TextEditingController();
+  final _aboutController = TextEditingController();
+  final _linkedinController = TextEditingController();
+  final _githubController = TextEditingController();
+
+  final _experienceController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+  User? user;
   @override
   void initState() {
     context.read<SkillCubit>().getSkills();
     user = context.read<CoreCubit>().state.user;
+    _nameController.text = user!.name.toString();
+    _mobileController.text = user!.mobile.toString();
+    _aboutController.text = user!.about.toString();
+    _linkedinController.text = user!.linkedin.toString();
+    _githubController.text = user!.github.toString();
+    _experienceController.text = user!.experienceYears.toString();
+    _selectedSkills = [...List.castFrom<Skill, Skill>(user!.skills!)];
+
     _nameController.text = user!.name.toString();
     _mobileController.text = user!.mobile.toString();
     _aboutController.text = user!.about.toString();
@@ -49,8 +69,23 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
 
   File? _resumeFile;
   File? _imageFile;
-
   List<Skill> _selectedSkills = [];
+
+  void pickImage({
+    required ImageSource source,
+  }) async {
+    try {
+      final imagePicker = ImagePicker();
+      final pickedImage = await imagePicker.pickImage(source: source);
+      if (pickedImage != null) {
+        setState(() {
+          _imageFile = File(pickedImage.path);
+        });
+      }
+    } catch (e) {
+      log("Crash Error: $e");
+    }
+  }
 
   void pickImage({
     required ImageSource source,
@@ -77,15 +112,27 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
       //   throw "Please allow storage permission to upload files";
       // }
       // log("status: $status");
+      // final status = await Permission.manageExternalStorage.request();
+      // if (status.isDenied ||
+      //     status.isPermanentlyDenied ||
+      //     status.isRestricted) {
+      //   throw "Please allow storage permission to upload files";
+      // }
+      // log("status: $status");
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
+        type: FileType.custom,
         allowMultiple: false,
+        allowedExtensions: [
+          'pdf',
+        ],
         allowedExtensions: [
           'pdf',
         ],
       );
       if (result != null) {
         setState(() {
+          _resumeFile = File(result.files.single.path!);
           _resumeFile = File(result.files.single.path!);
         });
       }
@@ -96,6 +143,7 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    user = context.watch<CoreCubit>().state.user;
     user = context.watch<CoreCubit>().state.user;
     return Scaffold(
       appBar: AppBar(
@@ -155,10 +203,7 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                           left: 0,
                                           right: 0,
                                           child: IconButton(
-                                            onPressed: () {
-                                              pickImage(
-                                                  source: ImageSource.gallery);
-                                            },
+                                            onPressed: () {},
                                             icon: Icon(
                                               Icons.camera_alt,
                                             ),
@@ -213,7 +258,6 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                 LabeledFormInput(
                                   child: TextFormField(
                                     controller: _aboutController,
-                                    maxLines: 5,
                                     decoration: InputDecoration(
                                       prefixIcon: Icon(Icons.menu_book),
                                     ),
@@ -235,7 +279,13 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                       RegExp regex = RegExp(
                                         r'^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)',
                                       );
+                                      RegExp regex = RegExp(
+                                        r'^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)',
+                                      );
 
+                                      if (!regex.hasMatch(value)) {
+                                        return 'Invalid LinkedIn link';
+                                      }
                                       if (!regex.hasMatch(value)) {
                                         return 'Invalid LinkedIn link';
                                       }
@@ -245,6 +295,7 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                   ),
                                   label: 'Linkedin',
                                 ),
+
                                 10.heightBox,
                                 LabeledFormInput(
                                   child: TextFormField(
@@ -264,12 +315,16 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                       if (!regex.hasMatch(value)) {
                                         return 'Invalid GitHub link';
                                       }
+                                      if (!regex.hasMatch(value)) {
+                                        return 'Invalid GitHub link';
+                                      }
 
                                       return null;
                                     },
                                   ),
                                   label: 'Github',
                                 ),
+
                                 10.heightBox,
                                 Text(
                                   'Skills',
@@ -278,19 +333,65 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                           .colorScheme
                                           .secondaryContainer),
                                 ),
-                                DropdownSearch<Skill>.multiSelection(
-                                  items: state.skills,
-                                  selectedItems: _selectedSkills,
-                                  onChanged: (selectedItems) {
-                                    setState(() {
-                                      _selectedSkills = selectedItems;
-                                    });
-                                  },
-                                  itemAsString: (item) => item.name.toString(),
-                                  popupProps: PopupPropsMultiSelection.dialog(
-                                      showSearchBox: true,
-                                      searchDelay: 100.milliseconds),
+                                Wrap(
+                                  children: [
+                                    for (final skill in _selectedSkills)
+                                      Chip(
+                                        label: Text(skill.name.toString()),
+                                        deleteIcon: Icon(
+                                          Icons.close,
+                                          size: 15,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
+                                        ),
+                                        onDeleted: () {
+                                          setState(() {
+                                            _selectedSkills.remove(skill);
+                                          });
+                                        },
+                                      )
+                                  ],
                                 ),
+                                DropdownButtonFormField<Skill>(
+                                    hint: const Text("Search skills"),
+                                    items: [
+                                      for (final skill in state.skills)
+                                        DropdownMenuItem(
+                                          value: skill,
+                                          child: Text(skill.name.toString()),
+                                        ),
+                                    ],
+                                    onChanged: (value) {
+                                      bool isAlreadySelected =
+                                          _selectedSkills.any((element) =>
+                                              element.id == value?.id);
+                                      if (isAlreadySelected) {
+                                        return;
+                                      }
+                                      setState(() {
+                                        _selectedSkills.add(value!);
+                                      });
+                                    }),
+                                //  DropdownSearch<Skill>(
+                                //   items: state.skills,
+                                //   showClearButton: true,
+                                //   onChanged: (Skill? value) {
+                                //     if (value != null) {
+                                //       setState(() {
+                                //         _selectedSkills.add(value);
+                                //       });
+                                //     }
+                                //   },
+                                //   selectedItem: null,
+                                //   searchBoxDecoration: InputDecoration(
+                                //     labelText: "Skills", // Use labelText for label
+                                //     hintText: "Select a skill", // Use hintText for hint
+                                //     border: OutlineInputBorder(),
+                                //     contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                                //   ),
+                                // ),
+
                                 10.heightBox,
                                 LabeledFormInput(
                                   child: TextFormField(
@@ -307,6 +408,7 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                   ),
                                   label: 'Experience',
                                 ),
+
                                 10.heightBox,
                                 Text(
                                   'Add Resume',
@@ -315,29 +417,6 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                           .colorScheme
                                           .secondaryContainer),
                                 ),
-                                5.heightBox,
-                                if (user!.resume != null)
-                                  ListTile(
-                                    tileColor: Theme.of(context)
-                                        .colorScheme
-                                        .surfaceVariant,
-                                    leading: Icon(Icons.insert_drive_file),
-                                    title: Text(
-                                      'Current Resume',
-                                      style: context.bodyMedium,
-                                    ),
-                                    subtitle: Text(
-                                      user!.resume.toString().split('/').last,
-                                      style: context.bodyMedium,
-                                    ),
-                                    trailing: IconButton(
-                                      onPressed: () {
-                                        context.push(CommonRoutes.pdfViewer,
-                                            extra: user!.resume.toString());
-                                      },
-                                      icon: Icon(Icons.visibility),
-                                    ),
-                                  ),
                                 5.heightBox,
                                 InkWell(
                                   onTap: pickFile,
@@ -386,7 +465,7 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                 if (_resumeFile != null)
                                   InkWell(
                                     onTap: () {
-                                      context.push(CommonRoutes.pdfViewer,
+                                      context.go(CommonRoutes.pdfViewer,
                                           extra: _resumeFile!.path);
                                     },
                                     child: Container(

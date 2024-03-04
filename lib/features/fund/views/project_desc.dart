@@ -115,9 +115,10 @@ class _ProjectDescScreenState extends State<ProjectDescScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    context.push(
-                      FundRoutes.donationpage,
-                    );
+                    // context.push(
+                    //   FundRoutes.donationpage,
+                    // );
+                    context.showMessage(message: 'Not yet implemented');
                   },
                   child: Text('Donate',
                       style: context.titleSmall!.copyWith(

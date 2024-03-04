@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
-import 'package:logman/logman.dart';
+
 import 'package:stuverse/features/forum/forum.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,11 +16,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Logman.instance.attachOverlay(
-        context: context,
-      );
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   Logman.instance.attachOverlay(
+    //     context: context,
+    //   );
+    // });
   }
 
   @override
