@@ -4,10 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/mentor/mentor.dart';
 import 'package:stuverse/features/mentor/models/mentor_post.dart';
-
-import '../cubit/home/mentor_home_cubit.dart';
 import '../cubit/manage_mentor_post/manage_mentor_post_cubit.dart';
 import '../cubit/manage_mentor_post/manage_mentor_post_state.dart';
+import '../cubit/search/mentor_search_cubit.dart';
 
 class ManageMentorPostScreen extends StatefulWidget {
   const ManageMentorPostScreen({super.key, this.post});
@@ -210,7 +209,7 @@ class _ManageMentorPostScreenState extends State<ManageMentorPostScreen> {
                             content: Text(state.message),
                           ));
                           context.pushReplacement(MentorRoutes.mentorHome);
-                          context.read<MentorHomeCubit>().getMentorHomeData();
+                          context.read<MentorSearchCubit>().getMentorSearchData();
                         }
                       },
                       builder: (context, state) => state

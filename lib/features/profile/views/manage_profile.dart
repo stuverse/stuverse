@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -60,11 +58,9 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
       extendBodyBehindAppBar: true,
       body: BlocConsumer<SkillCubit, SkillState>(
         listener: (context, state) {
-          // TODO: implement listener
         },
         builder: (context, state) {
-          if (state is SkillSuccess) {
-            
+          if (state is SkillSuccess) { 
           return BgGradient(
             child: SingleChildScrollView(
               child: SafeArea(
@@ -264,7 +260,6 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
 //     contentPadding: EdgeInsets.symmetric(horizontal: 10),
 //   ),
 // ),
-
       10.heightBox,
         LabeledFormInput(
                               child: TextFormField(

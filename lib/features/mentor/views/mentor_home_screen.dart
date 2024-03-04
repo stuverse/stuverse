@@ -4,13 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/mentor/cubit/manage_mentor_post/manage_mentor_post_cubit.dart';
 import 'package:stuverse/features/mentor/cubit/manage_mentor_post/manage_mentor_post_state.dart';
-import '../cubit/home/mentor_home_cubit.dart';
+import '../cubit/home/cubit/mentor_home_cubit.dart';
 import '../routes/mentor_routes.dart';
 import '../widgets/mentor_post_card.dart';
 
 class MentorHomeScreen extends StatefulWidget {
   MentorHomeScreen({super.key});
-
   @override
   _MentorHomeScreenState createState() => _MentorHomeScreenState();
 }
@@ -19,11 +18,9 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
   void initState() {
     context
         .read<MentorHomeCubit>()
-        .getMentorHomeData(search: _searchController.text);
+        .getMentorHomeData();
     super.initState();
   }
-
-  final _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +31,7 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
             onRefresh: () async {
               context
                   .read<MentorHomeCubit>()
-                  .getMentorHomeData(search: _searchController.text);
+                  .getMentorHomeData();
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -70,22 +67,31 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                     buttonText: 'Join Now',
                   ),
                   SizedBox(height: 15),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(27),
-                      color: Color.fromARGB(242, 231, 230, 230),
-                    ),
-                    child: TextField(
-                      controller: _searchController,
-                      onChanged: (value) {
-                        context.read<MentorHomeCubit>().getMentorHomeData(
-                            search: _searchController.text);
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Search',
-                        border: InputBorder.none,
-                        prefixIcon: Icon(
-                          Icons.search,
+                  Hero(
+                    tag: 'search',
+                    child: Material(
+                      child: InkWell(
+                        onTap: () {
+                          context.push(MentorRoutes.seeAllPosts
+                              );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(27),
+                            color: Color.fromARGB(242, 231, 230, 230),
+                          ),
+                          child: IgnorePointer(
+                            ignoring: true,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Search',
+                                border: InputBorder.none,
+                                prefixIcon: Icon(
+                                  Icons.search,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -109,7 +115,7 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          'Top Mentors',
+                                          'Latest Mentorships',
                                           style:
                                               context.titleMedium!.copyWith(
                                             fontWeight: FontWeight.w600,
@@ -140,7 +146,7 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                                       scrollDirection: Axis.horizontal,
                                       child: Row(
                                         children: [
-                                          for (final post in state.posts)
+                                          for (final post in state.latestPosts)
                                             MentorPostCard(post: post),
                                         ],
                                       ),

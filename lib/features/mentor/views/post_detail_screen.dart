@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:readmore/readmore.dart';
-import 'package:stuverse/app/app.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../models/mentor_post.dart';
 
@@ -16,6 +15,7 @@ class PostDetailsScreen extends StatefulWidget {
 }
   bool isAboutExpanded = false;
 class _PostDetailsScreenState extends State<PostDetailsScreen> {
+
   @override
   Widget build(BuildContext context) {
     double deviceHeight= MediaQuery.of(context).size.height;
@@ -35,7 +35,8 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
             child: 
                 Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [            
+                children: [  
+                
                  ClipRRect(
                   borderRadius: BorderRadius.circular(35),
                   child: Container(
@@ -222,8 +223,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
               ),
               SizedBox(height: 10,),
                 ],
-              ),
-                                
+              ),                     
            
           )),
         ),
@@ -231,3 +231,4 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
     );
   }
 }
+

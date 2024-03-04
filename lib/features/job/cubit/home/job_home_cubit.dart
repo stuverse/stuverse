@@ -29,7 +29,6 @@ class JobHomeCubit extends Cubit<JobHomeState> {
       emit(JobHomeError(e.toString()));
     }
   }
-
   // void deletePost({required int id}) async {
   //   emit(DeletePostLoading());
   //   try {
