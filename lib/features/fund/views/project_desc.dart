@@ -114,7 +114,11 @@ class _ProjectDescScreenState extends State<ProjectDescScreen> {
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.push(
+                      FundRoutes.donationpage,
+                    );
+                  },
                   child: Text('Donate',
                       style: context.titleSmall!.copyWith(
                           color: context.colorScheme.surface,
