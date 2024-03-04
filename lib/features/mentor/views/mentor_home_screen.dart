@@ -24,6 +24,7 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+     final user = context.read<CoreCubit>().state.user;
     return SingleChildScrollView(
       child: BgGradient(
         child: SafeArea(
@@ -33,12 +34,13 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                   .read<MentorHomeCubit>()
                   .getMentorHomeData();
             },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                10.heightBox,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -49,6 +51,10 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                       ),
                       IconButton(
                         onPressed: () {
+                           if (user?.linkedin == null || user?.mobile == null || user?.github == null || user?.about == null ||  user?.experienceYears == null || user?.skills == null) {
+              context.showMessage(message: "Please ensure your profile is complete before proceeding.");
+             return;
+            }
                           context.push(MentorRoutes.manageMentorPost);
                         },
                         icon: Icon(
@@ -58,11 +64,17 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                       )
                     ],
                   ),
-                  Text('Perfect Mentor',
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text('Perfect Mentor',
                       style: context.headlineLarge!
                           .copyWith(fontWeight: FontWeight.bold)),
-                  SizedBox(height: 5),
-                  BannerCard(
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: BannerCard(
                     title: 'Unlock Your Potential!',
                     description:
                         'Inspire and empower others with your knowledge. Join as a mentor today.',
@@ -71,9 +83,12 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                       context.showMessage(message: "Feature not available yet");
                     },
                   ),
-                  SizedBox(height: 15),
-
-                  Hero(
+                ),
+                SizedBox(height: 15),
+            
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Hero(
                     tag: 'search',
                     child: Material(
                       child: InkWell(
@@ -98,35 +113,38 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                               ),
                             ),
                           ),
-
+                                  
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
-                  BlocBuilder<ManageMentorPostCubit, ManageMentorPostState>(
-                    builder: (context, state) => state
-                            is ManageMentorPostLoading
-                        ? CircularProgressIndicator()
-                        : BlocConsumer<MentorHomeCubit, MentorHomeState>(
-                            listener: (context, state) {},
-                            builder: (context, state) {
-                              if (state is MentorHomeFailure) {
-                                return Center(child: Text('Error'));
-                              }
-                              if (state is MentorHomeLoaded) {
-                                return Column(
-                                  children: [
-                                    Row(
+                ),
+                SizedBox(height: 10),
+                BlocBuilder<ManageMentorPostCubit, ManageMentorPostState>(
+                  builder: (context, state) => state
+                          is ManageMentorPostLoading
+                      ? CircularProgressIndicator()
+                      : BlocConsumer<MentorHomeCubit, MentorHomeState>(
+                          listener: (context, state) {},
+                          builder: (context, state) {
+                            if (state is MentorHomeFailure) {
+                              return Center(child: Text('Error'));
+                            }
+                            if (state is MentorHomeLoaded) {
+                              return Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                                    child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-
+                                                
                                           'Latest Mentorships',
                                           style:
                                               context.titleMedium!.copyWith(
-
+                                                
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
@@ -146,27 +164,27 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
-                                      height: 5,
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: [
+                                        for (final post in state.latestPosts)
+                                          MentorPostCard(post: post),
+                                      ],
                                     ),
-                                    SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                        children: [
-                                          for (final post in state.latestPosts)
-                                            MentorPostCard(post: post),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                );
-                              }
-                              return Center(child: CircularProgressIndicator());
-                            },
-                          ),
-                  ),
-                ],
-              ),
+                                  )
+                                ],
+                              );
+                            }
+                            return Center(child: CircularProgressIndicator());
+                          },
+                        ),
+                ),
+              ],
             ),
           ),
         ),
