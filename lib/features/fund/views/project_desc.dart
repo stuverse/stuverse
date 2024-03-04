@@ -79,7 +79,8 @@ class _ProjectDescScreenState extends State<ProjectDescScreen> {
 
                     Text(
                       '#tag: ${widget.project.category}',
-                      style: context.bodySmall,
+                      style: context.bodySmall!
+                          .copyWith(fontWeight: FontWeight.w100),
                     ),
                     Divider(
                       color: Colors.white,
