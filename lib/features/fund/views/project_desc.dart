@@ -70,7 +70,6 @@ class _ProjectDescScreenState extends State<ProjectDescScreen> {
                       style: context.titleLarge!
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
-
                     Text(
                       '#tag: ${widget.project.category}',
                       style: context.bodySmall!
@@ -80,9 +79,6 @@ class _ProjectDescScreenState extends State<ProjectDescScreen> {
                       color: Colors.white,
                       thickness: 0.3,
                     ),
-                    // const SizedBox(
-                    //   height: 10,
-                    // ),
                     ListTile(
                       leading: CircleAvatar(
                         radius: 30,
@@ -103,7 +99,6 @@ class _ProjectDescScreenState extends State<ProjectDescScreen> {
                       color: Colors.white,
                       thickness: 0.3,
                     ),
-
                     const SizedBox(
                       height: 20,
                     ),
