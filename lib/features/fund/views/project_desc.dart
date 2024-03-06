@@ -3,8 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
-import 'package:stuverse/features/fund/cubit/cubit/home_cubit.dart';
+import 'package:stuverse/features/fund/cubit/home/fund_home_cubit.dart';
 import 'package:stuverse/features/fund/models/projects.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../routes/fund_routes.dart';
 
@@ -114,11 +115,21 @@ class _ProjectDescScreenState extends State<ProjectDescScreen> {
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     // context.push(
                     //   FundRoutes.donationpage,
                     // );
                     context.showMessage(message: "Donation Page not available");
+                    final uri = Uri.parse(
+                        "upi://pay?cu=INR&pa=7356910877@paytm&pn=Basha&tn=&am=3.00");
+
+                    final canLaunch = await canLaunchUrl(uri);
+
+                    if (canLaunch) {
+                      await launchUrl(uri);
+                    } else {
+                      context.showMessage(message: "Cant open upi app");
+                    }
                   },
                   child: Text('Donate',
                       style: context.titleSmall!.copyWith(

@@ -40,7 +40,32 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
             ),
             IconButton(
               onPressed: () {
-                context.read<ManageJobCubit>().deleteJob(id: widget.post.id);
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text("Delete Job"),
+                        content: const Text(
+                            "Are you sure you want to delete this job?"),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              context
+                                  .read<ManageJobCubit>()
+                                  .deleteJob(id: widget.post.id);
+                              context.go(JobRoutes.jobHome);
+                            },
+                            child: const Text("Yes"),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("No"),
+                          ),
+                        ],
+                      );
+                    });
               },
               icon: const Icon(Icons.delete_outline),
             )

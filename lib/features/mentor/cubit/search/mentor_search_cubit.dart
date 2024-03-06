@@ -9,8 +9,8 @@ class MentorSearchCubit extends Cubit<MentorSearchState> {
   void getMentorSearchData({String? search}) async {
     emit(MentorSearchLoading());
     try {
-      final resp = await dioClient
-          .get('/mentor/posts', queryParameters: {if (search != null)'search': search});
+      final resp = await dioClient.get('/mentor/posts',
+          queryParameters: {if (search != null) 'search': search});
       final List<MentorPost> posts = [];
       for (final post in resp.data) {
         posts.add(MentorPost.fromJson(post));

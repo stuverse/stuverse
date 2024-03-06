@@ -4,8 +4,6 @@ import 'package:stuverse/features/mentor/models/mentor_post.dart';
 import 'package:stuverse/features/mentor/views/manage_mentor_post.dart';
 import 'package:stuverse/features/mentor/views/post_detail_screen.dart';
 
-
-
 import 'package:stuverse/features/mentor/views/see_all_posts.dart';
 
 class MentorRoutes {
@@ -18,8 +16,8 @@ class MentorRoutes {
   //! ----------------
 
   static const String manageMentorPost = '/mentor/manageMentorPost';
-  static const String seeAllPosts= '/mentor/seeAllPosts';
-  static const String postDetails= '/mentor/postDetails';
+  static const String seeAllPosts = '/mentor/seeAllPosts';
+  static const String postDetails = '/mentor/postDetails';
 
   static List<GoRoute> mentorRoutes = [
     GoRoute(
@@ -34,7 +32,8 @@ class MentorRoutes {
     ),
     GoRoute(
       path: '/mentor/postDetails',
-      builder: (context, state) => PostDetailsScreen(post: state.extra as MentorPost),
+      builder: (context, state) =>
+          PostDetailsScreen(post: state.extra as MentorPost),
     ),
   ];
 }

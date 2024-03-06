@@ -27,7 +27,7 @@ class ManageProfileCubit extends Cubit<ManageProfileState> {
         "name": name,
         "mobile": mobile,
         "about": about,
-        "experience": experience_years,
+        "experience_years": experience_years,
         "linkedin": linkedin,
         "github": github,
         "skills": skillsIDList,

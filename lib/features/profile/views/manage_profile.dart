@@ -36,12 +36,13 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
   void initState() {
     context.read<SkillCubit>().getSkills();
     user = context.read<CoreCubit>().state.user;
-    _nameController.text = user!.name.toString();
-    _mobileController.text = user!.mobile.toString();
-    _aboutController.text = user!.about.toString();
-    _linkedinController.text = user!.linkedin.toString();
-    _githubController.text = user!.github.toString();
-    _experienceController.text = user!.experienceYears.toString();
+    _nameController.text = user!.name ?? '';
+    _mobileController.text = user!.mobile ?? '';
+    _aboutController.text = user!.about ?? '';
+    _linkedinController.text = user!.linkedin ?? '';
+    _githubController.text = user!.github ?? '';
+    _experienceController.text =
+        user!.experienceYears != null ? user!.experienceYears.toString() : '';
     _selectedSkills = [...List.castFrom<Skill, Skill>(user!.skills!)];
 
     super.initState();
@@ -189,10 +190,9 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                 LabeledFormInput(
                                   child: TextFormField(
                                     validator: (value) {
-                                      if (value != null ||
-                                          (value?.isNotEmpty ?? false)) {
+                                      if (value != null && (value.isNotEmpty)) {
                                         try {
-                                          if (value!.length != 10) {
+                                          if (value.length != 10) {
                                             return "Mobile number should be of 10 digits";
                                           }
                                           int.parse(value);
@@ -203,7 +203,7 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                       return null;
                                     },
                                     decoration: InputDecoration(
-                                      prefixIcon: Icon(Icons.mail),
+                                      prefixIcon: Icon(Icons.phone),
                                     ),
                                     controller: _mobileController,
                                   ),

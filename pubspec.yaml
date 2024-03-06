@@ -1,6 +1,6 @@
 name: stuverse
 description: Stuverse student and alumni community forum
-version: 1.0.0+2
+version: 1.0.0+3
 publish_to: none
 
 environment:
@@ -34,6 +34,7 @@ dependencies:
   intl: ^0.18.0
   json_annotation: ^4.8.1
   logman: ^0.0.5
+  lottie: ^3.1.0
   permission_handler: ^11.3.0
   readmore: ^2.2.0
   shared_preferences: ^2.2.2
@@ -58,6 +59,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/app/animations/
     - assets/app/icons/
     - assets/app/logo/
     - assets/app/images/
