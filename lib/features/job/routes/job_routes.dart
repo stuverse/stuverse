@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/job/job.dart';
+import 'package:stuverse/features/job/views/home/job_ai_search_screen.dart';
 
 import 'package:stuverse/features/job/views/home/job_search_screen.dart';
 
@@ -11,6 +12,7 @@ class JobRoutes {
   static const String jobAddEdit = '/job/add-edit';
   static const String jobDetail = '/job/detail';
   static const String jobSearch = '/job/search';
+  static const String jobAiSearch = '/job/ai-search';
 
   static List<GoRoute> jobRoutes = [
     GoRoute(
@@ -27,7 +29,11 @@ class JobRoutes {
     GoRoute(
       path: jobSearch,
       builder: (context, state) => const JobSearchScreen(),
-    )
+    ),
+    GoRoute(
+      path: jobAiSearch,
+      builder: (context, state) => const JobAiSearchScreen(),
+    ),
 
     // GoRoute(
     //   path: '/mentor/manage',

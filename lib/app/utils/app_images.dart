@@ -12,7 +12,7 @@ class AppImages {
   static const String fundraisingOnboarding =
       "assets/app/images/fundraising.png";
   static const String otp3 = "assets/app/images/otp3.png";
-
+  static const String aiLottie = "assets/app/animations/ai.json";
   //! App SVGs
   static const String logoSVG = "assets/app/logo/stuverse.svg";
   static const String forumSVG = "assets/app/icons/forum.svg";

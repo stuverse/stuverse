@@ -6,12 +6,14 @@ import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/app/common/core/widgets/MarkdownTextInput/markdown_text_input.dart';
 import 'package:stuverse/app/widgets/bg_gradient.dart';
-import 'package:stuverse/features/fund/cubit/cubit/home_cubit.dart';
+import 'package:stuverse/features/fund/cubit/home/fund_home_cubit.dart';
 import 'package:stuverse/features/fund/fund.dart';
 
 import 'package:stuverse/features/fund/widgets/category.dart';
 import 'package:stuverse/features/fund/widgets/project_card.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../models/projects.dart';
 
 class FundHomeScreen extends StatefulWidget {
   const FundHomeScreen({super.key});
@@ -27,6 +29,8 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
     context.read<FundHomeCubit>().getProjects(search: _searchcontroller.text);
     super.initState();
   }
+
+  String? selectedCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -52,21 +56,24 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
                           horizontal: 13,
                           vertical: 8,
                         ),
-                        child: TextField(
-                            controller: _searchcontroller,
-                            onChanged: (value) {
-                              context.read<FundHomeCubit>().getProjects(
-                                    search: _searchcontroller.text,
-                                  );
-                            },
-                            style: context.textTheme.bodyMedium!.copyWith(),
-                            decoration: InputDecoration(
-                              fillColor:
-                                  Theme.of(context).colorScheme.background,
-                              border: InputBorder.none,
-                              prefixIcon: const Icon(Icons.search),
-                              hintText: "Find fundraisers, projects, and more",
-                            )),
+                        child: InkWell(
+                          onTap: () {
+                            context.push(FundRoutes.search);
+                          },
+                          child: TextField(
+                              controller: _searchcontroller,
+                              enabled: false,
+                              onChanged: (value) {},
+                              style: context.textTheme.bodyMedium!.copyWith(),
+                              decoration: InputDecoration(
+                                fillColor:
+                                    Theme.of(context).colorScheme.background,
+                                border: InputBorder.none,
+                                prefixIcon: const Icon(Icons.search),
+                                hintText:
+                                    "Find fundraisers, projects, and more",
+                              )),
+                        ),
                       ),
                       const SizedBox(
                         height: 25,
@@ -87,40 +94,96 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            InkWell(
-                              onTap: () {},
-                              child: const Category(
-                                title: 'Medical',
-                                image: FundImages.medical,
-                              ),
+                            FundCategory(
+                              title: 'All',
+                              image: FundImages.all,
+                              isSelected: selectedCategory == null,
+                              onTap: () {
+                                setState(() {
+                                  selectedCategory = null;
+                                });
+                                context.read<FundHomeCubit>().getProjects(
+                                      search: _searchcontroller.text,
+                                      category: selectedCategory,
+                                    );
+                              },
                             ),
-                            InkWell(
-                              onTap: () {},
-                              child: const Category(
-                                title: 'Education',
-                                image: FundImages.education,
-                              ),
+                            FundCategory(
+                              title: 'Medical',
+                              image: FundImages.medical,
+                              isSelected: selectedCategory ==
+                                  FundCategoryChoice.medical,
+                              onTap: () {
+                                setState(() {
+                                  selectedCategory = FundCategoryChoice.medical;
+                                });
+                                context.read<FundHomeCubit>().getProjects(
+                                      search: _searchcontroller.text,
+                                      category: selectedCategory,
+                                    );
+                              },
                             ),
-                            InkWell(
-                              onTap: () {},
-                              child: const Category(
-                                title: 'Disaster',
-                                image: FundImages.disastor,
-                              ),
+                            FundCategory(
+                              title: 'Education',
+                              image: FundImages.education,
+                              isSelected: selectedCategory ==
+                                  FundCategoryChoice.education,
+                              onTap: () {
+                                setState(() {
+                                  selectedCategory =
+                                      FundCategoryChoice.education;
+                                });
+                                context.read<FundHomeCubit>().getProjects(
+                                      search: _searchcontroller.text,
+                                      category: selectedCategory,
+                                    );
+                              },
                             ),
-                            InkWell(
-                              onTap: () {},
-                              child: const Category(
-                                title: 'Charity',
-                                image: FundImages.charity,
-                              ),
+                            FundCategory(
+                              title: 'Disaster',
+                              image: FundImages.disastor,
+                              isSelected: selectedCategory ==
+                                  FundCategoryChoice.disaster,
+                              onTap: () {
+                                setState(() {
+                                  selectedCategory =
+                                      FundCategoryChoice.disaster;
+                                });
+                                context.read<FundHomeCubit>().getProjects(
+                                      search: _searchcontroller.text,
+                                      category: selectedCategory,
+                                    );
+                              },
                             ),
-                            InkWell(
-                              onTap: () {},
-                              child: const Category(
-                                title: 'Others',
-                                image: FundImages.other,
-                              ),
+                            FundCategory(
+                              title: 'Charity',
+                              image: FundImages.charity,
+                              isSelected: selectedCategory ==
+                                  FundCategoryChoice.charity,
+                              onTap: () {
+                                setState(() {
+                                  selectedCategory = FundCategoryChoice.charity;
+                                });
+                                context.read<FundHomeCubit>().getProjects(
+                                      search: _searchcontroller.text,
+                                      category: selectedCategory,
+                                    );
+                              },
+                            ),
+                            FundCategory(
+                              title: 'Others',
+                              image: FundImages.other,
+                              isSelected:
+                                  selectedCategory == FundCategoryChoice.others,
+                              onTap: () {
+                                setState(() {
+                                  selectedCategory = FundCategoryChoice.others;
+                                });
+                                context.read<FundHomeCubit>().getProjects(
+                                      search: _searchcontroller.text,
+                                      category: selectedCategory,
+                                    );
+                              },
                             ),
                           ]),
                       const SizedBox(
@@ -139,14 +202,14 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
                       BlocConsumer<FundHomeCubit, FundHomeState>(
                         listener: (context, state) {},
                         builder: (context, state) {
-                          if (state is HomeError) {
+                          if (state is FundHomeError) {
                             return Container(
                               alignment: Alignment.center,
                               child: Text(state.errorMessage),
                             );
                           }
 
-                          if (state is HomeSuccess) {
+                          if (state is FundHomeSuccess) {
                             return Column(
                               children: [
                                 for (final project in state.project)

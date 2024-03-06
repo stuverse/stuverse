@@ -11,8 +11,7 @@ class MentorHomeCubit extends Cubit<MentorHomeState> {
   void getMentorHomeData() async {
     emit(MentorHomeLoading());
     try {
-      final resp = await dioClient
-          .get('/mentor/home');
+      final resp = await dioClient.get('/mentor/home');
       final List<MentorPost> latestPosts = [];
       for (final latestPost in resp.data['top_mentors']) {
         latestPosts.add(MentorPost.fromJson(latestPost));

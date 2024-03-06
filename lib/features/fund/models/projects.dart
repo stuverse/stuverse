@@ -111,3 +111,11 @@ class User {
         "image": image,
       };
 }
+
+class FundCategoryChoice {
+  static final String medical = 'medical';
+  static final String education = 'education';
+  static final String disaster = 'disaster';
+  static final String charity = 'charity';
+  static final String others = 'others';
+}

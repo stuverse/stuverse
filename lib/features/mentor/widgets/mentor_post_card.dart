@@ -24,10 +24,10 @@ class _MentorPostCardState extends State<MentorPostCard> {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: InkWell(
         onTap: () {
-          context.push(MentorRoutes.postDetails,extra: widget.post);
+          context.push(MentorRoutes.postDetails, extra: widget.post);
         },
         child: Hero(
-           tag: 'mentor_${widget.post.id}',
+          tag: 'mentor_${widget.post.id}',
           child: Container(
             height: MediaQuery.of(context).size.height * 0.24,
             width: MediaQuery.of(context).size.height * 0.31,
@@ -76,8 +76,8 @@ class _MentorPostCardState extends State<MentorPostCard> {
                                     SizedBox(width: 5),
                                     Text(
                                       'Edit',
-                                      style: context.bodySmall!
-                                          .copyWith(fontWeight: FontWeight.bold),
+                                      style: context.bodySmall!.copyWith(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 )),
@@ -130,7 +130,8 @@ class _MentorPostCardState extends State<MentorPostCard> {
                                                           .deletePost(
                                                               id: widget
                                                                   .post.id!);
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
                                                     child: Text('Delete'),
                                                   )),

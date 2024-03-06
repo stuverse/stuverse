@@ -102,13 +102,12 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
                               ),
                               20.heightBox,
                               BannerCard(
-                                title: 'AI Job Search✨',
+                                title: 'AI Pick✨',
                                 description:
-                                    'Find the best jobs that match your skills and expertise.',
-                                buttonText: 'Find Now',
+                                    'Let AI pick a job for you based on your skills and experience',
+                                buttonText: "Pick for me",
                                 onTap: () {
-                                  context.showMessage(
-                                      message: "Feature not available yet");
+                                  context.push(JobRoutes.jobAiSearch);
                                 },
                               ),
                               10.heightBox,

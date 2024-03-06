@@ -7,7 +7,7 @@ part 'skill_state.dart';
 class SkillCubit extends Cubit<SkillState> {
   SkillCubit() : super(SkillInitial());
 
-   void getSkills()async{
+  void getSkills() async {
     emit(SkillLoading());
     try {
       final resp = await dioClient.get('/core/skills/');
@@ -20,6 +20,5 @@ class SkillCubit extends Cubit<SkillState> {
       print(e);
       emit(SkillError(message: 'Something went wrong'));
     }
-
   }
 }

@@ -16,23 +16,19 @@ class MentorHomeScreen extends StatefulWidget {
 
 class _MentorHomeScreenState extends State<MentorHomeScreen> {
   void initState() {
-    context
-        .read<MentorHomeCubit>()
-        .getMentorHomeData();
+    context.read<MentorHomeCubit>().getMentorHomeData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-     final user = context.read<CoreCubit>().state.user;
+    final user = context.read<CoreCubit>().state.user;
     return SingleChildScrollView(
       child: BgGradient(
         child: SafeArea(
           child: RefreshIndicator(
             onRefresh: () async {
-              context
-                  .read<MentorHomeCubit>()
-                  .getMentorHomeData();
+              context.read<MentorHomeCubit>().getMentorHomeData();
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,10 +47,17 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                       ),
                       IconButton(
                         onPressed: () {
-                           if (user?.linkedin == null || user?.mobile == null || user?.github == null || user?.about == null ||  user?.experienceYears == null || user?.skills == null) {
-              context.showMessage(message: "Please ensure your profile is complete before proceeding.");
-             return;
-            }
+                          if (user?.linkedin == null ||
+                              user?.mobile == null ||
+                              user?.github == null ||
+                              user?.about == null ||
+                              user?.experienceYears == null ||
+                              user?.skills == null) {
+                            context.showMessage(
+                                message:
+                                    "Please ensure your profile is complete before proceeding.");
+                            return;
+                          }
                           context.push(MentorRoutes.manageMentorPost);
                         },
                         icon: Icon(
@@ -85,7 +88,6 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                   ),
                 ),
                 SizedBox(height: 15),
-            
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Hero(
@@ -93,8 +95,7 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                     child: Material(
                       child: InkWell(
                         onTap: () {
-                          context.push(MentorRoutes.seeAllPosts
-                              );
+                          context.push(MentorRoutes.seeAllPosts);
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -113,7 +114,6 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                               ),
                             ),
                           ),
-                                  
                         ),
                       ),
                     ),
@@ -121,8 +121,7 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                 ),
                 SizedBox(height: 10),
                 BlocBuilder<ManageMentorPostCubit, ManageMentorPostState>(
-                  builder: (context, state) => state
-                          is ManageMentorPostLoading
+                  builder: (context, state) => state is ManageMentorPostLoading
                       ? CircularProgressIndicator()
                       : BlocConsumer<MentorHomeCubit, MentorHomeState>(
                           listener: (context, state) {},
@@ -134,17 +133,15 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                               return Column(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                                
                                           'Latest Mentorships',
-                                          style:
-                                              context.titleMedium!.copyWith(
-                                                
+                                          style: context.titleMedium!.copyWith(
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),

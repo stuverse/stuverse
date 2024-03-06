@@ -4,4 +4,5 @@ class FundImages {
   static const String education = 'assets/fund/images/education.png';
   static const String charity = 'assets/fund/images/charity.png';
   static const String other = 'assets/fund/images/other.png';
+  static const String all = 'assets/fund/images/all.png';
 }

@@ -15,123 +15,121 @@ class seeAllPostsScreen extends StatefulWidget {
 
 class _seeAllPostsScreenState extends State<seeAllPostsScreen> {
   final _searchController = TextEditingController();
-    @override
+  @override
   void initState() {
-    context.read<MentorSearchCubit>().getMentorSearchData(
-        search: _searchController.text);
+    context
+        .read<MentorSearchCubit>()
+        .getMentorSearchData(search: _searchController.text);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
-      body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child:  Column(
-        children: [
-          5.heightBox,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Hero(
-              tag: 'search',
-              child: Material(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(27),
-                    color: Color.fromARGB(242, 231, 230, 230),
-                  ),
-                  child: TextField(
-                    controller: _searchController,
-                    onChanged: (value) {
-                      context
-                          .read<MentorSearchCubit>()
-                          .getMentorSearchData(search: _searchController.text);
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'Search',
-                      border: InputBorder.none,
-                      prefixIcon: Icon(
-                        Icons.search,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          5.heightBox,
-          BlocBuilder<MentorSearchCubit, MentorSearchState>(
-           builder: (context, state) {
-    if (state is MentorSearchLoading) {
-      return LinearProgressIndicator();
-    } else if (state is MentorSearchLoaded) {
-      final posts = state.posts;
-      final facultyMentors =
-          posts.where((post) => post.mentor!.type == "faculty").toList();
-      final studentMentors =
-          posts.where((post) => post.mentor!.type == "student").toList();
-              return Expanded(
-                      child: DefaultTabController(
-                        length: 2,
-                        child: Column(
-                          children: [
-                          
-                            TabBar(
-                              dividerColor: Colors.transparent,
-                              tabs: [
-                                Tab(
-                                  text: 'Professional Mentors',
-                                ),
-                                Tab(text: 'Student Mentors'),
-                              ],
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+        ),
+        body: SafeArea(
+            child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  children: [
+                    5.heightBox,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Hero(
+                        tag: 'search',
+                        child: Material(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(27),
+                              color: Color.fromARGB(242, 231, 230, 230),
                             ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 20,
-                                ),
-                                child: TabBarView(
-                                  children: [
-                                    ListView.builder(
-                                      itemBuilder: (context, index) {
-                                        return MentorPostCard(
-                                          post: facultyMentors[index],
-                                        );
-                                      },
-                                      itemCount: facultyMentors.length,
-                                    ),
-                                    ListView.builder(
-                                      itemBuilder: (context, index) {
-                                        return MentorPostCard(
-                                          post: studentMentors[index],
-                                        );
-                                      },
-                                      itemCount: studentMentors.length,
-                                    ),
-                                  ],
+                            child: TextField(
+                              controller: _searchController,
+                              onChanged: (value) {
+                                context
+                                    .read<MentorSearchCubit>()
+                                    .getMentorSearchData(
+                                        search: _searchController.text);
+                              },
+                              decoration: InputDecoration(
+                                hintText: 'Search',
+                                border: InputBorder.none,
+                                prefixIcon: Icon(
+                                  Icons.search,
                                 ),
                               ),
                             ),
-                          ],
+                          ),
                         ),
                       ),
-                    );
-    }
-    return Container();
-            },
-          )
-
-        ],
-      )
-  
-)
-
-      ));
+                    ),
+                    5.heightBox,
+                    BlocBuilder<MentorSearchCubit, MentorSearchState>(
+                      builder: (context, state) {
+                        if (state is MentorSearchLoading) {
+                          return LinearProgressIndicator();
+                        } else if (state is MentorSearchLoaded) {
+                          final posts = state.posts;
+                          final facultyMentors = posts
+                              .where((post) => post.mentor!.type == "faculty")
+                              .toList();
+                          final studentMentors = posts
+                              .where((post) => post.mentor!.type == "student")
+                              .toList();
+                          return Expanded(
+                            child: DefaultTabController(
+                              length: 2,
+                              child: Column(
+                                children: [
+                                  TabBar(
+                                    dividerColor: Colors.transparent,
+                                    tabs: [
+                                      Tab(
+                                        text: 'Professional Mentors',
+                                      ),
+                                      Tab(text: 'Student Mentors'),
+                                    ],
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        top: 20,
+                                      ),
+                                      child: TabBarView(
+                                        children: [
+                                          ListView.builder(
+                                            itemBuilder: (context, index) {
+                                              return MentorPostCard(
+                                                post: facultyMentors[index],
+                                              );
+                                            },
+                                            itemCount: facultyMentors.length,
+                                          ),
+                                          ListView.builder(
+                                            itemBuilder: (context, index) {
+                                              return MentorPostCard(
+                                                post: studentMentors[index],
+                                              );
+                                            },
+                                            itemCount: studentMentors.length,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }
+                        return Container();
+                      },
+                    )
+                  ],
+                ))));
   }
 }
