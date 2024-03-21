@@ -50,6 +50,7 @@ class AppRouter {
         path: CommonRoutes.signin,
         builder: (context, state) => const SignInScreen(),
       ),
+       
       GoRoute(
         path: CommonRoutes.signup,
         builder: (context, state) => const SignUpScreen(),
