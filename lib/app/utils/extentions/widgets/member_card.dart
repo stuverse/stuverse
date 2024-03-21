@@ -27,7 +27,8 @@ class MembersCard extends StatelessWidget {
     trailing: PopupMenuButton(itemBuilder: (context)
     {
       return [
-        const PopupMenuItem(
+         PopupMenuItem(
+          onTap: (){},
           child: Row(
             children: [
               Icon(Icons.account_circle_sharp,

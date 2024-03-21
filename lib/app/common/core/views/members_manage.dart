@@ -26,7 +26,6 @@ class _ManageModeratorState extends State<ManageModerator> {
           actions: [
             IconButton(
               onPressed: () {
-                
               },
               icon: Icon(Icons.add),
             ),
