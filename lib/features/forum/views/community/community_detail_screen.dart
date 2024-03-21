@@ -83,6 +83,10 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> {
                         },
                       ),
                       PopupMenuItem(
+                        onTap: () {
+                         context.push(CommonRoutes.manageModerator,
+                              );
+                        },
                         child: Text("Manage Moderators"),
                       ),
                     ];

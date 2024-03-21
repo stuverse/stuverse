@@ -57,7 +57,6 @@ class _seeAllPostsScreenState extends State<seeAllPostsScreen> {
                               },
                               decoration: InputDecoration(
                                 hintText: 'Search',
-                                border: InputBorder.none,
                                 prefixIcon: Icon(
                                   Icons.search,
                                 ),
