@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stuverse/app/common/core/views/members_manage.dart';
+import 'package:stuverse/features/forum/views/community/community_members_manage.dart';
 import 'package:stuverse/app/common/core/views/pdf_viewer_screen.dart';
 import 'package:stuverse/features/forum/forum.dart';
 import 'package:stuverse/features/fund/fund.dart';
@@ -51,10 +51,7 @@ class AppRouter {
         path: CommonRoutes.signin,
         builder: (context, state) => const SignInScreen(),
       ),
-        GoRoute(
-        path: CommonRoutes.manageModerator,
-        builder: (context, state) => const ManageModerator(),
-      ),
+       
       GoRoute(
         path: CommonRoutes.signup,
         builder: (context, state) => const SignUpScreen(),

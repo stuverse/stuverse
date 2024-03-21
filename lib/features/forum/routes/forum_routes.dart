@@ -8,6 +8,7 @@ import '../models/community/community.dart';
 import '../views/community/community_add_edit_screen.dart';
 import '../views/community/community_admin_screen.dart';
 import '../views/community/community_detail_screen.dart';
+import '../views/community/community_members_manage.dart';
 import '../views/thread/thread_add_edit_screen.dart';
 import '../views/thread/thread_detail_screen.dart';
 
@@ -26,7 +27,7 @@ class ForumRoutes {
   static final String communityAddEdit = '/forum/community/add-edit';
 
   static final String threadAddEdit = '/forum/thread/add-edit';
-
+ static const String manageModerator = '/manage-moderator';
   static final List<GoRoute> forumRoutes = [
     GoRoute(
       path: threadDetail,
@@ -77,5 +78,9 @@ class ForumRoutes {
         ),
       ),
     ),
+     GoRoute(
+        path: ForumRoutes.manageModerator,
+        builder: (context, state) => const ManageModerator(),
+      ),
   ];
 }

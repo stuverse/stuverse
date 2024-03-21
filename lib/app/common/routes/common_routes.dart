@@ -10,5 +10,5 @@ class CommonRoutes {
   static const String markdownEditor = '/markdown-editor';
   static const String userRequest = '/user-request';
   static const String pdfViewer = '/pdf-viewer';
-  static const String manageModerator = '/manage-moderator';
+  
 }

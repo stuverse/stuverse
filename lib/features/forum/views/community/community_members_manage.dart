@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stuverse/app/app.dart';
 
-import '../../../utils/extentions/widgets/member_card.dart';
+import '../../widgets/community/member_card.dart';
 
 class ManageModerator extends StatefulWidget {
   const ManageModerator({super.key});
