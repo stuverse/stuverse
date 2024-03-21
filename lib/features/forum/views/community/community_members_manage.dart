@@ -4,14 +4,14 @@ import 'package:stuverse/app/app.dart';
 
 import '../../widgets/community/member_card.dart';
 
-class ManageModerator extends StatefulWidget {
-  const ManageModerator({super.key});
+class CommunityMembersManageScreen extends StatefulWidget {
+  const CommunityMembersManageScreen({super.key});
 
   @override
-  State<ManageModerator> createState() => _ManageModeratorState();
+  State<CommunityMembersManageScreen> createState() => _CommunityMembersManageScreenState();
 }
 
-class _ManageModeratorState extends State<ManageModerator> {
+class _CommunityMembersManageScreenState extends State<CommunityMembersManageScreen> {
   final _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
