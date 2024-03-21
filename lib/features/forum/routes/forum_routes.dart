@@ -27,7 +27,7 @@ class ForumRoutes {
   static final String communityAddEdit = '/forum/community/add-edit';
 
   static final String threadAddEdit = '/forum/thread/add-edit';
- static const String manageModerator = '/manage-moderator';
+ static const String communityMembersManageScreen = '/manage-community-members';
   static final List<GoRoute> forumRoutes = [
     GoRoute(
       path: threadDetail,
@@ -79,8 +79,8 @@ class ForumRoutes {
       ),
     ),
      GoRoute(
-        path: ForumRoutes.manageModerator,
-        builder: (context, state) => const ManageModerator(),
+        path: ForumRoutes.communityMembersManageScreen,
+        builder: (context, state) => const CommunityMembersManageScreen(),
       ),
   ];
 }
