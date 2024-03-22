@@ -4,6 +4,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/forum/forum.dart';
 
+import '../../../app/models/mini_user.dart';
+
 class CommunityRepo {
   Future<Either<String, Unit>> toggleJoinCommunity(
     int communityId,
@@ -87,6 +89,58 @@ class CommunityRepo {
       await dioClient.post(
         COMMUNITY_LIST_CREATE_API,
         data: formData,
+      );
+      return right(unit);
+    } catch (e) {
+      return left("Something went wrong");
+    }
+  }
+
+
+  Future<Either<String, List<MiniUser>>> getCommunityMembers(int communityId)async {
+    try {
+      final response = await dioClient.get(
+        GET_COMMUNITY_MEMBERS_API.replaceFirst("<id>", communityId.toString()),
+      );
+      final List<MiniUser> members = (response.data as List)
+          .map((e) => MiniUser.fromJson(e))
+          .toList();
+      return right(members);
+    } catch (e) {
+      return left("Something went wrong");
+    }
+  }
+
+  Future<Either<String, Unit>> addMembersToCommunity({
+    required int communityId,
+    required List<int> users,
+  }) async {
+    try {
+      await dioClient.post(
+        COMMUNITY_MEMBERS_MANAGE_API,
+        data: {
+          'community_id': communityId,
+          'users':users
+        },
+      );
+      return right(unit);
+    } catch (e) {
+      return left("Something went wrong");
+    }
+  } 
+
+
+  Future<Either<String, Unit>> removeMemberFromCommunity({
+    required int communityId,
+    required String userId,
+  }) async {
+    try {
+      await dioClient.delete(
+        COMMUNITY_MEMBERS_MANAGE_API,
+        data: {
+          'community_id': communityId,
+          'user_id': userId,
+        },
       );
       return right(unit);
     } catch (e) {
