@@ -85,9 +85,10 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> {
                       PopupMenuItem(
                         onTap: () {
                          context.push(ForumRoutes.communityMembersManageScreen,
+                         extra: widget.community.id!
                               );
                         },
-                        child: Text("Manage Moderators"),
+                        child: Text("Manage Members"),
                       ),
                     ];
                   },

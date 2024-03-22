@@ -112,6 +112,13 @@ class AppRouter {
         path: CommonRoutes.userRequest,
         builder: (context, state) => const UserRequestListScreen(),
       ),
+      GoRoute(
+        path: CommonRoutes.usersList,
+        builder: (context, state) =>  UsersListScreen(
+          onSubmit: state.extra as Function(List<MiniUser>),
+        ),
+      ),
+      
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return MainScreen(

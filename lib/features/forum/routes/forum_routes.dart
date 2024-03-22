@@ -80,7 +80,9 @@ class ForumRoutes {
     ),
      GoRoute(
         path: ForumRoutes.communityMembersManageScreen,
-        builder: (context, state) => const CommunityMembersManageScreen(),
+        builder: (context, state) =>  CommunityMembersManageScreen(
+          communityId: state.extra as int,
+        ),
       ),
   ];
 }
