@@ -3,7 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 
 import 'package:stuverse/features/forum/forum.dart';
+import 'package:stuverse/features/forum/views/community/show_all_communities_screen.dart';
 
+import '../cubit/community/all/all_community_cubit.dart';
 import '../models/community/community.dart';
 import '../views/community/community_add_edit_screen.dart';
 import '../views/community/community_admin_screen.dart';
@@ -25,6 +27,7 @@ class ForumRoutes {
   static final String communityDetail = '/forum/community';
   static final String communityManage = '/forum/community/manage';
   static final String communityAddEdit = '/forum/community/add-edit';
+  static final String allCommunities = '/forum/community/all';
 
   static final String threadAddEdit = '/forum/thread/add-edit';
  static const String communityMembersManageScreen = '/manage-community-members';
@@ -78,11 +81,20 @@ class ForumRoutes {
         ),
       ),
     ),
+
+    GoRoute(
+      path: allCommunities,
+      builder: (context, state) => ShowAllCommunitiesScreen(
+        yourCommunity: state.extra as bool,
+      ),
+    )
+
      GoRoute(
-        path: ForumRoutes.communityMembersManageScreen,
+        path: communityMembersManageScreen,
         builder: (context, state) =>  CommunityMembersManageScreen(
           communityId: state.extra as int,
         ),
       ),
+
   ];
 }

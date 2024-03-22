@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/forum/forum.dart';
+import 'package:stuverse/features/forum/views/community/show_all_communities_screen.dart';
 
 import '../widgets/community/community_mini_card.dart';
 
@@ -86,12 +88,18 @@ class _ForumHomeScreenState extends State<ForumHomeScreen>
                             children: [
                               _getTitleRow(
                                 title: "Popular Communities",
-                                onSeeAll: () {},
+                                onSeeAll: () {
+                                  context.push(ForumRoutes.allCommunities,
+                                      extra: false);
+                                },
                               ),
                               _getCommunityView(state.popularCommunities),
                               _getTitleRow(
                                 title: "Your Communities",
-                                onSeeAll: () {},
+                                onSeeAll: () {
+                                  context.push(ForumRoutes.allCommunities,
+                                      extra: true);
+                                },
                               ),
                               _getCommunityView(state.yourCommunities),
                             ],

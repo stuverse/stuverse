@@ -26,12 +26,14 @@ class CommunityRepo {
   Future<Either<String, List<Community>>> getAllCommunities({
     String? search,
     bool? isPrivate,
+    int? userId,
   }) async {
     try {
       final response =
           await dioClient.get(COMMUNITY_LIST_CREATE_API, queryParameters: {
         if (search != null) 'search': search,
         if (isPrivate != null) 'is_private': isPrivate,
+        if (userId != null) 'members': userId,
       });
       final List<Community> communities =
           (response.data as List).map((e) => Community.fromJson(e)).toList();
