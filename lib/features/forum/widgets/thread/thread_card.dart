@@ -34,8 +34,7 @@ class ThreadCard extends StatelessWidget {
       onTap: () {
         if (!isDetailScreen) {
           context.push(
-            ForumRoutes.threadDetail,
-            extra: thread,
+            ForumRoutes.threadDetail.replaceFirst(":id", thread.id.toString()),
           );
         }
       },
@@ -233,15 +232,15 @@ class ThreadCard extends StatelessWidget {
                           Theme.of(context).colorScheme.onBackground,
                           BlendMode.srcIn),
                     ),
-                    5.widthBox,
-                    Text(
-                      CommonUtils.formatNumberEnglish(
-                        thread.shareCount ?? 0,
-                      ),
-                      style: context.bodyMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground,
-                      ),
-                    ),
+                    // 5.widthBox,
+                    // Text(
+                    //   CommonUtils.formatNumberEnglish(
+                    //     thread.shareCount ?? 0,
+                    //   ),
+                    //   style: context.bodyMedium!.copyWith(
+                    //     color: Theme.of(context).colorScheme.onBackground,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

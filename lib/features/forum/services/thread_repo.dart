@@ -27,6 +27,18 @@ class ThreadRepo {
     }
   }
 
+  Future<Either<String, Thread>> getThread(int threadId) async {
+    try {
+      final response =
+          await dioClient.get(MANAGE_THREAD_API, data: {'id': threadId});
+      final thread = Thread.fromJson(response.data);
+
+      return right(thread);
+    } catch (e) {
+      return left('Failed to get thread');
+    }
+  }
+
   Future<Either<String, Unit>> createThread({
     required String title,
     String? content,

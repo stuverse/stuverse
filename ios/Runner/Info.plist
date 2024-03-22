@@ -18,6 +18,21 @@
     <!-- Microphone -->
     <key>NSMicrophoneUsageDescription</key>
     <string>We need access to your microphone to record audio for video recording within the app.</string>
+	<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>stuverse</string> <!-- Replace with your custom scheme -->
+        </array>
+		<key>CFBundleURLName</key>
+    <string>stuverse.in</string>
+    </dict>
+</array>
+<key>FlutterDeepLinkingEnabled</key>
+<true/>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>

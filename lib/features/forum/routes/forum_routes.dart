@@ -23,14 +23,15 @@ class ForumRoutes {
   );
   //! ----------------
 
-  static final String threadDetail = '/forum/thread';
-  static final String communityDetail = '/forum/community';
+  static final String threadDetail = '/forum/thread/details/:id';
+  static final String communityDetail = '/forum/community/details/:id';
   static final String communityManage = '/forum/community/manage';
   static final String communityAddEdit = '/forum/community/add-edit';
   static final String allCommunities = '/forum/community/all';
 
   static final String threadAddEdit = '/forum/thread/add-edit';
- static const String communityMembersManageScreen = '/manage-community-members';
+  static const String communityMembersManageScreen =
+      '/manage-community-members';
   static final List<GoRoute> forumRoutes = [
     GoRoute(
       path: threadDetail,
@@ -39,7 +40,7 @@ class ForumRoutes {
         return true;
       },
       builder: (context, state) => ThreadDetailScreen(
-        thread: state.extra as Thread,
+        threadId: int.tryParse(state.pathParameters['id'] ?? "N/A"),
       ),
     ),
     GoRoute(
@@ -55,7 +56,7 @@ class ForumRoutes {
           ),
         ],
         child: CommunityDetailScreen(
-          community: state.extra as Community,
+          communityId: int.tryParse(state.pathParameters['id'] ?? "N/A"),
         ),
       ),
     ),
@@ -81,20 +82,17 @@ class ForumRoutes {
         ),
       ),
     ),
-
     GoRoute(
       path: allCommunities,
       builder: (context, state) => ShowAllCommunitiesScreen(
         yourCommunity: state.extra as bool,
       ),
-    )
-
-     GoRoute(
-        path: communityMembersManageScreen,
-        builder: (context, state) =>  CommunityMembersManageScreen(
-          communityId: state.extra as int,
-        ),
+    ),
+    GoRoute(
+      path: communityMembersManageScreen,
+      builder: (context, state) => CommunityMembersManageScreen(
+        communityId: state.extra as int,
       ),
-
+    ),
   ];
 }

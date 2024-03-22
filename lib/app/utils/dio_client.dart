@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stuverse/app/app.dart';
 import 'package:stuverse/app/utils/logman_dio_interceptor.dart';
 
 bool isDev = false;
@@ -13,7 +14,7 @@ String getBaseUrl() {
     if (Platform.isAndroid && isEmulator) return 'http://10.0.2.2:8000/api';
     return 'http://localhost:8000/api';
   } else {
-    return 'https://stuverse.in/api';
+    return '$baseUrl/api';
   }
 }
 
