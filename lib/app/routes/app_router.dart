@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logman/logman.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stuverse/app/common/core/views/pdf_viewer_screen.dart';
@@ -38,10 +39,17 @@ class AppRouter {
     initialLocation: CommonRoutes.splash,
     debugLogDiagnostics: true,
     navigatorKey: _rootNavigatorKey,
+    observers: [
+      LogmanNavigatorObserver(), // Navigator observer
+    ],
     redirect: (ctx, state) {
-      final user = ctx.read<CoreCubit>().state.user;
-      if (user == null && !unProtectedRoutes.contains(state.uri.path)) {
-        return CommonRoutes.signin;
+      final coreState = ctx.read<CoreCubit>().state;
+
+      if (coreState.user == null &&
+          !unProtectedRoutes.contains(state.uri.path)) {
+        ctx.read<CoreCubit>().setIsUserLoading(true);
+        print(state.uri.path);
+        return CommonRoutes.splash + "?from=${state.uri.path}";
       }
       return null;
     },
@@ -50,7 +58,6 @@ class AppRouter {
         path: CommonRoutes.signin,
         builder: (context, state) => const SignInScreen(),
       ),
-       
       GoRoute(
         path: CommonRoutes.signup,
         builder: (context, state) => const SignUpScreen(),
@@ -73,7 +80,9 @@ class AppRouter {
       ),
       GoRoute(
         path: CommonRoutes.splash,
-        builder: (context, state) => const SplashScreen(),
+        builder: (context, state) => SplashScreen(
+          from: state.uri.queryParameters['from'],
+        ),
       ),
       GoRoute(
           path: CommonRoutes.webView,
@@ -114,11 +123,10 @@ class AppRouter {
       ),
       GoRoute(
         path: CommonRoutes.usersList,
-        builder: (context, state) =>  UsersListScreen(
+        builder: (context, state) => UsersListScreen(
           onSubmit: state.extra as Function(List<MiniUser>),
         ),
       ),
-      
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return MainScreen(

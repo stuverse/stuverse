@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart';
 
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/forum/cubit/vote/vote_cubit.dart';
@@ -242,6 +243,11 @@ class ThreadCard extends StatelessWidget {
                     //   ),
                     // ),
                   ],
+                ),
+              ).onTap(
+                () => Share.share(
+                  "See this thread on Stuverse🤩: ${thread.title}\n${thread.content}\n${baseUrl + THREAD_DETAIL_LINK_DEEP.replaceFirst("<id>", thread.id.toString())}",
+                  subject: 'Share this thread',
                 ),
               ),
             ],

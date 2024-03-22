@@ -54,6 +54,14 @@ class _ThreadDetailScreenState extends State<ThreadDetailScreen> {
         elevation: 0,
         scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
+        leading: IconButton(
+          onPressed: () {
+            context.canPop()
+                ? context.pop()
+                : context.go(ForumRoutes.forumHome);
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
         actions: [
           // IconButton(
           //   onPressed: () {},

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -6,7 +8,8 @@ import 'package:logman/logman.dart';
 import 'package:stuverse/features/forum/forum.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  const SplashScreen({super.key, this.from});
+  final String? from;
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -21,12 +24,15 @@ class _SplashScreenState extends State<SplashScreen> {
         context: context,
       );
     });
+
+    context.read<CoreCubit>().getInitialData();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CoreCubit, CoreState>(
       listener: (context, state) {
+        log(state.toString());
         if (state.isUserLoading == false) {
           if (state.isFirstTime) {
             context.read<CoreCubit>().setIsFirstTime(false);
@@ -35,7 +41,10 @@ class _SplashScreenState extends State<SplashScreen> {
             if (state.user == null) {
               context.go(CommonRoutes.signin);
             } else {
-              context.go(ForumRoutes.forumHome);
+              if (widget.from != null) {
+                context.go(widget.from!);
+              } else
+                context.go(ForumRoutes.forumHome);
             }
           }
         }

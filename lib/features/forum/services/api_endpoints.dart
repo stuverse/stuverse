@@ -13,4 +13,6 @@ const ADD_THREAD_COMMENT_API = '/forum/comments/create/';
 const GET_COMMUNITY_MEMBERS_API = '/forum/community/<id>/members/';
 const COMMUNITY_MEMBERS_MANAGE_API = '/forum/community/members/manage/';
 
-const COMMUNITY_JOIN_LINK_API = '/forum/community/join/<id>/';
+//!! Deep Links
+const COMMUNITY_JOIN_LINK_DEEP = '/forum/community/join/<id>/';
+const THREAD_DETAIL_LINK_DEEP = '/forum/thread/<id>/';

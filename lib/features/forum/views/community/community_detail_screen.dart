@@ -102,7 +102,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> {
                       IconButton(
                         onPressed: () {
                           Share.share(
-                              "Join this community on Stuverse: ${state.community?.name}\n${state.community?.description}\nJoin now: ${baseUrl + COMMUNITY_JOIN_LINK_API.replaceFirst("<id>", state.community?.id.toString() ?? "NA")}",
+                              "Join this community on Stuverse: ${state.community?.name}\n${state.community?.description}\nJoin now: ${baseUrl + COMMUNITY_JOIN_LINK_DEEP.replaceFirst("<id>", state.community?.id.toString() ?? "NA")}",
                               subject: 'Join this community');
                         },
                         icon: const Icon(Icons.share),

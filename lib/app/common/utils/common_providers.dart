@@ -4,7 +4,7 @@ import 'package:stuverse/app/app.dart';
 class CommonProviders {
   static get blocProviders => [
         BlocProvider(create: (context) => AuthCubit()),
-        BlocProvider(create: (context) => CoreCubit()..getInitialData()),
+        BlocProvider(create: (context) => CoreCubit()),
         BlocProvider(create: (context) => HomeCubit()),
         BlocProvider(create: (context) => AICubit()),
         BlocProvider(create: (context) => UserRequestCubit()),
