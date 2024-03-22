@@ -9,5 +9,6 @@ class CommonProviders {
         BlocProvider(create: (context) => AICubit()),
         BlocProvider(create: (context) => UserRequestCubit()),
         BlocProvider(create: (context) => ManageUserRequestCubit()),
+        BlocProvider(create: (context) => UsersListCubit()),
       ];
 }

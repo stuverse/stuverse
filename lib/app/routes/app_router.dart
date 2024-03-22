@@ -50,6 +50,7 @@ class AppRouter {
         path: CommonRoutes.signin,
         builder: (context, state) => const SignInScreen(),
       ),
+       
       GoRoute(
         path: CommonRoutes.signup,
         builder: (context, state) => const SignUpScreen(),
@@ -111,6 +112,13 @@ class AppRouter {
         path: CommonRoutes.userRequest,
         builder: (context, state) => const UserRequestListScreen(),
       ),
+      GoRoute(
+        path: CommonRoutes.usersList,
+        builder: (context, state) =>  UsersListScreen(
+          onSubmit: state.extra as Function(List<MiniUser>),
+        ),
+      ),
+      
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return MainScreen(

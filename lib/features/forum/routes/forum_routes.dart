@@ -10,6 +10,7 @@ import '../models/community/community.dart';
 import '../views/community/community_add_edit_screen.dart';
 import '../views/community/community_admin_screen.dart';
 import '../views/community/community_detail_screen.dart';
+import '../views/community/community_members_manage.dart';
 import '../views/thread/thread_add_edit_screen.dart';
 import '../views/thread/thread_detail_screen.dart';
 
@@ -29,7 +30,7 @@ class ForumRoutes {
   static final String allCommunities = '/forum/community/all';
 
   static final String threadAddEdit = '/forum/thread/add-edit';
-
+ static const String communityMembersManageScreen = '/manage-community-members';
   static final List<GoRoute> forumRoutes = [
     GoRoute(
       path: threadDetail,
@@ -80,11 +81,20 @@ class ForumRoutes {
         ),
       ),
     ),
+
     GoRoute(
       path: allCommunities,
       builder: (context, state) => ShowAllCommunitiesScreen(
         yourCommunity: state.extra as bool,
       ),
     )
+
+     GoRoute(
+        path: communityMembersManageScreen,
+        builder: (context, state) =>  CommunityMembersManageScreen(
+          communityId: state.extra as int,
+        ),
+      ),
+
   ];
 }

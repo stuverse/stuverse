@@ -26,7 +26,7 @@ class BannerCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color:
-                  Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.4),
+                 context.colorScheme.surfaceVariant,
             ),
             child: Padding(
                 padding: const EdgeInsets.symmetric(

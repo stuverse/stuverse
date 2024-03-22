@@ -9,3 +9,8 @@ const MANAGE_THREAD_API = '/forum/thread/manage/';
 const VOTE_THREAD_API = '/forum/vote/thread/';
 const GET_THREAD_COMMENT_API = '/forum/thread/<id>/comments/';
 const ADD_THREAD_COMMENT_API = '/forum/comments/create/';
+
+
+const GET_COMMUNITY_MEMBERS_API = '/forum/community/<id>/members/';
+const COMMUNITY_MEMBERS_MANAGE_API = '/forum/community/members/manage/';
+

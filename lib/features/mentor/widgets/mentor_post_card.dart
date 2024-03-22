@@ -21,7 +21,7 @@ class _MentorPostCardState extends State<MentorPostCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 8),
       child: InkWell(
         onTap: () {
           context.push(MentorRoutes.postDetails, extra: widget.post);
@@ -29,8 +29,8 @@ class _MentorPostCardState extends State<MentorPostCard> {
         child: Hero(
           tag: 'mentor_${widget.post.id}',
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.24,
-            width: MediaQuery.of(context).size.height * 0.31,
+            height: context.height * 0.24,
+            width: context.height * 0.31,
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: context.colorScheme.surfaceVariant,
@@ -40,21 +40,33 @@ class _MentorPostCardState extends State<MentorPostCard> {
               children: [
                 Row(children: [
                   CircleAvatar(
-                    radius: 18,
-                    backgroundImage: NetworkImage(widget.post.mentor!.image!),
+                    radius: context.height * 0.02,
+                    backgroundImage: NetworkImage(widget.post.mentor.image),
                   ),
                   SizedBox(
                     width: 10,
                   ),
-                  Text(
-                    widget.post.mentor?.name ?? "User",
-                    style: context.bodyLarge!.copyWith(
+                  Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.post.mentor.name,
+                     style: context.bodyLarge!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                    ),
+                     Text(
+                          CommonUtils.relativeTime(
+                            DateTime.parse(
+                              widget.post.createdAt
+                            )
+                            
+                          ),
+                          style: context.bodyMedium,
+                        ),
+                  ],
+                 ),
                   Spacer(),
-                  if (widget.post.mentor!.id ==
+                  if (widget.post.mentor.id ==
                       context.read<CoreCubit>().state.user!.id)
                     PopupMenuButton(
                         padding: EdgeInsets.zero,
@@ -179,7 +191,7 @@ class _MentorPostCardState extends State<MentorPostCard> {
                             SizedBox(
                               width: 5,
                             ),
-                            (widget.post.isFree!)
+                            (widget.post.isFree)
                                 ? Text(
                                     'Free',
                                     style: context.bodyMedium!.copyWith(
@@ -199,7 +211,7 @@ class _MentorPostCardState extends State<MentorPostCard> {
                           height: 10,
                         ),
                         Text(
-                          widget.post.name ?? "",
+                          widget.post.name,
                           style: context.bodyMedium!.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
