@@ -38,10 +38,8 @@ class _CommunityMiniCardState extends State<CommunityMiniCard> {
       onTap: widget.isDetail
           ? null
           : () {
-              context.push(
-                ForumRoutes.communityDetail,
-                extra: widget.community,
-              );
+              context.push(ForumRoutes.communityDetail
+                  .replaceFirst(":id", widget.community.id.toString()));
             },
       child: Container(
         margin: widget.isDetail ? null : context.paddingOnlyWith(right: 15),

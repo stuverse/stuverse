@@ -1,24 +1,31 @@
 part of 'community_detail_cubit.dart';
 
 @immutable
-sealed class CommunityDetailState {}
-
-final class CommunityDetailInitial extends CommunityDetailState {}
-
-final class CommunityDetailLoading extends CommunityDetailState {}
-
-final class CommunityDetailLoaded extends CommunityDetailState {
+final class CommunityDetailState {
+  final Community? community;
   final List<Thread> threads;
+  final APIStatus communityStatus;
+  final APIStatus threadsStatus;
+  final String? message;
 
-  CommunityDetailLoaded({
-    required this.threads,
-  });
-}
+  CommunityDetailState(
+      {required this.threads,
+      required this.communityStatus,
+      required this.threadsStatus,
+      this.community,
+      this.message});
 
-final class CommunityDetailError extends CommunityDetailState {
-  final String message;
-
-  CommunityDetailError({
-    required this.message,
-  });
+  CommunityDetailState copyWith(
+      {Community? community,
+      List<Thread>? threads,
+      APIStatus? communityStatus,
+      APIStatus? threadsStatus,
+      String? message}) {
+    return CommunityDetailState(
+        community: community ?? this.community,
+        threads: threads ?? this.threads,
+        communityStatus: communityStatus ?? this.communityStatus,
+        threadsStatus: threadsStatus ?? this.threadsStatus,
+        message: message ?? this.message);
+  }
 }

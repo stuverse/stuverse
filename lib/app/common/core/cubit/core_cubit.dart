@@ -29,7 +29,7 @@ class CoreCubit extends Cubit<CoreState> {
     } catch (e) {
       log(e.toString());
     }
-    emit(CoreState(
+    emit(state.copyWith(
       isDarkMode: _isDarkMode,
       isFirstTime: _isFirstTime,
       user: user,
@@ -44,6 +44,10 @@ class CoreCubit extends Cubit<CoreState> {
 
   void setUser(User user) async {
     emit(state.copyWith(user: user));
+  }
+
+  void setIsUserLoading(bool isLoading) async {
+    emit(state.copyWith(isUserLoading: isLoading));
   }
 
   void signOut() async {

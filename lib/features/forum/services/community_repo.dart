@@ -43,6 +43,18 @@ class CommunityRepo {
     }
   }
 
+  Future<Either<String, Community>> getCommunity(int communityId) async {
+    try {
+      final response = await dioClient.get(
+        COMMUNITY_MANAGE_API.replaceFirst("<id>", communityId.toString()),
+      );
+      final Community community = Community.fromJson(response.data);
+      return right(community);
+    } catch (e) {
+      return left("Something went wrong");
+    }
+  }
+
   Future<Either<String, Unit>> editCommunity({
     required int communityId,
     required String name,
@@ -62,7 +74,7 @@ class CommunityRepo {
           )
       });
       await dioClient.patch(
-        COMMUNITY_EDIT_API.replaceFirst("<id>", communityId.toString()),
+        COMMUNITY_MANAGE_API.replaceFirst("<id>", communityId.toString()),
         data: formData,
       );
       return right(unit);
@@ -98,15 +110,14 @@ class CommunityRepo {
     }
   }
 
-
-  Future<Either<String, List<MiniUser>>> getCommunityMembers(int communityId)async {
+  Future<Either<String, List<MiniUser>>> getCommunityMembers(
+      int communityId) async {
     try {
       final response = await dioClient.get(
         GET_COMMUNITY_MEMBERS_API.replaceFirst("<id>", communityId.toString()),
       );
-      final List<MiniUser> members = (response.data as List)
-          .map((e) => MiniUser.fromJson(e))
-          .toList();
+      final List<MiniUser> members =
+          (response.data as List).map((e) => MiniUser.fromJson(e)).toList();
       return right(members);
     } catch (e) {
       return left("Something went wrong");
@@ -120,17 +131,13 @@ class CommunityRepo {
     try {
       await dioClient.post(
         COMMUNITY_MEMBERS_MANAGE_API,
-        data: {
-          'community_id': communityId,
-          'users':users
-        },
+        data: {'community_id': communityId, 'users': users},
       );
       return right(unit);
     } catch (e) {
       return left("Something went wrong");
     }
-  } 
-
+  }
 
   Future<Either<String, Unit>> removeMemberFromCommunity({
     required int communityId,
