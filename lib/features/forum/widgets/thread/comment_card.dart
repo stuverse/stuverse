@@ -1,4 +1,5 @@
 import 'package:animated_tree_view/animated_tree_view.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stuverse/app/app.dart';
@@ -35,8 +36,8 @@ class CommentCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 20,
-                backgroundImage:
-                    NetworkImage(comment.data?.author?.image ?? ""),
+                backgroundImage: CachedNetworkImageProvider(
+                    comment.data?.author?.image ?? ""),
               ),
               10.widthBox,
               Column(

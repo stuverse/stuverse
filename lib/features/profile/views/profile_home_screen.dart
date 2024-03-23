@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -21,7 +22,7 @@ class ProfileHomeScreen extends StatelessWidget {
             20.heightBox,
             CircleAvatar(
               radius: 65,
-              backgroundImage: NetworkImage(user?.image ?? ""),
+              backgroundImage: CachedNetworkImageProvider(user?.image ?? ""),
             ),
             10.heightBox,
             Text(user?.name ?? "", style: context.headlineSmall),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -34,8 +35,13 @@ class ProjectCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   child: Hero(
                     tag: project.images,
-                    child: Image.network(
-                      project.images,
+                    child: CachedNetworkImage(
+                      placeholder: (context, url) {
+                        return Container(
+                          color: Theme.of(context).colorScheme.primaryContainer,
+                        );
+                      },
+                      imageUrl: project.images,
                       height: double.maxFinite,
                       width: double.maxFinite,
                       fit: BoxFit.fill,

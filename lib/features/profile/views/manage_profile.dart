@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:file_picker/file_picker.dart';
 
@@ -143,7 +144,7 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                           shape: BoxShape.circle,
                                           image: DecorationImage(
                                             image: _imageFile == null
-                                                ? NetworkImage(
+                                                ? CachedNetworkImageProvider(
                                                     user!.image.toString())
                                                 : FileImage(_imageFile!)
                                                     as ImageProvider,

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,9 +53,10 @@ class ThreadCard extends StatelessWidget {
                     ? null
                     : CircleAvatar(
                         radius: 18,
-                        backgroundImage: NetworkImage(isCommunityScreen
-                            ? thread.author?.image ?? ""
-                            : thread.community?.image ?? ""),
+                        backgroundImage: CachedNetworkImageProvider(
+                            isCommunityScreen
+                                ? thread.author?.image ?? ""
+                                : thread.community?.image ?? ""),
                       ),
               ),
               10.widthBox,
@@ -153,8 +155,13 @@ class ThreadCard extends StatelessWidget {
                           .onBackground
                           .withOpacity(0.1),
                     )
-                  : Image.network(
-                      thread.image!,
+                  : CachedNetworkImage(
+                      placeholder: (context, url) {
+                        return Container(
+                          color: Theme.of(context).colorScheme.primaryContainer,
+                        );
+                      },
+                      imageUrl: thread.image!,
                       width: double.infinity,
                       height: context.minSize * 0.8,
                       fit: BoxFit.cover,

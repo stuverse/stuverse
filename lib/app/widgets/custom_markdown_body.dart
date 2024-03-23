@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -13,9 +14,14 @@ class CustomMarkdownBody extends StatelessWidget {
       shrinkWrap: true,
       softLineBreak: true,
       imageBuilder: (imageUri, _, alternateText) {
-        return Image.network(
-          imageUri.toString(),
-          errorBuilder: (_, __, ___) {
+        return CachedNetworkImage(
+          imageUrl: imageUri.toString(),
+          placeholder: (context, url) {
+            return Container(
+              color: Theme.of(context).colorScheme.primaryContainer,
+            );
+          },
+          errorWidget: (_, __, ___) {
             return Text(alternateText ?? "");
           },
         );
