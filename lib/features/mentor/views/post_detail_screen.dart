@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -40,8 +41,13 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                   child: Container(
                     height: deviceHeight * 0.35,
                     width: double.infinity,
-                    child: Image.network(
-                      widget.post.mentor!.image!,
+                    child: CachedNetworkImage(
+                      placeholder: (context, url) {
+                        return Container(
+                          color: Theme.of(context).colorScheme.primaryContainer,
+                        );
+                      },
+                      imageUrl: widget.post.mentor!.image!,
                       fit: BoxFit.cover,
                     ),
                   ),

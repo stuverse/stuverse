@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -91,7 +92,7 @@ class _CommunityTile extends StatelessWidget {
       title: Text(community.name ?? ""),
       subtitle: Text((community.description ?? "")),
       leading: CircleAvatar(
-        backgroundImage: NetworkImage(community.image ?? ""),
+        backgroundImage: CachedNetworkImageProvider(community.image ?? ""),
       ),
       onTap: () {
         context.push(

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -145,7 +146,7 @@ class ProfileNavItem extends StatelessWidget {
         backgroundColor: context.colorScheme.onBackground.withOpacity(0.5),
         child: CircleAvatar(
           radius: 13,
-          backgroundImage: NetworkImage(
+          backgroundImage: CachedNetworkImageProvider(
             user?.image ?? "",
           ),
         ),
@@ -155,7 +156,7 @@ class ProfileNavItem extends StatelessWidget {
         backgroundColor: context.colorScheme.secondaryContainer,
         child: CircleAvatar(
           radius: 13,
-          backgroundImage: NetworkImage(
+          backgroundImage: CachedNetworkImageProvider(
             user?.image ?? "",
           ),
         ),

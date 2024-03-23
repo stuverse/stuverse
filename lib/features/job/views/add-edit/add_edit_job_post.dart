@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -87,7 +88,7 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                       backgroundImage: _selectedImage != null
                           ? FileImage(File(_selectedImage!.path))
                           : widget.post?.image != null
-                              ? NetworkImage(widget.post!.image)
+                              ? CachedNetworkImageProvider(widget.post!.image)
                                   as ImageProvider
                               : null,
                     ),

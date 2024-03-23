@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -48,7 +49,8 @@ class _JobListTileState extends State<JobListTile> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           image: DecorationImage(
-                              image: NetworkImage(widget.post.image),
+                              image:
+                                  CachedNetworkImageProvider(widget.post.image),
                               fit: BoxFit.cover))),
                 ),
                 const SizedBox(width: 10),

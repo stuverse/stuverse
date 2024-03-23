@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -82,8 +83,15 @@ class _ThreadAddEditScreenState extends State<ThreadAddEditScreen> {
                     else if (widget.props.thread != null &&
                         widget.props.thread!.image != null)
                       Positioned.fill(
-                        child: Image.network(
-                          widget.props.thread!.image ?? "",
+                        child: CachedNetworkImage(
+                          placeholder: (context, url) {
+                            return Container(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primaryContainer,
+                            );
+                          },
+                          imageUrl: widget.props.thread!.image ?? "",
                           fit: BoxFit.cover,
                           width: double.infinity,
                         ),
