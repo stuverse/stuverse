@@ -1,5 +1,10 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/fund/models/projects.dart';
@@ -24,6 +29,22 @@ class _AddFundProjectScreenState extends State<AddFundProjectScreen> {
   final _upiIdController = TextEditingController();
 
   String? _selectedCategory;
+  XFile? _selectedImage;
+
+  void _chooseImage() async {
+    try {
+      final imagePicker = ImagePicker();
+      final pickedImage =
+          await imagePicker.pickImage(source: ImageSource.gallery);
+      if (pickedImage != null) {
+        setState(() {
+          _selectedImage = pickedImage;
+        });
+      }
+    } catch (e) {
+      log("Crash Error: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +78,28 @@ class _AddFundProjectScreenState extends State<AddFundProjectScreen> {
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
                     30.heightBox,
+                    GestureDetector(
+                      onTap: () {
+                        _chooseImage();
+                      },
+                      child: Center(
+                        child: CircleAvatar(
+                          radius: 70,
+                          backgroundImage: _selectedImage != null
+                              ? FileImage(File(_selectedImage!.path))
+                              : widget.post?.images != null
+                                  ? CachedNetworkImageProvider(
+                                      widget.post!.images) as ImageProvider
+                                  : null,
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: TextButton.icon(
+                          onPressed: _chooseImage,
+                          icon: const Icon(Icons.image),
+                          label: Text("Select a Image")),
+                    ),
                     Text(
                       "Title",
                       style: TextStyle(
