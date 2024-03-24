@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/fund/cubit/home/fund_home_cubit.dart';
 import 'package:stuverse/features/fund/fund.dart';
 import 'package:stuverse/features/fund/models/projects.dart';
+import 'package:stuverse/features/fund/views/add_fund_project.dart';
 import 'package:stuverse/features/fund/views/donate_page.dart';
 import 'package:stuverse/features/fund/views/project_desc.dart';
 import 'package:stuverse/features/fund/views/project_search_screen.dart';
@@ -22,6 +23,7 @@ class FundRoutes {
   static const String projectDesc = '/fund/projectdesc';
   static const String donationpage = '/fund/donation';
   static const String search = '/fund/search';
+  static const String addProject = '/fund/addproject';
 
   static List<GoRoute> fundRoutes = [
     GoRoute(
@@ -31,6 +33,8 @@ class FundRoutes {
       ),
     ),
     GoRoute(path: donationpage, builder: (context, state) => DonatePage()),
+    GoRoute(
+        path: addProject, builder: (context, state) => AddFundProjectScreen()),
     GoRoute(
       path: search,
       builder: (context, state) => BlocProvider(
