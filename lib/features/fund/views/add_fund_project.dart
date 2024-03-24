@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/fund/models/projects.dart';
 
@@ -259,6 +260,79 @@ class _AddFundProjectScreenState extends State<AddFundProjectScreen> {
                             _selectedCategory = value;
                           });
                         }),
+                    30.heightBox,
+                    Text("Start Date",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        )),
+                    15.heightBox,
+                    TextFormField(
+                      controller: _startDateController,
+                      readOnly: true,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Start Date',
+                          labelStyle: TextStyle(
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w100,
+                            fontSize: 15,
+                          ),
+                          suffixIcon: IconButton(
+                              onPressed: () async {
+                                final DateTime? _pickedDate =
+                                    await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(2024),
+                                  lastDate:
+                                      DateTime(2030).add(Duration(days: 365)),
+                                );
+                                setState(() {
+                                  _startDateController.text =
+                                      DateFormat('dd-MM-yyyy')
+                                          .format(_pickedDate!);
+                                });
+                              },
+                              icon: Icon(Icons.calendar_month_outlined))),
+                    ),
+                    30.heightBox,
+                    Text("End Date",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        )),
+                    15.heightBox,
+                    TextFormField(
+                      controller: _endDateController,
+                      readOnly: true,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'End Date',
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w100,
+                            fontSize: 15,
+                          ),
+                          suffixIcon: IconButton(
+                              onPressed: () async {
+                                final DateTime? _pickedDate =
+                                    await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(2024),
+                                  lastDate:
+                                      DateTime(2030).add(Duration(days: 365)),
+                                );
+                                setState(() {
+                                  _endDateController.text =
+                                      DateFormat('dd-MM-yyyy')
+                                          .format(_pickedDate!);
+                                });
+                              },
+                              icon: Icon(Icons.calendar_month_outlined))),
+                    ),
+                    30.heightBox,
                   ],
                 ),
               ),
