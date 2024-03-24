@@ -94,8 +94,7 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
                             "Create your fundraising Project and get funding fast and easy.",
                         buttonText: "Start",
                         onTap: () {
-                          context.showMessage(
-                              message: "Feature not available yet");
+                          context.push(FundRoutes.addProject);
                         },
                       ),
                       const SizedBox(
