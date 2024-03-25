@@ -3,11 +3,15 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:stuverse/app/app.dart';
+import 'package:stuverse/features/fund/cubit/add_edit_fundProject/cubit/add_edit_fund_project_cubit.dart';
+import 'package:stuverse/features/fund/cubit/home/fund_home_cubit.dart';
 import 'package:stuverse/features/fund/models/projects.dart';
+import 'package:stuverse/features/fund/routes/fund_routes.dart';
 
 class AddFundProjectScreen extends StatefulWidget {
   const AddFundProjectScreen({super.key, this.post});
@@ -98,7 +102,7 @@ class _AddFundProjectScreenState extends State<AddFundProjectScreen> {
                       child: TextButton.icon(
                           onPressed: _chooseImage,
                           icon: const Icon(Icons.image),
-                          label: Text("Select a Image")),
+                          label: Text("Pick an Image")),
                     ),
                     Text(
                       "Title",
@@ -315,8 +319,8 @@ class _AddFundProjectScreenState extends State<AddFundProjectScreen> {
                       readOnly: true,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Start Date',
-                          labelStyle: TextStyle(
+                          hintText: 'Start Date',
+                          hintStyle: TextStyle(
                             color: Colors.grey,
                             fontWeight: FontWeight.w100,
                             fontSize: 15,
@@ -376,6 +380,60 @@ class _AddFundProjectScreenState extends State<AddFundProjectScreen> {
                               icon: Icon(Icons.calendar_month_outlined))),
                     ),
                     30.heightBox,
+                    BlocConsumer<AddEditFundProjectCubit,
+                        AddEditFundProjectState>(
+                      listener: (context, state) {
+                        if (state is AddEditFundProjectError) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(state.errorMessage),
+                          ));
+                        }
+                        if (state is AddEditFundProjectSuccess) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(state.message),
+                          ));
+                          context.pushReplacement(FundRoutes.fundHome);
+                          context.read<FundHomeCubit>().getProjects();
+                        }
+                      },
+                      builder: (context, state) {
+                        if (state is AddEditFundProjectLoading) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                        return ElevatedButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                if (_selectedCategory == null) {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                          content: Text(
+                                    'Please select a category',
+                                  )));
+                                }
+                              }
+                              ;
+                              // widget.post==null?context.read<AddEditFundProjectCubit>().addEditFundProject(
+                              //   title: _titleController.text,
+                              //   description: _descriptionController.text,
+                              //   category: _selectedCategory!,
+                              //   startDate: _startDateController.text.
+                              // )
+                            },
+                            child: Text(widget.post != null ? 'Update' : 'Post',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(fontWeight: FontWeight.bold)),
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: const Size(double.infinity, 35),
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.primary,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)),
+                            ));
+                      },
+                    )
                   ],
                 ),
               ),
