@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
+import 'package:stuverse/app/app.dart';
 import 'package:stuverse/app/utils/dio_client.dart';
 
 part 'add_edit_fund_project_state.dart';
@@ -10,7 +11,8 @@ class AddEditFundProjectCubit extends Cubit<AddEditFundProjectState> {
   AddEditFundProjectCubit() : super(AddEditFundProjectInitial());
 
   void addEditFundProject(
-      {required String title,
+      {required User user,
+      required String title,
       required String description,
       required double targetAmount,
       required DateTime startDate,
@@ -23,6 +25,7 @@ class AddEditFundProjectCubit extends Cubit<AddEditFundProjectState> {
 
     try {
       final formData = FormData.fromMap({
+        "user": user.id,
         "title": title,
         "description": description,
         "target_amount": targetAmount,

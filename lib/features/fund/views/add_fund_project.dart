@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -48,6 +49,10 @@ class _AddFundProjectScreenState extends State<AddFundProjectScreen> {
     } catch (e) {
       log("Crash Error: $e");
     }
+  }
+
+  void initState() {
+    context.read<CoreCubit>().state.user;
   }
 
   @override
@@ -164,7 +169,7 @@ class _AddFundProjectScreenState extends State<AddFundProjectScreen> {
                     TextFormField(
                         maxLength: 5000,
                         maxLines: 7,
-                        enabled: false,
+                        enabled: true,
                         controller: _descriptionController,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
@@ -201,7 +206,7 @@ class _AddFundProjectScreenState extends State<AddFundProjectScreen> {
                             )),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter some text';
+                            return 'Please enter the Amount';
                           }
                           final regExp = RegExp(r'^[0-9]+(\.[0-9]+)?$');
                           if (!regExp.hasMatch(value)) {
@@ -337,8 +342,9 @@ class _AddFundProjectScreenState extends State<AddFundProjectScreen> {
                                 );
                                 setState(() {
                                   _startDateController.text =
-                                      DateFormat('dd-MM-yyyy')
-                                          .format(_pickedDate!);
+                                      DateFormat('yyyy-MM-dd')
+                                          .format(_pickedDate!)
+                                          .toString();
                                 });
                               },
                               icon: Icon(Icons.calendar_month_outlined))),
@@ -373,8 +379,9 @@ class _AddFundProjectScreenState extends State<AddFundProjectScreen> {
                                 );
                                 setState(() {
                                   _endDateController.text =
-                                      DateFormat('dd-MM-yyyy')
-                                          .format(_pickedDate!);
+                                      DateFormat('yyyy-MM-dd')
+                                          .format(_pickedDate!)
+                                          .toString();
                                 });
                               },
                               icon: Icon(Icons.calendar_month_outlined))),
@@ -412,13 +419,24 @@ class _AddFundProjectScreenState extends State<AddFundProjectScreen> {
                                   )));
                                 }
                               }
-                              ;
-                              // widget.post==null?context.read<AddEditFundProjectCubit>().addEditFundProject(
-                              //   title: _titleController.text,
-                              //   description: _descriptionController.text,
-                              //   category: _selectedCategory!,
-                              //   startDate: _startDateController.text.
-                              // )
+
+                              context
+                                  .read<AddEditFundProjectCubit>()
+                                  .addEditFundProject(
+                                    user: context.read<CoreCubit>().state.user!,
+                                    title: _titleController.text,
+                                    description: _descriptionController.text,
+                                    category: _selectedCategory!,
+                                    startDate: DateTime.parse(
+                                        _startDateController.text),
+                                    endDate:
+                                        DateTime.parse(_endDateController.text),
+                                    targetAmount: double.parse(
+                                        _targetamountController.text),
+                                    accountNumber:
+                                        _accountNumberController.text,
+                                    upiId: _upiIdController.text,
+                                  );
                             },
                             child: Text(widget.post != null ? 'Update' : 'Post',
                                 style: Theme.of(context)
@@ -426,7 +444,7 @@ class _AddFundProjectScreenState extends State<AddFundProjectScreen> {
                                     .titleSmall!
                                     .copyWith(fontWeight: FontWeight.bold)),
                             style: ElevatedButton.styleFrom(
-                              minimumSize: const Size(double.infinity, 35),
+                              minimumSize: Size(double.infinity, 40),
                               backgroundColor:
                                   Theme.of(context).colorScheme.primary,
                               shape: RoundedRectangleBorder(
