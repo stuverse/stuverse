@@ -7,9 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:stuverse/app/app.dart';
 
-import 'api_endpoints.dart';
-import 'i_auth_repo.dart';
-
 class AuthRepo implements IAuthRepo {
   @override
   Future<Either<AuthFailure, User>> signInWithEmailAndPassword(
