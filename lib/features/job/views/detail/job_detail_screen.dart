@@ -1,5 +1,6 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -93,7 +94,8 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border.all(),
                                 image: DecorationImage(
-                                    image: NetworkImage(widget.post.image),
+                                    image: CachedNetworkImageProvider(
+                                        widget.post.image),
                                     fit: BoxFit.cover)),
                           ),
                           const SizedBox(height: 10),

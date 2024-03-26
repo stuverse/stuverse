@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -78,8 +79,15 @@ class _CommunityAddEditScreenState extends State<CommunityAddEditScreen> {
                       )
                     else if (widget.community != null)
                       Positioned.fill(
-                        child: Image.network(
-                          widget.community!.image ?? "",
+                        child: CachedNetworkImage(
+                          placeholder: (context, url) {
+                            return Container(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primaryContainer,
+                            );
+                          },
+                          imageUrl: widget.community!.image ?? "",
                           fit: BoxFit.cover,
                           width: double.infinity,
                         ),

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -85,8 +86,14 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> {
                     ),
                     flexibleSpace: FlexibleSpaceBar(
                       stretchModes: [StretchMode.blurBackground],
-                      background: Image.network(
-                        state.community?.image ?? "",
+                      background: CachedNetworkImage(
+                        placeholder: (context, url) {
+                          return Container(
+                            color:
+                                Theme.of(context).colorScheme.primaryContainer,
+                          );
+                        },
+                        imageUrl: state.community?.image ?? "",
                         fit: BoxFit.cover,
                         color: context.theme.brightness == Brightness.dark
                             ? context.colorScheme.tertiary.withOpacity(0.7)

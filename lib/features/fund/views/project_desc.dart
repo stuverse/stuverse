@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,8 +58,15 @@ class _ProjectDescScreenState extends State<ProjectDescScreen> {
                           child: Container(
                             height: 300,
                             width: double.infinity,
-                            child: Image.network(
-                              widget.project.images,
+                            child: CachedNetworkImage(
+                              placeholder: (context, url) {
+                                return Container(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primaryContainer,
+                                );
+                              },
+                              imageUrl: widget.project.images,
                               fit: BoxFit.fill,
                             ),
                           )),
@@ -83,8 +91,8 @@ class _ProjectDescScreenState extends State<ProjectDescScreen> {
                     ListTile(
                       leading: CircleAvatar(
                         radius: 30,
-                        backgroundImage:
-                            NetworkImage(widget.project.user.image),
+                        backgroundImage: CachedNetworkImageProvider(
+                            widget.project.user.image),
                       ),
                       title: Text(
                         widget.project.user.name,

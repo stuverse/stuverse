@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stuverse/app/app.dart';
@@ -18,7 +19,7 @@ class UserRequestTile extends StatelessWidget {
       title: Text(user.name ?? ""),
       subtitle: Text((user.email ?? "")),
       leading: CircleAvatar(
-        backgroundImage: NetworkImage(user.image ?? ""),
+        backgroundImage: CachedNetworkImageProvider(user.image ?? ""),
       ),
       trailing: Icon(Icons.chevron_right),
       onTap: () async {
@@ -34,7 +35,8 @@ class UserRequestTile extends StatelessWidget {
                       Align(
                         alignment: Alignment.center,
                         child: CircleAvatar(
-                          backgroundImage: NetworkImage(user.image ?? ""),
+                          backgroundImage:
+                              CachedNetworkImageProvider(user.image ?? ""),
                           radius: 50,
                         ),
                       ),

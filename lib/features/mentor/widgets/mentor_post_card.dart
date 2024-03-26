@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -21,7 +22,7 @@ class _MentorPostCardState extends State<MentorPostCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: InkWell(
         onTap: () {
           context.push(MentorRoutes.postDetails, extra: widget.post);
@@ -41,30 +42,28 @@ class _MentorPostCardState extends State<MentorPostCard> {
                 Row(children: [
                   CircleAvatar(
                     radius: context.height * 0.02,
-                    backgroundImage: NetworkImage(widget.post.mentor.image),
+                    backgroundImage:
+                        CachedNetworkImageProvider(widget.post.mentor.image),
                   ),
                   SizedBox(
                     width: 10,
                   ),
                   Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(widget.post.mentor.name,
-                     style: context.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                    ),
-                     Text(
-                          CommonUtils.relativeTime(
-                            DateTime.parse(
-                              widget.post.createdAt
-                            )
-                            
-                          ),
-                          style: context.bodyMedium,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.post.mentor.name,
+                        style: context.bodyLarge!.copyWith(
+                          fontWeight: FontWeight.bold,
                         ),
-                  ],
-                 ),
+                      ),
+                      Text(
+                        CommonUtils.relativeTime(
+                            DateTime.parse(widget.post.createdAt)),
+                        style: context.bodyMedium,
+                      ),
+                    ],
+                  ),
                   Spacer(),
                   if (widget.post.mentor.id ==
                       context.read<CoreCubit>().state.user!.id)
