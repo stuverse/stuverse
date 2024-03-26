@@ -36,6 +36,7 @@ class AuthCubit extends Cubit<AuthState> {
     }, (user) {
       storeToken(token: user.token);
       emit(AuthState.success(user));
+      _authRepo.setFcmToken(user: user);
     });
   }
 

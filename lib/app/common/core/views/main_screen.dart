@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,15 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     user = context.read<CoreCubit>().state.user;
+    FirebaseMessaging.onMessage.listen((message) {
+      print(message);
+      if (message.notification != null) {
+        context.showMessage(
+            message:
+                "${message.notification?.title ?? ''} \n${message.notification?.body ?? ''} ",
+            duration: const Duration(seconds: 5));
+      }
+    });
     navItems.addAll([
       NavDestItem(
         label: 'Forum',

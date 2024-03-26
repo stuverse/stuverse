@@ -23,7 +23,7 @@ class LogmanDioInterceptor extends Interceptor {
       body: options.data,
       sentAt: sentAt,
     );
-    _logman.recordNetworkRequest(requestRecord);
+    _logman.networkRequest(requestRecord);
 
     return super.onRequest(options, handler);
   }
@@ -44,7 +44,7 @@ class LogmanDioInterceptor extends Interceptor {
       receivedAt: receivedAt,
     );
 
-    _logman.recordNetworkResponse(responseRecord);
+    _logman.networkResponse(responseRecord);
 
     return super.onResponse(response, handler);
   }
@@ -64,7 +64,7 @@ class LogmanDioInterceptor extends Interceptor {
       receivedAt: DateTime.now(),
     );
 
-    _logman.recordNetworkResponse(responseRecord);
+    _logman.networkResponse(responseRecord);
 
     return super.onError(err, handler);
   }
