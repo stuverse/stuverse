@@ -24,3 +24,5 @@ class AuthState with _$AuthState {
 
   const factory AuthState.accountNotVerified() = _AccountNotVerified;
 }
+
+final obj = AuthState;

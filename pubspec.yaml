@@ -1,6 +1,6 @@
 name: stuverse
 description: Stuverse student and alumni community forum
-version: 1.0.1+4
+version: 1.0.1+5
 publish_to: none
 
 environment:
@@ -17,11 +17,14 @@ dependencies:
   easy_search_bar: ^2.5.0
   expandable: ^5.0.1
   file_picker: ^6.1.1
+  firebase_core: ^2.27.1
+  firebase_messaging: ^14.7.20
   flex_color_scheme: ^7.3.1
   flutter:
     sdk: flutter
   flutter_animate: ^4.5.0
   flutter_bloc: ^8.1.3
+  flutter_local_notifications: ^17.0.0
   flutter_localizations:
     sdk: flutter
   flutter_markdown: ^0.6.20
@@ -34,7 +37,7 @@ dependencies:
   image_picker: ^1.0.7
   intl: ^0.18.0
   json_annotation: ^4.8.1
-  logman: ^0.0.5
+  logman: ^0.0.13
   lottie: ^3.1.0
   permission_handler: ^11.3.0
   readmore: ^2.2.0

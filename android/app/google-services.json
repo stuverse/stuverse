@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "395933211284",
+    "project_id": "stuverse-project",
+    "storage_bucket": "stuverse-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395933211284:android:469f87ae76f212244a7281",
+        "android_client_info": {
+          "package_name": "in.stuverse.stuverse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFMCq-46f8w7LEHzAek2th0RqYilg3PYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,6 +13,7 @@ export 'utils/app_theme.dart';
 export 'utils/dio_client.dart';
 export 'utils/common_utils.dart';
 export 'utils/extentions/app_extensions.dart';
+export 'utils/secrets.dart';
 
 //! Views
 export 'views/root_app.dart';

@@ -4,8 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/app/models/user/token.dart';
 
-import '../services/auth_repo.dart';
-
 part 'auth_state.dart';
 part 'auth_cubit.freezed.dart';
 
@@ -36,6 +34,7 @@ class AuthCubit extends Cubit<AuthState> {
     }, (user) {
       storeToken(token: user.token);
       emit(AuthState.success(user));
+      _authRepo.setFcmToken(user: user);
     });
   }
 

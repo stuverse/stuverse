@@ -1,11 +1,11 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:stuverse/app/app.dart';
-
-import 'api_endpoints.dart';
-import 'i_auth_repo.dart';
 
 class AuthRepo implements IAuthRepo {
   @override
@@ -140,6 +140,59 @@ class AuthRepo implements IAuthRepo {
       return left(const AuthFailure.authServerFailure());
     } catch (e) {
       return left(const AuthFailure.authClientFailure());
+    }
+  }
+
+  void setFcmToken({
+    required User user,
+  }) async {
+    print("Setting FCM Token");
+    try {
+      String platform = 'android';
+      if (kIsWeb) {
+        platform = 'web';
+      } else {
+        if (Platform.isIOS) {
+          // iOS-specific code
+          platform = 'ios';
+        }
+      }
+
+      String? fcmToken = await FirebaseMessaging.instance
+          .getToken(vapidKey: kIsWeb ? vapidFcmKey : null);
+
+      if (fcmToken == null) {
+        print("FCM Token is null");
+        return;
+      }
+
+      final resp = await dioClient.post(
+        REGISTER_FCM_DEVICE_API,
+        data: {
+          'name': user.name,
+          'registration_id': fcmToken,
+          'type': platform,
+        },
+        options: Options(
+          headers: {
+            'Authorization': 'Token ${user.token}',
+          },
+        ),
+      );
+
+      print(resp.data);
+      print("FCM Token set successfully");
+    } on DioException catch (e) {
+      print("Unable to set FCM Token");
+      final response = e.response;
+      if (response == null) {
+        print(e.toString());
+      } else {
+        print(e.response!.data);
+      }
+    } catch (e) {
+      print("Unable to set FCM Token (Client Error)");
+      print(e.toString());
     }
   }
 }

@@ -2,8 +2,13 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:stuverse/app/app.dart';
+
+import 'firebase_options.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -29,6 +34,17 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   Bloc.observer = const AppBlocObserver();
 
   // Add cross-flavor configuration here
-  dioClient.interceptors.add(interceptorWrapper);
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final app = await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  print('Firebase app name: ${app.name}');
+  final messaging = FirebaseMessaging.instance;
+  await messaging.requestPermission();
+
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   runApp(await builder());
 }
