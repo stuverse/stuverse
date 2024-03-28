@@ -1,6 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/app/routes/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,53 +29,20 @@ class RootApp extends StatelessWidget {
 }
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  print("This is background message");
-  print(message);
-  RemoteNotification? notification = message.notification;
-  AndroidNotification? android = message.notification?.android;
+  print('A new onMessageOpenedApp event was published!');
+  print(message.data);
 
-  if (notification != null && android != null) {
-    flutterLocalNotificationsPlugin.show(
-        notification.hashCode,
-        notification.title,
-        notification.body,
-        NotificationDetails(
-          android: AndroidNotificationDetails(
-            channel.id,
-            channel.name,
-            channelDescription: channel.description,
-            icon: 'launch_background',
-            priority: Priority.high,
-            actions: [
-              AndroidNotificationAction(
-                'archive',
-                'Archive',
-              ),
-              AndroidNotificationAction(
-                'dismiss',
-                'Dismiss',
-              ),
-            ],
-          ),
-        ));
+  try {
+    final data = message.data;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (data['action'] == 'thread') {
+        AppRouter.router
+            .go(ForumRoutes.threadDetail.replaceFirst(":id", data['id']));
+      }
+    });
+  } catch (e) {
+    print(e);
   }
-}
-
-const AndroidNotificationChannel channel = AndroidNotificationChannel(
-  'high_importance_channel', // id
-  'High Importance Notifications', // title
-  description:
-      'This channel is used for important notifications.', // description
-  importance: Importance.max,
-  playSound: true,
-);
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
-
-Future<dynamic> onSelectNotification(payload) async {
-// navigate to booking screen if the payload equal BOOKING
-  print("Payload: $payload");
-  AppRouter.router.go(JobRoutes.jobHome);
 }
 
 class _App extends StatefulWidget {
@@ -89,82 +55,17 @@ class _App extends StatefulWidget {
 class _AppState extends State<_App> {
   void initState() {
     super.initState();
-    //foreground notification
-    flutterLocalNotificationsPlugin.initialize(
-      InitializationSettings(
-        android: AndroidInitializationSettings('launch_background'),
-      ),
-      onDidReceiveBackgroundNotificationResponse: onSelectNotification,
-      onDidReceiveNotificationResponse: onSelectNotification,
-    );
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      RemoteNotification? notification = message.notification;
-      AndroidNotification? android = message.notification?.android;
-      if (notification != null && android != null) {
-        flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                channelDescription: channel.description,
-                icon: 'launch_background',
-                priority: Priority.high,
-                actions: [
-                  AndroidNotificationAction(
-                    'archive',
-                    'Archive',
-                    inputs: [
-                      const AndroidNotificationActionInput(
-                        choices: ['Yes', 'No'],
-                        allowFreeFormInput: false,
-                        label: 'Do you want to archive this notification?',
-                      ),
-                    ],
-                  ),
-                  AndroidNotificationAction(
-                    'dismiss',
-                    'Dismiss',
-                  ),
-                ],
-              ),
-            ));
-      }
-    });
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {});
     //background notification
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('A new onMessageOpenedApp event was published!');
-      RemoteNotification? notification = message.notification;
-      AndroidNotification? android = message.notification?.android;
-      if (notification != null && android != null) {
-        flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                channelDescription: channel.description,
-                icon: 'launch_background',
-                priority: Priority.high,
-                actions: [
-                  AndroidNotificationAction(
-                    'archive',
-                    'Archive',
-                  ),
-                  AndroidNotificationAction(
-                    'dismiss',
-                    'Dismiss',
-                  ),
-                ],
-              ),
-            ));
+    FirebaseMessaging.onMessageOpenedApp
+        .listen(firebaseMessagingBackgroundHandler);
+    FirebaseMessaging.instance.getInitialMessage().then((value) {
+      if (value != null) {
+        firebaseMessagingBackgroundHandler(value);
       }
     });
-    //foreground notification
+
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   }
 

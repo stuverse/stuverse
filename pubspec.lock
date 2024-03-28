@@ -1446,7 +1446,7 @@ packages:
     dependency: transitive
     description:
       name: syncfusion_pdfviewer_windows
-      sha256: "6e33562967828feeebc1b5cb0e5f1ec23abb86007dce37773501f9f18bfe3a36"
+      sha256: "31a7c29741a3686b82245336ea49e3f52ead6459782e02983a0eabae04bafaad"
       url: "https://pub.dev"
     source: hosted
     version: "24.2.8"
@@ -1458,7 +1458,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0+1"
-
   term_glyph:
     dependency: transitive
     description:

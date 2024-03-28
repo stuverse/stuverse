@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
@@ -18,12 +18,6 @@ class _OtpSigningScreenState extends State<OtpSigningScreen> {
 
   @override
   void initState() {
-    if (widget.email != null) {
-      _emailController.text = widget.email!;
-      context.read<AuthCubit>().sendOtp(
-            email: _emailController.text,
-          );
-    }
     super.initState();
   }
 
