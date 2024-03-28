@@ -56,23 +56,33 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
                           horizontal: 13,
                           vertical: 8,
                         ),
-                        child: InkWell(
-                          onTap: () {
-                            context.push(FundRoutes.search);
-                          },
-                          child: TextField(
-                              controller: _searchcontroller,
-                              enabled: false,
-                              onChanged: (value) {},
-                              style: context.textTheme.bodyMedium!.copyWith(),
-                              decoration: InputDecoration(
-                                fillColor:
-                                    Theme.of(context).colorScheme.background,
-                                border: InputBorder.none,
-                                prefixIcon: const Icon(Icons.search),
-                                hintText:
-                                    "Find fundraisers, projects, and more",
-                              )),
+                        child: Hero(
+                          tag: 'search',
+                          child: Material(
+                            child: InkWell(
+                              onTap: () {
+                                context.push(FundRoutes.search);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(27),
+                                  color: Color.fromARGB(242, 231, 230, 230),
+                                ),
+                                child: IgnorePointer(
+                                  ignoring: true,
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      hintText: 'find projects and more....',
+                                      border: InputBorder.none,
+                                      prefixIcon: Icon(
+                                        Icons.search,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -84,8 +94,7 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
                             "Create your fundraising Project and get funding fast and easy.",
                         buttonText: "Start",
                         onTap: () {
-                          context.showMessage(
-                              message: "Feature not available yet");
+                          context.push(FundRoutes.addProject);
                         },
                       ),
                       const SizedBox(

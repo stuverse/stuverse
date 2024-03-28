@@ -17,7 +17,7 @@ class _ProjectSearchScreenState extends State<ProjectSearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Search Projects"),
+        title: const Text("All Projects"),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -26,7 +26,7 @@ class _ProjectSearchScreenState extends State<ProjectSearchScreen> {
       body: BgGradient(
         child: Column(
           children: [
-            130.heightBox,
+            60.heightBox,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               child: TextField(
@@ -36,7 +36,7 @@ class _ProjectSearchScreenState extends State<ProjectSearchScreen> {
                       );
                 },
                 decoration: InputDecoration(
-                  hintText: "Search projects",
+                  hintText: "find projects and more...",
                   prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
@@ -72,13 +72,16 @@ class _ProjectSearchScreenState extends State<ProjectSearchScreen> {
                 }
                 if (state is FundHomeSuccess) {
                   return Expanded(
-                      child: Column(
-                    children: [
-                      for (final project in state.project)
-                        ProjectCard(
-                          project: project,
-                        )
-                    ],
+                      child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      children: [
+                        for (final project in state.project)
+                          ProjectCard(
+                            project: project,
+                          )
+                      ],
+                    ),
                   ));
                 }
                 return const Center(
