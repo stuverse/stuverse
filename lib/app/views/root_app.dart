@@ -28,7 +28,22 @@ class RootApp extends StatelessWidget {
   }
 }
 
-Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  print('A new onMessageOpenedApp event was published!');
+  print(message.data);
+
+  try {
+    final data = message.data;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (data['action'] == 'thread') {
+        AppRouter.router
+            .go(ForumRoutes.threadDetail.replaceFirst(":id", data['id']));
+      }
+    });
+  } catch (e) {
+    print(e);
+  }
+}
 
 class _App extends StatefulWidget {
   const _App();
@@ -43,21 +58,14 @@ class _AppState extends State<_App> {
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {});
     //background notification
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('A new onMessageOpenedApp event was published!');
-      print(message.data);
-
-      try {
-        final data = message.data;
-        if (data['action'] == 'thread') {
-          AppRouter.router
-              .go(ForumRoutes.threadDetail.replaceFirst(":id", data['id']));
-        }
-      } catch (e) {
-        print(e);
+    FirebaseMessaging.onMessageOpenedApp
+        .listen(firebaseMessagingBackgroundHandler);
+    FirebaseMessaging.instance.getInitialMessage().then((value) {
+      if (value != null) {
+        firebaseMessagingBackgroundHandler(value);
       }
     });
-    //foreground notification
+
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   }
 
