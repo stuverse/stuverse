@@ -134,7 +134,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                                 width: 6,
                               ),
                               Text(
-                                  "${widget.post.jobType} - ${widget.post.jobLocationType}",
+                                  "${CommonUtils.toTitleCase(widget.post.jobType)} - ${CommonUtils.toTitleCase(widget.post.jobLocationType)}",
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
