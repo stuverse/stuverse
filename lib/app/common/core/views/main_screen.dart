@@ -1,4 +1,3 @@
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -94,28 +93,27 @@ class _MainScreenState extends State<MainScreen> {
           //   hasNotification: false,
           //   onPressed: () {},
           // ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 7,
-            ),
-            child: IconButton(
-              onPressed: () {
-                context.showMessage(
-                    message: "Notifications will be available soon");
-              },
-              icon: SvgPicture.asset(
-                AppImages.bellSVG,
-                height: 20,
-                colorFilter: ColorFilter.mode(
-                  context.colorScheme.onBackground,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-          )
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     top: 7,
+          //   ),
+          //   child: IconButton(
+          //     onPressed: () {
+          //       context.showMessage(
+          //           message: "Notifications will be available soon");
+          //     },
+          //     icon: SvgPicture.asset(
+          //       AppImages.bellSVG,
+          //       height: 20,
+          //       colorFilter: ColorFilter.mode(
+          //         context.colorScheme.onBackground,
+          //         BlendMode.srcIn,
+          //       ),
+          //     ),
+          //   ),
+          // )
         ],
       ),
-      drawer: MainDrawer(),
       extendBodyBehindAppBar: true,
       extendBody: true,
       body: BgGradient(

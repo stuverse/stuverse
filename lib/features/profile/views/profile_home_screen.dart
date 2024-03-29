@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
+import 'package:stuverse/features/forum/routes/forum_routes.dart';
 
 import '../routes/profile_routes.dart';
 
@@ -70,13 +71,19 @@ class ProfileHomeScreen extends StatelessWidget {
                         }),
                     10.heightBox,
                     ProfileTile(
-                        title: "Settings",
+                        title: "Manage Communities",
                         iconData: Icons.settings,
                         color: context.goldPrimary,
                         onTap: () {
-                          context.showMessage(
-                              message:
-                                  "Settings will be available in future updates");
+                          context.push(ForumRoutes.communityManage);
+                        }),
+                    10.heightBox,
+                    ProfileTile(
+                        title: "User Requests",
+                        iconData: Icons.settings,
+                        color: context.goldPrimary,
+                        onTap: () {
+                          context.push(CommonRoutes.userRequest);
                         }),
                     10.heightBox,
                     Divider(
