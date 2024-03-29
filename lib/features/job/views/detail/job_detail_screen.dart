@@ -88,8 +88,8 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                         children: [
                           Container(
                             padding: EdgeInsets.all(10),
-                            height: 200,
-                            width: 250,
+                            height: 100,
+                            width: 100,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border.all(),

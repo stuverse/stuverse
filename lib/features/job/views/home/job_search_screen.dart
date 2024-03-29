@@ -15,7 +15,7 @@ class JobSearchScreen extends StatefulWidget {
 
 class _JobSearchScreenState extends State<JobSearchScreen> {
   final _searchController = TextEditingController();
-
+  bool _isSelected = false;
   @override
   void initState() {
     context.read<JobSearchCubit>().searchJobs();
@@ -40,20 +40,76 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
               children: [
                 Hero(
                   tag: 'jobSearch',
-                  child: Material(
-                    child: TextField(
-                      onChanged: (value) {
-                        context
-                            .read<JobSearchCubit>()
-                            .searchJobs(search: value);
-                      },
-                      controller: _searchController,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.search),
-                        hintText: 'Search jobs here.....',
-                        border: OutlineInputBorder(),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          onChanged: (value) {
+                            context
+                                .read<JobSearchCubit>()
+                                .searchJobs(search: value);
+                          },
+                          controller: _searchController,
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.search),
+                            hintText: 'Search jobs here.....',
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
                       ),
-                    ),
+                      10.widthBox,
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text("Select Your Choices"),
+                                  content: Wrap(
+                                    spacing: 5.0,
+                                    children: List.generate(
+                                      5,
+                                      (index) => ChoiceChip(
+                                          label: Text("Clear"),
+                                          selected: _isSelected,
+                                          onSelected: (value) {
+                                            setState(() {
+                                              _isSelected = value;
+                                            });
+                                          }),
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text("Okay"),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text("No"),
+                                    ),
+                                  ],
+                                );
+                              });
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: context.colorScheme.primaryContainer,
+                          ),
+                          child: Icon(
+                            Icons.sort,
+                            size: 26,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 20),
