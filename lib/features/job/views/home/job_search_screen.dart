@@ -15,7 +15,8 @@ class JobSearchScreen extends StatefulWidget {
 
 class _JobSearchScreenState extends State<JobSearchScreen> {
   final _searchController = TextEditingController();
-  bool _isSelected = false;
+  int _choiceIndex = 0;
+  List jobChoices = ["On-site", "Remote", "Hybrid"];
   @override
   void initState() {
     context.read<JobSearchCubit>().searchJobs();
@@ -65,32 +66,41 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
                               builder: (context) {
                                 return AlertDialog(
                                   title: const Text("Select Your Choices"),
-                                  content: Wrap(
-                                    spacing: 5.0,
-                                    children: List.generate(
-                                      5,
-                                      (index) => ChoiceChip(
-                                          label: Text("Clear"),
-                                          selected: _isSelected,
-                                          onSelected: (value) {
-                                            setState(() {
-                                              _isSelected = value;
-                                            });
-                                          }),
-                                    ),
+                                  content: StatefulBuilder(
+                                    builder: (context, setState) {
+                                      return Wrap(
+                                        spacing: 10,
+                                        runSpacing: 6.0,
+                                        children: List.generate(
+                                          jobChoices.length,
+                                          (index) {
+                                            return ChoiceChip(
+                                              selectedColor: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondaryContainer,
+                                              label: Text(jobChoices[index]),
+                                              selected: _choiceIndex == index,
+                                              onSelected: (value) {
+                                                setState(
+                                                    () => _choiceIndex = index);
+                                              },
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    },
                                   ),
                                   actions: [
                                     TextButton(
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
-                                      child: const Text("Okay"),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: const Text("No"),
+                                      child: const Text(
+                                        "Okay",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20),
+                                      ),
                                     ),
                                   ],
                                 );
