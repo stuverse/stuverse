@@ -61,66 +61,67 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
                           ),
                         ),
                         10.widthBox,
-                        InkWell(
-                          onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: const Text("Select Your Choices"),
-                                    content: StatefulBuilder(
-                                      builder: (context, setState) {
-                                        return Wrap(
-                                          spacing: 10,
-                                          runSpacing: 6.0,
-                                          children: List.generate(
-                                            jobChoices.length,
-                                            (index) {
-                                              return ChoiceChip(
-                                                selectedColor: Theme.of(context)
-                                                    .colorScheme
-                                                    .secondaryContainer,
-                                                label: Text(jobChoices[index]),
-                                                selected: _choiceIndex == index,
-                                                onSelected: (value) {
-                                                  setState(() =>
-                                                      _choiceIndex = index);
-                                                },
-                                              );
-                                            },
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: const Text(
-                                          "Okay",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20),
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                });
-                          },
-                          child: Container(
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: context.colorScheme.primaryContainer,
-                            ),
-                            child: Icon(
-                              Icons.sort,
-                              size: 26,
-                            ),
-                          ),
-                        ),
+                        // InkWell(
+                        //   onTap: () {
+                        //     showDialog(
+                        //         context: context,
+                        //         builder: (context) {
+                        //           return AlertDialog(
+                        //             title: const Text("Select Your Choices"),
+                        //             content: StatefulBuilder(
+                        //               builder: (context, setState) {
+                        //                 return Wrap(
+                        //                   spacing: 10,
+                        //                   runSpacing: 6.0,
+                        //                   children: List.generate(
+                        //                     jobChoices.length,
+                        //                     (index) {
+                        //                       return ChoiceChip(
+                        //                         selectedColor: Theme.of(context)
+                        //                             .colorScheme
+                        //                             .secondaryContainer,
+                        //                         label: Text(jobChoices[index]),
+                        //                         selected: _choiceIndex == index,
+                        //                         onSelected: (value) {
+                        //                           setState(() =>
+                        //                               _choiceIndex = index);
+                        //                         },
+                        //                       );
+                        //                     },
+                        //                   ),
+                        //                 );
+                        //               },
+                        //             ),
+                        //             actions: [
+                        //               TextButton(
+                        //                 onPressed: () {
+                        //                   Navigator.of(context).pop();
+                        //                 },
+                        //                 child: const Text(
+                        //                   "Okay",
+                        //                   style: TextStyle(
+                        //                       fontWeight: FontWeight.bold,
+                        //                       fontSize: 20),
+                        //                 ),
+                        //               ),
+                        //             ],
+                        //           );
+                        //         });
+                        //   },
+                        // child:
+                        // Container(
+                        //   height: 60,
+                        //   width: 60,
+                        //   decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.circular(12),
+                        //     color: context.colorScheme.primaryContainer,
+                        //   ),
+                        //   child: Icon(
+                        //     Icons.sort,
+                        //     size: 26,
+                        //   ),
+                        // ),
+                        // ),
                       ],
                     ),
                   ),
