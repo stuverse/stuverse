@@ -84,12 +84,12 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Center(
-                          child: Column(
+                          child: Row(
                         children: [
                           Container(
                             padding: EdgeInsets.all(10),
-                            height: 200,
-                            width: 250,
+                            height: 100,
+                            width: 100,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border.all(),
@@ -98,54 +98,74 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                                         widget.post.image),
                                     fit: BoxFit.cover)),
                           ),
-                          const SizedBox(height: 10),
-                          Text(
-                            widget.post.title,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          Text(
-                            "${widget.post.companyName} - ${widget.post.place}",
-                            style: Theme.of(context).textTheme.titleSmall,
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.post.title,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium!
+                                      .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                                Text(
+                                  "${widget.post.companyName} - ${widget.post.place}",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall!
+                                      .copyWith(
+                                          color: context
+                                              .colorScheme.onBackground
+                                              .withOpacity(0.7)),
+                                ),
+                                const SizedBox(height: 5),
+                                Container(
+                                  decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .surfaceVariant
+                                          .withOpacity(0.5),
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline,
+                                      )),
+                                  padding: const EdgeInsets.all(5),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(
+                                        Icons.business_center,
+                                        size: 17,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurfaceVariant,
+                                      ),
+                                      const SizedBox(
+                                        width: 6,
+                                      ),
+                                      Text(
+                                          "${CommonUtils.toTitleCase(widget.post.jobType)} - ${CommonUtils.toTitleCase(widget.post.jobLocationType)}",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium!
+                                              .copyWith(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSurfaceVariant)),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       )),
-                      const SizedBox(height: 15),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .surfaceVariant
-                                .withOpacity(0.5),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          padding: const EdgeInsets.all(10),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.business_center,
-                                size: 25,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onSurfaceVariant,
-                              ),
-                              const SizedBox(
-                                width: 6,
-                              ),
-                              Text(
-                                  "${CommonUtils.toTitleCase(widget.post.jobType)} - ${CommonUtils.toTitleCase(widget.post.jobLocationType)}",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSurfaceVariant)),
-                            ],
-                          ),
-                        ),
-                      ),
                       const SizedBox(
                         height: 15,
                       ),

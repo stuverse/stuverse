@@ -15,7 +15,8 @@ class JobSearchScreen extends StatefulWidget {
 
 class _JobSearchScreenState extends State<JobSearchScreen> {
   final _searchController = TextEditingController();
-
+  int _choiceIndex = 0;
+  List jobChoices = ["On-site", "Remote", "Hybrid"];
   @override
   void initState() {
     context.read<JobSearchCubit>().searchJobs();
@@ -41,18 +42,87 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
                 Hero(
                   tag: 'jobSearch',
                   child: Material(
-                    child: TextField(
-                      onChanged: (value) {
-                        context
-                            .read<JobSearchCubit>()
-                            .searchJobs(search: value);
-                      },
-                      controller: _searchController,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.search),
-                        hintText: 'Search jobs here.....',
-                        border: OutlineInputBorder(),
-                      ),
+                    color: Colors.transparent,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            onChanged: (value) {
+                              context
+                                  .read<JobSearchCubit>()
+                                  .searchJobs(search: value);
+                            },
+                            controller: _searchController,
+                            decoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.search),
+                              hintText: 'Search jobs here.....',
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        ),
+                        10.widthBox,
+                        // InkWell(
+                        //   onTap: () {
+                        //     showDialog(
+                        //         context: context,
+                        //         builder: (context) {
+                        //           return AlertDialog(
+                        //             title: const Text("Select Your Choices"),
+                        //             content: StatefulBuilder(
+                        //               builder: (context, setState) {
+                        //                 return Wrap(
+                        //                   spacing: 10,
+                        //                   runSpacing: 6.0,
+                        //                   children: List.generate(
+                        //                     jobChoices.length,
+                        //                     (index) {
+                        //                       return ChoiceChip(
+                        //                         selectedColor: Theme.of(context)
+                        //                             .colorScheme
+                        //                             .secondaryContainer,
+                        //                         label: Text(jobChoices[index]),
+                        //                         selected: _choiceIndex == index,
+                        //                         onSelected: (value) {
+                        //                           setState(() =>
+                        //                               _choiceIndex = index);
+                        //                         },
+                        //                       );
+                        //                     },
+                        //                   ),
+                        //                 );
+                        //               },
+                        //             ),
+                        //             actions: [
+                        //               TextButton(
+                        //                 onPressed: () {
+                        //                   Navigator.of(context).pop();
+                        //                 },
+                        //                 child: const Text(
+                        //                   "Okay",
+                        //                   style: TextStyle(
+                        //                       fontWeight: FontWeight.bold,
+                        //                       fontSize: 20),
+                        //                 ),
+                        //               ),
+                        //             ],
+                        //           );
+                        //         });
+                        //   },
+                        // child:
+                        // Container(
+                        //   height: 60,
+                        //   width: 60,
+                        //   decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.circular(12),
+                        //     color: context.colorScheme.primaryContainer,
+                        //   ),
+                        //   child: Icon(
+                        //     Icons.sort,
+                        //     size: 26,
+                        //   ),
+                        // ),
+                        // ),
+                      ],
                     ),
                   ),
                 ),
