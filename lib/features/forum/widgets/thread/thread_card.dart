@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -135,26 +136,8 @@ class ThreadCard extends StatelessWidget {
                               },
                               builder: (context, state) {
                                 if (state is ThreadSummarySuccess) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: SingleChildScrollView(
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            "Summary",
-                                            style:
-                                                context.titleMedium!.copyWith(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onBackground,
-                                            ),
-                                          ),
-                                          10.heightBox,
-                                          CustomMarkdownBody(
-                                              inputText: state.summary),
-                                        ],
-                                      ),
-                                    ),
+                                  return ThreadAISummary(
+                                    summary: state.summary,
                                   );
                                 }
                                 return Container(
@@ -319,6 +302,58 @@ class ThreadCard extends StatelessWidget {
             ],
           )
         ],
+      ),
+    );
+  }
+}
+
+class ThreadAISummary extends StatefulWidget {
+  const ThreadAISummary({
+    super.key,
+    required this.summary,
+  });
+  final String summary;
+
+  @override
+  State<ThreadAISummary> createState() => _ThreadAISummaryState();
+}
+
+class _ThreadAISummaryState extends State<ThreadAISummary> {
+  late final ConfettiController _confettiController;
+  @override
+  void initState() {
+    super.initState();
+    _confettiController =
+        ConfettiController(duration: const Duration(seconds: 1))..play();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ConfettiWidget(
+      confettiController: _confettiController,
+      blastDirectionality: BlastDirectionality.explosive,
+      particleDrag: 0.05,
+      emissionFrequency: 0.05,
+      numberOfParticles: 50,
+      gravity: 0.05,
+      colors: const [
+        Colors.green,
+        Colors.blue,
+        Colors.pink,
+        Colors.orange,
+        Colors.purple
+      ],
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomMarkdownBody(inputText: widget.summary),
+            ],
+          ),
+        ),
       ),
     );
   }
