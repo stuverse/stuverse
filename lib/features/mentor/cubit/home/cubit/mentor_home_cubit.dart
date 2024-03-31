@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:stuverse/features/mentor/models/mentor_request.dart';
 
 import '../../../../../app/utils/dio_client.dart';
 import '../../../models/mentor_post.dart';
@@ -13,10 +14,14 @@ class MentorHomeCubit extends Cubit<MentorHomeState> {
     try {
       final resp = await dioClient.get('/mentor/home');
       final List<MentorPost> latestPosts = [];
+      final List<MentorRequest> latestRequests = [];
       for (final latestPost in resp.data['top_mentors']) {
         latestPosts.add(MentorPost.fromJson(latestPost));
       }
-      emit(MentorHomeLoaded(latestPosts));
+        for (final latestRequest in resp.data['latest_requests']) {
+        latestRequests.add(MentorRequest.fromJson(latestRequest));
+      }
+      emit(MentorHomeLoaded(latestPosts, latestRequests));
     } catch (e) {
       emit(MentorHomeFailure(e.toString()));
       print(e);
