@@ -34,7 +34,10 @@ class FundRoutes {
     ),
     GoRoute(path: donationpage, builder: (context, state) => DonatePage()),
     GoRoute(
-        path: addProject, builder: (context, state) => AddFundProjectScreen()),
+        path: addProject,
+        builder: (context, state) => AddFundProjectScreen(
+              post: state.extra as Projects?,
+            )),
     GoRoute(
       path: search,
       builder: (context, state) => BlocProvider(

@@ -39,6 +39,23 @@ class _ProjectDescScreenState extends State<ProjectDescScreen> {
           style: context.titleMedium!.copyWith(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              if (widget.project.user.id ==
+                  context.read<CoreCubit>().state.user!.id) {
+                context.push(
+                  FundRoutes.addProject,
+                  extra: widget.project,
+                );
+              }
+            },
+            icon: Icon(
+              Icons.more_vert_outlined,
+              size: 18,
+            ),
+          )
+        ],
       ),
       body: BgGradient(
           child: SafeArea(
