@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stuverse/features/mentor/cubit/manage_mentor_post/manage_mentor_post_cubit.dart';
+import 'package:stuverse/features/mentor/cubit/request/cubit/mentorship_request_cubit.dart';
 
 import '../cubit/home/cubit/mentor_home_cubit.dart';
 import '../cubit/search/mentor_search_cubit.dart';
@@ -14,6 +15,9 @@ class MentorProviders {
         ),
         BlocProvider<MentorSearchCubit>(
           create: (context) => MentorSearchCubit(),
+        ),
+        BlocProvider<MentorshipRequestCubit>(
+          create: (context) => MentorshipRequestCubit(),
         ),
       ];
 }

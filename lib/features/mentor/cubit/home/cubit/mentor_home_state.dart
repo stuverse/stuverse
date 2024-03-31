@@ -9,7 +9,8 @@ final class MentorHomeLoading extends MentorHomeState {}
 
 final class MentorHomeLoaded extends MentorHomeState {
   final List<MentorPost> latestPosts;
-  MentorHomeLoaded(this.latestPosts);
+  final List<MentorRequest> latestRequests;
+  MentorHomeLoaded(this.latestPosts, this.latestRequests);
 }
 
 final class MentorHomeFailure extends MentorHomeState {
