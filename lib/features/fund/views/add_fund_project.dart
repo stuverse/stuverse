@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
@@ -79,8 +80,8 @@ class _AddFundProjectScreenState extends State<AddFundProjectScreen> {
                     30.heightBox,
                     Text(
                       widget.post != null
-                          ? "Make it amazing! \n Edit & relaunch your project"
-                          : " Small steps, big change.\n Create your project! ",
+                          ? "Make it amazing! \nEdit & relaunch your project"
+                          : " Small steps, big change.\nCreate your project! ",
                       style: Theme.of(context)
                           .textTheme
                           .headlineLarge!
@@ -420,23 +421,52 @@ class _AddFundProjectScreenState extends State<AddFundProjectScreen> {
                                 }
                               }
 
-                              context
-                                  .read<AddEditFundProjectCubit>()
-                                  .addEditFundProject(
-                                    user: context.read<CoreCubit>().state.user!,
-                                    title: _titleController.text,
-                                    description: _descriptionController.text,
-                                    category: _selectedCategory!,
-                                    startDate: DateTime.parse(
-                                        _startDateController.text),
-                                    endDate:
-                                        DateTime.parse(_endDateController.text),
-                                    targetAmount: double.parse(
-                                        _targetamountController.text),
-                                    accountNumber:
-                                        _accountNumberController.text,
-                                    upiId: _upiIdController.text,
-                                  );
+                              widget.post == null
+                                  ? context
+                                      .read<AddEditFundProjectCubit>()
+                                      .addFundProject(
+                                        user: context
+                                            .read<CoreCubit>()
+                                            .state
+                                            .user!,
+                                        title: _titleController.text,
+                                        description:
+                                            _descriptionController.text,
+                                        category: _selectedCategory!,
+                                        startDate: DateTime.parse(
+                                            _startDateController.text),
+                                        endDate: DateTime.parse(
+                                            _endDateController.text),
+                                        targetAmount: double.parse(
+                                            _targetamountController.text),
+                                        accountNumber:
+                                            _accountNumberController.text,
+                                        upiId: _upiIdController.text,
+                                        image: _selectedImage,
+                                      )
+                                  : context
+                                      .read<AddEditFundProjectCubit>()
+                                      .editFundProject(
+                                        user: context
+                                            .read<CoreCubit>()
+                                            .state
+                                            .user!,
+                                        id: widget.post!.id,
+                                        title: _titleController.text,
+                                        description:
+                                            _descriptionController.text,
+                                        targetAmount: double.parse(
+                                            _targetamountController.text),
+                                        startDate: DateTime.parse(
+                                            _startDateController.text),
+                                        endDate: DateTime.parse(
+                                            _endDateController.text),
+                                        accountNumber:
+                                            _accountNumberController.text,
+                                        upiId: _upiIdController.text,
+                                        category: _selectedCategory!,
+                                        image: _selectedImage,
+                                      );
                             },
                             child: Text(widget.post != null ? 'Update' : 'Post',
                                 style: Theme.of(context)
