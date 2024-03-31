@@ -42,7 +42,7 @@ class AddEditFundProjectCubit extends Cubit<AddEditFundProjectState> {
           )
       });
 
-      final response = await dioClient.post("/fund/project/", data: formData);
+      await dioClient.post("/fund/project/", data: formData);
 
       emit(AddEditFundProjectSuccess(
         message: "Successfully added fund project",
@@ -93,5 +93,18 @@ class AddEditFundProjectCubit extends Cubit<AddEditFundProjectState> {
         message: "Successfully edited fund project",
       ));
     } catch (e) {}
+  }
+
+  void deleteFundProject({required int id}) async {
+    emit(AddEditFundProjectLoading());
+
+    try {
+      await dioClient.delete("/fund/project/${id}/");
+      emit(AddEditFundProjectSuccess(
+        message: "Successfully deleted",
+      ));
+    } catch (e) {
+      emit(AddEditFundProjectError(errorMessage: "Failed to delete"));
+    }
   }
 }
