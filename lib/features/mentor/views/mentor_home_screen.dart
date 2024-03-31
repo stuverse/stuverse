@@ -24,7 +24,6 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
     final user = context.read<CoreCubit>().state.user;
     return BgGradient(
       child: Scaffold(
-        backgroundColor: Colors.transparent,
         appBar: getMainAppbar(
           actions: [
             IconButton(
@@ -46,87 +45,64 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
             ),
           ],
         ),
+        backgroundColor: Colors.transparent,
         body: SafeArea(
           child: RefreshIndicator(
             onRefresh: () async {
               context.read<MentorHomeCubit>().getMentorHomeData();
             },
-
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                10.heightBox,
-                Padding(
-                  padding: context.paddingHorz,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Find Your',
-                            style: context.headlineMedium!.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  10.heightBox,
+                  Padding(
+                    padding: context.paddingHorz,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Find Your',
+                          style: context.headlineMedium!.copyWith(
+                            fontWeight: FontWeight.w600,
                           ),
-                          IconButton(
-                            onPressed: () {
-                              if (user?.linkedin == null ||
-                                  user?.mobile == null ||
-                                  user?.github == null ||
-                                  user?.about == null ||
-                                  user?.experienceYears == null ||
-                                  user?.skills == null) {
-                                context.showMessage(
-                                    message:
-                                        "Please ensure your profile is complete before proceeding.");
-                                return;
-                              }
-                              context.push(MentorRoutes.manageMentorPost);
-                            },
-                            icon: Icon(
-                              Icons.add,
-                            ),
-                            iconSize: context.height * 0.03,
-                          )
-                        ],
-                      ),
-                      Text('Perfect Mentor',
-                          style: context.headlineLarge!
-                              .copyWith(fontWeight: FontWeight.bold)),
-                      SizedBox(height: 5),
-                      BannerCard(
-                        title: 'Unlock Your Potential!',
-                        description:
-                            'Inspire and empower others with your knowledge. Join as a mentor today.',
-                        buttonText: 'Join Now',
-                        onTap: () {
-                          context.showMessage(
-                              message: "Feature not available yet");
-                        },
-                      ),
-                      SizedBox(height: 15),
-                      Hero(
-                        tag: 'search',
-                        child: Material(
-                          child: InkWell(
-                            onTap: () {
-                              context.push(MentorRoutes.seeAllPosts);
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(27),
-                                color: Color.fromARGB(242, 231, 230, 230),
-                              ),
-                              child: IgnorePointer(
-                                ignoring: true,
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    hintText: 'Search',
-                                    border: InputBorder.none,
-                                    prefixIcon: Icon(
-                                      Icons.search,
+                        ),
+                        Text('Perfect Mentor',
+                            style: context.headlineLarge!
+                                .copyWith(fontWeight: FontWeight.bold)),
+                        SizedBox(height: 5),
+                        BannerCard(
+                          title: 'Unlock Your Potential!',
+                          description:
+                              'Inspire and empower others with your knowledge. Join as a mentor today.',
+                          buttonText: 'Join Now',
+                          onTap: () {
+                            context.showMessage(
+                                message: "Feature not available yet");
+                          },
+                        ),
+                        SizedBox(height: 15),
+                        Hero(
+                          tag: 'search',
+                          child: Material(
+                            child: InkWell(
+                              onTap: () {
+                                context.push(MentorRoutes.seeAllPosts);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(27),
+                                  color: Color.fromARGB(242, 231, 230, 230),
+                                ),
+                                child: IgnorePointer(
+                                  ignoring: true,
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      hintText: 'Search',
+                                      border: InputBorder.none,
+                                      prefixIcon: Icon(
+                                        Icons.search,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -134,123 +110,105 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 10),
-                    ],
+                        SizedBox(height: 10),
+                      ],
+                    ),
                   ),
-                ),
-                   
-                       BlocConsumer<MentorHomeCubit, MentorHomeState>(
-                          listener: (context, state) {},
-                          builder: (context, state) {
-                            if (state is MentorHomeFailure) {
-                              return Center(child: Text('Error'));
-                            }
-                            if (state is MentorHomeLoaded) {
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: context.paddingHorz,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Latest Mentorships',
-                                          style: context.titleMedium!.copyWith(
-                                            fontWeight: FontWeight.w600,
-
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              context.push(
-                                                  MentorRoutes.seeAllPosts);
-                                            },
-                                            child: Text(
-                                              'See All',
-                                              style: context.bodyMedium!
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .primary),
-                                            ),
-                                          ),
-                                        ],
+                  BlocConsumer<MentorHomeCubit, MentorHomeState>(
+                    listener: (context, state) {},
+                    builder: (context, state) {
+                      if (state is MentorHomeFailure) {
+                        return Center(child: Text('Error'));
+                      }
+                      if (state is MentorHomeLoaded) {
+                        return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: context.paddingHorz,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Latest Mentorships',
+                                      style: context.titleMedium!.copyWith(
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
-
-                                  ),
-                                  10.heightBox,
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: [
-                                        for (final post in state.latestPosts)
-                                          MentorPostCard(post: post),
-                                      ],
-                                    ),
-                                  ),
-                                  10.heightBox,
-                                  Padding(
-                                    padding: context.paddingHorz,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Requests',
-                                          style: context.titleMedium!.copyWith(
-                                            fontWeight: FontWeight.w600,
-
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              context.push(
-                                                  MentorRoutes.seeAllPosts);
-                                            },
-                                            child: Text(
-                                              'See All',
-                                              style: context.bodyMedium!
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .primary),
-                                            ),
-                                          ),
-                                        ],
+                                    TextButton(
+                                      onPressed: () {
+                                        context.push(MentorRoutes.seeAllPosts);
+                                      },
+                                      child: Text(
+                                        'See All',
+                                        style: context.bodyMedium!.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary),
                                       ),
                                     ),
-
-
-                                  ),
-                                  10.heightBox,
-                                 
-                                     SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          children: [
-                                            for(final request in state.latestRequests)
-
-                                            RequestCard(request: request)],
-                                        ),
+                                  ],
+                                ),
+                              ),
+                              10.heightBox,
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    for (final post in state.latestPosts)
+                                      MentorPostCard(post: post),
+                                  ],
+                                ),
+                              ),
+                              10.heightBox,
+                              Padding(
+                                padding: context.paddingHorz,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Requests',
+                                      style: context.titleMedium!.copyWith(
+                                        fontWeight: FontWeight.w600,
                                       ),
-                                     
-                                     
-                                
-                                ]
-                              );
-                            }
-                            return Center(child: CircularProgressIndicator());
-                          },
-                        ),
-                SizedBox(height: 20),
-              ],
-
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        context.push(MentorRoutes.seeAllPosts);
+                                      },
+                                      child: Text(
+                                        'See All',
+                                        style: context.bodyMedium!.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              10.heightBox,
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    for (final request in state.latestRequests)
+                                      RequestCard(request: request)
+                                  ],
+                                ),
+                              ),
+                            ]);
+                      }
+                      return Center(child: CircularProgressIndicator());
+                    },
+                  ),
+                  SizedBox(height: 20),
+                ],
+              ),
             ),
           ),
         ),
