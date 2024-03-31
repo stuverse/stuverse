@@ -209,8 +209,7 @@ class _ProjectDescScreenState extends State<ProjectDescScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Text(widget.project.description,
-                        style: context.bodyMedium!.copyWith(fontSize: 15)),
+                    CustomMarkdownBody(inputText: widget.project.description),
                     const SizedBox(
                       height: 40,
                     ),
