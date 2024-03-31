@@ -48,6 +48,9 @@ class _ProjectDescScreenState extends State<ProjectDescScreen> {
                   FundRoutes.addProject,
                   extra: widget.project,
                 );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("You can't edit this project")));
               }
             },
             icon: Icon(
