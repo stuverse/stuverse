@@ -9,11 +9,18 @@ part 'job_search_state.dart';
 class JobSearchCubit extends Cubit<JobSearchState> {
   JobSearchCubit() : super(JobSearchInitial());
 
-  void searchJobs({String? search}) async {
+  void searchJobs({
+    String? search,
+    String? location,
+    String? type,
+  }) async {
     emit(JobSearchLoading());
     try {
-      final response = await dioClient.get("/job/posts",
-          queryParameters: {if (search != null) "search": search});
+      final response = await dioClient.get("/job/posts", queryParameters: {
+        if (search != null) "search": search,
+        if (type != null) "jobType": type,
+        if (location != null) "jobLocationType": location,
+      });
       final List<JobPost> postList = [];
       for (final post in response.data) {
         postList.add(JobPost.fromJson(post));

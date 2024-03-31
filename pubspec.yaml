@@ -1,6 +1,6 @@
 name: stuverse
 description: Stuverse student and alumni community forum
-version: 1.0.1+8
+version: 1.0.1+9
 publish_to: none
 
 environment:

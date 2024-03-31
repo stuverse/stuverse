@@ -49,57 +49,60 @@ class ProfileHomeScreen extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Column(children: [
-                    ProfileTile(
-                        title: "Edit Profile",
-                        iconData: Icons.person,
-                        color: context.limeM3Primary,
+                  child: SingleChildScrollView(
+                    physics: AlwaysScrollableScrollPhysics(),
+                    child: Column(children: [
+                      ProfileTile(
+                          title: "Edit Profile",
+                          iconData: Icons.person,
+                          color: context.limeM3Primary,
+                          onTap: () {
+                            context.push(ProfileRoutes.profileEdit);
+                          }),
+                      10.heightBox,
+                      ProfileTile(
+                          title: coreState.isDarkMode
+                              ? "Change to Light Mode"
+                              : "Change to Dark Mode",
+                          iconData: coreState.isDarkMode
+                              ? Icons.light_mode
+                              : Icons.dark_mode,
+                          color: context.bluePrimary,
+                          onTap: () {
+                            context.read<CoreCubit>().toggleTheme();
+                          }),
+                      10.heightBox,
+                      ProfileTile(
+                          title: "Manage Communities",
+                          iconData: Icons.forum,
+                          color: context.goldPrimary,
+                          onTap: () {
+                            context.push(ForumRoutes.communityManage);
+                          }),
+                      10.heightBox,
+                      ProfileTile(
+                          title: "User Requests",
+                          iconData: Icons.manage_accounts,
+                          color: context.moneyPrimary,
+                          onTap: () {
+                            context.push(CommonRoutes.userRequest);
+                          }),
+                      10.heightBox,
+                      Divider(
+                        thickness: 5,
+                      ),
+                      10.heightBox,
+                      ProfileTile(
+                        title: "Logout",
+                        iconData: Icons.logout,
+                        color: context.pinkM3Primary,
                         onTap: () {
-                          context.push(ProfileRoutes.profileEdit);
-                        }),
-                    10.heightBox,
-                    ProfileTile(
-                        title: coreState.isDarkMode
-                            ? "Change to Light Mode"
-                            : "Change to Dark Mode",
-                        iconData: coreState.isDarkMode
-                            ? Icons.light_mode
-                            : Icons.dark_mode,
-                        color: context.bluePrimary,
-                        onTap: () {
-                          context.read<CoreCubit>().toggleTheme();
-                        }),
-                    10.heightBox,
-                    ProfileTile(
-                        title: "Manage Communities",
-                        iconData: Icons.settings,
-                        color: context.goldPrimary,
-                        onTap: () {
-                          context.push(ForumRoutes.communityManage);
-                        }),
-                    10.heightBox,
-                    ProfileTile(
-                        title: "User Requests",
-                        iconData: Icons.settings,
-                        color: context.goldPrimary,
-                        onTap: () {
-                          context.push(CommonRoutes.userRequest);
-                        }),
-                    10.heightBox,
-                    Divider(
-                      thickness: 5,
-                    ),
-                    10.heightBox,
-                    ProfileTile(
-                      title: "Logout",
-                      iconData: Icons.logout,
-                      color: context.pinkM3Primary,
-                      onTap: () {
-                        context.go(CommonRoutes.signin);
-                        context.read<CoreCubit>().signOut();
-                      },
-                    ),
-                  ]),
+                          context.go(CommonRoutes.signin);
+                          context.read<CoreCubit>().signOut();
+                        },
+                      ),
+                    ]),
+                  ),
                 ),
               ),
             )

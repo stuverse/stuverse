@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
+import 'package:stuverse/features/forum/forum.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({required this.navigationShell, Key? key})
@@ -24,12 +25,18 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     user = context.read<CoreCubit>().state.user;
     FirebaseMessaging.onMessage.listen((message) {
-      print(message);
       if (message.notification != null) {
         context.showMessage(
             message:
                 "${message.notification?.title ?? ''} \n${message.notification?.body ?? ''} ",
             duration: const Duration(seconds: 5));
+      }
+      if (message.data.isNotEmpty) {
+        if (message.data['action'] == "thread") {
+          try {
+            context.read<ForumHomeCubit>().getHomeData();
+          } catch (e) {}
+        }
       }
     });
     navItems.addAll([
@@ -80,40 +87,6 @@ class _MainScreenState extends State<MainScreen> {
     final currentIndex = widget.navigationShell.currentIndex;
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Image.asset(
-          AppImages.logoGlow,
-          width: 90,
-        ),
-        centerTitle: true,
-        actions: [
-          // NotificationIcon(
-          //   hasNotification: false,
-          //   onPressed: () {},
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.only(
-          //     top: 7,
-          //   ),
-          //   child: IconButton(
-          //     onPressed: () {
-          //       context.showMessage(
-          //           message: "Notifications will be available soon");
-          //     },
-          //     icon: SvgPicture.asset(
-          //       AppImages.bellSVG,
-          //       height: 20,
-          //       colorFilter: ColorFilter.mode(
-          //         context.colorScheme.onBackground,
-          //         BlendMode.srcIn,
-          //       ),
-          //     ),
-          //   ),
-          // )
-        ],
-      ),
       extendBodyBehindAppBar: true,
       extendBody: true,
       body: BgGradient(
