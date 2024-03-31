@@ -75,7 +75,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
       body: BgGradient(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: context.paddingHorzWithTop,
             child: Stack(
               children: [
                 SingleChildScrollView(
