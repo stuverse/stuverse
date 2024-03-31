@@ -76,6 +76,7 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                           description:
                               'Inspire and empower others with your knowledge. Join as a mentor today.',
                           buttonText: 'Join Now',
+                          bannerText: 'Beta',
                           onTap: () {
                             context.showMessage(
                                 message: "Feature not available yet");

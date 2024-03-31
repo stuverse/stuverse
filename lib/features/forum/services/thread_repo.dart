@@ -98,4 +98,14 @@ class ThreadRepo {
       return left('Failed to edit thread');
     }
   }
+
+  Future<Either<String, String>> threadSummarize(int id) async {
+    try {
+      final response = await dioClient
+          .get(THREAD_SUMMARIZE.replaceFirst('<id>', id.toString()));
+      return right(response.data['result']);
+    } catch (e) {
+      return left('Failed to summarize thread');
+    }
+  }
 }

@@ -12,6 +12,7 @@ import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/forum/cubit/vote/vote_cubit.dart';
 import 'package:stuverse/features/forum/forum.dart';
 
+import '../../cubit/thread/summary/thread_summary_cubit.dart';
 import '../../views/thread/thread_add_edit_screen.dart';
 
 class ThreadCard extends StatelessWidget {
@@ -112,6 +113,59 @@ class ThreadCard extends StatelessWidget {
                             communityId: thread.community!.id!,
                           ),
                         );
+                    },
+                  ),
+                  PopupMenuItem(
+                    child: Text("AI Summarize"),
+                    value: "summary",
+                    onTap: () {
+                      context
+                          .read<ThreadSummaryCubit>()
+                          .summarizeThread(threadId: thread.id!);
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return BlocConsumer<ThreadSummaryCubit,
+                                ThreadSummaryState>(
+                              listener: (context, state) {
+                                if (state is ThreadSummaryError) {
+                                  context.showErrorMessage(
+                                      message: state.message);
+                                }
+                              },
+                              builder: (context, state) {
+                                if (state is ThreadSummarySuccess) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            "Summary",
+                                            style:
+                                                context.titleMedium!.copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onBackground,
+                                            ),
+                                          ),
+                                          10.heightBox,
+                                          CustomMarkdownBody(
+                                              inputText: state.summary),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }
+                                return Container(
+                                  height: context.height * 0.5,
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
+                              },
+                            );
+                          });
                     },
                   ),
                 ];

@@ -36,7 +36,7 @@ class AddEditFundProjectCubit extends Cubit<AddEditFundProjectState> {
         "upi_id": upiId,
         "category": category,
         if (image != null)
-          "image": await MultipartFile.fromFile(
+          "images": await MultipartFile.fromFile(
             image.path,
             filename: image.name,
           )

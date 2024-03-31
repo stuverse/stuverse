@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stuverse/features/forum/cubit/thread/summary/thread_summary_cubit.dart';
 import 'package:stuverse/features/forum/forum.dart';
 
 import '../cubit/community/all/all_community_cubit.dart';
@@ -28,6 +29,9 @@ class ForumProviders {
         ),
         BlocProvider<CommunityMembersCubit>(
           create: (context) => CommunityMembersCubit(),
+        ),
+        BlocProvider<ThreadSummaryCubit>(
+          create: (context) => ThreadSummaryCubit(),
         ),
       ];
 }
