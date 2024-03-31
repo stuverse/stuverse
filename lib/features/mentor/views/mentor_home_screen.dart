@@ -22,13 +22,36 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.read<CoreCubit>().state.user;
-    return SingleChildScrollView(
-      child: BgGradient(
-        child: SafeArea(
+    return BgGradient(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: getMainAppbar(
+          actions: [
+            IconButton(
+              onPressed: () {
+                if (user?.linkedin == null ||
+                    user?.mobile == null ||
+                    user?.github == null ||
+                    user?.about == null ||
+                    user?.experienceYears == null ||
+                    user?.skills == null) {
+                  context.showMessage(
+                      message:
+                          "Please ensure your profile is complete before proceeding.");
+                  return;
+                }
+                context.push(MentorRoutes.manageMentorPost);
+              },
+              icon: Icon(Icons.add),
+            ),
+          ],
+        ),
+        body: SafeArea(
           child: RefreshIndicator(
             onRefresh: () async {
               context.read<MentorHomeCubit>().getMentorHomeData();
             },
+
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -137,24 +160,28 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                                           'Latest Mentorships',
                                           style: context.titleMedium!.copyWith(
                                             fontWeight: FontWeight.w600,
+
                                           ),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            context
-                                                .push(MentorRoutes.seeAllPosts);
-                                          },
-                                          child: Text(
-                                            'See All',
-                                            style: context.bodyMedium!.copyWith(
-                                                fontWeight: FontWeight.bold,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .primary),
+                                          TextButton(
+                                            onPressed: () {
+                                              context.push(
+                                                  MentorRoutes.seeAllPosts);
+                                            },
+                                            child: Text(
+                                              'See All',
+                                              style: context.bodyMedium!
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .primary),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
+
                                   ),
                                   10.heightBox,
                                   SingleChildScrollView(
@@ -177,24 +204,29 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                                           'Requests',
                                           style: context.titleMedium!.copyWith(
                                             fontWeight: FontWeight.w600,
+
                                           ),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            context
-                                                .push(MentorRoutes.seeAllPosts);
-                                          },
-                                          child: Text(
-                                            'See All',
-                                            style: context.bodyMedium!.copyWith(
-                                                fontWeight: FontWeight.bold,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .primary),
+                                          TextButton(
+                                            onPressed: () {
+                                              context.push(
+                                                  MentorRoutes.seeAllPosts);
+                                            },
+                                            child: Text(
+                                              'See All',
+                                              style: context.bodyMedium!
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .primary),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
+
+
                                   ),
                                   10.heightBox,
                                  
@@ -218,6 +250,7 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                         ),
                 SizedBox(height: 20),
               ],
+
             ),
           ),
         ),

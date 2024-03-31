@@ -104,13 +104,14 @@ class ThreadCard extends StatelessWidget {
                     child: Text("Edit"),
                     value: "edit",
                     onTap: () {
-                      context.push(
-                        ForumRoutes.threadAddEdit,
-                        extra: ThreadAddEditScreenProps(
-                          thread: thread,
-                          communityId: thread.community!.id!,
-                        ),
-                      );
+                      if (thread.community != null)
+                        context.push(
+                          ForumRoutes.threadAddEdit,
+                          extra: ThreadAddEditScreenProps(
+                            thread: thread,
+                            communityId: thread.community!.id!,
+                          ),
+                        );
                     },
                   ),
                 ];
@@ -126,14 +127,15 @@ class ThreadCard extends StatelessWidget {
                 fontWeight: FontWeight.bold),
           ),
           5.heightBox,
-          Wrap(
-            spacing: 5,
-            runSpacing: 5,
-            children: List.generate(
-              min(thread.tags!.length, 3),
-              (index) => ThreadTagChip(tag: thread.tags![index]),
+          if (thread.tags != null)
+            Wrap(
+              spacing: 5,
+              runSpacing: 5,
+              children: List.generate(
+                min((thread.tags?.length ?? 0), 3),
+                (index) => ThreadTagChip(tag: thread.tags![index]),
+              ),
             ),
-          ),
           5.heightBox,
           if (thread.content != null && thread.content!.isNotEmpty)
             Text(
@@ -155,16 +157,19 @@ class ThreadCard extends StatelessWidget {
                           .onBackground
                           .withOpacity(0.1),
                     )
-                  : CachedNetworkImage(
-                      placeholder: (context, url) {
-                        return Container(
-                          color: Theme.of(context).colorScheme.primaryContainer,
-                        );
-                      },
-                      imageUrl: thread.image!,
-                      width: double.infinity,
-                      height: context.minSize * 0.8,
-                      fit: BoxFit.cover,
+                  : InteractiveViewer(
+                      child: CachedNetworkImage(
+                        placeholder: (context, url) {
+                          return Container(
+                            color:
+                                Theme.of(context).colorScheme.primaryContainer,
+                          );
+                        },
+                        imageUrl: thread.image!,
+                        width: double.infinity,
+                        height: context.minSize * 0.8,
+                        fit: BoxFit.cover,
+                      ),
                     ),
             ),
           10.heightBox,
@@ -174,7 +179,7 @@ class ThreadCard extends StatelessWidget {
                 create: (context) => VoteCubit(),
                 child: VoteChip(
                   vote: thread.vote,
-                  threadId: thread.id!,
+                  threadId: thread.id ?? -1,
                 ),
               ),
               10.widthBox,

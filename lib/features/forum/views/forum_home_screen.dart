@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
+
 import 'package:stuverse/features/forum/forum.dart';
-import 'package:stuverse/features/forum/views/community/show_all_communities_screen.dart';
 
 import '../widgets/community/community_mini_card.dart';
 
@@ -30,92 +30,97 @@ class _ForumHomeScreenState extends State<ForumHomeScreen>
   @override
   Widget build(BuildContext context) {
     return BgGradient(
-      child: SafeArea(
-        child: Column(
-          children: [
-            TabBar(
-              controller: _tabController,
-              onTap: (value) {
-                context.read<ForumHomeCubit>().getHomeData();
-              },
-              tabs: const [
-                Tab(
-                  text: "Threads",
-                ),
-                Tab(
-                  text: "Communites",
-                ),
-              ],
-            ),
-            Expanded(
-              child: BlocConsumer<ForumHomeCubit, ForumHomeState>(
-                listener: (context, state) {
-                  if (state is ForumHomeError) {
-                    context.showErrorMessage(
-                      message: state.message,
-                      duration: 3.seconds,
-                    );
-                  }
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: getMainAppbar(),
+        body: SafeArea(
+          child: Column(
+            children: [
+              TabBar(
+                controller: _tabController,
+                onTap: (value) {
+                  context.read<ForumHomeCubit>().getHomeData();
                 },
-                builder: (context, state) {
-                  if (state is ForumHomeLoaded) {
-                    return RefreshIndicator.adaptive(
-                      onRefresh: () async {
-                        context.read<ForumHomeCubit>().getHomeData();
-                      },
-                      child: TabBarView(controller: _tabController, children: [
-                        SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              20.heightBox,
-                              for (final thread in state.threads)
-                                Column(
-                                  children: [
-                                    Padding(
-                                      padding: context.paddingHorz,
-                                      child: ThreadCard(
-                                        thread: thread,
-                                      ),
-                                    ),
-                                    Divider()
-                                  ],
-                                ),
-                            ].defaultListAnimation(),
-                          ),
-                        ),
-                        SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              _getTitleRow(
-                                title: "Popular Communities",
-                                onSeeAll: () {
-                                  context.push(ForumRoutes.allCommunities,
-                                      extra: false);
-                                },
-                              ),
-                              _getCommunityView(state.popularCommunities),
-                              _getTitleRow(
-                                title: "Your Communities",
-                                onSeeAll: () {
-                                  context.push(ForumRoutes.allCommunities,
-                                      extra: true);
-                                },
-                              ),
-                              _getCommunityView(state.yourCommunities),
-                            ],
-                          ),
-                        ),
-                      ]),
-                    );
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
+                tabs: const [
+                  Tab(
+                    text: "Threads",
+                  ),
+                  Tab(
+                    text: "Communites",
+                  ),
+                ],
               ),
-            ),
-          ],
+              Expanded(
+                child: BlocConsumer<ForumHomeCubit, ForumHomeState>(
+                  listener: (context, state) {
+                    if (state is ForumHomeError) {
+                      context.showErrorMessage(
+                        message: state.message,
+                        duration: 3.seconds,
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is ForumHomeLoaded) {
+                      return RefreshIndicator.adaptive(
+                        onRefresh: () async {
+                          context.read<ForumHomeCubit>().getHomeData();
+                        },
+                        child:
+                            TabBarView(controller: _tabController, children: [
+                          SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                20.heightBox,
+                                for (final thread in state.threads)
+                                  Column(
+                                    children: [
+                                      Padding(
+                                        padding: context.paddingHorz,
+                                        child: ThreadCard(
+                                          thread: thread,
+                                        ),
+                                      ),
+                                      Divider()
+                                    ],
+                                  ),
+                              ].defaultListAnimation(),
+                            ),
+                          ),
+                          SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                _getTitleRow(
+                                  title: "Popular Communities",
+                                  onSeeAll: () {
+                                    context.push(ForumRoutes.allCommunities,
+                                        extra: false);
+                                  },
+                                ),
+                                _getCommunityView(state.popularCommunities),
+                                _getTitleRow(
+                                  title: "Your Communities",
+                                  onSeeAll: () {
+                                    context.push(ForumRoutes.allCommunities,
+                                        extra: true);
+                                  },
+                                ),
+                                _getCommunityView(state.yourCommunities),
+                              ],
+                            ),
+                          ),
+                        ]),
+                      );
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

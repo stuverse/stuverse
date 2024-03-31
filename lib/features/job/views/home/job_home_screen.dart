@@ -24,25 +24,34 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocListener<ManageJobCubit, ManageJobState>(
-        listener: (context, state) {
-          if (state is ManageJobSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(state.message),
-            ));
+    return BgGradient(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: getMainAppbar(actions: [
+          IconButton(
+            onPressed: () {
+              context.push(JobRoutes.jobAddEdit);
+            },
+            icon: const Icon(Icons.add),
+          ),
+        ]),
+        body: BlocListener<ManageJobCubit, ManageJobState>(
+          listener: (context, state) {
+            if (state is ManageJobSuccess) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(state.message),
+              ));
 
-            context.read<JobHomeCubit>().getJobHomeData();
+              context.read<JobHomeCubit>().getJobHomeData();
 
-            context.go(JobRoutes.jobHome);
-          }
-          if (state is ManageJobError) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(state.message),
-            ));
-          }
-        },
-        child: BgGradient(
+              context.go(JobRoutes.jobHome);
+            }
+            if (state is ManageJobError) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(state.message),
+              ));
+            }
+          },
           child: SafeArea(
             child: Padding(
               padding: context.paddingHorzWithTop,
@@ -59,45 +68,15 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text('Find Your Dream',
-                                          style: context.headlineLarge!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.bold)),
-                                      Text('Job With Us ',
-                                          style: context.headlineLarge!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.bold)),
-                                    ],
-                                  ),
-                                  Spacer(),
-                                  InkWell(
-                                    onTap: () {
-                                      context.push(JobRoutes.jobAddEdit);
-                                    },
-                                    child: Container(
-                                      padding:
-                                          EdgeInsets.only(top: 4, bottom: 4),
-                                      width: 55,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary
-                                              .withOpacity(0.3),
-                                          border: Border.all()),
-                                      child: Icon(
-                                        Icons.add,
-                                        size: 20,
-                                      ),
-                                    ),
-                                  )
+                                  Text('Find Your Dream',
+                                      style: context.headlineLarge!.copyWith(
+                                          fontWeight: FontWeight.bold)),
+                                  Text('Job With Us ',
+                                      style: context.headlineLarge!.copyWith(
+                                          fontWeight: FontWeight.bold)),
                                 ],
                               ),
                               20.heightBox,
@@ -111,21 +90,18 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
                                 },
                               ),
                               10.heightBox,
-                              Hero(
-                                tag: 'jobSearch',
-                                child: Material(
-                                  child: InkWell(
-                                    onTap: () {
-                                      context.push(JobRoutes.jobSearch);
-                                    },
-                                    child: IgnorePointer(
-                                      ignoring: true,
-                                      child: TextField(
-                                        decoration: InputDecoration(
-                                          prefixIcon: const Icon(Icons.search),
-                                          hintText: 'Search jobs here.....',
-                                          border: OutlineInputBorder(),
-                                        ),
+                              Material(
+                                child: InkWell(
+                                  onTap: () {
+                                    context.push(JobRoutes.jobSearch);
+                                  },
+                                  child: IgnorePointer(
+                                    ignoring: true,
+                                    child: TextField(
+                                      decoration: InputDecoration(
+                                        prefixIcon: const Icon(Icons.search),
+                                        hintText: 'Search jobs here.....',
+                                        border: OutlineInputBorder(),
                                       ),
                                     ),
                                   ),

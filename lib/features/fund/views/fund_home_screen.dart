@@ -34,9 +34,11 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BgGradient(
-        child: SafeArea(
+    return BgGradient(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: getMainAppbar(),
+        body: SafeArea(
           child: RefreshIndicator(
             onRefresh: () async {
               context.read<FundHomeCubit>().getProjects(
