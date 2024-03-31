@@ -34,6 +34,7 @@ class AppTheme {
       segmentedButtonBorderWidth: 0.5,
       alignedDropdown: true,
       useInputDecoratorThemeInDialogs: true,
+      inputDecoratorRadius: 20,
     ),
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     useMaterial3: true,
@@ -67,7 +68,7 @@ class AppTheme {
       segmentedButtonRadius: 9,
       segmentedButtonBorderWidth: 0.5,
       inputDecoratorSchemeColor: SchemeColor.tertiary,
-
+      inputDecoratorRadius: 20,
       inputDecoratorBorderSchemeColor: SchemeColor.primary,
       inputCursorSchemeColor: SchemeColor.onTertiary,
       // inputDecoratorIsFilled: false,
@@ -98,7 +99,7 @@ class AppTheme {
   );
 
   static const _flexSchemeDark = FlexSchemeColor(
-    primary: Color(0xFF1D72C6),
+    primary: Color.fromARGB(255, 93, 173, 253),
     primaryContainer: Color(0xff001d34),
     secondary: Color(0xfffabf93),
     secondaryContainer: Color(0xFF8EC8F5),

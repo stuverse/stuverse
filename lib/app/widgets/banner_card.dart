@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:stuverse/app/app.dart';
@@ -25,8 +26,24 @@ class BannerCard extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color:
-                 context.colorScheme.surfaceVariant,
+              gradient: LinearGradient(
+                colors: [
+                  if (context.isDark)
+                    context.colorScheme.primaryContainer
+                  else
+                    context.colorScheme.surfaceVariant,
+                  if (context.isDark)
+                    context.colorScheme.tertiary
+                  else
+                    context.colorScheme.surfaceVariant.withOpacity(0.8)
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              border: Border.all(
+                color: context.colorScheme.onBackground.withOpacity(0.1),
+                width: 2,
+              ),
             ),
             child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -57,7 +74,7 @@ class BannerCard extends StatelessWidget {
                         onPressed: onTap,
                         child: Text(buttonText,
                             style: context.titleSmall!.copyWith(
-                                color: context.colorScheme.surface,
+                                color: context.colorScheme.onSecondaryContainer,
                                 fontWeight: FontWeight.bold)),
                         style: ElevatedButton.styleFrom(
                             backgroundColor: context.colorScheme.secondary,
