@@ -31,7 +31,7 @@ class _MentorPostCardState extends State<MentorPostCard> {
           tag: 'mentor_${widget.post.id}',
           child: Container(
             height: context.height * 0.24,
-            width: context.height * 0.31,
+            width: context.width * 0.7,
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: context.colorScheme.surfaceVariant,
