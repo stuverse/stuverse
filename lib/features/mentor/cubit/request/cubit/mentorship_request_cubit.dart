@@ -11,15 +11,14 @@ class MentorshipRequestCubit extends Cubit<MentorshipRequestState> {
   void getMentorRequestData() async {
     emit(MentorshipRequestLoading());
     try {
-      final resp= await dioClient.get('/mentor/requests');
+      final resp = await dioClient.get('/mentor/requests');
       final List<MentorRequest> requests = [];
-      for(final request in resp.data){
+      for (final request in resp.data) {
         requests.add(MentorRequest.fromJson(request));
-    }
-    emit(MentorshipRequestLoaded(requests));
-    }
-     catch (e) {
+      }
+      emit(MentorshipRequestLoaded(requests));
+    } catch (e) {
       emit(MentorshipRequestFailure(e.toString()));
     }
-}
+  }
 }

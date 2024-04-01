@@ -19,18 +19,13 @@ final class CommunityMembersLoaded extends CommunityMembersState {
   CommunityMembersLoaded({required this.members});
 }
 
-
-
 final class CommunityMemberAddError extends CommunityMembersState {
   final String message;
 
   CommunityMemberAddError({required this.message});
 }
 
-final class CommunityMemberAdded extends CommunityMembersState {
-}
-
-
+final class CommunityMemberAdded extends CommunityMembersState {}
 
 final class CommunityMemberRemoveError extends CommunityMembersState {
   final String message;
@@ -38,5 +33,4 @@ final class CommunityMemberRemoveError extends CommunityMembersState {
   CommunityMemberRemoveError({required this.message});
 }
 
-final class CommunityMemberRemoved extends CommunityMembersState {
-}
+final class CommunityMemberRemoved extends CommunityMembersState {}

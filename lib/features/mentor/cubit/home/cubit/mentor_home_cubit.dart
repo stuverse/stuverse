@@ -18,7 +18,7 @@ class MentorHomeCubit extends Cubit<MentorHomeState> {
       for (final latestPost in resp.data['top_mentors']) {
         latestPosts.add(MentorPost.fromJson(latestPost));
       }
-        for (final latestRequest in resp.data['latest_requests']) {
+      for (final latestRequest in resp.data['latest_requests']) {
         latestRequests.add(MentorRequest.fromJson(latestRequest));
       }
       emit(MentorHomeLoaded(latestPosts, latestRequests));
