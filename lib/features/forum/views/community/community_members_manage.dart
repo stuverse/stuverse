@@ -41,7 +41,7 @@ class _CommunityMembersManageScreenState
           actions: [
             IconButton(
               onPressed: () {
-                context.push(CommonRoutes.usersList,
+                context.push(CommonRoutes.usersSelection,
                     extra: (List<MiniUser> usersList) {
                   context.read<CommunityMembersCubit>().addMembers(
                       communityId: widget.communityId, users: usersList);

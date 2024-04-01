@@ -46,13 +46,17 @@ class _UserRequestListScreenState extends State<UserRequestListScreen> {
           },
           builder: (context, state) {
             if (state is UserRequestSuccess) {
+              if (state.requestUsersSelection.isEmpty)
+                return const Center(
+                  child: Text('No user requests found'),
+                );
               return RefreshIndicator.adaptive(
                 onRefresh: () async {
                   context.read<UserRequestCubit>().getAllUserRequest();
                 },
                 child: ListView(
                   children: [
-                    for (final user in state.requestUsersList)
+                    for (final user in state.requestUsersSelection)
                       BlocProvider(
                         create: (context) => ManageUserRequestCubit(),
                         child: UserRequestTile(user: user),

@@ -8,9 +8,9 @@ final class UserRequestInitial extends UserRequestState {}
 final class UserRequestLoading extends UserRequestState {}
 
 final class UserRequestSuccess extends UserRequestState {
-  final List<User> requestUsersList;
+  final List<User> requestUsersSelection;
 
-  UserRequestSuccess(this.requestUsersList);
+  UserRequestSuccess(this.requestUsersSelection);
 }
 
 final class UserRequestFailure extends UserRequestState {}

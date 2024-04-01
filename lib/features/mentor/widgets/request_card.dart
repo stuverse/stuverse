@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/mentor/models/mentor_request.dart';
 
 import '../../../app/app.dart';
+import '../routes/mentor_routes.dart';
 
 class RequestCard extends StatelessWidget {
   const RequestCard({super.key, required this.request});
@@ -12,12 +14,11 @@ class RequestCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Container(
-        height: context.height * 0.3,
+        height: context.height * 0.19,
         width: context.width * 0.8,
         decoration: BoxDecoration(
           border:
-              Border.all(color: context.colorScheme.surfaceVariant, width: 2),
-          //color: context.colorScheme.surfaceVariant,
+              Border.all(color: context.colorScheme.onBackground.withOpacity(0.1), width: 2),
           borderRadius: BorderRadius.circular(25),
         ),
         child: Padding(
@@ -35,23 +36,11 @@ class RequestCard extends StatelessWidget {
                   SizedBox(
                     width: 10,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        request.mentor.name,
-                        style: context.bodyLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      // Text(
-                      //   CommonUtils.relativeTime(
-                      //     DateTime.parse(request.createdAt)
-                      //     ,
-                      //   ),
-                      //   style: context.bodyMedium,
-                      // ),
-                    ],
+                  Text(
+                    request.mentor.name,
+                    style: context.bodyLarge!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   )
                 ],
               ),
@@ -61,21 +50,33 @@ class RequestCard extends StatelessWidget {
                 style: context.bodyMedium!.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
-                maxLines: 4,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
               10.heightBox,
-              // ElevatedButton(
-              //           onPressed: (){},
-              //           child: Text('Review',
-              //               style: context.titleSmall!.copyWith(
-              //                   color: context.colorScheme.surface,
-              //                   fontWeight: FontWeight.bold)),
-              //           style: ElevatedButton.styleFrom(
-              //               backgroundColor: context.colorScheme.secondary,
-              //               shape: RoundedRectangleBorder(
-              //                   borderRadius: BorderRadius.circular(12))),
-              //         ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                         onPressed: (){
+                           context.push(MentorRoutes.requestDetails, extra: request);
+                         },
+                             child: Text('Review',
+                                 style: context.titleSmall!.copyWith(
+                                     color: context.colorScheme.surface,
+                                     fontWeight: FontWeight.bold)),
+                             style: ElevatedButton.styleFrom(
+                                 backgroundColor: context.colorScheme.secondary,
+                                 shape: RoundedRectangleBorder(
+                                     borderRadius: BorderRadius.circular(12))),
+                           ),
+                  // FilledButton(onPressed: (){}, child: Text('Review',
+                  //  style: context.titleSmall!.copyWith(
+                  //                    color: context.colorScheme.surface,
+                  //                    fontWeight: FontWeight.bold)
+                  // ))
+                ],
+              ),
             ],
           ),
         ),
