@@ -10,7 +10,7 @@ class CommunityMembersCubit extends Cubit<CommunityMembersState> {
   CommunityMembersCubit() : super(CommunityMembersInitial());
 
   final _communityRepo = CommunityRepo();
-  void getCommunityMembers(int communityId)async{
+  void getCommunityMembers(int communityId) async {
     emit(CommunityMembersLoading());
     final result = await _communityRepo.getCommunityMembers(communityId);
     result.fold(
@@ -26,7 +26,7 @@ class CommunityMembersCubit extends Cubit<CommunityMembersState> {
   void removeMember({
     required int memberId,
     required int communityId,
-  })async{
+  }) async {
     emit(CommunityMembersLoading());
     final result = await _communityRepo.removeMemberFromCommunity(
       communityId: communityId,
@@ -47,7 +47,7 @@ class CommunityMembersCubit extends Cubit<CommunityMembersState> {
   void addMembers({
     required List<MiniUser> users,
     required int communityId,
-  })async{
+  }) async {
     emit(CommunityMembersLoading());
     final result = await _communityRepo.addMembersToCommunity(
       communityId: communityId,

@@ -10,23 +10,18 @@ class UsersListCubit extends Cubit<UsersListState> {
 
   void getAllUsers({
     String? query,
-  })async{
+  }) async {
     emit(UsersListLoading());
     try {
       final resp = await dioClient.get('/core/users/',
-        queryParameters: {
-          if (query != null) 'search': query
-        }
-      );
+          queryParameters: {if (query != null) 'search': query});
       final List<MiniUser> usersList = [
         for (final user in resp.data) MiniUser.fromJson(user)
       ];
       emit(UsersListSuccess(usersList));
     } catch (e) {
       print(e);
-      emit(UsersListFailure(
-        "Something went wrong. Please try again later"
-      ));
+      emit(UsersListFailure("Something went wrong. Please try again later"));
     }
   }
 }

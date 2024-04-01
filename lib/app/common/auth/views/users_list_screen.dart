@@ -5,9 +5,6 @@ import 'package:go_router/go_router.dart';
 
 import 'package:stuverse/app/app.dart';
 
-
-
-
 class UsersListScreen extends StatefulWidget {
   const UsersListScreen({super.key, required this.onSubmit});
   final Function(List<MiniUser>) onSubmit;
@@ -65,20 +62,20 @@ class _UsersListScreenState extends State<UsersListScreen> {
                 child: ListView(
                   children: [
                     for (final user in state.usersList)
-                     CheckboxListTile(
-                       title: Text(user.name!),
-                       value: selectedUsers.any((u) => u.id! == user.id),
-                       controlAffinity: ListTileControlAffinity.leading,
-                       onChanged: (value) {
-                         setState(() {
-                           if (value!) {
-                             selectedUsers.add(user);
-                           } else {
-                             selectedUsers.remove(user);
-                           }
-                         });
-                       },
-                     )
+                      CheckboxListTile(
+                        title: Text(user.name!),
+                        value: selectedUsers.any((u) => u.id! == user.id),
+                        controlAffinity: ListTileControlAffinity.leading,
+                        onChanged: (value) {
+                          setState(() {
+                            if (value!) {
+                              selectedUsers.add(user);
+                            } else {
+                              selectedUsers.remove(user);
+                            }
+                          });
+                        },
+                      )
                   ],
                 ),
               );
