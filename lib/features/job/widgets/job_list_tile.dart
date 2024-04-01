@@ -54,7 +54,7 @@ class _JobListTileState extends State<JobListTile> {
                   CircleAvatar(
                     radius: 30,
                     backgroundImage:
-                        CachedNetworkImageProvider(widget.post.image),
+                        CachedNetworkImageProvider(widget.post.image ?? ""),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
@@ -62,7 +62,7 @@ class _JobListTileState extends State<JobListTile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.post.title,
+                          widget.post.title ?? "",
                           style: context.textTheme.titleMedium!.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -70,7 +70,7 @@ class _JobListTileState extends State<JobListTile> {
                           maxLines: 1,
                         ),
                         Text(
-                          widget.post.companyName,
+                          widget.post.companyName ?? "",
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
@@ -108,7 +108,8 @@ class _JobListTileState extends State<JobListTile> {
                         const SizedBox(
                           width: 6,
                         ),
-                        Text("${CommonUtils.toTitleCase(widget.post.jobType)}",
+                        Text(
+                            "${CommonUtils.toTitleCase(widget.post.jobType ?? "")}",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!
@@ -161,7 +162,7 @@ class _JobListTileState extends State<JobListTile> {
                           width: 6,
                         ),
                         Text(
-                            " ${CommonUtils.toTitleCase(widget.post.jobLocationType)}",
+                            " ${CommonUtils.toTitleCase(widget.post.jobLocationType ?? "")}",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!
@@ -184,7 +185,7 @@ class _JobListTileState extends State<JobListTile> {
                   ),
                   const SizedBox(width: 5),
                   Text(
-                    widget.post.place,
+                    widget.post.place ?? "",
                     style: context.textTheme.titleSmall,
                   ),
                 ],
@@ -195,7 +196,7 @@ class _JobListTileState extends State<JobListTile> {
                 children: [
                   Text(
                     CommonUtils.relativeTime(
-                        DateTime.parse(widget.post.createdAt)),
+                        DateTime.parse(widget.post.createdAt.toString())),
                     style: context.bodyMedium!.copyWith(
                       color:
                           context.colorScheme.onSurfaceVariant.withOpacity(0.7),
