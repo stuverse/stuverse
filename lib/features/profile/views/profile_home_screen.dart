@@ -81,11 +81,11 @@ class ProfileHomeScreen extends StatelessWidget {
                           }),
                       10.heightBox,
                       ProfileTile(
-                          title: "User Requests",
+                          title: "Users Manage",
                           iconData: Icons.manage_accounts,
                           color: context.moneyPrimary,
                           onTap: () {
-                            context.push(CommonRoutes.userRequest);
+                            context.push(CommonRoutes.userManage);
                           }),
                       10.heightBox,
                       Divider(

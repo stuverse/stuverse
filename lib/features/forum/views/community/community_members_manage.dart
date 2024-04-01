@@ -20,12 +20,15 @@ class _CommunityMembersManageScreenState
     extends State<CommunityMembersManageScreen> {
   final _searchController = TextEditingController();
 
-   List<MiniUser> filteredMembers = [];
+  List<MiniUser> filteredMembers = [];
   @override
   void initState() {
-    context.read<CommunityMembersCubit>().getCommunityMembers(widget.communityId);
+    context
+        .read<CommunityMembersCubit>()
+        .getCommunityMembers(widget.communityId);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BgGradient(
@@ -38,15 +41,11 @@ class _CommunityMembersManageScreenState
           actions: [
             IconButton(
               onPressed: () {
-                  context.push(
-                    CommonRoutes.usersList,
-                    extra: (List<MiniUser> usersList){
-                      context.read<CommunityMembersCubit>().addMembers(
-                        communityId: widget.communityId,
-                        users: usersList
-                      );
-                    }
-                  );
+                context.push(CommonRoutes.usersSelection,
+                    extra: (List<MiniUser> usersList) {
+                  context.read<CommunityMembersCubit>().addMembers(
+                      communityId: widget.communityId, users: usersList);
+                });
               },
               icon: Icon(Icons.add),
             ),
@@ -61,77 +60,72 @@ class _CommunityMembersManageScreenState
                   duration: 3.seconds,
                 );
               }
-              if(state is CommunityMemberAddError){
+              if (state is CommunityMemberAddError) {
                 context.showErrorMessage(
                   message: state.message,
                   duration: 3.seconds,
                 );
               }
-              if(state is CommunityMemberRemoveError){
+              if (state is CommunityMemberRemoveError) {
                 context.showErrorMessage(
                   message: state.message,
                   duration: 3.seconds,
                 );
               }
 
-              if(state is CommunityMemberAdded){
+              if (state is CommunityMemberAdded) {
                 context.showMessage(
                   message: "Member added successfully",
                   duration: 3.seconds,
                 );
               }
-              if(state is CommunityMemberRemoved){
+              if (state is CommunityMemberRemoved) {
                 context.showMessage(
                   message: "Member removed successfully",
                   duration: 3.seconds,
                 );
               }
-              if(state is CommunityMembersLoaded){
+              if (state is CommunityMembersLoaded) {
                 filteredMembers = state.members;
               }
-
-             
-              
             },
             builder: (context, state) {
               if (state is CommunityMembersLoaded) {
-                
-                   return SingleChildScrollView(
-                     child: Column(
-                                     children: [
-                                       TextField(
-                      controller: _searchController,
-                      onChanged: (value) {
-                        setState(() {
-                          filteredMembers = state.members
-                              .where((member) => member.name!
-                                  .toLowerCase()
-                                  .contains(value.toLowerCase()))
-                              .toList();
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Search',
-                        prefixIcon: Icon(
-                          Icons.search,
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      TextField(
+                        controller: _searchController,
+                        onChanged: (value) {
+                          setState(() {
+                            filteredMembers = state.members
+                                .where((member) => member.name!
+                                    .toLowerCase()
+                                    .contains(value.toLowerCase()))
+                                .toList();
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Search',
+                          prefixIcon: Icon(
+                            Icons.search,
+                          ),
                         ),
                       ),
-                                       ),
-                                       10.heightBox,
-                                      for(final member in filteredMembers)
-                                       MembersCard(
-                                         member: member,
-                                         communityId: widget.communityId,
-                                       )
-                                     ],
-                                   ),
-                   );
+                      10.heightBox,
+                      for (final member in filteredMembers)
+                        MembersCard(
+                          member: member,
+                          communityId: widget.communityId,
+                        )
+                    ],
+                  ),
+                );
               }
 
               return const Center(
                 child: CircularProgressIndicator(),
               );
-             
             },
           ).paddingAll(8),
         ),
