@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:readmore/readmore.dart';
+
 
 import 'package:stuverse/app/app.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -84,6 +86,7 @@ class _UsersListScreenState extends State<UsersListScreen> {
                             .surfaceVariant
                             .withOpacity(0.7),
                       ),
+                      
                   ],
                 ),
               );
@@ -101,131 +104,209 @@ class _UsersListScreenState extends State<UsersListScreen> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (context) => Container(
-        color: Theme.of(context).colorScheme.surface,
-        width: double.infinity,
-        child: SingleChildScrollView(
-          child: SafeArea(
+      builder: (context) => SingleChildScrollView(
+        child: SafeArea(
+            child: Padding(
+          padding: const EdgeInsets.all(15),
+          child:  Stack(
+            alignment: AlignmentDirectional.topCenter,
+            children: [
+              
+             Container(
+              width: double.infinity,
+             height: 700,
               child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(35),
-                  child: Container(
-                    height: context.height * 0.35,
-                    width: double.infinity,
-                    child: CachedNetworkImage(
-                      placeholder: (context, url) {
-                        return Container(
-                          color: Theme.of(context).colorScheme.primaryContainer,
-                        );
-                      },
-                      imageUrl: user.image ?? '',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                padding: const EdgeInsets.only(top:80),
+                child: Container(
+                width: double.infinity,
+                height: context.height,
+                decoration: BoxDecoration(
+                   color:
+                    context.isDark
+                             ?context.colorScheme.surfaceVariant.withOpacity(0.2)
+                             :context.colorScheme.surfaceVariant,
+    
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(25),
+                        topRight: Radius.circular(25))),
+                              ),
+              ),
+             ),
+             Padding(
+               padding: const EdgeInsets.only(top:5,
+               left: 10,
+               right: 10),
+               
+               child: Column(
+                children: [
+                  Container(
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 4,
+                
+                             color:
+                             context.isDark
+                             ?context.colorScheme.surfaceVariant.withOpacity(0.2)
+                             :context.colorScheme.surfaceVariant
+                             ),
+                            image: DecorationImage(
+                                image: 
+                                CachedNetworkImageProvider(user.image ?? ""),
+                                fit: BoxFit.cover),
+                                boxShadow: [
+                                  BoxShadow(
+                                      spreadRadius: 2,
+                                      blurRadius: 10,
+                                      color:  context.isDark
+                                      ? Colors.black.withOpacity(0.1)
+                                      :Colors.white,
+                                      offset: const Offset(0, 10))
+                                ],
+                            borderRadius: BorderRadius.circular(150),
+                            ),
+                      ),
+                  20.heightBox,
+                  Text(user.name ?? "",style: context.titleLarge!.copyWith(fontWeight: FontWeight.bold),),
+                  20.heightBox,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
-                      user.name ?? '',
-                      style:
-                          Theme.of(context).textTheme.headlineSmall!.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                    InkWell(
+                      onTap: () {
+                        launchUrl(Uri.parse(user.linkedin ?? ""));
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: context.height * 0.02,
+                        backgroundImage:  AssetImage('assets/app/icons/circle-linkedin-512.webp',
+                        ),
+                                       
+                                        ),
                     ),
-                    SizedBox(
-                      height: 5,
-                    ),
+                     InkWell(
+                       onTap: () {
+                         launchUrl(Uri.parse(user.github ?? ""));
+                       },
+                       child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: context.height * 0.02,
+                        backgroundImage:  AssetImage('assets/app/icons/25231.png',
+                        ),
+                                        
+                                         ),
+                     ),
+                     InkWell(
+                       onTap: () {
+                        context.push(CommonRoutes.pdfViewer, extra: user.resume.toString());
+                       },
+                       child: Image.asset('assets/app/icons/1250696.png',
+                       color:context.colorScheme.onBackground,
+                       height: context.height * 0.035,
+                       width: context.height * 0.035,
+                       
+                       ),
+                     )
+                    
+                  ],
+                  ),
+                  20.heightBox,
                     Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Column(
+                          
+                          Row(
                             children: [
-                              Text(
-                                'Experience',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(),
+                              Icon(Icons.mail,
+                              size: context.height * 0.021,
                               ),
+                              3.widthBox,
                               Text(
-                                '${user.experienceYears!.toString()} Years',
+                                user.email ?? "N/A",
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
-                                    .copyWith(fontWeight: FontWeight.bold),
+                                    .copyWith(),
                               ),
                             ],
                           ),
-                          Container(
-                            height: 30,
-                            child: VerticalDivider(
-                              color: Theme.of(context).colorScheme.onBackground,
-                              thickness: 1,
-                            ),
+                        
+                          Row(
+                            children: [
+                              Icon(Icons.phone,
+                                  size: context.height * 0.021,
+                                  ),
+                             3.widthBox,
+                                Text(
+                                  '+91 ${user.mobile ?? "N/A"}',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                     ,
+                                )
+                             
+                            ],
                           ),
+
                         ]),
-                    SizedBox(
-                      height: 3,
-                    ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        final url = Uri.parse("http://wa.me/+91${user.mobile}");
-                        final canlaunch = await canLaunchUrl(url);
-                        if (!canlaunch) {
-                          return;
-                        } else {
-                          await launchUrl(url);
-                        }
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.send,
-                            color: Theme.of(context).colorScheme.onBackground,
+                        20.heightBox,
+                  
+                     InkWell(
+                       onTap: () async {
+                         final url = Uri.parse(
+                             "http://wa.me/+91${user.mobile ?? ""}");
+                         final canlaunch = await canLaunchUrl(url);
+                         if (!canlaunch) {
+                           return;
+                         } else {
+                           await launchUrl(url);
+                         }
+                       },
+                       child: Container(
+                        width: context.width * 0.25,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            width: 1,
+                            color: Theme.of(context).colorScheme.onBackground
+                          )
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Icon(Icons.send,),
+                              3.widthBox,
+                              Text(
+                                'Message',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold
+                                    ),
+                              ),
+                            ],
                           ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text('Connect',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(fontWeight: FontWeight.bold)),
-                        ],
-                      ),
-                      style: ElevatedButton.styleFrom(
-                          maximumSize: Size(double.infinity, 80),
-                          backgroundColor: Theme.of(context)
-                              .colorScheme
-                              .primary
-                              .withOpacity(0.86),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15))),
-                    )
-                  ],
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "About",
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
+                        ),
+                       ),
+                     ),
+                     20.heightBox,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                      "About",
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium!
+                          .copyWith(fontWeight: FontWeight.bold),
+                                      ),
+                                       SizedBox(
                   height: 5,
                 ),
                 ReadMoreText(
-                  user.about!,
+                  user.about ?? "N/A",
                   trimLines: 3,
                   colorClickableText: Theme.of(context).colorScheme.primary,
                   trimCollapsedText: 'Read more',
@@ -259,7 +340,7 @@ class _UsersListScreenState extends State<UsersListScreen> {
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Theme.of(context).colorScheme.surfaceVariant,
+                            color: Theme.of(context).colorScheme.onBackground.withOpacity(0.2),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
@@ -279,13 +360,15 @@ class _UsersListScreenState extends State<UsersListScreen> {
                     }).toList(),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-              ],
-            ),
-          )),
-        ),
+                    ],
+                  ),
+               
+                ],
+               ),
+             )
+            ],
+          )
+      )),
       ),
     );
   }

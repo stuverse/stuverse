@@ -145,7 +145,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.message,
+                            Icons.send,
                             color: Theme.of(context).colorScheme.onBackground,
                           ),
                           SizedBox(

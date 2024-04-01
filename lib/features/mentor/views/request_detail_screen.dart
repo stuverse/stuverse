@@ -57,7 +57,7 @@ class RequestDetailsScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10))),
                         onPressed: (){}, child: Row(
                         children: [
-                          Icon(Icons.message,
+                          Icon(Icons.send,
                           color: context.colorScheme.onBackground,
                           ),
                           5.widthBox,
