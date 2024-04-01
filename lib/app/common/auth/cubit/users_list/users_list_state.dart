@@ -8,7 +8,7 @@ final class UsersListInitial extends UsersListState {}
 final class UsersListLoading extends UsersListState {}
 
 final class UsersListSuccess extends UsersListState {
-  final List<MiniUser> usersList;
+  final List<User> usersList;
 
   UsersListSuccess(this.usersList);
 }
