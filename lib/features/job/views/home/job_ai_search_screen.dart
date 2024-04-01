@@ -20,7 +20,7 @@ class _JobAiSearchScreenState extends State<JobAiSearchScreen> {
   void initState() {
     super.initState();
 
-    _controller = ConfettiController(duration: const Duration(seconds: 5));
+    _controller = ConfettiController(duration: const Duration(seconds: 1));
     context.read<JobAiSearchCubit>().getBestJobsAI();
   }
 
@@ -52,7 +52,7 @@ class _JobAiSearchScreenState extends State<JobAiSearchScreen> {
             if (state is JobAiSearchSuccess) {
               if (state.result.bestJob == null) {
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: context.paddingHorzWithTop,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -72,7 +72,7 @@ class _JobAiSearchScreenState extends State<JobAiSearchScreen> {
                 );
               }
               return Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: context.paddingHorzWithTop,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [

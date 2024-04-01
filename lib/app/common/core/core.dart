@@ -12,4 +12,5 @@ export 'widgets/main_appbar.dart';
 
 export 'cubit/core_cubit.dart';
 export 'cubit/home/home_cubit.dart';
+export 'cubit/skill/skill_cubit.dart';
 export 'cubit/ai/ai_cubit.dart';
