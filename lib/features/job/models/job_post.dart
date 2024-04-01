@@ -1,57 +1,69 @@
+import '../../../app/models/user/skill.dart';
+
 class JobPost {
+  int? id;
+  String? title;
+  String? place;
+  String? companyName;
+  String? image;
+  String? description;
+  String? jobType;
+  String? jobLocationType;
+  String? url;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  List<Skill>? skills;
+
   JobPost({
-    required this.id,
-    required this.title,
-    required this.place,
-    required this.companyName,
-    required this.image,
-    required this.description,
-    required this.jobType,
-    required this.url,
-    required this.createdAt,
-    required this.updatedAt,
+    this.id,
+    this.title,
+    this.place,
+    this.companyName,
+    this.image,
+    this.description,
+    this.jobType,
+    this.jobLocationType,
+    this.url,
+    this.createdAt,
+    this.updatedAt,
+    this.skills,
   });
-  late final int id;
-  late final String title;
-  late final String place;
-  late final String companyName;
-  late final String image;
-  late final String description;
-  late final String jobType;
-  late final String jobLocationType;
-  late final String url;
-  late final String createdAt;
-  late final String updatedAt;
 
-  JobPost.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    place = json['place'];
-    companyName = json['companyName'];
-    image = json['image'];
-    description = json['description'];
-    jobType = json['jobType'];
-    jobLocationType = json['jobLocationType'];
-    url = json['url'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
-  }
+  factory JobPost.fromJson(Map<String, dynamic> json) => JobPost(
+        id: json['id'] as int?,
+        title: json['title'] as String?,
+        place: json['place'] as String?,
+        companyName: json['companyName'] as String?,
+        image: json['image'] as String?,
+        description: json['description'] as String?,
+        jobType: json['jobType'] as String?,
+        jobLocationType: json['jobLocationType'] as String?,
+        url: json['url'] as String?,
+        createdAt: json['createdAt'] == null
+            ? null
+            : DateTime.parse(json['createdAt'] as String),
+        updatedAt: json['updatedAt'] == null
+            ? null
+            : DateTime.parse(json['updatedAt'] as String),
+        skills: (json['skills'] as List<dynamic>?)
+            ?.map((e) => Skill.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['title'] = title;
-    _data['place'] = place;
-    _data['companyName'] = companyName;
-    _data['image'] = image;
-    _data['description'] = description;
-    _data['jobType'] = jobType;
-    _data['jobLocationType'] = jobLocationType;
-    _data['url'] = url;
-    _data['createdAt'] = createdAt;
-    _data['updatedAt'] = updatedAt;
-    return _data;
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'place': place,
+        'companyName': companyName,
+        'image': image,
+        'description': description,
+        'jobType': jobType,
+        'jobLocationType': jobLocationType,
+        'url': url,
+        'createdAt': createdAt?.toIso8601String(),
+        'updatedAt': updatedAt?.toIso8601String(),
+        'skills': skills?.map((e) => e.toJson()).toList(),
+      };
 }
 
 class JOB_TYPE {

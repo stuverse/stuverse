@@ -9,8 +9,8 @@ class MentorRequest {
   late final String description;
   late final String createdAt;
   late final Mentor mentor;
-  
-  MentorRequest.fromJson(Map<String, dynamic> json){
+
+  MentorRequest.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     description = json['description'];
     createdAt = json['created_at'];
@@ -36,8 +36,8 @@ class Mentor {
     required this.createdAt,
     required this.image,
     required this.about,
-     this.linkedin,
-     this.github,
+    this.linkedin,
+    this.github,
     required this.skills,
     required this.experienceYears,
   });
@@ -52,8 +52,8 @@ class Mentor {
   late final Null github;
   late final List<dynamic> skills;
   late final int experienceYears;
-  
-  Mentor.fromJson(Map<String, dynamic> json){
+
+  Mentor.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     type = json['type'];

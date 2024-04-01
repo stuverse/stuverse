@@ -17,8 +17,8 @@ class MentorPost {
   late final String updatedAt;
   late final String price;
   late final Mentor mentor;
-  
-  MentorPost.fromJson(Map<String, dynamic> json){
+
+  MentorPost.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     isFree = json['isFree'];
@@ -68,8 +68,8 @@ class Mentor {
   late final String github;
   late final List<Skills> skills;
   late final int experienceYears;
-  
-  Mentor.fromJson(Map<String, dynamic> json){
+
+  Mentor.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     type = json['type'];
@@ -79,7 +79,7 @@ class Mentor {
     about = json['about'];
     linkedin = json['linkedin'];
     github = json['github'];
-    skills = List.from(json['skills']).map((e)=>Skills.fromJson(e)).toList();
+    skills = List.from(json['skills']).map((e) => Skills.fromJson(e)).toList();
     experienceYears = json['experience_years'];
   }
 
@@ -94,7 +94,7 @@ class Mentor {
     _data['about'] = about;
     _data['linkedin'] = linkedin;
     _data['github'] = github;
-    _data['skills'] = skills.map((e)=>e.toJson()).toList();
+    _data['skills'] = skills.map((e) => e.toJson()).toList();
     _data['experience_years'] = experienceYears;
     return _data;
   }
@@ -107,8 +107,8 @@ class Skills {
   });
   late final int id;
   late final String name;
-  
-  Skills.fromJson(Map<String, dynamic> json){
+
+  Skills.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
   }

@@ -44,7 +44,7 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
     _githubController.text = user!.github ?? '';
     _experienceController.text =
         user!.experienceYears != null ? user!.experienceYears.toString() : '';
-    _selectedSkills = [...List.castFrom<Skill, Skill>(user!.skills!)];
+    _selectedSkills = [...user?.skills ?? []];
 
     super.initState();
   }
@@ -480,10 +480,11 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                                                         _githubController.text,
                                                     mobile:
                                                         _mobileController.text,
-                                                    skillsIDList:
-                                                        _selectedSkills
-                                                            .map((e) => e.id!)
-                                                            .toList(),
+                                                    skillsIDList: [
+                                                      for (var skill
+                                                          in _selectedSkills)
+                                                        skill.id!
+                                                    ],
                                                     imageFile: _imageFile,
                                                     resumeFile: _resumeFile);
                                           }
