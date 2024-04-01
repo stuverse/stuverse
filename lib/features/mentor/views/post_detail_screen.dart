@@ -145,16 +145,16 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.send,
+                            Icons.message,
                             color: Theme.of(context).colorScheme.onBackground,
                           ),
                           SizedBox(
                             width: 5,
                           ),
-                          Text('Connect',
+                          Text('Message',
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyLarge!
+                                  .bodyMedium!
                                   .copyWith(fontWeight: FontWeight.bold)),
                         ],
                       ),
@@ -165,7 +165,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                               .primary
                               .withOpacity(0.86),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15))),
+                              borderRadius: BorderRadius.circular(10))),
                     )
                   ],
                 ),

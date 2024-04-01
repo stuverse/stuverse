@@ -26,8 +26,29 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
       child: Scaffold(
         appBar: getMainAppbar(
           actions: [
-            IconButton(
-              onPressed: () {
+            // IconButton(
+            //   onPressed: () {
+            //     if (user?.linkedin == null ||
+            //         user?.mobile == null ||
+            //         user?.github == null ||
+            //         user?.about == null ||
+            //         user?.experienceYears == null ||
+            //         user?.skills == null) {
+            //       context.showMessage(
+            //           message:
+            //               "Please ensure your profile is complete before proceeding.");
+            //       return;
+            //     }
+            //     context.push(MentorRoutes.manageMentorPost);
+            //   },
+            //   icon: Icon(Icons.add),
+            // ),
+            PopupMenuButton(
+              // icon: Icon(Icons.more_vert),
+              itemBuilder: (context) {
+              return [
+                PopupMenuItem(
+                  onTap: () {
                 if (user?.linkedin == null ||
                     user?.mobile == null ||
                     user?.github == null ||
@@ -40,9 +61,17 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                   return;
                 }
                 context.push(MentorRoutes.manageMentorPost);
-              },
-              icon: Icon(Icons.add),
-            ),
+                  },
+                  child: Text('Add Mentorship Post'),
+                ),
+                 PopupMenuItem(
+                  onTap: () {
+                    context.push(MentorRoutes.seeAllPosts);
+                  },
+                  child: Text('Add Mentorship Request'),
+                ),
+              ];
+            })
           ],
         ),
         backgroundColor: Colors.transparent,
