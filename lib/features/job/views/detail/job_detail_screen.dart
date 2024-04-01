@@ -188,7 +188,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                               "Skills Required:",
                               style: Theme.of(context)
                                   .textTheme
-                                  .titleLarge!
+                                  .titleSmall!
                                   .copyWith(fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 5),
@@ -209,12 +209,13 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                                             .colorScheme
                                             .outline,
                                       )),
-                                  padding: const EdgeInsets.all(8),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
                                   child: Text(
                                     widget.post.skills![index].name ?? "",
                                     style: Theme.of(context)
                                         .textTheme
-                                        .titleSmall!
+                                        .bodySmall!
                                         .copyWith(
                                             color: Theme.of(context)
                                                 .colorScheme
@@ -225,13 +226,6 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                             ),
                             SizedBox(
                               height: 10,
-                            ),
-                            Text(
-                              "Job Description:",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge!
-                                  .copyWith(fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 5),
                             CustomMarkdownBody(
