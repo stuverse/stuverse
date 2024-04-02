@@ -57,7 +57,7 @@ class MentorRoutes {
       path: '/mentor/manageMentorRequest',
       builder: (context, state) =>
           ManageMentorRequest(
-            mentorRequest: state.extra as MentorRequest,
+            mentorRequest: state.extra as MentorRequest?,
           ),
     ),
   ];

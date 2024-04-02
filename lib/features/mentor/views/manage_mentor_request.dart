@@ -58,7 +58,7 @@ class _ManageMentorRequestState extends State<ManageMentorRequest> {
                 return null;
               },
               decoration: InputDecoration(
-                hintText: 'Share your mentorship needs',
+                hintText: 'Share your mentorship needs here',
           
               ),), label: 'Description'),
               10.heightBox,
