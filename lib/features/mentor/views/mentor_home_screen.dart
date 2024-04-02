@@ -44,27 +44,27 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
             //   icon: Icon(Icons.add),
             // ),
             PopupMenuButton(
-              // icon: Icon(Icons.more_vert),
-              itemBuilder: (context) {
+                // icon: Icon(Icons.more_vert),
+                itemBuilder: (context) {
               return [
                 PopupMenuItem(
                   onTap: () {
-                if (user?.linkedin == null ||
-                    user?.mobile == null ||
-                    user?.github == null ||
-                    user?.about == null ||
-                    user?.experienceYears == null ||
-                    user?.skills == null) {
-                  context.showMessage(
-                      message:
-                          "Please ensure your profile is complete before proceeding.");
-                  return;
-                }
-                context.push(MentorRoutes.manageMentorPost);
+                    if (user?.linkedin == null ||
+                        user?.mobile == null ||
+                        user?.github == null ||
+                        user?.about == null ||
+                        user?.experienceYears == null ||
+                        user?.skills == null) {
+                      context.showMessage(
+                          message:
+                              "Please ensure your profile is complete before proceeding.");
+                      return;
+                    }
+                    context.push(MentorRoutes.manageMentorPost);
                   },
                   child: Text('Add Mentorship Post'),
                 ),
-                 PopupMenuItem(
+                PopupMenuItem(
                   onTap: () {
                     context.push(MentorRoutes.seeAllPosts);
                   },
