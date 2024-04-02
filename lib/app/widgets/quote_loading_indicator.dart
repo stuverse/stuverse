@@ -33,33 +33,38 @@ class _QuoteLoadingIndicatorState extends State<QuoteLoadingIndicator> {
 
   @override
   Widget build(BuildContext context) {
-    motivationalQuotes.shuffle();
+    final random =
+        DateTime.now().microsecondsSinceEpoch % motivationalQuotes.length;
+    final randomMotivationalQuote = motivationalQuotes[random];
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(20.0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(height: 10),
-          Expanded(
-            child: Column(
-              children: [
-                Text(
-                  "\" " + motivationalQuotes[0].text + " \"",
-                  style: const TextStyle(fontSize: 20),
-                ),
-                Text(
-                  "- " + motivationalQuotes[0].author,
-                  textAlign: TextAlign.end,
-                  style: TextStyle(
-                      fontSize: 13,
-                      color: context.colorScheme.onBackground.withOpacity(0.5)),
-                ),
-              ],
-            ),
+          Text(
+            "\" " + randomMotivationalQuote.text + " \"",
+            style: const TextStyle(fontSize: 20),
+          ),
+          Text(
+            "- " + randomMotivationalQuote.author,
+            textAlign: TextAlign.end,
+            style: TextStyle(
+                fontSize: 13,
+                color: context.colorScheme.onBackground.withOpacity(0.5)),
           ),
           const SizedBox(height: 10),
-          if (widget.showIndicator) const CircularProgressIndicator(),
-        ],
+          if (widget.showIndicator)
+            Text(
+              "Loading...",
+              style: TextStyle(
+                  fontSize: 13,
+                  color: context.colorScheme.onBackground.withOpacity(0.5)),
+            ),
+          const SizedBox(height: 10),
+          if (widget.showIndicator) const LinearProgressIndicator(),
+        ].defaultListAnimation(),
       ),
     );
   }
