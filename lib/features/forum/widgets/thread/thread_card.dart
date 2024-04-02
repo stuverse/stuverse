@@ -143,7 +143,7 @@ class ThreadCard extends StatelessWidget {
                                 return Container(
                                   height: context.height * 0.5,
                                   child: Center(
-                                    child: CircularProgressIndicator(),
+                                    child: QuoteLoadingIndicator(),
                                   ),
                                 );
                               },
