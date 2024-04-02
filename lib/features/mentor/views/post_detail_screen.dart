@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:readmore/readmore.dart';
+import 'package:stuverse/app/utils/extentions/app_extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../models/mentor_post.dart';
 
@@ -128,48 +129,60 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                           )
                         ]),
                     SizedBox(
-                      height: 3,
+                      height: 10,
                     ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        final url = Uri.parse(
-                            "http://wa.me/+91${widget.post.mentor!.mobile}");
-                        final canlaunch = await canLaunchUrl(url);
-                        if (!canlaunch) {
-                          return;
-                        } else {
-                          await launchUrl(url);
-                        }
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.send,
-                            color: Theme.of(context).colorScheme.onBackground,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text('Message',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(fontWeight: FontWeight.bold)),
-                        ],
-                      ),
-                      style: ElevatedButton.styleFrom(
-                          maximumSize: Size(double.infinity, 80),
-                          backgroundColor: Theme.of(context)
-                              .colorScheme
-                              .primary
-                              .withOpacity(0.86),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                    )
+                    InkWell(
+                        onTap:()async{
+                            final url =
+                          Uri.parse("http://wa.me/+91${widget.post.mentor.mobile}");
+                      final canlaunch = await canLaunchUrl(url);
+                      if (!canlaunch) {
+                        return;
+                      } else {
+                        await launchUrl(url);
+                      }
+                        } ,
+                         child: Expanded(
+                           flex: 1,
+                           child: Container(
+                             decoration: BoxDecoration(
+                                 borderRadius: BorderRadius.circular(10),
+                                 border: Border.all(
+                                     width: 1,
+                                     color:
+                                         Theme.of(context).colorScheme.onBackground)),
+                                             
+                             child: Padding(
+                               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                                             
+                               child:
+                                Row(
+                                               
+                                 mainAxisAlignment: MainAxisAlignment.center,
+                                 children: [
+                                   Image.asset('assets/app/icons/WhatsApp_icon.png',
+                                   height: context.height * 0.028,
+                                   width: context.height * 0.028,
+                                   ),
+                                   3.widthBox,
+                                   Text(
+                                     'Connect to whatsapp',
+                                     style: Theme.of(context)
+                                         .textTheme
+                                         .bodyMedium!
+                                         .copyWith(fontWeight: FontWeight.bold,
+                                         color: Colors.green
+                                         ),
+                                   ),
+                                 ],
+                               ),
+                             ),
+                           ),
+                         ),
+                       ),
                   ],
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 15),
                 Text(
                   "Insights",
                   style: Theme.of(context)
@@ -181,7 +194,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                   height: 5,
                 ),
                 ReadMoreText(
-                  widget.post.description!,
+                  widget.post.description,
                   trimLines: 2,
                   colorClickableText: Theme.of(context).colorScheme.primary,
                   trimCollapsedText: 'Read more',
@@ -207,7 +220,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                   height: 5,
                 ),
                 ReadMoreText(
-                  widget.post.mentor!.about!,
+                  widget.post.mentor.about,
                   trimLines: 3,
                   colorClickableText: Theme.of(context).colorScheme.primary,
                   trimCollapsedText: 'Read more',
@@ -235,7 +248,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: widget.post.mentor!.skills!.map((skill) {
+                    children: widget.post.mentor.skills.map((skill) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                         child: Container(
@@ -247,7 +260,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 4),
                             child: Text(
-                              skill.name!,
+                              skill.name,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyMedium!
