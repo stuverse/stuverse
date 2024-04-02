@@ -209,6 +209,28 @@ class _ProjectDescScreenState extends State<ProjectDescScreen> {
                     const SizedBox(
                       height: 20,
                     ),
+                    //Target
+                    Text(
+                      'Target: ${widget.project.targetAmount}',
+                      style: context.titleMedium!
+                          .copyWith(fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                    //Account number
+                    Text(
+                      'Account Number: ${widget.project.accountNumber}',
+                      style: context.titleMedium!
+                          .copyWith(fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+
+                    //UPI ID
+                    Text(
+                      'UPI ID: ${widget.project.upiId}',
+                      style: context.titleMedium!
+                          .copyWith(fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     CustomMarkdownBody(inputText: widget.project.description),
                     const SizedBox(
                       height: 40,
@@ -224,9 +246,9 @@ class _ProjectDescScreenState extends State<ProjectDescScreen> {
                     // context.push(
                     //   FundRoutes.donationpage,
                     // );
-                    context.showMessage(message: "Donation Page not available");
+
                     final uri = Uri.parse(
-                        "upi://pay?cu=INR&pa=7356910877@paytm&pn=Basha&tn=&am=3.00");
+                        "upi://pay?cu=INR&pa=${widget.project.upiId}&pn=${widget.project.user.name}&tn=&am=100.00");
 
                     final canLaunch = await canLaunchUrl(uri);
 

@@ -27,7 +27,7 @@ class FundHomeCubit extends Cubit<FundHomeState> {
         projectList.add(Projects.fromJson(project));
       }
 
-      emit(FundHomeSuccess(project: projectList));
+      emit(FundHomeSuccess(project: projectList.reversed.toList()));
     } catch (e) {
       emit(FundHomeError(errorMessage: e.toString()));
     }

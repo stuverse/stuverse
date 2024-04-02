@@ -82,7 +82,7 @@ class ProjectCard extends StatelessWidget {
                                       context.textTheme.bodyMedium!.copyWith(),
                                 ),
                                 Text(
-                                  'Target Amount : \$${project.targetAmount}',
+                                  'Target Amount : ₹${project.targetAmount}',
                                   textAlign: TextAlign.center,
                                   style:
                                       context.textTheme.bodyMedium!.copyWith(),
