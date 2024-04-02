@@ -8,10 +8,11 @@ part 'mentorship_request_state.dart';
 
 class MentorshipRequestCubit extends Cubit<MentorshipRequestState> {
   MentorshipRequestCubit() : super(MentorshipRequestInitial());
-  void getMentorRequestData() async {
+  void getMentorRequestData({String? search}) async {
     emit(MentorshipRequestLoading());
     try {
-      final resp = await dioClient.get('/mentor/requests');
+      final resp = await dioClient.get('/mentor/requests',
+          queryParameters: {if (search != null) 'search': search});
       final List<MentorRequest> requests = [];
       for (final request in resp.data) {
         requests.add(MentorRequest.fromJson(request));
@@ -19,6 +20,7 @@ class MentorshipRequestCubit extends Cubit<MentorshipRequestState> {
       emit(MentorshipRequestLoaded(requests));
     } catch (e) {
       emit(MentorshipRequestFailure(e.toString()));
+      print('error is ${e}');
     }
   }
 }

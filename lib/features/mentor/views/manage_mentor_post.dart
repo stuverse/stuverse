@@ -26,13 +26,13 @@ class _ManageMentorPostScreenState extends State<ManageMentorPostScreen> {
   @override
   void initState() {
     if (widget.post != null) {
-      _postController.text = widget.post!.name!;
-      _descriptionController.text = widget.post!.description!;
-      _priceController.text = widget.post!.price!.toString();
-      if (widget.post!.isFree!) {
+      _postController.text = widget.post!.name;
+      _descriptionController.text = widget.post!.description;
+      _priceController.text = widget.post!.price.toString();
+      if (widget.post!.isFree) {
         isFree = true;
       }
-      if (!widget.post!.isFree!) {
+      if (!widget.post!.isFree) {
         isFree = false;
       }
     }
@@ -238,7 +238,7 @@ class _ManageMentorPostScreenState extends State<ManageMentorPostScreen> {
                                       : context
                                           .read<ManageMentorPostCubit>()
                                           .editPost(
-                                            id: widget.post!.id!,
+                                            id: widget.post!.id,
                                             postName: postName,
                                             fee: double.parse(fee),
                                             isFree: isFree,

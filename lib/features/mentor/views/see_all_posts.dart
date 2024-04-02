@@ -125,7 +125,7 @@ class _seeAllPostsScreenState extends State<seeAllPostsScreen> {
                             ),
                           );
                         }
-                        return Container();
+                        return const SizedBox();
                       },
                     )
                   ],
