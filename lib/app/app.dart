@@ -25,3 +25,4 @@ export 'widgets/horz_tab_bar.dart';
 
 export 'widgets/custom_markdown_body.dart';
 export 'widgets/banner_card.dart';
+export 'widgets/quote_loading_indicator.dart';
