@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stuverse/features/job/cubit/job_material/job_material_cubit.dart';
 
 import '../cubit/add_edit/manage_job_cubit.dart';
 
@@ -19,6 +20,9 @@ class JobProviders {
         ),
         BlocProvider<JobAiSearchCubit>(
           create: (context) => JobAiSearchCubit(),
+        ),
+        BlocProvider<JobMaterialCubit>(
+          create: (context) => JobMaterialCubit(),
         ),
       ];
 }

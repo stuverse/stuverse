@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewScreen extends StatefulWidget {
@@ -46,13 +47,31 @@ class _WebViewScreenState extends State<WebViewScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('WebView'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              _controller.reload();
+            },
+            icon: const Icon(Icons.refresh),
+          ),
+          //open in browser
+          IconButton(
+            onPressed: () async {
+              final uri = Uri.parse(widget.url);
+              if (await canLaunchUrl(uri)) {
+                await launchUrl(uri);
+              } else {
+                throw 'Could not launch $uri';
+              }
+            },
+            icon: const Icon(Icons.open_in_browser),
+          ),
+        ],
       ),
       body: SafeArea(
           child: isLoading
-              ? Center(
-                  child: CircularProgressIndicator(
-                    value: currentProgress,
-                  ),
+              ? LinearProgressIndicator(
+                  value: currentProgress,
                 )
               : WebViewWidget(
                   controller: _controller,

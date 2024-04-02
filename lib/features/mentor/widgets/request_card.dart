@@ -17,8 +17,9 @@ class RequestCard extends StatelessWidget {
         height: context.height * 0.19,
         width: context.width * 0.8,
         decoration: BoxDecoration(
-          border:
-              Border.all(color: context.colorScheme.onBackground.withOpacity(0.1), width: 2),
+          border: Border.all(
+              color: context.colorScheme.onBackground.withOpacity(0.1),
+              width: 2),
           borderRadius: BorderRadius.circular(25),
         ),
         child: Padding(
@@ -58,18 +59,18 @@ class RequestCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ElevatedButton(
-                         onPressed: (){
-                           context.push(MentorRoutes.requestDetails, extra: request);
-                         },
-                             child: Text('Review',
-                                 style: context.titleSmall!.copyWith(
-                                     color: context.colorScheme.surface,
-                                     fontWeight: FontWeight.bold)),
-                             style: ElevatedButton.styleFrom(
-                                 backgroundColor: context.colorScheme.secondary,
-                                 shape: RoundedRectangleBorder(
-                                     borderRadius: BorderRadius.circular(12))),
-                           ),
+                    onPressed: () {
+                      context.push(MentorRoutes.requestDetails, extra: request);
+                    },
+                    child: Text('Review',
+                        style: context.titleSmall!.copyWith(
+                            color: context.colorScheme.surface,
+                            fontWeight: FontWeight.bold)),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: context.colorScheme.secondary,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12))),
+                  ),
                   // FilledButton(onPressed: (){}, child: Text('Review',
                   //  style: context.titleSmall!.copyWith(
                   //                    color: context.colorScheme.surface,
