@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:lottie/lottie.dart';
 import 'package:stuverse/app/app.dart';
 
 import 'package:url_launcher/url_launcher.dart';
@@ -245,11 +246,8 @@ class _MarkDownScreenState extends State<MarkDownScreen>
                     if (state is AILoading)
                       Positioned.fill(
                         child: ColoredBox(
-                          color: Colors.black.withOpacity(0.5),
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        ),
+                            color: Colors.black.withOpacity(0.5),
+                            child: Center(child: QuoteLoadingIndicator())),
                       )
                   ],
                 ),
