@@ -24,16 +24,18 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<CoreCubit>().state.user;
     return BgGradient(
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: getMainAppbar(actions: [
-          IconButton(
-            onPressed: () {
-              context.push(JobRoutes.jobAddEdit);
-            },
-            icon: const Icon(Icons.add),
-          ),
+          if (user != null && user.type != UserTypes.STUDENT)
+            IconButton(
+              onPressed: () {
+                context.push(JobRoutes.jobAddEdit);
+              },
+              icon: const Icon(Icons.add),
+            ),
         ]),
         body: BlocListener<ManageJobCubit, ManageJobState>(
           listener: (context, state) {

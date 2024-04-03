@@ -34,6 +34,7 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<CoreCubit>().state.user;
     return BgGradient(
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -90,15 +91,16 @@ class _FundHomeScreenState extends State<FundHomeScreen> {
                       const SizedBox(
                         height: 25,
                       ),
-                      BannerCard(
-                        title: "Start New Project ",
-                        description:
-                            "Create your fundraising Project and get funding fast and easy.",
-                        buttonText: "Start",
-                        onTap: () {
-                          context.push(FundRoutes.addProject);
-                        },
-                      ),
+                      if (user != null && user.type != UserTypes.STUDENT)
+                        BannerCard(
+                          title: "Start New Project ",
+                          description:
+                              "Create your fundraising Project and get funding fast and easy.",
+                          buttonText: "Start",
+                          onTap: () {
+                            context.push(FundRoutes.addProject);
+                          },
+                        ),
                       const SizedBox(
                         height: 30,
                       ),

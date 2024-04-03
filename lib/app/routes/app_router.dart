@@ -33,6 +33,7 @@ class AppRouter {
     CommonRoutes.otpSignin,
     CommonRoutes.onBoarding,
     CommonRoutes.splash,
+    CommonRoutes.webView,
   ];
 
   static final GoRouter _router = GoRouter(

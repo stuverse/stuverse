@@ -114,33 +114,36 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> {
                         },
                         icon: const Icon(Icons.share),
                       ),
+                      if (user != null &&
+                          (state.community!.moderators?.contains(user!.id) ??
+                              false))
+                        PopupMenuButton(
+                          icon: const Icon(Icons.more_vert),
+                          itemBuilder: (context) {
+                            return [
+                              // if (isModerator)
 
-                      PopupMenuButton(
-                        icon: const Icon(Icons.more_vert),
-                        itemBuilder: (context) {
-                          return [
-                            // if (isModerator)
-                            PopupMenuItem(
-                              child: Text("Add Thread"),
-                              onTap: () {
-                                context.push(
-                                  ForumRoutes.threadAddEdit,
-                                  extra: ThreadAddEditScreenProps(
-                                      communityId: state.community!.id!),
-                                );
-                              },
-                            ),
-                            PopupMenuItem(
-                              onTap: () {
-                                context.push(
-                                    ForumRoutes.communityMembersManageScreen,
-                                    extra: state.community!.id!);
-                              },
-                              child: Text("Manage Members"),
-                            ),
-                          ];
-                        },
-                      ),
+                              PopupMenuItem(
+                                child: Text("Add Thread"),
+                                onTap: () {
+                                  context.push(
+                                    ForumRoutes.threadAddEdit,
+                                    extra: ThreadAddEditScreenProps(
+                                        communityId: state.community!.id!),
+                                  );
+                                },
+                              ),
+                              PopupMenuItem(
+                                onTap: () {
+                                  context.push(
+                                      ForumRoutes.communityMembersManageScreen,
+                                      extra: state.community!.id!);
+                                },
+                                child: Text("Manage Members"),
+                              ),
+                            ];
+                          },
+                        ),
                     ],
                   ),
                   SliverList(
