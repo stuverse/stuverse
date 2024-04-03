@@ -1,23 +1,46 @@
-// import 'package:bloc/bloc.dart';
-// import 'package:meta/meta.dart';
+import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
+import 'package:stuverse/app/app.dart';
 
-// import '../../../models/mentor_request.dart';
+part 'manage_mentor_request_state.dart';
 
-// part 'manage_mentor_request_state.dart';
+class ManageMentorRequestCubit extends Cubit<ManageMentorRequestState> {
+  ManageMentorRequestCubit() : super(ManageMentorRequestInitial());
+  void addRequest({required int mentorId, required String description}) async {
+    emit(ManageMentorRequestLoading());
+    try {
+      final resp = await dioClient.post('/mentor/requests/',
+          data: {'description': description, 'mentor': mentorId});
+      emit(ManageMentorRequestLoaded('Posted Successfully'));
+    } catch (e) {
+      emit(ManageMentorRequestFailure('Something went wrong'));
+    }
+  }
 
-// class ManageMentorRequestCubit extends Cubit<ManageMentorRequestState> {
-//   ManageMentorRequestCubit() : super(ManageMentorRequestInitial());
-//   void manageMentorRequestData() async {
-//     emit(ManageMentorRequestLoading());
-//     try {
-//       final resp = await dioClient.get('/mentor/requests');
-//       final List<MentorRequest> requests = [];
-//       for (final request in resp.data) {
-//         requests.add(MentorRequest.fromJson(request));
-//       }
-//       emit(ManageMentorRequestLoaded(requests));
-//     } catch (e) {
-//       emit(ManageMentorRequestFailure(e.toString()));
-//     }
-//   }
-// }
+  void editRequest(
+      {required int mentorId,
+      required String description,
+      required int id}) async {
+    emit(ManageMentorRequestLoading());
+    try {
+      final resp = await dioClient.put('/mentor/requests/$id/',
+          data: {'description': description, 'mentor': mentorId});
+      emit(ManageMentorRequestLoaded('Edited Successfully'));
+    } catch (e) {
+      print(e);
+      emit(ManageMentorRequestFailure('Something went wrong'));
+    }
+  }
+
+  void deleteRequest({required int id}) async {
+    emit(ManageMentorRequestLoading());
+    try {
+      final resp = await dioClient.delete(
+        '/mentor/requests/$id/',
+      );
+      emit(ManageMentorRequestLoaded('Deleted Successfully'));
+    } catch (e) {
+      emit(ManageMentorRequestFailure('Something went wrong'));
+    }
+  }
+}

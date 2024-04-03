@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stuverse/app/app.dart';
 
-import '../cubit/search/mentor_search_cubit.dart';
-import '../widgets/mentor_post_card.dart';
+import '../../cubit/search/mentor_search_cubit.dart';
+import '../../widgets/mentor_post_card.dart';
 
 class seeAllPostsScreen extends StatefulWidget {
   const seeAllPostsScreen({super.key});
@@ -125,7 +125,7 @@ class _seeAllPostsScreenState extends State<seeAllPostsScreen> {
                             ),
                           );
                         }
-                        return Container();
+                        return const SizedBox();
                       },
                     )
                   ],

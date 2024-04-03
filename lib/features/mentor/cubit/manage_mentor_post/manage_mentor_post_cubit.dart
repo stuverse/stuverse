@@ -49,7 +49,6 @@ class ManageMentorPostCubit extends Cubit<ManageMentorPostState> {
       });
       emit(ManageMentorPostLoaded('Edited successfully'));
     } catch (e) {
-      print(e);
       emit(ManageMentorPostFailure('Something went wrong'));
     }
   }
@@ -60,7 +59,7 @@ class ManageMentorPostCubit extends Cubit<ManageMentorPostState> {
       final resp = await dioClient.delete('/mentor/posts/$id/');
       emit(ManageMentorPostLoaded('Deleted successfully'));
     } catch (e) {
-      print(e);
+     
       emit(ManageMentorPostFailure('Something went wrong'));
     }
   }

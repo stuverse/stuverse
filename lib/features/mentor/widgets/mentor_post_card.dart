@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -34,8 +35,17 @@ class _MentorPostCardState extends State<MentorPostCard> {
             width: context.width * 0.7,
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: context.colorScheme.surfaceVariant,
-              borderRadius: BorderRadius.circular(25),
+              border: Border.all(
+                color: context.colorScheme.onBackground.withOpacity(0.1),),
+              color:
+               context.isDark
+               ?context.colorScheme.primaryContainer.blend(
+                  context.colorScheme.surfaceVariant)
+                  :context.colorScheme.surfaceVariant,
+
+           
+             
+ borderRadius: BorderRadius.circular(25),
             ),
             child: Column(
               children: [
@@ -60,7 +70,7 @@ class _MentorPostCardState extends State<MentorPostCard> {
                       Text(
                         CommonUtils.relativeTime(
                             DateTime.parse(widget.post.createdAt)),
-                        style: context.bodyMedium,
+                        style: context.bodySmall,
                       ),
                     ],
                   ),
@@ -145,7 +155,8 @@ class _MentorPostCardState extends State<MentorPostCard> {
                                                           .pop();
                                                     },
                                                     child: Text('Delete'),
-                                                  )),
+                                                  )
+                                                  ),
                                       ],
                                     );
                                   },
@@ -177,8 +188,15 @@ class _MentorPostCardState extends State<MentorPostCard> {
                   child: Container(
                     padding: EdgeInsets.all(15),
                     decoration: BoxDecoration(
+                      border: Border.all(
+                        color: context.colorScheme.onBackground.withOpacity(0.1),),
                       borderRadius: BorderRadius.circular(25),
-                      color: context.colorScheme.surface,
+                       color:
+                       context.isDark
+                        ?context.colorScheme.tertiary
+                        :context.colorScheme.surface
+                    
+          
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

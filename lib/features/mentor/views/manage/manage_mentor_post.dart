@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/mentor/mentor.dart';
 import 'package:stuverse/features/mentor/models/mentor_post.dart';
-import '../cubit/manage_mentor_post/manage_mentor_post_cubit.dart';
-import '../cubit/manage_mentor_post/manage_mentor_post_state.dart';
-import '../cubit/search/mentor_search_cubit.dart';
+import '../../cubit/manage_mentor_post/manage_mentor_post_cubit.dart';
+import '../../cubit/manage_mentor_post/manage_mentor_post_state.dart';
+import '../../cubit/search/mentor_search_cubit.dart';
 
 class ManageMentorPostScreen extends StatefulWidget {
   const ManageMentorPostScreen({super.key, this.post});
@@ -26,13 +26,13 @@ class _ManageMentorPostScreenState extends State<ManageMentorPostScreen> {
   @override
   void initState() {
     if (widget.post != null) {
-      _postController.text = widget.post!.name!;
-      _descriptionController.text = widget.post!.description!;
-      _priceController.text = widget.post!.price!.toString();
-      if (widget.post!.isFree!) {
+      _postController.text = widget.post!.name;
+      _descriptionController.text = widget.post!.description;
+      _priceController.text = widget.post!.price.toString();
+      if (widget.post!.isFree) {
         isFree = true;
       }
-      if (!widget.post!.isFree!) {
+      if (!widget.post!.isFree) {
         isFree = false;
       }
     }
@@ -77,7 +77,9 @@ class _ManageMentorPostScreenState extends State<ManageMentorPostScreen> {
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium!
-                          .copyWith(fontWeight: FontWeight.bold),
+                          .copyWith(fontWeight: FontWeight.bold,
+                           color: Theme.of(context).colorScheme.secondaryContainer,
+                          ),
                     ),
                     SizedBox(
                       height: 5,
@@ -106,7 +108,9 @@ class _ManageMentorPostScreenState extends State<ManageMentorPostScreen> {
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
-                              .copyWith(fontWeight: FontWeight.bold),
+                              .copyWith(fontWeight: FontWeight.bold,
+                              
+                               color: Theme.of(context).colorScheme.secondaryContainer,),
                         ),
                         ElevatedButton.icon(
                           onPressed: () {
@@ -150,7 +154,9 @@ class _ManageMentorPostScreenState extends State<ManageMentorPostScreen> {
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium!
-                          .copyWith(fontWeight: FontWeight.bold),
+                          .copyWith(fontWeight: FontWeight.bold,
+                          
+                           color: Theme.of(context).colorScheme.secondaryContainer,),
                     ),
                     SizedBox(
                       height: 5,
@@ -238,7 +244,7 @@ class _ManageMentorPostScreenState extends State<ManageMentorPostScreen> {
                                       : context
                                           .read<ManageMentorPostCubit>()
                                           .editPost(
-                                            id: widget.post!.id!,
+                                            id: widget.post!.id,
                                             postName: postName,
                                             fee: double.parse(fee),
                                             isFree: isFree,

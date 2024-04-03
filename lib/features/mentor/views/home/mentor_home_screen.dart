@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/mentor/widgets/request_card.dart';
-import '../cubit/home/cubit/mentor_home_cubit.dart';
-import '../routes/mentor_routes.dart';
-import '../widgets/mentor_post_card.dart';
+import '../../cubit/home/cubit/mentor_home_cubit.dart';
+import '../../routes/mentor_routes.dart';
+import '../../widgets/mentor_post_card.dart';
 
 class MentorHomeScreen extends StatefulWidget {
   MentorHomeScreen({super.key});
@@ -26,26 +26,7 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
       child: Scaffold(
         appBar: getMainAppbar(
           actions: [
-            // IconButton(
-            //   onPressed: () {
-            //     if (user?.linkedin == null ||
-            //         user?.mobile == null ||
-            //         user?.github == null ||
-            //         user?.about == null ||
-            //         user?.experienceYears == null ||
-            //         user?.skills == null) {
-            //       context.showMessage(
-            //           message:
-            //               "Please ensure your profile is complete before proceeding.");
-            //       return;
-            //     }
-            //     context.push(MentorRoutes.manageMentorPost);
-            //   },
-            //   icon: Icon(Icons.add),
-            // ),
-            PopupMenuButton(
-                // icon: Icon(Icons.more_vert),
-                itemBuilder: (context) {
+            PopupMenuButton(itemBuilder: (context) {
               return [
                 PopupMenuItem(
                   onTap: () {
@@ -66,7 +47,7 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                 ),
                 PopupMenuItem(
                   onTap: () {
-                    context.push(MentorRoutes.seeAllPosts);
+                    context.push(MentorRoutes.manageMentorRequest);
                   },
                   child: Text('Add Mentorship Request'),
                 ),
@@ -182,7 +163,6 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                                   ],
                                 ),
                               ),
-                              10.heightBox,
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
@@ -200,14 +180,15 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Requests',
+                                      'Mentorship Requests',
                                       style: context.titleMedium!.copyWith(
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        context.push(MentorRoutes.seeAllPosts);
+                                        context
+                                            .push(MentorRoutes.seeAllRequests);
                                       },
                                       child: Text(
                                         'See All',
@@ -221,7 +202,6 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                                   ],
                                 ),
                               ),
-                              10.heightBox,
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
