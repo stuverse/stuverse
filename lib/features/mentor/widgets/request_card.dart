@@ -24,11 +24,11 @@ class _RequestCardState extends State<RequestCard> {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: Container(
         height: context.height * 0.2,
-
-             width: context.width * 0.9,
+        width: context.width * 0.9,
         decoration: BoxDecoration(
-          border:
-              Border.all(color: context.colorScheme.onBackground.withOpacity(0.1), width: 2),
+          border: Border.all(
+              color: context.colorScheme.onBackground.withOpacity(0.1),
+              width: 2),
           borderRadius: BorderRadius.circular(25),
         ),
         child: Padding(
@@ -55,7 +55,7 @@ class _RequestCardState extends State<RequestCard> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                        Text(
+                      Text(
                         CommonUtils.relativeTime(
                             DateTime.parse(widget.request.createdAt)),
                         style: context.bodySmall,
@@ -63,7 +63,7 @@ class _RequestCardState extends State<RequestCard> {
                     ],
                   ),
                   Spacer(),
-                     if (widget.request.mentor.id ==
+                  if (widget.request.mentor.id ==
                       context.read<CoreCubit>().state.user!.id)
                     PopupMenuButton(
                         padding: EdgeInsets.zero,
@@ -124,7 +124,8 @@ class _RequestCardState extends State<RequestCard> {
                                                 context.pushReplacement(
                                                     MentorRoutes.mentorHome);
                                                 context
-                                                    .read<MentorshipRequestCubit>()
+                                                    .read<
+                                                        MentorshipRequestCubit>()
                                                     .getMentorRequestData();
                                               }
                                             },
@@ -137,16 +138,14 @@ class _RequestCardState extends State<RequestCard> {
                                                           .read<
                                                               ManageMentorRequestCubit>()
                                                           .deleteRequest(
-                                                              id: widget
-                                                                  .request.id,
-                                                                 
-                                                                  );
+                                                            id: widget
+                                                                .request.id,
+                                                          );
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
                                                     child: Text('Delete'),
-                                                  )
-                                                  ),
+                                                  )),
                                       ],
                                     );
                                   },
@@ -186,18 +185,19 @@ class _RequestCardState extends State<RequestCard> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ElevatedButton(
-                         onPressed: (){
-                           context.push(MentorRoutes.requestDetails, extra: widget.request);
-                         },
-                             child: Text('Review',
-                                 style: context.titleSmall!.copyWith(
-                                     color: context.colorScheme.surface,
-                                     fontWeight: FontWeight.bold)),
-                             style: ElevatedButton.styleFrom(
-                                 backgroundColor: context.colorScheme.secondary,
-                                 shape: RoundedRectangleBorder(
-                                     borderRadius: BorderRadius.circular(12))),
-                           ),
+                    onPressed: () {
+                      context.push(MentorRoutes.requestDetails,
+                          extra: widget.request);
+                    },
+                    child: Text('Review',
+                        style: context.titleSmall!.copyWith(
+                            color: context.colorScheme.surface,
+                            fontWeight: FontWeight.bold)),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: context.colorScheme.secondary,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12))),
+                  ),
                 ],
               ),
             ],

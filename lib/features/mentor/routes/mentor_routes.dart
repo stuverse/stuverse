@@ -43,7 +43,7 @@ class MentorRoutes {
       builder: (context, state) =>
           PostDetailsScreen(post: state.extra as MentorPost),
     ),
-     GoRoute(
+    GoRoute(
       path: '/mentor/requestDetails',
       builder: (context, state) =>
           RequestDetailsScreen(request: state.extra as MentorRequest),

@@ -143,7 +143,7 @@ class ThreadCard extends StatelessWidget {
                                 return Container(
                                   height: context.height * 0.5,
                                   child: Center(
-                                    child: CircularProgressIndicator(),
+                                    child: QuoteLoadingIndicator(),
                                   ),
                                 );
                               },
@@ -225,7 +225,8 @@ class ThreadCard extends StatelessWidget {
                   if (isDetailScreen) {
                     commentFocusNode?.requestFocus();
                   } else {
-                    context.push(ForumRoutes.threadDetail, extra: thread);
+                    context.push(ForumRoutes.threadDetail
+                        .replaceFirst(":id", thread.id.toString()));
                   }
                 },
                 selected: false,
@@ -334,7 +335,7 @@ class _ThreadAISummaryState extends State<ThreadAISummary> {
       blastDirectionality: BlastDirectionality.explosive,
       particleDrag: 0.05,
       emissionFrequency: 0.05,
-      numberOfParticles: 50,
+      numberOfParticles: 10,
       gravity: 0.05,
       colors: const [
         Colors.green,
@@ -345,7 +346,7 @@ class _ThreadAISummaryState extends State<ThreadAISummary> {
       ],
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(15.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

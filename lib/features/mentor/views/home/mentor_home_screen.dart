@@ -26,28 +26,26 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
       child: Scaffold(
         appBar: getMainAppbar(
           actions: [
-            PopupMenuButton(
-     
-              itemBuilder: (context) {
+            PopupMenuButton(itemBuilder: (context) {
               return [
                 PopupMenuItem(
                   onTap: () {
-                if (user?.linkedin == null ||
-                    user?.mobile == null ||
-                    user?.github == null ||
-                    user?.about == null ||
-                    user?.experienceYears == null ||
-                    user?.skills == null) {
-                  context.showMessage(
-                      message:
-                          "Please ensure your profile is complete before proceeding.");
-                  return;
-                }
-                context.push(MentorRoutes.manageMentorPost);
+                    if (user?.linkedin == null ||
+                        user?.mobile == null ||
+                        user?.github == null ||
+                        user?.about == null ||
+                        user?.experienceYears == null ||
+                        user?.skills == null) {
+                      context.showMessage(
+                          message:
+                              "Please ensure your profile is complete before proceeding.");
+                      return;
+                    }
+                    context.push(MentorRoutes.manageMentorPost);
                   },
                   child: Text('Add Mentorship Post'),
                 ),
-                 PopupMenuItem(
+                PopupMenuItem(
                   onTap: () {
                     context.push(MentorRoutes.manageMentorRequest);
                   },
@@ -165,7 +163,6 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                                   ],
                                 ),
                               ),
-                            
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
@@ -190,7 +187,8 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        context.push(MentorRoutes.seeAllRequests);
+                                        context
+                                            .push(MentorRoutes.seeAllRequests);
                                       },
                                       child: Text(
                                         'See All',
@@ -204,7 +202,6 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                                   ],
                                 ),
                               ),
-                        
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
