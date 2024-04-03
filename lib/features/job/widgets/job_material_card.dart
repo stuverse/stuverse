@@ -54,15 +54,26 @@ class JobMaterialCard extends StatelessWidget {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              Text(material.title ?? "",
-                                  style: context.titleLarge!.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                              Text(material.description ?? "",
-                                  style: context.bodyMedium!.copyWith(
-                                    color: context.colorScheme.onSurface
-                                        .withOpacity(0.8),
-                                  )),
+                              Container(
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    color: context.colorScheme.surface,
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(),
+                                  ),
+                                  child: Column(children: [
+                                    Text(material.title ?? "",
+                                        style: context.titleLarge!.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                    10.heightBox,
+                                    Text(material.description ?? "",
+                                        style: context.bodyMedium!.copyWith(
+                                          color: context.colorScheme.onSurface
+                                              .withOpacity(0.8),
+                                        )),
+                                  ])),
+                              30.heightBox,
                               SizedBox(
                                 width: double.infinity,
                                 child: ElevatedButton.icon(
