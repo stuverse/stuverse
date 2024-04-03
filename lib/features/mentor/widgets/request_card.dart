@@ -23,9 +23,10 @@ class _RequestCardState extends State<RequestCard> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: Container(
-        height: context.height * 0.2,
+        height: 190,
         width: context.width * 0.9,
         decoration: BoxDecoration(
+          color: context.colorScheme.surface,
           border: Border.all(
               color: context.colorScheme.onBackground.withOpacity(0.1),
               width: 2),
