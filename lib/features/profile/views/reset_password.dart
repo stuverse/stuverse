@@ -41,22 +41,16 @@ class _ResetAccountPasswordState extends State<ResetAccountPassword> {
               controller: _passwordController,
               decoration: InputDecoration(
                 labelText: "New Password",
-                suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.remove_red_eye_rounded),
-                ),
               ),
+              obscureText: true,
             ),
             20.heightBox,
             TextField(
               controller: _password2Controller,
               decoration: InputDecoration(
                 labelText: "Confirm Password",
-                suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.remove_red_eye_rounded),
-                ),
               ),
+              obscureText: true,
             ),
             50.heightBox,
             Center(
