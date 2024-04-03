@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
+
+import '../cubit/delete_account/delete_account_cubit.dart';
 
 class DeleteAccount extends StatefulWidget {
   const DeleteAccount({super.key});
@@ -9,6 +13,7 @@ class DeleteAccount extends StatefulWidget {
 }
 
 class _DeleteAccountState extends State<DeleteAccount> {
+  final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,30 +75,87 @@ class _DeleteAccountState extends State<DeleteAccount> {
                 ),
                 10.heightBox,
                 TextField(
+                  controller: _passwordController,
                   decoration: InputDecoration(
                     labelText: "Enter your password",
                     border: const OutlineInputBorder(),
-                    suffixIcon: IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.remove_red_eye_rounded),
-                    ),
                   ),
+                  obscureText: true,
                 ),
                 30.heightBox,
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text("Delete Account",
-                      style: context.titleLarge!.copyWith(
-                        fontSize: 20,
-                      )),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(double.infinity, 50),
-                    backgroundColor: Theme.of(context).colorScheme.error,
-                    foregroundColor: Theme.of(context).colorScheme.onError,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
+                BlocConsumer<DeleteAccountCubit, DeleteAccountState>(
+                  listener: (context, state) {
+                    if (state is DeleteAccountSuccess) {
+                      context.go(CommonRoutes.signin);
+                      context.read<CoreCubit>().signOut();
+                      context.showMessage(
+                          message:
+                              "Your account has been deleted successfully. Thank you for using our app.",
+                          duration: 5.seconds);
+                    }
+                    if (state is DeleteAccountError) {
+                      context.showErrorMessage(message: state.message);
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is DeleteAccountLoading) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return ElevatedButton(
+                      onPressed: () {
+                        if (_passwordController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Enter your password"),
+                            ),
+                          );
+                          return;
+                        }
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text(
+                                "Are you sure you want to delete your account?"),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Cancel"),
+                              ),
+                              FilledButton(
+                                style: FilledButton.styleFrom(
+                                  backgroundColor: context.colorScheme.error,
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  context
+                                      .read<DeleteAccountCubit>()
+                                      .deleteAccount(
+                                          password: _passwordController.text);
+                                },
+                                child: Text("Delete"),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      child: Text("Delete Account",
+                          style: context.titleLarge!.copyWith(
+                            fontSize: 20,
+                          )),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(double.infinity, 50),
+                        backgroundColor: Theme.of(context).colorScheme.error,
+                        foregroundColor: Theme.of(context).colorScheme.onError,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ],
             )

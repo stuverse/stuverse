@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
+
+import '../cubit/reset_password/reset_password_cubit.dart';
 
 class ResetAccountPassword extends StatefulWidget {
   const ResetAccountPassword({super.key});
@@ -8,10 +12,10 @@ class ResetAccountPassword extends StatefulWidget {
   State<ResetAccountPassword> createState() => _ResetAccountPasswordState();
 }
 
-class _ResetAccountPasswordState extends State<ResetAccountPassword>
-    with SingleTickerProviderStateMixin {
-  @override
-  @override
+class _ResetAccountPasswordState extends State<ResetAccountPassword> {
+  final _passwordController = TextEditingController();
+  final _password2Controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +38,7 @@ class _ResetAccountPasswordState extends State<ResetAccountPassword>
             ),
             20.heightBox,
             TextField(
+              controller: _passwordController,
               decoration: InputDecoration(
                 labelText: "New Password",
                 suffixIcon: IconButton(
@@ -44,6 +49,7 @@ class _ResetAccountPasswordState extends State<ResetAccountPassword>
             ),
             20.heightBox,
             TextField(
+              controller: _password2Controller,
               decoration: InputDecoration(
                 labelText: "Confirm Password",
                 suffixIcon: IconButton(
@@ -54,18 +60,48 @@ class _ResetAccountPasswordState extends State<ResetAccountPassword>
             ),
             50.heightBox,
             Center(
-              child: FilledButton(
-                onPressed: () {},
-                child: Text("Reset Password",
-                    style: context.titleLarge!.copyWith(
-                      fontSize: 20,
-                    )),
-                style: FilledButton.styleFrom(
-                  minimumSize: Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
+              child: BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
+                listener: (context, state) {
+                  if (state is ResetPasswordSuccess) {
+                    context.go(CommonRoutes.signin);
+                    context.read<CoreCubit>().signOut();
+                    context.showMessage(message: "Password reset successfully");
+                  }
+                  if (state is ResetPasswordError) {
+                    context.showErrorMessage(
+                        message: "Unable to reset password");
+                  }
+                },
+                builder: (context, state) {
+                  if (state is ResetPasswordLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return FilledButton(
+                    onPressed: () {
+                      if (_passwordController.text !=
+                          _password2Controller.text) {
+                        context.showErrorMessage(
+                            message: "Passwords do not match");
+                        return;
+                      }
+                      context.read<ResetPasswordCubit>().resetPassword(
+                          password: _passwordController.text,
+                          password2: _password2Controller.text);
+                    },
+                    child: Text("Reset Password",
+                        style: context.titleLarge!.copyWith(
+                          fontSize: 20,
+                        )),
+                    style: FilledButton.styleFrom(
+                      minimumSize: Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ],
