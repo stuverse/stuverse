@@ -42,4 +42,20 @@ class ThreadCommentRepo {
       return left("Something went wrong");
     }
   }
+
+  Future<Either<String, Unit>> reportComment(
+      {required int commentId, required String reason}) async {
+    try {
+      final resp = await dioClient.post(
+        REPORT_COMMENT_API,
+        data: {'comment_id': commentId, 'reason': "Reason: " + reason},
+      );
+      return right(unit);
+    } on DioException catch (e) {
+      return left(
+          e.response?.data['error'].toString() ?? "Unable to report comment");
+    } catch (e) {
+      return left("Something went wrong");
+    }
+  }
 }

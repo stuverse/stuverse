@@ -1,9 +1,11 @@
 import 'package:animated_tree_view/animated_tree_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stuverse/app/app.dart';
 
+import '../../cubit/comment/report/comment_report_cubit.dart';
 import '../../forum.dart';
 
 class CommentCard extends StatelessWidget {
@@ -66,7 +68,23 @@ class CommentCard extends StatelessWidget {
                 ),
               ),
               5.widthBox,
-              IconButton(icon: Icon(Icons.more_horiz), onPressed: () {}),
+              PopupMenuButton(itemBuilder: (context) {
+                return [
+                  PopupMenuItem(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return ReportCommentDialog(
+                            comment: comment.data!,
+                          );
+                        },
+                      );
+                    },
+                    child: Text("Report !"),
+                  ),
+                ];
+              }),
               5.widthBox,
             ],
           ),
@@ -126,6 +144,80 @@ class CommentCard extends StatelessWidget {
           10.heightBox,
         ],
       ),
+    );
+  }
+}
+
+class ReportCommentDialog extends StatefulWidget {
+  const ReportCommentDialog({
+    super.key,
+    required this.comment,
+  });
+
+  final ThreadComment comment;
+
+  @override
+  State<ReportCommentDialog> createState() => _ReportCommentDialogState();
+}
+
+class _ReportCommentDialogState extends State<ReportCommentDialog> {
+  final _reasonController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text("Report !"),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text("Why are you reporting this comment ?"),
+          TextFormField(
+            controller: _reasonController,
+            decoration: InputDecoration(
+              labelText: "Reason",
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text("Cancel"),
+        ),
+        BlocConsumer<CommentReportCubit, CommentReportState>(
+          listener: (context, state) {
+            if (state is CommentReportSuccess) {
+              context
+                  .read<ThreadCommentCubit>()
+                  .getComments(threadId: widget.comment.thread ?? -1);
+              Navigator.pop(context);
+              context.showMessage(message: "Reported successfully");
+            }
+            if (state is CommentReportError) {
+              Navigator.pop(context);
+              context.showErrorMessage(message: state.message);
+            }
+          },
+          builder: (context, state) {
+            if (state is CommentReportLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return TextButton(
+              onPressed: () {
+                context.read<CommentReportCubit>().reportComment(
+                      commentId: widget.comment.id ?? -1,
+                      reason: _reasonController.text,
+                    );
+              },
+              child: Text("Report"),
+            );
+          },
+        ),
+      ],
     );
   }
 }

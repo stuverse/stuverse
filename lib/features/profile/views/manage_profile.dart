@@ -12,6 +12,7 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/profile/cubit/manage_profile_cubit.dart';
+import 'package:stuverse/features/profile/profile.dart';
 
 import '../../../app/common/core/cubit/skill/skill_cubit.dart';
 
@@ -104,6 +105,31 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
         title: Text(
           "Edit Profile",
         ),
+        actions: [
+          PopupMenuButton(
+              icon: Icon(Icons.more_vert),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              itemBuilder: (context) {
+                return [
+                  PopupMenuItem(
+                    onTap: () {
+                      context.push(ProfileRoutes.resetPassword);
+                    },
+                    value: 1,
+                    child: Text("Reset Password"),
+                  ),
+                  PopupMenuItem(
+                    onTap: () {
+                      context.push(ProfileRoutes.profileDelete);
+                    },
+                    value: 2,
+                    child: Text("Delete Account"),
+                  ),
+                ];
+              })
+        ],
         elevation: 0,
       ),
       extendBodyBehindAppBar: true,

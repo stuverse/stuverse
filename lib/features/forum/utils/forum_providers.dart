@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stuverse/features/forum/cubit/thread/summary/thread_summary_cubit.dart';
 import 'package:stuverse/features/forum/forum.dart';
 
+import '../cubit/comment/report/comment_report_cubit.dart';
 import '../cubit/community/all/all_community_cubit.dart';
 
 import '../cubit/community/members/community_members_cubit.dart';
@@ -32,6 +33,9 @@ class ForumProviders {
         ),
         BlocProvider<ThreadSummaryCubit>(
           create: (context) => ThreadSummaryCubit(),
+        ),
+        BlocProvider<CommentReportCubit>(
+          create: (context) => CommentReportCubit(),
         ),
       ];
 }
