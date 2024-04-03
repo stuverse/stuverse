@@ -2,14 +2,14 @@ import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/mentor/mentor.dart';
 import 'package:stuverse/features/mentor/models/mentor_post.dart';
 import 'package:stuverse/features/mentor/models/mentor_request.dart';
-import 'package:stuverse/features/mentor/views/manage_mentor_post.dart';
-import 'package:stuverse/features/mentor/views/post_detail_screen.dart';
-import 'package:stuverse/features/mentor/views/request_detail_screen.dart';
+import 'package:stuverse/features/mentor/views/manage/manage_mentor_post.dart';
+import 'package:stuverse/features/mentor/views/detail/post_detail_screen.dart';
+import 'package:stuverse/features/mentor/views/detail/request_detail_screen.dart';
 
-import 'package:stuverse/features/mentor/views/see_all_posts.dart';
+import 'package:stuverse/features/mentor/views/detail/see_all_posts.dart';
 
-import '../views/manage_mentor_request.dart';
-import '../views/see_all_requests.dart';
+import '../views/manage/manage_mentor_request.dart';
+import '../views/detail/see_all_requests.dart';
 
 class MentorRoutes {
   //! ---DO NOT MODIFY-----

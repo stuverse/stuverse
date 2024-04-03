@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:readmore/readmore.dart';
 import 'package:stuverse/app/utils/extentions/app_extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../models/mentor_post.dart';
+import '../../models/mentor_post.dart';
 
 class PostDetailsScreen extends StatefulWidget {
   PostDetailsScreen({super.key, required this.post});

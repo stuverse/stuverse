@@ -5,8 +5,8 @@ import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/mentor/cubit/mentor_request/cubit/mentorship_request_cubit.dart';
 import 'package:stuverse/features/mentor/models/mentor_request.dart';
 
-import '../cubit/manage_mentor_request/cubit/manage_mentor_request_cubit.dart';
-import '../routes/mentor_routes.dart';
+import '../../cubit/manage_mentor_request/cubit/manage_mentor_request_cubit.dart';
+import '../../routes/mentor_routes.dart';
 
 class ManageMentorRequest extends StatefulWidget {
   const ManageMentorRequest({super.key, required this.mentorRequest});

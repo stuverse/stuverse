@@ -35,6 +35,8 @@ class _MentorPostCardState extends State<MentorPostCard> {
             width: context.width * 0.7,
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
+              border: Border.all(
+                color: context.colorScheme.onBackground.withOpacity(0.1),),
               color:
                context.isDark
                ?context.colorScheme.primaryContainer.blend(
@@ -68,7 +70,7 @@ class _MentorPostCardState extends State<MentorPostCard> {
                       Text(
                         CommonUtils.relativeTime(
                             DateTime.parse(widget.post.createdAt)),
-                        style: context.bodyMedium,
+                        style: context.bodySmall,
                       ),
                     ],
                   ),
@@ -186,6 +188,8 @@ class _MentorPostCardState extends State<MentorPostCard> {
                   child: Container(
                     padding: EdgeInsets.all(15),
                     decoration: BoxDecoration(
+                      border: Border.all(
+                        color: context.colorScheme.onBackground.withOpacity(0.1),),
                       borderRadius: BorderRadius.circular(25),
                        color:
                        context.isDark

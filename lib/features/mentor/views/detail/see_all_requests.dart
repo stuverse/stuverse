@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/mentor/cubit/mentor_request/cubit/mentorship_request_cubit.dart';
 
-import '../widgets/request_card.dart';
+import '../../widgets/request_card.dart';
 
 class seeAllRequestsScreen extends StatefulWidget {
   const seeAllRequestsScreen({super.key});

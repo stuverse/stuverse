@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/mentor/widgets/request_card.dart';
-import '../cubit/home/cubit/mentor_home_cubit.dart';
-import '../routes/mentor_routes.dart';
-import '../widgets/mentor_post_card.dart';
+import '../../cubit/home/cubit/mentor_home_cubit.dart';
+import '../../routes/mentor_routes.dart';
+import '../../widgets/mentor_post_card.dart';
 
 class MentorHomeScreen extends StatefulWidget {
   MentorHomeScreen({super.key});
@@ -183,7 +183,7 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Requests',
+                                      'Mentorship Requests',
                                       style: context.titleMedium!.copyWith(
                                         fontWeight: FontWeight.w600,
                                       ),

@@ -46,11 +46,21 @@ class _RequestCardState extends State<RequestCard> {
                   SizedBox(
                     width: 10,
                   ),
-                  Text(
-                    widget.request.mentor.name,
-                    style: context.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.request.mentor.name,
+                        style: context.bodyLarge!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                        Text(
+                        CommonUtils.relativeTime(
+                            DateTime.parse(widget.request.createdAt)),
+                        style: context.bodySmall,
+                      ),
+                    ],
                   ),
                   Spacer(),
                      if (widget.request.mentor.id ==

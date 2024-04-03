@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../models/mentor_request.dart';
+import '../../models/mentor_request.dart';
 
 class RequestDetailsScreen extends StatelessWidget {
   const RequestDetailsScreen({super.key, required this.request});
@@ -33,11 +33,21 @@ class RequestDetailsScreen extends StatelessWidget {
                   SizedBox(
                     width: 10,
                   ),
-                  Text(
-                    request.mentor.name,
-                    style: context.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        request.mentor.name,
+                        style: context.bodyLarge!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                       Text(
+                        CommonUtils.relativeTime(
+                            DateTime.parse(request.createdAt)),
+                        style: context.bodySmall,
+                      ),
+                    ],
                   )
             ],
           ),
