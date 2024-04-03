@@ -72,21 +72,23 @@ class ProfileHomeScreen extends StatelessWidget {
                             context.read<CoreCubit>().toggleTheme();
                           }),
                       10.heightBox,
-                      ProfileTile(
-                          title: "Manage Communities",
-                          iconData: Icons.forum,
-                          color: context.goldPrimary,
-                          onTap: () {
-                            context.push(ForumRoutes.communityManage);
-                          }),
+                      if (user != null && user.type != UserTypes.STUDENT)
+                        ProfileTile(
+                            title: "Manage Communities",
+                            iconData: Icons.forum,
+                            color: context.goldPrimary,
+                            onTap: () {
+                              context.push(ForumRoutes.communityManage);
+                            }),
                       10.heightBox,
-                      ProfileTile(
-                          title: "Users Manage",
-                          iconData: Icons.manage_accounts,
-                          color: context.moneyPrimary,
-                          onTap: () {
-                            context.push(CommonRoutes.userManage);
-                          }),
+                      if (user != null && user.type != UserTypes.STUDENT)
+                        ProfileTile(
+                            title: "Users Manage",
+                            iconData: Icons.manage_accounts,
+                            color: context.moneyPrimary,
+                            onTap: () {
+                              context.push(CommonRoutes.userManage);
+                            }),
                       10.heightBox,
                       Divider(
                         thickness: 5,
@@ -97,8 +99,34 @@ class ProfileHomeScreen extends StatelessWidget {
                         iconData: Icons.logout,
                         color: context.pinkM3Primary,
                         onTap: () {
-                          context.go(CommonRoutes.signin);
-                          context.read<CoreCubit>().signOut();
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text("Logout"),
+                                content:
+                                    Text("Are you sure you want to logout?"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      context.pop();
+                                    },
+                                    child: Text("Cancel"),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      context.go(CommonRoutes.signin);
+                                      context.read<CoreCubit>().signOut();
+                                    },
+                                    child: Text(
+                                      "Logout",
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                  )
+                                ],
+                              );
+                            },
+                          );
                         },
                       ),
                     ]),

@@ -27,6 +27,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
   }
 
   Widget build(BuildContext context) {
+    final user = context.read<CoreCubit>().state.user;
     return Scaffold(
       appBar: AppBar(
           title: const Text("Job details"),
@@ -35,46 +36,48 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
           backgroundColor: Colors.transparent,
           scrolledUnderElevation: 0,
           actions: [
-            IconButton(
-              onPressed: () {
-                context.push(
-                  JobRoutes.jobAddEdit,
-                  extra: widget.post,
-                );
-              },
-              icon: const Icon(Icons.create_outlined),
-            ),
-            IconButton(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: const Text("Delete Job"),
-                        content: const Text(
-                            "Are you sure you want to delete this job?"),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              context
-                                  .read<ManageJobCubit>()
-                                  .deleteJob(id: widget.post.id!);
-                              context.go(JobRoutes.jobHome);
-                            },
-                            child: const Text("Yes"),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text("No"),
-                          ),
-                        ],
-                      );
-                    });
-              },
-              icon: const Icon(Icons.delete_outline),
-            )
+            if (user != null && user.type != UserTypes.STUDENT)
+              IconButton(
+                onPressed: () {
+                  context.push(
+                    JobRoutes.jobAddEdit,
+                    extra: widget.post,
+                  );
+                },
+                icon: const Icon(Icons.create_outlined),
+              ),
+            if (user != null && user.type != UserTypes.STUDENT)
+              IconButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text("Delete Job"),
+                          content: const Text(
+                              "Are you sure you want to delete this job?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                context
+                                    .read<ManageJobCubit>()
+                                    .deleteJob(id: widget.post.id!);
+                                context.go(JobRoutes.jobHome);
+                              },
+                              child: const Text("Yes"),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("No"),
+                            ),
+                          ],
+                        );
+                      });
+                },
+                icon: const Icon(Icons.delete_outline),
+              )
           ]),
       extendBodyBehindAppBar: true,
       body: BgGradient(

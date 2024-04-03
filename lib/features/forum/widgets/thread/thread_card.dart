@@ -34,6 +34,7 @@ class ThreadCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<CoreCubit>().state.user;
     return InkWell(
       onTap: () {
         if (!isDetailScreen) {
@@ -102,20 +103,21 @@ class ThreadCard extends StatelessWidget {
               5.widthBox,
               PopupMenuButton(itemBuilder: (context) {
                 return [
-                  PopupMenuItem(
-                    child: Text("Edit"),
-                    value: "edit",
-                    onTap: () {
-                      if (thread.community != null)
-                        context.push(
-                          ForumRoutes.threadAddEdit,
-                          extra: ThreadAddEditScreenProps(
-                            thread: thread,
-                            communityId: thread.community!.id!,
-                          ),
-                        );
-                    },
-                  ),
+                  if (user != null && user.type != UserTypes.STUDENT)
+                    PopupMenuItem(
+                      child: Text("Edit"),
+                      value: "edit",
+                      onTap: () {
+                        if (thread.community != null)
+                          context.push(
+                            ForumRoutes.threadAddEdit,
+                            extra: ThreadAddEditScreenProps(
+                              thread: thread,
+                              communityId: thread.community!.id!,
+                            ),
+                          );
+                      },
+                    ),
                   PopupMenuItem(
                     child: Text("AI Summarize"),
                     value: "summary",

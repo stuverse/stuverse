@@ -1,4 +1,5 @@
 // ignore_for_file: lines_longer_than_80_chars
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +21,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _selectedRadioValue = UserTypes.STUDENT;
 
   final _aboutController = TextEditingController();
+
+  bool _checkboxValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -162,6 +165,54 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       30.heightBox,
                                     ])
                               ].defaultListAnimation(),
+                            Row(
+                              children: [
+                                Checkbox(
+                                  value: _checkboxValue,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _checkboxValue = value!;
+                                    });
+                                  },
+                                ),
+                                Expanded(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: 'I agree to the ',
+                                      style: context.bodyMedium,
+                                      children: [
+                                        TextSpan(
+                                          text: 'Terms of Service',
+                                          style: context.bodyMedium!.copyWith(
+                                              color:
+                                                  context.colorScheme.primary),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () => context.push(
+                                                CommonRoutes.webView,
+                                                extra:
+                                                    "https://stuverse.in/terms-and-conditions"),
+                                        ),
+                                        TextSpan(
+                                          text: ' and ',
+                                          style: context.bodyMedium,
+                                        ),
+                                        TextSpan(
+                                          text: 'Privacy Policy',
+                                          style: context.bodyMedium!.copyWith(
+                                              color:
+                                                  context.colorScheme.primary),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () => context.push(
+                                                CommonRoutes.webView,
+                                                extra:
+                                                    "https://stuverse.in/privacy-policy"),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ]),
                       BlocConsumer<AuthCubit, AuthState>(
                         listener: (context, state) {
@@ -192,6 +243,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             orElse: () => FilledButton(
                                   onPressed: () {
                                     HapticFeedback.lightImpact();
+                                    if (!_checkboxValue) {
+                                      context.showErrorMessage(
+                                          message:
+                                              'Please agree to the terms and conditions');
+                                      return;
+                                    }
                                     if (_formKey.currentState!.validate()) {
                                       context
                                           .read<AuthCubit>()
@@ -209,7 +266,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ).toCenter(),
                                 )),
                       ),
-                    ]),
+                    ].defaultListAnimation()),
               ),
             ),
           ),
