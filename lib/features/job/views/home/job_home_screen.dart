@@ -90,44 +90,6 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
                                 },
                               ),
                               10.heightBox,
-                              Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .primaryContainer
-                                    .withOpacity(0.3),
-                                elevation: 5,
-                                child: ListTile(
-                                  onTap: () {
-                                    context.push(JobRoutes.jobMaterials);
-                                  },
-                                  title: Text(
-                                    'Click here to see all Job Materials',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge
-                                        ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onPrimaryContainer,
-                                            fontWeight: FontWeight.bold),
-                                  ),
-                                  trailing: TextButton(
-                                    onPressed: () {
-                                      context.push(JobRoutes.jobMaterials);
-                                    },
-                                    child: Text(
-                                      'Show all',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              10.heightBox,
                               Material(
                                 child: InkWell(
                                   onTap: () {
@@ -144,6 +106,54 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
                                     ),
                                   ),
                                 ),
+                              ),
+                              10.heightBox,
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primaryContainer
+                                    .withOpacity(0.3),
+                                elevation: 5,
+                                child: ListTile(
+                                    onTap: () {
+                                      context.push(JobRoutes.jobMaterials);
+                                    },
+                                    leading: Icon(
+                                      Icons.article_outlined,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimaryContainer,
+                                    ),
+                                    title: Text(
+                                      'Explore Materials',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onPrimaryContainer,
+                                              fontWeight: FontWeight.bold),
+                                    ),
+                                    subtitle: Text(
+                                      'Explore job materials to prepare for your dream job, interviews, and more.',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onPrimaryContainer),
+                                    ),
+                                    trailing: Icon(
+                                      Icons.arrow_forward,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimaryContainer,
+                                    )),
                               ),
                               10.heightBox,
                               Row(
