@@ -82,17 +82,18 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                             style: context.headlineLarge!
                                 .copyWith(fontWeight: FontWeight.bold)),
                         SizedBox(height: 5),
-                        BannerCard(
-                          title: 'Unlock Your Potential!',
-                          description:
-                              'Inspire and empower others with your knowledge. Join as a mentor today.',
-                          buttonText: 'Join Now',
-                          bannerText: 'Beta',
-                          onTap: () {
-                            context.showMessage(
-                                message: "Feature not available yet");
-                          },
-                        ),
+
+                        // BannerCard(
+                        //   title: 'Unlock Your Potential!',
+                        //   description:
+                        //       'Inspire and empower others with your knowledge. Join as a mentor today.',
+                        //   buttonText: 'Join Now',
+                        //   bannerText: 'Beta',
+                        //   onTap: () {
+                        //     context.showMessage(
+                        //         message: "Feature not available yet");
+                        //   },
+                        // ),
                         SizedBox(height: 15),
                         InkWell(
                           onTap: () {

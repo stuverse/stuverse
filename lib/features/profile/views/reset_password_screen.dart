@@ -5,14 +5,14 @@ import 'package:stuverse/app/app.dart';
 
 import '../cubit/reset_password/reset_password_cubit.dart';
 
-class ResetAccountPassword extends StatefulWidget {
-  const ResetAccountPassword({super.key});
+class ResetAccountPasswordScreen extends StatefulWidget {
+  const ResetAccountPasswordScreen({super.key});
 
   @override
-  State<ResetAccountPassword> createState() => _ResetAccountPasswordState();
+  State<ResetAccountPasswordScreen> createState() => _ResetAccountPasswordScreenState();
 }
 
-class _ResetAccountPasswordState extends State<ResetAccountPassword> {
+class _ResetAccountPasswordScreenState extends State<ResetAccountPasswordScreen> {
   final _passwordController = TextEditingController();
   final _password2Controller = TextEditingController();
 

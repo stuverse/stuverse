@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/features/profile/profile.dart';
-import 'package:stuverse/features/profile/views/delete_account.dart';
-import 'package:stuverse/features/profile/views/reset_password.dart';
+import 'package:stuverse/features/profile/views/delete_account_screen.dart';
+import 'package:stuverse/features/profile/views/reset_password_screen.dart';
 
 import '../views/manage_profile.dart';
 
@@ -25,11 +25,11 @@ class ProfileRoutes {
     ),
     GoRoute(
       path: profileDelete,
-      builder: (context, state) => const DeleteAccount(),
+      builder: (context, state) => const DeleteAccountScreen(),
     ),
     GoRoute(
       path: resetPassword,
-      builder: (context, state) => const ResetAccountPassword(),
+      builder: (context, state) => const ResetAccountPasswordScreen(),
     ),
   ];
 

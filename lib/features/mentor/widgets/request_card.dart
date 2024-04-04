@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:stuverse/features/mentor/cubit/home/cubit/mentor_home_cubit.dart';
 import 'package:stuverse/features/mentor/models/mentor_request.dart';
 
 import '../../../app/app.dart';
@@ -118,16 +119,20 @@ class _RequestCardState extends State<RequestCard> {
                                               }
                                               if (state
                                                   is ManageMentorRequestLoaded) {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(SnackBar(
-                                                  content: Text(state.message),
-                                                ));
-                                                context.pushReplacement(
-                                                    MentorRoutes.mentorHome);
-                                                context
+                                                    Navigator.of(context)
+                                                          .pop();
+                                                    context
                                                     .read<
                                                         MentorshipRequestCubit>()
                                                     .getMentorRequestData();
+                                                    context
+                                                    .read<
+                                                        MentorHomeCubit>()
+                                                    .getMentorHomeData();
+                                                context.showMessage(message: state.message);
+
+                                                context.go(MentorRoutes.mentorHome);
+                                                
                                               }
                                             },
                                             builder: (context, state) => state
@@ -142,8 +147,7 @@ class _RequestCardState extends State<RequestCard> {
                                                             id: widget
                                                                 .request.id,
                                                           );
-                                                      Navigator.of(context)
-                                                          .pop();
+                                                      
                                                     },
                                                     child: Text('Delete'),
                                                   )),

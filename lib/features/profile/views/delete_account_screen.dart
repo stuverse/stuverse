@@ -5,14 +5,14 @@ import 'package:stuverse/app/app.dart';
 
 import '../cubit/delete_account/delete_account_cubit.dart';
 
-class DeleteAccount extends StatefulWidget {
-  const DeleteAccount({super.key});
+class DeleteAccountScreen extends StatefulWidget {
+  const DeleteAccountScreen({super.key});
 
   @override
-  State<DeleteAccount> createState() => _DeleteAccountState();
+  State<DeleteAccountScreen> createState() => _DeleteAccountScreenState();
 }
 
-class _DeleteAccountState extends State<DeleteAccount> {
+class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
   final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -136,23 +136,31 @@ class _DeleteAccountState extends State<DeleteAccount> {
                                       .deleteAccount(
                                           password: _passwordController.text);
                                 },
-                                child: Text("Delete"),
+                                child: Text("Delete",
+                                style: context.bodyMedium!.copyWith(
+                                  color: context.colorScheme.onError
+                                ),
+                                ),
                               ),
                             ],
                           ),
                         );
                       },
                       child: Text("Delete Account",
-                          style: context.titleLarge!.copyWith(
-                            fontSize: 20,
-                          )),
+                      style: context.bodyMedium!.copyWith(
+                                  color: context.colorScheme.onError
+                                ),
+),
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(double.infinity, 50),
                         backgroundColor: Theme.of(context).colorScheme.error,
-                        foregroundColor: Theme.of(context).colorScheme.onError,
+
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
+                        textStyle: context.bodyMedium!.copyWith(
+                                  color: context.colorScheme.onError
+                                ),
                       ),
                     );
                   },
