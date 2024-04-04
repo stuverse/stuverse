@@ -222,7 +222,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                                         .copyWith(
                                             color: Theme.of(context)
                                                 .colorScheme
-                                                .onPrimary),
+                                                .onSurface),
                                   ),
                                 ),
                               ),

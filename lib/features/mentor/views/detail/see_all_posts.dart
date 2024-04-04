@@ -136,10 +136,10 @@ class _seeAllPostsScreenState extends State<seeAllPostsScreen> {
                         } else if (state is MentorSearchLoaded) {
                           final posts = state.posts;
                           final facultyMentors = posts
-                              .where((post) => post.mentor!.type == "faculty")
+                              .where((post) => post.mentor!.type == UserTypes.FACULTY)
                               .toList();
                           final studentMentors = posts
-                              .where((post) => post.mentor!.type == "student")
+                              .where((post) => post.mentor!.type == UserTypes.STUDENT)
                               .toList();
                           return Expanded(
                             child: DefaultTabController(
