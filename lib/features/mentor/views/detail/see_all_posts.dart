@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stuverse/app/app.dart';
 
 import '../../cubit/search/mentor_search_cubit.dart';
+import '../../models/mentor_post.dart';
 import '../../widgets/mentor_post_card.dart';
 
 class seeAllPostsScreen extends StatefulWidget {
@@ -15,12 +16,28 @@ class seeAllPostsScreen extends StatefulWidget {
 
 class _seeAllPostsScreenState extends State<seeAllPostsScreen> {
   final _searchController = TextEditingController();
+  
   @override
   void initState() {
     context
         .read<MentorSearchCubit>()
         .getMentorSearchData(search: _searchController.text);
     super.initState();
+  }
+    String? selectedFilter;
+  List<String> filters = ['All', 'Free', 'Paid'];
+  List<MentorPost> allPosts = []; // Assuming you have all mentor posts stored here
+
+  List<MentorPost> getFilteredPosts() {
+    // Filter mentor posts based on the selected filter
+    switch (selectedFilter) {
+      case 'Free':
+        return allPosts.where((post) => post.isFree).toList();
+      case 'Paid':
+        return allPosts.where((post) => !post.isFree).toList();
+      default:
+        return allPosts;
+    }
   }
 
   @override
@@ -39,31 +56,76 @@ class _seeAllPostsScreenState extends State<seeAllPostsScreen> {
                     5.heightBox,
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Hero(
-                        tag: 'search',
-                        child: Material(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(27),
-                              color: Color.fromARGB(242, 231, 230, 230),
-                            ),
-                            child: TextField(
-                              controller: _searchController,
-                              onChanged: (value) {
-                                context
-                                    .read<MentorSearchCubit>()
-                                    .getMentorSearchData(
-                                        search: _searchController.text);
-                              },
-                              decoration: InputDecoration(
-                                hintText: 'Search',
-                                prefixIcon: Icon(
-                                  Icons.search,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(27),
+                                color: Color.fromARGB(242, 231, 230, 230),
+                              ),
+                              child: TextField(
+                                controller: _searchController,
+                                onChanged: (value) {
+                                  context
+                                      .read<MentorSearchCubit>()
+                                      .getMentorSearchData(
+                                          search: _searchController.text);
+                                },
+                                decoration: InputDecoration(
+                                  hintText: 'Search',
+                                  prefixIcon: Icon(
+                                    Icons.search,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
+                          10.widthBox,
+                        InkWell(
+                          onTap: () {
+                            showDialog(context: context, builder: (BuildContext context){
+                              return AlertDialog(
+                                content: Text("Mentorship Fee"),
+                                actions: [
+                                 Column(
+                                   children: [
+                                    Text('fee'),
+                                          DropdownButton<String>(
+                      value: selectedFilter,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedFilter = value;
+                        });
+                      },
+                      items: filters.map<DropdownMenuItem<String>>((String filter) {
+                        return DropdownMenuItem<String>(
+                          value: filter,
+                          child: Text(filter),
+                        );
+                      }).toList(),
+                    ),
+                                   ],
+                                 ),
+
+                                ],
+                              );
+                            });
+                          },
+                          child: Container(
+                              height:58,
+                              width: 58,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: context.colorScheme.primaryContainer,
+                              ),
+                              child: Icon(
+                                Icons.tune,
+                                size: 24,
+                              ),
+                            ),
                         ),
+                        ],
                       ),
                     ),
                     5.heightBox,

@@ -71,6 +71,7 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                      
                         Text(
                           'Find Your',
                           style: context.headlineMedium!.copyWith(
@@ -93,28 +94,23 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
                           },
                         ),
                         SizedBox(height: 15),
-                        Hero(
-                          tag: 'search',
-                          child: Material(
-                            child: InkWell(
-                              onTap: () {
-                                context.push(MentorRoutes.seeAllPosts);
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(27),
-                                  color: Color.fromARGB(242, 231, 230, 230),
-                                ),
-                                child: IgnorePointer(
-                                  ignoring: true,
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: 'Search',
-                                      border: InputBorder.none,
-                                      prefixIcon: Icon(
-                                        Icons.search,
-                                      ),
-                                    ),
+                        InkWell(
+                          onTap: () {
+                            context.push(MentorRoutes.seeAllPosts);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(27),
+                              color: Color.fromARGB(242, 231, 230, 230),
+                            ),
+                            child: IgnorePointer(
+                              ignoring: true,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  hintText: 'Search',
+                                  border: InputBorder.none,
+                                  prefixIcon: Icon(
+                                    Icons.search,
                                   ),
                                 ),
                               ),
