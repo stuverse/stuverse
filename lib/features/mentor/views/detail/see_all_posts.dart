@@ -151,6 +151,7 @@ class _seeAllPostsScreenState extends State<seeAllPostsScreen> {
                                     tabs: [
                                       Tab(
                                         text: 'Professional Mentors',
+                                        
                                       ),
                                       Tab(text: 'Student Mentors'),
                                     ],

@@ -54,9 +54,61 @@ class RequestDetailsScreen extends StatelessWidget {
           10.heightBox,
           Text(request.description),
           20.heightBox,
-            InkWell(
-              onTap:()async{
-                  final url =
+            // InkWell(
+            //   onTap:()async{
+            //       final url =
+            //     Uri.parse("http://wa.me/+91${request.mentor.mobile}");
+            // final canlaunch = await canLaunchUrl(url);
+            // if (!canlaunch) {
+            //   return;
+            // } else {
+            //   await launchUrl(url);
+            // }
+            //   } ,
+            //    child: Container(
+            //      decoration: BoxDecoration(
+            //          borderRadius: BorderRadius.circular(10),
+            //          border: Border.all(
+            //              width: 1,
+            //              color:
+            //                  Theme.of(context).colorScheme.onBackground)),
+                                 
+            //      child: Padding(
+            //        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                                 
+            //        child:
+            //         Row(
+                                   
+            //          mainAxisAlignment: MainAxisAlignment.center,
+            //          children: [
+            //            Image.asset('assets/app/icons/WhatsApp_icon.png',
+            //            height: context.height * 0.028,
+            //            width: context.height * 0.028,
+            //            ),
+            //            3.widthBox,
+            //            Text(
+            //              'Connect to whatsapp',
+            //              style: Theme.of(context)
+            //                  .textTheme
+            //                  .bodyMedium!
+            //                  .copyWith(fontWeight: FontWeight.bold,
+            //                  color: Colors.green
+            //                  ),
+            //            ),
+            //          ],
+            //        ),
+            //      ),
+            //    ),
+            //  )
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(
+                      width: 1,
+                      color:
+                          context.colorScheme.onBackground)),
+              child: ElevatedButton(onPressed: ()async{
+                       final url =
                 Uri.parse("http://wa.me/+91${request.mentor.mobile}");
             final canlaunch = await canLaunchUrl(url);
             if (!canlaunch) {
@@ -64,44 +116,31 @@ class RequestDetailsScreen extends StatelessWidget {
             } else {
               await launchUrl(url);
             }
-              } ,
-               child: Expanded(
-                 child: Container(
-                   decoration: BoxDecoration(
-                       borderRadius: BorderRadius.circular(10),
-                       border: Border.all(
-                           width: 1,
-                           color:
-                               Theme.of(context).colorScheme.onBackground)),
-                                   
-                   child: Padding(
-                     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                                   
-                     child:
-                      Row(
-                                     
-                       mainAxisAlignment: MainAxisAlignment.center,
-                       children: [
-                         Image.asset('assets/app/icons/WhatsApp_icon.png',
+              }, child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                   Image.asset('assets/app/icons/WhatsApp_icon.png',
                          height: context.height * 0.028,
                          width: context.height * 0.028,
                          ),
                          3.widthBox,
-                         Text(
-                           'Connect to whatsapp',
-                           style: Theme.of(context)
-                               .textTheme
-                               .bodyMedium!
-                               .copyWith(fontWeight: FontWeight.bold,
-                               color: Colors.green
-                               ),
-                         ),
-                       ],
-                     ),
-                   ),
-                 ),
-               ),
-             )
+                  Text('Connect to whatsapp'),
+                  
+                ],
+              ),
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  
+                ),
+                backgroundColor: context.colorScheme.surface
+                ,
+                foregroundColor: context.colorScheme.onSurface,
+              
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              ),
+              ),
+            )
         ]),
       ))));
       

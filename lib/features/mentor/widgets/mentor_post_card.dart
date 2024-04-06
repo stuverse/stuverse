@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
+import 'package:stuverse/features/mentor/cubit/home/cubit/mentor_home_cubit.dart';
 import 'package:stuverse/features/mentor/cubit/manage_mentor_post/manage_mentor_post_cubit.dart';
 import 'package:stuverse/features/mentor/cubit/manage_mentor_post/manage_mentor_post_state.dart';
 import 'package:stuverse/features/mentor/mentor.dart';
@@ -53,7 +54,9 @@ class _MentorPostCardState extends State<MentorPostCard> {
                   CircleAvatar(
                     radius: context.height * 0.02,
                     backgroundImage:
-                        CachedNetworkImageProvider(widget.post.mentor.image),
+                       CachedNetworkImageProvider(
+                        
+                        widget.post.mentor.image),
                   ),
                   SizedBox(
                     width: 10,
@@ -75,13 +78,46 @@ class _MentorPostCardState extends State<MentorPostCard> {
                     ],
                   ),
                   Spacer(),
-                  if (widget.post.mentor.id ==
-                      context.read<CoreCubit>().state.user!.id)
+ 
                     PopupMenuButton(
                         padding: EdgeInsets.zero,
                         iconSize: 18,
                         itemBuilder: (context) {
                           return [
+                            //Report
+                            PopupMenuItem(
+                              child:  Row(
+                                children: [
+                                  Icon(
+                                    Icons.report_outlined,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    'Report',
+                                    style: context.bodySmall!.copyWith(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                              onTap: () {
+                                showDialog(context: context, builder: (context) {
+                                  return ReportDialogue(
+                                   item: ReportItem.mentorshipPost,
+                                   itemId: widget.post.id,
+                                   onSuccess: (){
+                                    context.go(MentorRoutes.mentorHome);
+                                    context.read<MentorHomeCubit>().getMentorHomeData();
+                                   },
+                                   onError: (){
+                                    
+                                   },
+                                  );
+                                });
+                              },
+                            ),
+
+                                             if (widget.post.mentor.id ==
+                      context.read<CoreCubit>().state.user!.id)
                             PopupMenuItem(
                                 onTap: () {
                                   context.push(
@@ -102,6 +138,8 @@ class _MentorPostCardState extends State<MentorPostCard> {
                                     ),
                                   ],
                                 )),
+                                                 if (widget.post.mentor.id ==
+                      context.read<CoreCubit>().state.user!.id)
                             PopupMenuItem(
                               onTap: () {
                                 showDialog(

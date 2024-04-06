@@ -12,6 +12,8 @@ class ThreadCommentCubit extends Cubit<ThreadCommentState> {
 
   final _commentRepo = ThreadCommentRepo();
 
+  
+
   void getComments({
     required int threadId,
   }) async {
@@ -20,7 +22,7 @@ class ThreadCommentCubit extends Cubit<ThreadCommentState> {
     result.fold(
       (error) => emit(ThreadCommentState.error(message: error)),
       (comments) => emit(ThreadCommentState.success(
-          comments: comments.filter((t) => t.isReported == false).toList())),
+          comments: comments)),
     );
   }
 

@@ -65,13 +65,44 @@ class _RequestCardState extends State<RequestCard> {
                     ],
                   ),
                   Spacer(),
-                  if (widget.request.mentor.id ==
-                      context.read<CoreCubit>().state.user!.id)
+                
                     PopupMenuButton(
                         padding: EdgeInsets.zero,
                         iconSize: 18,
                         itemBuilder: (context) {
                           return [
+                              PopupMenuItem(
+                              child:  Row(
+                                children: [
+                                  Icon(
+                                    Icons.report_outlined,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    'Report',
+                                    style: context.bodySmall!.copyWith(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                              onTap: () {
+                                showDialog(context: context, builder: (context) {
+                                  return ReportDialogue(
+                                   item: ReportItem.mentorshipRequest,
+                                   itemId: widget.request.id,
+                                   onSuccess: (){
+                                    context.go(MentorRoutes.mentorHome);
+                                    context.read<MentorHomeCubit>().getMentorHomeData();
+                                   },
+                                   onError: (){
+                                    
+                                   },
+                                  );
+                                });
+                              },
+                            ),
+                             if (widget.request.mentor.id ==
+                      context.read<CoreCubit>().state.user!.id)
                             PopupMenuItem(
                                 onTap: () {
                                   context.push(
@@ -92,6 +123,8 @@ class _RequestCardState extends State<RequestCard> {
                                     ),
                                   ],
                                 )),
+                                 if (widget.request.mentor.id ==
+                      context.read<CoreCubit>().state.user!.id)
                             PopupMenuItem(
                               onTap: () {
                                 showDialog(

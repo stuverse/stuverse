@@ -15,6 +15,7 @@ class MentorshipRequestCubit extends Cubit<MentorshipRequestState> {
           queryParameters: {if (search != null) 'search': search});
       final List<MentorRequest> requests = [];
       for (final request in resp.data) {
+        if (request['is_reported'] == true) continue;
         requests.add(MentorRequest.fromJson(request));
       }
       emit(MentorshipRequestLoaded(requests));

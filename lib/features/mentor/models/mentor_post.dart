@@ -8,6 +8,7 @@ class MentorPost {
     required this.updatedAt,
     required this.price,
     required this.mentor,
+    required this.isReported,
   });
   late final int id;
   late final String name;
@@ -17,6 +18,7 @@ class MentorPost {
   late final String updatedAt;
   late final String price;
   late final Mentor mentor;
+  late final bool isReported;
 
   MentorPost.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -27,6 +29,7 @@ class MentorPost {
     updatedAt = json['updated_at'];
     price = json['price'];
     mentor = Mentor.fromJson(json['mentor']);
+    isReported = json['is_reported'];
   }
 
   Map<String, dynamic> toJson() {
@@ -39,6 +42,7 @@ class MentorPost {
     _data['updated_at'] = updatedAt;
     _data['price'] = price;
     _data['mentor'] = mentor.toJson();
+    _data['is_reported'] = isReported;
     return _data;
   }
 }
