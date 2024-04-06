@@ -12,6 +12,7 @@ class ForumUtils {
     }
     // Loop through the threads
     for (var comment in comments) {
+     
       // If the thread id matches the parent id
       if (comment.id == parentId) {
         // Append the new thread to the children of the thread
@@ -28,6 +29,13 @@ class ForumUtils {
   // A recursive function to convert a ThreadComment object to a TreeNode<ThreadComment> object
   static TreeNode<ThreadComment> threadCommentToTreeNode(
       ThreadComment comment) {
+        if (comment.children == null) {
+          return TreeNode<ThreadComment>(
+            key: comment.id
+                .toString(), // using the toString() method of the int object
+            data: comment, // using the comment object itself as the data
+          );
+        }
     return TreeNode<ThreadComment>(
       key: comment.id
           .toString(), // using the toString() method of the int object

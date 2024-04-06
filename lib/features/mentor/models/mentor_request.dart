@@ -9,12 +9,14 @@ class MentorRequest {
   late final String description;
   late final String createdAt;
   late final Mentor mentor;
+  late final bool isReported;
 
   MentorRequest.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     description = json['description'];
     createdAt = json['created_at'];
     mentor = Mentor.fromJson(json['mentor']);
+    isReported = json['is_reported'];
   }
 
   Map<String, dynamic> toJson() {
@@ -23,6 +25,7 @@ class MentorRequest {
     _data['description'] = description;
     _data['created_at'] = createdAt;
     _data['mentor'] = mentor.toJson();
+    _data['is_reported'] = isReported;
     return _data;
   }
 }

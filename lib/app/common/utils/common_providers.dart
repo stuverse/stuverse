@@ -14,5 +14,6 @@ class CommonProviders {
         BlocProvider(create: (context) => UsersSelectionCubit()),
         BlocProvider(create: (context) => SkillCubit()),
         BlocProvider(create: (context) => UsersListCubit()),
+             BlocProvider(create: (context) => ReportCubit()),
       ];
 }
