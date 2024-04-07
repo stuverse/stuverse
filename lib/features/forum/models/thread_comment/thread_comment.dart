@@ -10,6 +10,7 @@ class ThreadComment {
   List<ThreadComment>? children;
   int? replyCount;
   bool? isReported;
+  bool? isUserBlocked;
 
   ThreadComment({
     this.id,
@@ -21,6 +22,7 @@ class ThreadComment {
     this.children,
     this.replyCount,
     this.isReported,
+    this.isUserBlocked,
   });
 
   @override
@@ -44,7 +46,8 @@ class ThreadComment {
           for (var item in json['children']) ThreadComment.fromJson(item)
       ],
       replyCount: json['reply_count'] as int?,
-      isReported: json['is_reported'] as bool?);
+      isReported: json['is_reported'] as bool?,
+      isUserBlocked: json['is_user_blocked'] as bool?);
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -55,6 +58,7 @@ class ThreadComment {
         'created_at': createdAt?.toIso8601String(),
         'children': children,
         'reply_count': replyCount,
-        'is_reported': isReported
+        'is_reported': isReported,
+        'is_user_blocked': isUserBlocked
       };
 }

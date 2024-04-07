@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stuverse/app/app.dart';
 
-
 import '../../forum.dart';
 
 class CommentCard extends StatelessWidget {
@@ -76,21 +75,54 @@ class CommentCard extends StatelessWidget {
                         context: context,
                         builder: (context) {
                           return ReportDialogue(
-                              item: ReportItem.comment,
-                              itemId: comment.data?.id ?? 0-1,
-                              onSuccess: () {
-                                context.read<ThreadCommentCubit>().getComments(
-                                  threadId: comment.data?.thread ?? -1
-                                );
-                              },
-                              onError: (){
-
-                              },
+                            item: ReportItem.comment,
+                            itemId: comment.data?.id ?? 0 - 1,
+                            onSuccess: () {
+                              context.read<ThreadCommentCubit>().getComments(
+                                  threadId: comment.data?.thread ?? -1);
+                            },
+                            onError: () {},
                           );
                         },
                       );
                     },
-                    child: Text("Report 🛑"),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.flag,
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                        5.widthBox,
+                        Text("Report"),
+                      ],
+                    ),
+                  ),
+                  PopupMenuItem(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return BlockUserDialogue(
+                            userId: comment.data?.author?.id ?? -1,
+                            onSuccess: () {
+                              context.read<ThreadCommentCubit>().getComments(
+                                  threadId: comment.data?.thread ?? -1);
+                            },
+                            onError: () {},
+                          );
+                        },
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.block,
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                        5.widthBox,
+                        Text("Block User"),
+                      ],
+                    ),
                   ),
                 ];
               }),

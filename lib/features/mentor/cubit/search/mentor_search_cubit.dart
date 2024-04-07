@@ -13,7 +13,8 @@ class MentorSearchCubit extends Cubit<MentorSearchState> {
           queryParameters: {if (search != null) 'search': search});
       final List<MentorPost> posts = [];
       for (final post in resp.data) {
-        if (post['is_reported'] == true) continue;
+        if (post['is_reported'] == true || post['is_user_blocked'] == true)
+          continue;
         posts.add(MentorPost.fromJson(post));
       }
       emit(MentorSearchLoaded(posts));

@@ -65,44 +65,76 @@ class _RequestCardState extends State<RequestCard> {
                     ],
                   ),
                   Spacer(),
-                
-                    PopupMenuButton(
-                        padding: EdgeInsets.zero,
-                        iconSize: 18,
-                        itemBuilder: (context) {
-                          return [
-                              PopupMenuItem(
-                              child:  Row(
-                                children: [
-                                  Icon(
-                                    Icons.report_outlined,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    'Report',
-                                    style: context.bodySmall!.copyWith(
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                              onTap: () {
-                                showDialog(context: context, builder: (context) {
-                                  return ReportDialogue(
-                                   item: ReportItem.mentorshipRequest,
-                                   itemId: widget.request.id,
-                                   onSuccess: (){
-                                    context.go(MentorRoutes.mentorHome);
-                                    context.read<MentorHomeCubit>().getMentorHomeData();
-                                   },
-                                   onError: (){
-                                    
-                                   },
-                                  );
-                                });
-                              },
+                  PopupMenuButton(
+                      padding: EdgeInsets.zero,
+                      iconSize: 18,
+                      itemBuilder: (context) {
+                        return [
+                          PopupMenuItem(
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.report_outlined,
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  'Report',
+                                  style: context.bodySmall!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                              ],
                             ),
-                             if (widget.request.mentor.id ==
-                      context.read<CoreCubit>().state.user!.id)
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return ReportDialogue(
+                                      item: ReportItem.mentorshipRequest,
+                                      itemId: widget.request.id,
+                                      onSuccess: () {
+                                        context.go(MentorRoutes.mentorHome);
+                                        context
+                                            .read<MentorHomeCubit>()
+                                            .getMentorHomeData();
+                                      },
+                                      onError: () {},
+                                    );
+                                  });
+                            },
+                          ),
+                          PopupMenuItem(
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.block_outlined,
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  'Block User',
+                                  style: context.bodySmall!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return BlockUserDialogue(
+                                      userId: widget.request.mentor.id,
+                                      onSuccess: () {
+                                        context.go(MentorRoutes.mentorHome);
+                                        context
+                                            .read<MentorHomeCubit>()
+                                            .getMentorHomeData();
+                                      },
+                                      onError: () {},
+                                    );
+                                  });
+                            },
+                          ),
+                          if (widget.request.mentor.id ==
+                              context.read<CoreCubit>().state.user!.id)
                             PopupMenuItem(
                                 onTap: () {
                                   context.push(
@@ -123,8 +155,8 @@ class _RequestCardState extends State<RequestCard> {
                                     ),
                                   ],
                                 )),
-                                 if (widget.request.mentor.id ==
-                      context.read<CoreCubit>().state.user!.id)
+                          if (widget.request.mentor.id ==
+                              context.read<CoreCubit>().state.user!.id)
                             PopupMenuItem(
                               onTap: () {
                                 showDialog(
@@ -152,20 +184,19 @@ class _RequestCardState extends State<RequestCard> {
                                               }
                                               if (state
                                                   is ManageMentorRequestLoaded) {
-                                                    Navigator.of(context)
-                                                          .pop();
-                                                    context
+                                                Navigator.of(context).pop();
+                                                context
                                                     .read<
                                                         MentorshipRequestCubit>()
                                                     .getMentorRequestData();
-                                                    context
-                                                    .read<
-                                                        MentorHomeCubit>()
+                                                context
+                                                    .read<MentorHomeCubit>()
                                                     .getMentorHomeData();
-                                                context.showMessage(message: state.message);
+                                                context.showMessage(
+                                                    message: state.message);
 
-                                                context.go(MentorRoutes.mentorHome);
-                                                
+                                                context.go(
+                                                    MentorRoutes.mentorHome);
                                               }
                                             },
                                             builder: (context, state) => state
@@ -180,7 +211,6 @@ class _RequestCardState extends State<RequestCard> {
                                                             id: widget
                                                                 .request.id,
                                                           );
-                                                      
                                                     },
                                                     child: Text('Delete'),
                                                   )),
@@ -205,8 +235,8 @@ class _RequestCardState extends State<RequestCard> {
                                 ],
                               ),
                             ),
-                          ];
-                        }),
+                        ];
+                      }),
                 ],
               ),
               10.heightBox,
