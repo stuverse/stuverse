@@ -173,14 +173,18 @@ class _ThreadDetailScreenState extends State<ThreadDetailScreen> {
                                             //     ),
                                             //   );
                                             // },
-                                            builder: (context, node) => node.data!.isReported! ? SizedBox() :
-                                                CommentCard(
-                                              onReply: (node) {
-                                                commentFocusNode.requestFocus();
-                                                replyToNotifier.value = node;
-                                              },
-                                              comment: node,
-                                            ),
+                                            builder: (context, node) =>
+                                                node.data!.isReported!
+                                                    ? SizedBox()
+                                                    : CommentCard(
+                                                        onReply: (node) {
+                                                          commentFocusNode
+                                                              .requestFocus();
+                                                          replyToNotifier
+                                                              .value = node;
+                                                        },
+                                                        comment: node,
+                                                      ),
                                           ),
                                         ],
                                       );
