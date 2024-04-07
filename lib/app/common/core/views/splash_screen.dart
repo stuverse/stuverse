@@ -19,11 +19,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Logman.instance.attachOverlay(
-        context: context,
-      );
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   Logman.instance.attachOverlay(
+    //     context: context,
+    //   );
+    // });
 
     context.read<CoreCubit>().getInitialData();
   }

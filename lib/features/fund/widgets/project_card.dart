@@ -77,13 +77,13 @@ class ProjectCard extends StatelessWidget {
                                 ),
                                 Text(
                                   'By : ${project.user.name}',
-                                  textAlign: TextAlign.center,
+                                  textAlign: TextAlign.left,
                                   style:
                                       context.textTheme.bodyMedium!.copyWith(),
                                 ),
                                 Text(
                                   'Target Amount : ₹${project.targetAmount}',
-                                  textAlign: TextAlign.center,
+                                  textAlign: TextAlign.left,
                                   style:
                                       context.textTheme.bodyMedium!.copyWith(),
                                 ),

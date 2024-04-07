@@ -21,6 +21,21 @@ class ProjectDescScreen extends StatefulWidget {
 }
 
 class _ProjectDescScreenState extends State<ProjectDescScreen> {
+  bool canLaunch = false;
+  late final Uri uri;
+  @override
+  void initState() {
+    super.initState();
+    uri = Uri.parse(
+        "upi://pay?cu=INR&pa=${widget.project.upiId}&pn=${widget.project.user.name}&tn=&am=100.00");
+
+    Future.delayed(Duration.zero, () async {
+      canLaunch = await canLaunchUrl(uri);
+      print("Can launch: $canLaunch");
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = context.read<CoreCubit>().state.user;
@@ -240,38 +255,34 @@ class _ProjectDescScreenState extends State<ProjectDescScreen> {
                     ),
                   ]),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    // context.push(
-                    //   FundRoutes.donationpage,
-                    // );
+            if (canLaunch)
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      // context.push(
+                      //   FundRoutes.donationpage,
+                      // );
 
-                    final uri = Uri.parse(
-                        "upi://pay?cu=INR&pa=${widget.project.upiId}&pn=${widget.project.user.name}&tn=&am=100.00");
-
-                    final canLaunch = await canLaunchUrl(uri);
-
-                    if (canLaunch) {
-                      await launchUrl(uri);
-                    } else {
-                      context.showMessage(message: "Cant open upi app");
-                    }
-                  },
-                  child: Text('Donate',
-                      style: context.titleSmall!.copyWith(
-                          color: context.colorScheme.surface,
-                          fontWeight: FontWeight.bold)),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: context.colorScheme.secondary,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12))),
+                      if (canLaunch) {
+                        await launchUrl(uri);
+                      } else {
+                        context.showMessage(message: "Cant open upi app");
+                      }
+                    },
+                    child: Text('Donate',
+                        style: context.titleSmall!.copyWith(
+                            color: context.colorScheme.surface,
+                            fontWeight: FontWeight.bold)),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: context.colorScheme.secondary,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12))),
+                  ),
                 ),
-              ),
-            )
+              )
           ],
         ),
       ))),
