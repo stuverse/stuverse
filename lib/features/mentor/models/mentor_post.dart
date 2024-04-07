@@ -9,6 +9,7 @@ class MentorPost {
     required this.price,
     required this.mentor,
     required this.isReported,
+    required this.isUserBlocked,
   });
   late final int id;
   late final String name;
@@ -19,6 +20,7 @@ class MentorPost {
   late final String price;
   late final Mentor mentor;
   late final bool isReported;
+  late final bool isUserBlocked;
 
   MentorPost.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -30,6 +32,7 @@ class MentorPost {
     price = json['price'];
     mentor = Mentor.fromJson(json['mentor']);
     isReported = json['is_reported'];
+    isUserBlocked = json['is_user_blocked'];
   }
 
   Map<String, dynamic> toJson() {
@@ -43,6 +46,7 @@ class MentorPost {
     _data['price'] = price;
     _data['mentor'] = mentor.toJson();
     _data['is_reported'] = isReported;
+    _data['is_user_blocked'] = isUserBlocked;
     return _data;
   }
 }

@@ -32,92 +32,122 @@ class _MentorPostCardState extends State<MentorPostCard> {
         child: Hero(
           tag: 'mentor_${widget.post.id}',
           child: Container(
-            height: 200,
+            height: 210,
             width: context.width * 0.7,
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
               border: Border.all(
-                color: context.colorScheme.onBackground.withOpacity(0.1),),
-              color:
-               context.isDark
-               ?context.colorScheme.primaryContainer.blend(
-                  context.colorScheme.surfaceVariant)
-                  :context.colorScheme.surfaceVariant,
-
-           
-             
- borderRadius: BorderRadius.circular(25),
+                color: context.colorScheme.onBackground.withOpacity(0.1),
+              ),
+              color: context.isDark
+                  ? context.colorScheme.primaryContainer
+                      .blend(context.colorScheme.surfaceVariant)
+                  : context.colorScheme.surfaceVariant,
+              borderRadius: BorderRadius.circular(25),
             ),
             child: Column(
               children: [
                 Row(children: [
                   CircleAvatar(
-                    radius: context.height * 0.02,
+                    radius: 20,
                     backgroundImage:
-                       CachedNetworkImageProvider(
-                        
-                        widget.post.mentor.image),
+                        CachedNetworkImageProvider(widget.post.mentor.image),
                   ),
                   SizedBox(
                     width: 10,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.post.mentor.name,
-                        style: context.bodyLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.post.mentor.name,
+                          style: context.bodyLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                      Text(
-                        CommonUtils.relativeTime(
-                            DateTime.parse(widget.post.createdAt)),
-                        style: context.bodySmall,
-                      ),
-                    ],
+                        Text(
+                          CommonUtils.relativeTime(
+                              DateTime.parse(widget.post.createdAt)),
+                          style: context.bodySmall,
+                        ),
+                      ],
+                    ),
                   ),
-                  Spacer(),
- 
-                    PopupMenuButton(
-                        padding: EdgeInsets.zero,
-                        iconSize: 18,
-                        itemBuilder: (context) {
-                          return [
-                            //Report
-                            PopupMenuItem(
-                              child:  Row(
-                                children: [
-                                  Icon(
-                                    Icons.report_outlined,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    'Report',
-                                    style: context.bodySmall!.copyWith(
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                              onTap: () {
-                                showDialog(context: context, builder: (context) {
-                                  return ReportDialogue(
-                                   item: ReportItem.mentorshipPost,
-                                   itemId: widget.post.id,
-                                   onSuccess: (){
-                                    context.go(MentorRoutes.mentorHome);
-                                    context.read<MentorHomeCubit>().getMentorHomeData();
-                                   },
-                                   onError: (){
-                                    
-                                   },
-                                  );
-                                });
-                              },
+                  PopupMenuButton(
+                      padding: EdgeInsets.zero,
+                      iconSize: 18,
+                      itemBuilder: (context) {
+                        return [
+                          //Report
+                          PopupMenuItem(
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.report_outlined,
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  'Report',
+                                  style: context.bodySmall!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                              ],
                             ),
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return ReportDialogue(
+                                      item: ReportItem.mentorshipPost,
+                                      itemId: widget.post.id,
+                                      onSuccess: () {
+                                        context.go(MentorRoutes.mentorHome);
+                                        context
+                                            .read<MentorHomeCubit>()
+                                            .getMentorHomeData();
+                                      },
+                                      onError: () {},
+                                    );
+                                  });
+                            },
+                          ),
+                          //Block User
+                          PopupMenuItem(
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.block_outlined,
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  'Block User',
+                                  style: context.bodySmall!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return BlockUserDialogue(
+                                      userId: widget.post.mentor.id,
+                                      onSuccess: () {
+                                        context.go(MentorRoutes.mentorHome);
+                                        context
+                                            .read<MentorHomeCubit>()
+                                            .getMentorHomeData();
+                                      },
+                                      onError: () {},
+                                    );
+                                  });
+                            },
+                          ),
 
-                                             if (widget.post.mentor.id ==
-                      context.read<CoreCubit>().state.user!.id)
+                          if (widget.post.mentor.id ==
+                              context.read<CoreCubit>().state.user!.id)
                             PopupMenuItem(
                                 onTap: () {
                                   context.push(
@@ -138,8 +168,8 @@ class _MentorPostCardState extends State<MentorPostCard> {
                                     ),
                                   ],
                                 )),
-                                                 if (widget.post.mentor.id ==
-                      context.read<CoreCubit>().state.user!.id)
+                          if (widget.post.mentor.id ==
+                              context.read<CoreCubit>().state.user!.id)
                             PopupMenuItem(
                               onTap: () {
                                 showDialog(
@@ -193,8 +223,7 @@ class _MentorPostCardState extends State<MentorPostCard> {
                                                           .pop();
                                                     },
                                                     child: Text('Delete'),
-                                                  )
-                                                  ),
+                                                  )),
                                       ],
                                     );
                                   },
@@ -216,8 +245,8 @@ class _MentorPostCardState extends State<MentorPostCard> {
                                 ],
                               ),
                             ),
-                          ];
-                        }),
+                        ];
+                      }),
                 ]),
                 SizedBox(
                   height: 10,
@@ -226,16 +255,14 @@ class _MentorPostCardState extends State<MentorPostCard> {
                   child: Container(
                     padding: EdgeInsets.all(15),
                     decoration: BoxDecoration(
-                      border: Border.all(
-                        color: context.colorScheme.onBackground.withOpacity(0.1),),
-                      borderRadius: BorderRadius.circular(25),
-                       color:
-                       context.isDark
-                        ?context.colorScheme.tertiary
-                        :context.colorScheme.surface
-                    
-          
-                    ),
+                        border: Border.all(
+                          color:
+                              context.colorScheme.onBackground.withOpacity(0.1),
+                        ),
+                        borderRadius: BorderRadius.circular(25),
+                        color: context.isDark
+                            ? context.colorScheme.tertiary
+                            : context.colorScheme.surface),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

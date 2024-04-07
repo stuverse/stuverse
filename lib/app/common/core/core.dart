@@ -10,6 +10,7 @@ export 'widgets/boarding_card.dart';
 export 'widgets/nav_dest_item.dart';
 export 'widgets/main_appbar.dart';
 export 'widgets/report_dialogue.dart';
+export 'widgets/block_user_dialogue.dart';
 
 export 'cubit/core_cubit.dart';
 export 'cubit/home/home_cubit.dart';
