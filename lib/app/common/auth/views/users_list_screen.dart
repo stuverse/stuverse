@@ -225,39 +225,36 @@ class _UsersListScreenState extends State<UsersListScreen> {
                                 await launchUrl(url);
                               }
                             },
-                            child: Expanded(
-                              flex: 1,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                        width: 1,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onBackground)),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0, vertical: 8.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/app/icons/WhatsApp_icon.png',
-                                        height: context.height * 0.028,
-                                        width: context.height * 0.028,
-                                      ),
-                                      3.widthBox,
-                                      Text(
-                                        'Connect to whatsapp',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium!
-                                            .copyWith(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.green),
-                                      ),
-                                    ],
-                                  ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                      width: 1,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground)),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0, vertical: 8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/app/icons/WhatsApp_icon.png',
+                                      height: context.height * 0.028,
+                                      width: context.height * 0.028,
+                                    ),
+                                    3.widthBox,
+                                    Text(
+                                      'Connect to whatsapp',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.green),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
