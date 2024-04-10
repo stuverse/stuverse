@@ -219,11 +219,10 @@ class _UsersListScreenState extends State<UsersListScreen> {
                               final url = Uri.parse(
                                   "http://wa.me/+91${user.mobile ?? ""}");
                               final canlaunch = await canLaunchUrl(url);
-                              if (!canlaunch) {
+                              if (!canlaunch)
                                 return;
-                              } else {
+                              else
                                 await launchUrl(url);
-                              }
                             },
                             child: Container(
                               decoration: BoxDecoration(
