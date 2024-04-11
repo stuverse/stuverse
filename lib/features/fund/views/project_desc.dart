@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/fund/cubit/add_edit_fundProject/cubit/add_edit_fund_project_cubit.dart';
-import 'package:stuverse/features/fund/cubit/home/fund_home_cubit.dart';
+
 import 'package:stuverse/features/fund/models/projects.dart';
 import 'package:url_launcher/url_launcher.dart';
 

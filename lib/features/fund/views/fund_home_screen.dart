@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stuverse/app/app.dart';
-import 'package:stuverse/app/common/core/widgets/MarkdownTextInput/markdown_text_input.dart';
-import 'package:stuverse/app/widgets/bg_gradient.dart';
+
 import 'package:stuverse/features/fund/cubit/home/fund_home_cubit.dart';
 import 'package:stuverse/features/fund/fund.dart';
 
 import 'package:stuverse/features/fund/widgets/category.dart';
 import 'package:stuverse/features/fund/widgets/project_card.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../models/projects.dart';
 

@@ -19,7 +19,6 @@ class CommunityMiniCard extends StatefulWidget {
 }
 
 class _CommunityMiniCardState extends State<CommunityMiniCard> {
-  @override
   late final User? user;
   bool isJoined = false;
   @override

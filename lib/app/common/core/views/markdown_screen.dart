@@ -2,13 +2,10 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:lottie/lottie.dart';
 import 'package:stuverse/app/app.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
-import '../cubit/ai/ai_cubit.dart';
 import '../widgets/MarkdownTextInput/markdown_text_input.dart';
 
 enum MenuItem {

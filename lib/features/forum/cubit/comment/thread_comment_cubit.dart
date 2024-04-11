@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:stuverse/features/forum/forum.dart';
 import 'package:stuverse/features/forum/utils/forum_utils.dart';
@@ -12,8 +11,6 @@ class ThreadCommentCubit extends Cubit<ThreadCommentState> {
 
   final _commentRepo = ThreadCommentRepo();
 
-  
-
   void getComments({
     required int threadId,
   }) async {
@@ -21,8 +18,7 @@ class ThreadCommentCubit extends Cubit<ThreadCommentState> {
     final result = await _commentRepo.getThreadComment(threadId: threadId);
     result.fold(
       (error) => emit(ThreadCommentState.error(message: error)),
-      (comments) => emit(ThreadCommentState.success(
-          comments: comments)),
+      (comments) => emit(ThreadCommentState.success(comments: comments)),
     );
   }
 
