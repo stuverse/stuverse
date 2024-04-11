@@ -12,7 +12,7 @@ class HomeRepo {
       final List<Thread> threads =
           (response.data as List).map((e) => Thread.fromJson(e)).toList();
       return right(threads);
-    } on DioException catch (e) {
+    } on DioException catch (_) {
       return left("Server Error");
     } catch (e) {
       return left("Client Error");

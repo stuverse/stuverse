@@ -38,13 +38,13 @@ class AuthRepo implements IAuthRepo {
   @override
   Future<Either<AuthFailure, Unit>> sendOtp({required String email}) async {
     try {
-      final resp = await dioClient.post(
+      await dioClient.post(
         SEND_OTP_API,
         data: {
           'email': email,
         },
       );
-      final user = User.fromJson(resp.data);
+
       return right(unit);
     } on DioException catch (e) {
       log(e.toString());
@@ -96,7 +96,7 @@ class AuthRepo implements IAuthRepo {
     String? about,
   }) async {
     try {
-      final resp = await dioClient.post(
+      await dioClient.post(
         SIGN_UP_API,
         data: {
           'email': email,

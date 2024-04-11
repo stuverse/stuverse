@@ -52,8 +52,10 @@ class _AddFundProjectScreenState extends State<AddFundProjectScreen> {
     }
   }
 
+  @override
   void initState() {
     context.read<CoreCubit>().state.user;
+    super.initState();
   }
 
   @override

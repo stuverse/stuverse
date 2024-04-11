@@ -1,18 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logman/logman.dart';
 import 'package:stuverse/app/app.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stuverse/app/common/core/views/pdf_viewer_screen.dart';
 import 'package:stuverse/features/forum/forum.dart';
 import 'package:stuverse/features/fund/fund.dart';
 import 'package:stuverse/features/job/job.dart';
 import 'package:stuverse/features/mentor/mentor.dart';
 import 'package:stuverse/features/profile/profile.dart';
-
-import '../common/auth/views/user_request_list_screen.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
