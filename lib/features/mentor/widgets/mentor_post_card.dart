@@ -218,7 +218,7 @@ class _MentorPostCardState extends State<MentorPostCard> {
                                                               ManageMentorPostCubit>()
                                                           .deletePost(
                                                               id: widget
-                                                                  .post.id!);
+                                                                  .post.id);
                                                       Navigator.of(context)
                                                           .pop();
                                                     },

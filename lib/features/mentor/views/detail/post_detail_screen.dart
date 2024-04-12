@@ -46,7 +46,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                           color: Theme.of(context).colorScheme.primaryContainer,
                         );
                       },
-                      imageUrl: widget.post.mentor!.image!,
+                      imageUrl: widget.post.mentor.image,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -58,7 +58,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      widget.post.mentor!.name!,
+                      widget.post.mentor.name,
                       style:
                           Theme.of(context).textTheme.headlineSmall!.copyWith(
                                 fontWeight: FontWeight.bold,
@@ -80,7 +80,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                     .copyWith(),
                               ),
                               Text(
-                                '${widget.post.mentor!.experienceYears!.toString()} Years',
+                                '${widget.post.mentor.experienceYears.toString()} Years',
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
@@ -105,7 +105,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                               SizedBox(
                                 width: 3,
                               ),
-                              if (widget.post.isFree!)
+                              if (widget.post.isFree)
                                 Text(
                                   'Free',
                                   style: Theme.of(context)
@@ -130,46 +130,45 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                       height: 10,
                     ),
                     Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
-                  border: Border.all(
-                      width: 1,
-                      color:
-                          context.colorScheme.onBackground)),
-              child: ElevatedButton(onPressed: ()async{
-                       final url =
-                Uri.parse("http://wa.me/+91${widget.post.mentor.mobile}");
-            final canlaunch = await canLaunchUrl(url);
-            if (!canlaunch) {
-              return;
-            } else {
-              await launchUrl(url);
-            }
-              }, child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                   Image.asset('assets/app/icons/WhatsApp_icon.png',
-                         height: context.height * 0.028,
-                         width: context.height * 0.028,
-                         ),
-                         3.widthBox,
-                  Text('Connect to whatsapp'),
-                  
-                ],
-              ),
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18),
-                  
-                ),
-                backgroundColor: context.colorScheme.surface
-                ,
-                foregroundColor: context.colorScheme.onSurface,
-              
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              ),
-              ),
-            )
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(18),
+                          border: Border.all(
+                              width: 1,
+                              color: context.colorScheme.onBackground)),
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          final url = Uri.parse(
+                              "http://wa.me/+91${widget.post.mentor.mobile}");
+                          final canlaunch = await canLaunchUrl(url);
+                          if (!canlaunch) {
+                            return;
+                          } else {
+                            await launchUrl(url);
+                          }
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/app/icons/WhatsApp_icon.png',
+                              height: context.height * 0.028,
+                              width: context.height * 0.028,
+                            ),
+                            3.widthBox,
+                            Text('Connect to whatsapp'),
+                          ],
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                          backgroundColor: context.colorScheme.surface,
+                          foregroundColor: context.colorScheme.onSurface,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0, vertical: 8.0),
+                        ),
+                      ),
+                    )
                   ],
                 ),
                 SizedBox(height: 15),
