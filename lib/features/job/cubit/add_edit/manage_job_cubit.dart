@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stuverse/app/app.dart';
 
-import '../../models/job_post.dart';
-
 part 'manage_job_state.dart';
 
 class ManageJobCubit extends Cubit<ManageJobState> {

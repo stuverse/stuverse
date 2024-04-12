@@ -6,12 +6,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stuverse/app/app.dart';
-
-import '../../../mentor/models/mentor_post.dart';
 import '../../cubit/add_edit/manage_job_cubit.dart';
 import '../../models/job_post.dart';
 

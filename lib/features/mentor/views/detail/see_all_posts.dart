@@ -16,7 +16,7 @@ class seeAllPostsScreen extends StatefulWidget {
 
 class _seeAllPostsScreenState extends State<seeAllPostsScreen> {
   final _searchController = TextEditingController();
-  
+
   @override
   void initState() {
     context
@@ -24,9 +24,11 @@ class _seeAllPostsScreenState extends State<seeAllPostsScreen> {
         .getMentorSearchData(search: _searchController.text);
     super.initState();
   }
-    String? selectedFilter;
+
+  String? selectedFilter;
   List<String> filters = ['All', 'Free', 'Paid'];
-  List<MentorPost> allPosts = []; // Assuming you have all mentor posts stored here
+  List<MentorPost> allPosts =
+      []; // Assuming you have all mentor posts stored here
 
   List<MentorPost> getFilteredPosts() {
     // Filter mentor posts based on the selected filter
@@ -82,38 +84,41 @@ class _seeAllPostsScreenState extends State<seeAllPostsScreen> {
                             ),
                           ),
                           10.widthBox,
-                        InkWell(
-                          onTap: () {
-                            showDialog(context: context, builder: (BuildContext context){
-                              return AlertDialog(
-                                content: Text("Mentorship Fee"),
-                                actions: [
-                                 Column(
-                                   children: [
-                                    Text('fee'),
-                                          DropdownButton<String>(
-                      value: selectedFilter,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedFilter = value;
-                        });
-                      },
-                      items: filters.map<DropdownMenuItem<String>>((String filter) {
-                        return DropdownMenuItem<String>(
-                          value: filter,
-                          child: Text(filter),
-                        );
-                      }).toList(),
-                    ),
-                                   ],
-                                 ),
-
-                                ],
-                              );
-                            });
-                          },
-                          child: Container(
-                              height:58,
+                          InkWell(
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      content: Text("Mentorship Fee"),
+                                      actions: [
+                                        Column(
+                                          children: [
+                                            Text('fee'),
+                                            DropdownButton<String>(
+                                              value: selectedFilter,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  selectedFilter = value;
+                                                });
+                                              },
+                                              items: filters.map<
+                                                      DropdownMenuItem<String>>(
+                                                  (String filter) {
+                                                return DropdownMenuItem<String>(
+                                                  value: filter,
+                                                  child: Text(filter),
+                                                );
+                                              }).toList(),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            },
+                            child: Container(
+                              height: 58,
                               width: 58,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
@@ -124,7 +129,7 @@ class _seeAllPostsScreenState extends State<seeAllPostsScreen> {
                                 size: 24,
                               ),
                             ),
-                        ),
+                          ),
                         ],
                       ),
                     ),
@@ -136,10 +141,12 @@ class _seeAllPostsScreenState extends State<seeAllPostsScreen> {
                         } else if (state is MentorSearchLoaded) {
                           final posts = state.posts;
                           final facultyMentors = posts
-                              .where((post) => post.mentor!.type == UserTypes.FACULTY)
+                              .where((post) =>
+                                  post.mentor.type == UserTypes.FACULTY)
                               .toList();
                           final studentMentors = posts
-                              .where((post) => post.mentor!.type == UserTypes.STUDENT)
+                              .where((post) =>
+                                  post.mentor.type == UserTypes.STUDENT)
                               .toList();
                           return Expanded(
                             child: DefaultTabController(
@@ -151,7 +158,6 @@ class _seeAllPostsScreenState extends State<seeAllPostsScreen> {
                                     tabs: [
                                       Tab(
                                         text: 'Professional Mentors',
-                                        
                                       ),
                                       Tab(text: 'Student Mentors'),
                                     ],

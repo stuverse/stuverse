@@ -14,7 +14,7 @@ class ManageMentorPostCubit extends Cubit<ManageMentorPostState> {
   }) async {
     emit(ManageMentorPostLoading());
     try {
-      final resp = await dioClient.post('/mentor/posts/', data: {
+      await dioClient.post('/mentor/posts/', data: {
         "name": postName,
         "isFree": isFree,
         "description": description,
@@ -40,7 +40,7 @@ class ManageMentorPostCubit extends Cubit<ManageMentorPostState> {
   }) async {
     emit(ManageMentorPostLoading());
     try {
-      final resp = await dioClient.put('/mentor/posts/$id/', data: {
+      await dioClient.put('/mentor/posts/$id/', data: {
         "name": postName,
         "isFree": isFree,
         "description": description,
@@ -56,10 +56,9 @@ class ManageMentorPostCubit extends Cubit<ManageMentorPostState> {
   void deletePost({required int id}) async {
     emit(ManageMentorPostLoading());
     try {
-      final resp = await dioClient.delete('/mentor/posts/$id/');
+      await dioClient.delete('/mentor/posts/$id/');
       emit(ManageMentorPostLoaded('Deleted successfully'));
     } catch (e) {
-     
       emit(ManageMentorPostFailure('Something went wrong'));
     }
   }

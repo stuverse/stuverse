@@ -9,7 +9,7 @@ class ManageMentorRequestCubit extends Cubit<ManageMentorRequestState> {
   void addRequest({required int mentorId, required String description}) async {
     emit(ManageMentorRequestLoading());
     try {
-      final resp = await dioClient.post('/mentor/requests/',
+      await dioClient.post('/mentor/requests/',
           data: {'description': description, 'mentor': mentorId});
       emit(ManageMentorRequestLoaded('Posted Successfully'));
     } catch (e) {
@@ -23,7 +23,7 @@ class ManageMentorRequestCubit extends Cubit<ManageMentorRequestState> {
       required int id}) async {
     emit(ManageMentorRequestLoading());
     try {
-      final resp = await dioClient.put('/mentor/requests/$id/',
+      await dioClient.put('/mentor/requests/$id/',
           data: {'description': description, 'mentor': mentorId});
       emit(ManageMentorRequestLoaded('Edited Successfully'));
     } catch (e) {
@@ -35,7 +35,7 @@ class ManageMentorRequestCubit extends Cubit<ManageMentorRequestState> {
   void deleteRequest({required int id}) async {
     emit(ManageMentorRequestLoading());
     try {
-      final resp = await dioClient.delete(
+      await dioClient.delete(
         '/mentor/requests/$id/',
       );
       emit(ManageMentorRequestLoaded('Deleted Successfully'));

@@ -1,7 +1,5 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/job/cubit/job_material/job_material_cubit.dart';
 import 'package:stuverse/features/job/widgets/job_material_card.dart';
 
