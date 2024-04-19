@@ -3,7 +3,7 @@ import 'package:stuverse/features/profile/profile.dart';
 import 'package:stuverse/features/profile/views/delete_account_screen.dart';
 import 'package:stuverse/features/profile/views/reset_password_screen.dart';
 
-import '../views/manage_profile.dart';
+import '../views/manage_profile_screen.dart';
 
 class ProfileRoutes {
   //! ---DO NOT MODIFY-----
