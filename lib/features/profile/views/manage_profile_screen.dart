@@ -3,18 +3,13 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:file_picker/file_picker.dart';
-
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'package:stuverse/app/app.dart';
 import 'package:stuverse/features/profile/cubit/manage_profile_cubit.dart';
 import 'package:stuverse/features/profile/profile.dart';
-
-import '../../../app/common/core/cubit/skill/skill_cubit.dart';
 
 class ManageProfileScreen extends StatefulWidget {
   const ManageProfileScreen({super.key});
