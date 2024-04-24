@@ -4,7 +4,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:stuverse/app/app.dart';
-import 'package:stuverse/app/utils/dio_client.dart';
 
 part 'add_edit_fund_project_state.dart';
 

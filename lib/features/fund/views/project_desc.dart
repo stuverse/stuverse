@@ -59,94 +59,87 @@ class _ProjectDescScreenState extends State<ProjectDescScreen> {
           if (user != null && user.type != UserTypes.STUDENT)
             IconButton(
               onPressed: () {
-                if (widget.project.user.id ==
-                    context.read<CoreCubit>().state.user!.id) {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return Container(
-                          color: Theme.of(context).colorScheme.primaryContainer,
-                          padding: EdgeInsets.only(top: 30),
-                          height: 150,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SizedBox(
-                                child: Column(children: [
-                                  IconButton(
-                                      onPressed: () {
-                                        context.push(
-                                          FundRoutes.addProject,
-                                          extra: widget.project,
-                                        );
-                                      },
-                                      icon: Icon(
-                                        Icons.edit,
-                                      )),
-                                  Text(
-                                    "Edit",
-                                    style: context.titleMedium!.copyWith(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 10),
-                                  )
-                                ]),
-                              ),
-                              SizedBox(
-                                child: Column(children: [
-                                  IconButton(
-                                      onPressed: () {
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertDialog(
-                                                  title: const Text(
-                                                      "Delete project"),
-                                                  content: const Text(
-                                                      "Are you sure you want to delete this project?"),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        context
-                                                            .read<
-                                                                AddEditFundProjectCubit>()
-                                                            .deleteFundProject(
-                                                                id: widget
-                                                                    .project
-                                                                    .id);
-                                                        context.go(FundRoutes
-                                                            .fundHome);
-                                                      },
-                                                      child: const Text("Yes"),
-                                                    ),
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      child: const Text("No"),
-                                                    ),
-                                                  ]);
-                                            });
-                                      },
-                                      icon: Icon(
-                                        Icons.delete,
-                                      )),
-                                  Text(
-                                    "Delete",
-                                    style: context.titleMedium!.copyWith(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 10),
-                                  )
-                                ]),
-                              ),
-                            ],
-                          ),
-                        );
-                      });
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("You can't edit this project")));
-                }
+                showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return Container(
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                        padding: EdgeInsets.only(top: 30),
+                        height: 150,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            SizedBox(
+                              child: Column(children: [
+                                IconButton(
+                                    onPressed: () {
+                                      context.push(
+                                        FundRoutes.addProject,
+                                        extra: widget.project,
+                                      );
+                                    },
+                                    icon: Icon(
+                                      Icons.edit,
+                                    )),
+                                Text(
+                                  "Edit",
+                                  style: context.titleMedium!.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 10),
+                                )
+                              ]),
+                            ),
+                            SizedBox(
+                              child: Column(children: [
+                                IconButton(
+                                    onPressed: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                                title: const Text(
+                                                    "Delete project"),
+                                                content: const Text(
+                                                    "Are you sure you want to delete this project?"),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      context
+                                                          .read<
+                                                              AddEditFundProjectCubit>()
+                                                          .deleteFundProject(
+                                                              id: widget
+                                                                  .project.id);
+                                                      context.go(
+                                                          FundRoutes.fundHome);
+                                                    },
+                                                    child: const Text("Yes"),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: const Text("No"),
+                                                  ),
+                                                ]);
+                                          });
+                                    },
+                                    icon: Icon(
+                                      Icons.delete,
+                                    )),
+                                Text(
+                                  "Delete",
+                                  style: context.titleMedium!.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 10),
+                                )
+                              ]),
+                            ),
+                          ],
+                        ),
+                      );
+                    });
               },
               icon: Icon(
                 Icons.more_vert_outlined,
