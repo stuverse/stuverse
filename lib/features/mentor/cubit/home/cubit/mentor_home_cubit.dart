@@ -16,7 +16,6 @@ class MentorHomeCubit extends Cubit<MentorHomeState> {
       final List<MentorPost> latestPosts = [];
       final List<MentorRequest> latestRequests = [];
       for (final latestPost in resp.data['top_mentors']) {
-        print(latestPost['is_reported']);
         if (latestPost['is_reported'] == true ||
             latestPost['is_user_blocked'] == true) continue;
         latestPosts.add(MentorPost.fromJson(latestPost));
