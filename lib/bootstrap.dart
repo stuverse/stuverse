@@ -34,10 +34,10 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  final app = await Firebase.initializeApp(
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  print('Firebase app name: ${app.name}');
+
   final messaging = FirebaseMessaging.instance;
   await messaging.requestPermission();
 
