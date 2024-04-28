@@ -128,7 +128,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           )),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 5,
                     ),
                     BlocConsumer<AuthCubit, AuthState>(
                         listener: (context, state) {
