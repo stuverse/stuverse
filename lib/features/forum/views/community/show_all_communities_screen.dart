@@ -76,10 +76,13 @@ class _ShowAllCommunitiesScreenState extends State<ShowAllCommunitiesScreen> {
                         itemCount: state.communities.length,
                         itemBuilder: (context, index) {
                           final community = state.communities[index];
-                          return BlocProvider(
-                            create: (context) => CommunityManageCubit(),
-                            child: CommunityMiniCard(
-                              community: community,
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: BlocProvider(
+                              create: (context) => CommunityManageCubit(),
+                              child: CommunityMiniCard(
+                                community: community,
+                              ),
                             ),
                           );
                         },
