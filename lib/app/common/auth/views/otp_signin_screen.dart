@@ -43,7 +43,7 @@ class _OtpSigningScreenState extends State<OtpSigningScreen> {
                   ),
                   25.heightBox,
                   Text(
-                    'Passwordless Signin',
+                    'Passwordless Sign In',
                     style: context.headlineMedium!.copyWith(
                       fontWeight: FontWeight.w800,
                       color: context.colorScheme.onBackground,
