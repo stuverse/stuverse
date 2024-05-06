@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +48,6 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> {
           },
           listener: (context, state) {
             if (state.communityStatus == APIStatus.success) {
-              log("message: ${state.community?.name}");
               if (user != null) {
                 isModerator =
                     state.community!.moderators!.contains(user?.id ?? -1);
