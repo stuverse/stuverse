@@ -196,7 +196,7 @@ class _ForumHomeScreenState extends State<ForumHomeScreen>
             ),
           ),
           child: Text(
-            "See All",
+            "See All ",
           ),
         ),
       ],
