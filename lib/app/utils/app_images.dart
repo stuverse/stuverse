@@ -15,6 +15,7 @@ class AppImages {
   static const String aiLottie = "assets/app/animations/ai.json";
   static const String loadingPlaneLottie =
       "assets/app/animations/loading-plane.json";
+
   //! App SVGs
   static const String logoSVG = "assets/app/logo/stuverse.svg";
   static const String forumSVG = "assets/app/icons/forum.svg";
